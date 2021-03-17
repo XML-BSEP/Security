@@ -1,6 +1,6 @@
-<div class="container">
-    <div class="content">
-        <button mat-icon-button matTooltip="Back" id="back" (click)="back()">
+<div id="container">
+    <div id="content">
+        <button mat-icon-button matTooltip="Back" class="back" (click)="back()">
             <mat-icon>keyboard_backspace</mat-icon>
           </button>
           <button mat-icon-button  matTooltip="Save template" id="save">
@@ -9,13 +9,13 @@
           <button mat-icon-button matTooltip="All templates" id="showAll">
             <mat-icon>favorite</mat-icon>
           </button>
-        <mat-card class="main-card">
-            <mat-card-header style="text-align: center;">
+        <mat-card id="main-card">
+            <mat-card-header >
                 <mat-card-title >
                   <label style="font-weight:bold; font-size: 25px;">Create certificate</label>
                 </mat-card-title>
               </mat-card-header>
         </mat-card>
-        
+
     </div>
 </div>

@@ -1,18 +1,16 @@
-.toolbar{
-    background-color: darkslategrey;
-    color:white;
-}
-.container{
+
+#container{
     background-image:url('/assets/large-material.jpeg');
     width:100%;
     height:100%; 
+    
 }
-.content{
+#content{
     display:flex;
     justify-content:center;
     
 }
-.title{
+#title{
     color:white;
     font-size: 2.4rem;
     font-weight:600;
@@ -20,6 +18,9 @@
 button {
     background-color: rgb(20, 197, 138);
     color:white;
+    margin-top:20px;
+    width:50px;
+    height:50px;
 }
 /* .button{
 
@@ -35,32 +36,26 @@ button:hover{
     border: 1px solid rgb(20, 197, 138);
     
 }
-.main-card{
+#main-card{
     margin-top:3%;
     width:50%;
     height:50rem;
     border-radius: 10px;
 }
-#back{
+.back{
     position:fixed;
     margin-right:94%;
-    margin-top:20px;
-    width:50px;
-    height:50px;
+
 }
 
 #save{
     position:fixed;
     margin-right:87%;
-    margin-top:20px;
-    width:50px;
-    height:50px;
+
 }
 
 #showAll{
     position:fixed;
     margin-right:80%;
-    margin-top:20px;
-    width:50px;
-    height:50px;
+
 }
