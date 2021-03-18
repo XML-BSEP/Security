@@ -1,0 +1,28 @@
+<div class="container">
+    <div id="header">
+        <button mat-icon-button id="back" (click)="back()">
+            <mat-icon>keyboard_backspace
+            </mat-icon>
+          </button>  
+
+          <div id="headercontent">
+            <div id="title"> 
+              <h2>All certificates</h2>
+            </div>
+            <div id="select-div">
+              <mat-form-field id="select" appearance="fill">
+                <mat-label>Select certificate type</mat-label>
+                <mat-select >
+                  <mat-option value="option1">Self-signed certificates</mat-option>
+                  <mat-option value="option2">Intermediate certificates</mat-option>
+                  <mat-option value="option3">End-entity certificates</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+    </div>
+    <!-- <div id="content">
+        
+    </div> -->
+</div>
