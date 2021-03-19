@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AllCertificatesComponent } from './all-certificates/all-certificates.component';
 import { CreateCertificateComponent } from './create-certificate/create-certificate.component';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { 
@@ -21,6 +22,10 @@ const routes: Routes = [
 {
   path: 'allCertificates',
   component: AllCertificatesComponent
+},
+{
+  path: 'login',
+  component: LoginComponent
 }
 ];
 

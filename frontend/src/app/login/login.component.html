@@ -1,0 +1,39 @@
+<div class="container">
+    <button mat-icon-button matTooltip="Login" id="back" (click)="back()" ><mat-icon>keyboard_backspace</mat-icon></button>            
+
+    <div class="content">
+
+        <mat-card class="main-card">
+            <h1 class="title">Duke Strategic Technologies PKI System</h1>
+            <form [formGroup]="loginForm" >
+                <div>
+                <mat-form-field class="example-full-width"  appearance="fill" id="email-ff">
+                  <mat-label>Email*</mat-label>
+                  <input matInput id="username" placeholder="Email" name="email-ff"
+                        formControlName="username" class="civca">
+                  <mat-error
+                    *ngIf="!loginForm.get('username').valid && loginForm.get('username').touched && loginForm.get('username').errors['required']">
+                    Please enter email</mat-error>
+                    <mat-error
+                    *ngIf="!loginForm.get('username').valid && loginForm.get('username').touched && loginForm.get('username').errors['email']">
+                    Please enter email</mat-error>
+                </mat-form-field>
+              </div>
+              <div>
+                <mat-form-field appearance="fill" id="password-ff">
+                  <mat-label>Password*</mat-label>
+                  <input matInput type="password" id="password" placeholder="Password" name="password-ff"
+                        formControlName="password" class="civca">
+                  <mat-error
+                    *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched && loginForm.get('password').errors['required']">
+                    Please enter password</mat-error>
+                </mat-form-field>
+              </div>
+
+              </form>
+              <button mat-raised-button id="login" (click)="login()"><mat-icon>login</mat-icon>Login</button>            
+
+        </mat-card>
+        
+    </div>
+</div>
