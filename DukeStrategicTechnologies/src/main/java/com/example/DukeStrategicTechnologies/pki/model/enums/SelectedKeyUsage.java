@@ -1,6 +1,6 @@
 package com.example.DukeStrategicTechnologies.pki.model.enums;
 
-public enum KeyUsage {
+public enum SelectedKeyUsage {
     NONE,
     KEY_USAGE,
     EXTENDED_KEY_USAGE,

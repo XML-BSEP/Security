@@ -12,13 +12,19 @@ public class User {
     private Long id;
 
     @Column(name = "name")
-    private String name;
+    private String givenName;
 
     @Column(name = "surname")
     private String surname;
+
+    @Column(name = "common_name")
+    private String commonName;
     
     @Column(name = "organization")
     private String organization;
+
+    @Column(name = "organization_unit")
+    private String organizationUnit;
     
     @Column(name = "state")
     private String state;
@@ -38,12 +44,14 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String name, String surname, String organization,
+    public User(Long id, String givenName, String surname, String commonName, String organization, String organizationUnit,
                 String state, String city, String email, boolean isCA, Long certificateCount) {
         this.id = id;
-        this.name = name;
+        this.givenName = givenName;
         this.surname = surname;
+        this.commonName = commonName;
         this.organization = organization;
+        this.organizationUnit = organizationUnit;
         this.state = state;
         this.city = city;
         this.email = email;
@@ -59,12 +67,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getGivenName() {
+        return givenName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setGivenName(String givenName) {
+        this.givenName = givenName;
     }
 
     public String getSurname() {
@@ -123,5 +131,19 @@ public class User {
         this.certificateCount = certificateCount;
     }
 
+    public String getOrganizationUnit() {
+        return organizationUnit;
+    }
 
+    public void setOrganizationUnit(String organizationUnit) {
+        this.organizationUnit = organizationUnit;
+    }
+
+    public String getCommonName() {
+        return commonName;
+    }
+
+    public void setCommonName(String commonName) {
+        this.commonName = commonName;
+    }
 }

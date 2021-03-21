@@ -1,33 +1,50 @@
-package com.example.DukeStrategicTechnologies.pki.model;
+package com.example.DukeStrategicTechnologies.pki.dto;
 
 import com.example.DukeStrategicTechnologies.pki.model.enums.SelectedKeyUsage;
 import com.example.DukeStrategicTechnologies.pki.model.enums.SignatureAlgorithm;
 
-import java.math.BigInteger;
+
 import java.time.LocalDate;
 import java.util.Collection;
 
-public class ExtendedCertificateData {
+public class CreateCertificateDTO {
 
+
+    private Long subjectId;
+    private Long issuerId;
     private LocalDate startDate;
     private LocalDate endDate;
     private SignatureAlgorithm signatureAlgorithm;
-    private Collection<Integer> keyUsage;
-    private BigInteger serialNumber;
+    private Collection<String> keyUsage;
     private SelectedKeyUsage selectedKeyUsage;
+    private String issuerSerialNumber;
 
-
-    public ExtendedCertificateData() {
-    }
-
-    public ExtendedCertificateData(LocalDate startDate, LocalDate endDate, SignatureAlgorithm signatureAlgorithm,
-                                   Collection<Integer> keyUsage, BigInteger serialNumber, SelectedKeyUsage selectedKeyUsage) {
+    public CreateCertificateDTO(Long subjectId, Long issuerId, LocalDate startDate, LocalDate endDate,
+                                SignatureAlgorithm signatureAlgorithm, Collection<String> keyUsage, SelectedKeyUsage selectedKeyUsage, String issuerSerialNumber) {
+        this.subjectId = subjectId;
+        this.issuerId = issuerId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.signatureAlgorithm = signatureAlgorithm;
         this.keyUsage = keyUsage;
-        this.serialNumber = serialNumber;
         this.selectedKeyUsage = selectedKeyUsage;
+        this.issuerSerialNumber = issuerSerialNumber;
+    }
+
+    public Long getSubjectId() {
+        return subjectId;
+    }
+
+    public void setSubjectId(Long subjectId) {
+        this.subjectId = subjectId;
+    }
+
+    public Long getIssuerId() {
+        return issuerId;
+    }
+
+    public void setIssuerId(Long issuerId) {
+        this.issuerId = issuerId;
     }
 
     public LocalDate getStartDate() {
@@ -54,20 +71,12 @@ public class ExtendedCertificateData {
         this.signatureAlgorithm = signatureAlgorithm;
     }
 
-    public Collection<Integer> getKeyUsage() {
+    public Collection<String> getKeyUsage() {
         return keyUsage;
     }
 
-    public void setKeyUsage(Collection<Integer> keyUsage) {
+    public void setKeyUsage(Collection<String> keyUsage) {
         this.keyUsage = keyUsage;
-    }
-
-    public BigInteger getSerialNumber() {
-        return serialNumber;
-    }
-
-    public void setSerialNumber(BigInteger serialNumber) {
-        this.serialNumber = serialNumber;
     }
 
     public SelectedKeyUsage getSelectedKeyUsage() {
@@ -76,5 +85,13 @@ public class ExtendedCertificateData {
 
     public void setSelectedKeyUsage(SelectedKeyUsage selectedKeyUsage) {
         this.selectedKeyUsage = selectedKeyUsage;
+    }
+
+    public String getIssuerSerialNumber() {
+        return issuerSerialNumber;
+    }
+
+    public void setIssuerSerialNumber(String issuerSerialNumber) {
+        this.issuerSerialNumber = issuerSerialNumber;
     }
 }
