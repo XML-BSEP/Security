@@ -37,8 +37,8 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.credentials).subscribe(
       result => {
         localStorage.setItem('userId',String(result.id))
-        if(result.role == Role.Admin){
-          this.router.navigate(['/home'])
+        if(result.role == Role.Admin.toString()){
+          this.router.navigate(['/'])
         }
       },
       error=>{
