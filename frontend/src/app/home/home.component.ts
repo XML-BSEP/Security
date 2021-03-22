@@ -12,18 +12,24 @@ export class HomeComponent implements OnInit {
   constructor(private router : Router, private authenticationService : AuthenticationService) { }
 
   ngOnInit(): void {
-    this.userLoggedIn=false;
+    console.log(localStorage.getItem('userId'));
+    if(localStorage.getItem('userId')!==null){
+      this.userLoggedIn = true;
+    }else{
+      this.userLoggedIn=false;
+    }
+    
   }
   createCertificate(){
-    this.router.navigate(['createCertificate']);
+    this.router.navigate(['/createCertificate']);
   }
   allCertificates(){
-    this.router.navigate(['allCertificates']);
+    this.router.navigate(['/allCertificates']);
 
   }
   
   login(){
-    this.router.navigate(['login']);
+    this.router.navigate(['/login']);
   }
 
   logout(){

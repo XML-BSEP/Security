@@ -1,0 +1,1 @@
+insert into accounts(id, email, password, role) VALUES (100, 'joxi@gmail.com', '$2y$12$x/JI8Vrzn3IWCPZpbLn4qOpqObD0npAA6DV6EcHv7GojslHdL1n4K', 'Admin');

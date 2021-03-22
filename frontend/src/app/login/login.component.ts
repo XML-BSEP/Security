@@ -34,17 +34,17 @@ export class LoginComponent implements OnInit {
     console.log(this.username);
     this.credentials = new Authentication(this.username.toLowerCase(), this.password);
     console.log(this.credentials);
-    // this.authService.login(this.credentials).subscribe(
-    //   result => {
-    //     localStorage.setItem('userId',String(result.id))
-    //     if(result.role == Role.Admin){
-    //       this.router.navigate(['/home'])
-    //     }
-    //   },
-    //   error=>{
-    //     alert("Wrong username or password")
-    //     this.router.navigate(['/login']);
+    this.authService.login(this.credentials).subscribe(
+      result => {
+        localStorage.setItem('userId',String(result.id))
+        if(result.role == Role.Admin.toString()){
+          this.router.navigate(['/'])
+        }
+      },
+      error=>{
+        alert("Wrong username or password")
+        this.router.navigate(['/login']);
 
-    //   });
+      });
   }
 }
