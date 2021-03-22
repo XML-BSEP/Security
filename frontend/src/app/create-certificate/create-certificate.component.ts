@@ -26,6 +26,7 @@ export class CreateCertificateComponent implements OnInit {
   allSubjects : string[] =["subject1", "subject2", "subject3"];
   selectedKeyUsages;
   selectedExtendedKeyUsages;
+  userLoggedIn: boolean;
   // visible = true;
   // selectable = true;
   // removable = true;
@@ -47,6 +48,11 @@ export class CreateCertificateComponent implements OnInit {
     //   startWith(null),
     //   map((keyUsage: string | null) => keyUsage ? this._filter(keyUsage) : this.allKeyUsages.slice()));
 
+    if(localStorage.getItem('userId')!==null){
+      this.userLoggedIn = true;
+    }else{
+      this.userLoggedIn=false;
+    }
     this.firstFormGroup = new FormGroup({
       "issuer": new FormControl(null, [Validators.required]),
       "validFrom" : new FormControl(null, [Validators.required]),

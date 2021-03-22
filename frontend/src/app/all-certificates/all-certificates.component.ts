@@ -11,8 +11,16 @@ import { Router } from '@angular/router';
 })
 export class AllCertificatesComponent implements OnInit {
   public panelColor = new FormControl('red');
+  userLoggedIn: boolean;
 
-  constructor(private router : Router) { }
+  constructor(private router : Router) { 
+    
+    if(localStorage.getItem('userId')!==null){
+      this.userLoggedIn = true;
+    }else{
+      this.userLoggedIn=false;
+    }
+  }
 
   ngOnInit(): void {
   }
