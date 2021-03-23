@@ -250,7 +250,6 @@ public class CertificateService {
             parent.checkValidity();
 
         }
-
     }
 
     private Certificate[] createCertificateChain(KeyStore keyStore, String alias, X509Certificate certificate) throws KeyStoreException {

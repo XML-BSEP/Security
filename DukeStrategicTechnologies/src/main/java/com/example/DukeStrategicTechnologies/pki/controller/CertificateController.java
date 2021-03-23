@@ -2,6 +2,7 @@ package com.example.DukeStrategicTechnologies.pki.controller;
 
 import com.example.DukeStrategicTechnologies.pki.dto.CertificateDTO;
 import com.example.DukeStrategicTechnologies.pki.dto.CreateCertificateDTO;
+import com.example.DukeStrategicTechnologies.pki.dto.DownloadCertificateDTO;
 import com.example.DukeStrategicTechnologies.pki.service.Base64Encoder;
 import com.example.DukeStrategicTechnologies.pki.service.CertificateService;
 import org.bouncycastle.cms.CMSException;
@@ -44,7 +45,7 @@ public class CertificateController {
     }
 
     @PostMapping("/downloadCertificate")
-    public ResponseEntity<?> downloadCertificate(@RequestBody CertificateDTO dto) throws CertificateException, UnrecoverableKeyException, NoSuchAlgorithmException,
+    public ResponseEntity<?> downloadCertificate(@RequestBody DownloadCertificateDTO dto) throws CertificateException, UnrecoverableKeyException, NoSuchAlgorithmException,
             KeyStoreException, CMSException, OperatorCreationException, NoSuchProviderException, IOException {
         base64Encoder.downloadCertificate(dto);
         return new ResponseEntity<>(HttpStatus.OK);
