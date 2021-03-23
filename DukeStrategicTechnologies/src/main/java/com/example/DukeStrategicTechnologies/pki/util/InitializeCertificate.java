@@ -5,28 +5,26 @@ import com.example.DukeStrategicTechnologies.pki.model.ExtendedCertificateData;
 import com.example.DukeStrategicTechnologies.pki.model.Issuer;
 import com.example.DukeStrategicTechnologies.pki.model.Subject;
 import com.example.DukeStrategicTechnologies.pki.model.User;
-import com.example.DukeStrategicTechnologies.pki.model.enums.SelectedKeyUsage;
 import com.example.DukeStrategicTechnologies.pki.model.enums.SignatureAlgorithm;
 import com.example.DukeStrategicTechnologies.pki.repository.UserRepository;
 import com.example.DukeStrategicTechnologies.pki.service.CertificateGenerator;
 import com.example.DukeStrategicTechnologies.pki.service.CreateCertificateService;
 import org.bouncycastle.asn1.x500.X500NameBuilder;
 import org.bouncycastle.asn1.x500.style.BCStyle;
+import org.bouncycastle.asn1.x509.KeyPurposeId;
 import org.bouncycastle.asn1.x509.KeyUsage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-
 import javax.persistence.criteria.Root;
+import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
-import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -59,9 +57,16 @@ public class InitializeCertificate implements ApplicationListener<ApplicationRea
             return;
         }
 
+
         User newRoot = new User(2L, "root", "rootovic", "rootic", "org1", "orgunit1", "Serbia", "Novi Sad", "root@gmail.com", true, 1L);
 
         userRepository.save(newRoot);
+
+        String rootPath = "root.jks";
+        File f = new File(rootPath);
+        if(f.exists()) {
+            return;
+        }
 
         X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
         builder.addRDN(BCStyle.CN, newRoot.getCommonName());
@@ -78,6 +83,8 @@ public class InitializeCertificate implements ApplicationListener<ApplicationRea
         Subject subject = new Subject(issuer.getX500Name(), issuer.getKeyPair());
 
         ArrayList<Integer> keyUsageValues = new ArrayList<>();
+        ArrayList<KeyPurposeId> extendedKeyUsageValues = new ArrayList<>();
+
         keyUsageValues.add(KeyUsage.digitalSignature);
         keyUsageValues.add(KeyUsage.nonRepudiation);
         keyUsageValues.add(KeyUsage.keyEncipherment);
@@ -88,12 +95,27 @@ public class InitializeCertificate implements ApplicationListener<ApplicationRea
         keyUsageValues.add(KeyUsage.encipherOnly);
         keyUsageValues.add(KeyUsage.decipherOnly);
 
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_serverAuth);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_clientAuth);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_codeSigning);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_emailProtection);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_ipsecEndSystem);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_ipsecTunnel);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_ipsecUser);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_timeStamping);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_OCSPSigning);
+
+        KeyPurposeId[] extendedKeyUsageArray = new KeyPurposeId[extendedKeyUsageValues.size()];
+        extendedKeyUsageValues.toArray(extendedKeyUsageArray);
+
         LocalDate startDate = LocalDate.parse("2018-02-12");
         LocalDate endtDate = LocalDate.parse("2028-02-12");
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.SHA2_256_RSA;
         BigInteger serialNumber = BigInteger.valueOf(4438154030353282418L);
-        SelectedKeyUsage selectedKeyUsage = SelectedKeyUsage.KEY_USAGE;
-        ExtendedCertificateData extendedCertificateData = new ExtendedCertificateData(startDate, endtDate, signatureAlgorithm, keyUsageValues, serialNumber, selectedKeyUsage);
+
+        ExtendedCertificateData extendedCertificateData = new ExtendedCertificateData(startDate, endtDate, signatureAlgorithm, keyUsageValues,
+                extendedKeyUsageArray, serialNumber);
+
         X509Certificate rootCertificate = certificateGenerator.generateCertificate(subject, issuer, extendedCertificateData);
 
 

@@ -1,7 +1,7 @@
 package com.example.DukeStrategicTechnologies.pki.model;
 
-import com.example.DukeStrategicTechnologies.pki.model.enums.SelectedKeyUsage;
 import com.example.DukeStrategicTechnologies.pki.model.enums.SignatureAlgorithm;
+import org.bouncycastle.asn1.x509.KeyPurposeId;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -13,21 +13,30 @@ public class ExtendedCertificateData {
     private LocalDate endDate;
     private SignatureAlgorithm signatureAlgorithm;
     private Collection<Integer> keyUsage;
+    private KeyPurposeId[] extendedKeyUsages;
     private BigInteger serialNumber;
-    private SelectedKeyUsage selectedKeyUsage;
 
 
     public ExtendedCertificateData() {
     }
 
     public ExtendedCertificateData(LocalDate startDate, LocalDate endDate, SignatureAlgorithm signatureAlgorithm,
-                                   Collection<Integer> keyUsage, BigInteger serialNumber, SelectedKeyUsage selectedKeyUsage) {
+                                   Collection<Integer> keyUsage, KeyPurposeId[] extendedKeyUsages,
+                                   BigInteger serialNumber) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.signatureAlgorithm = signatureAlgorithm;
         this.keyUsage = keyUsage;
+        this.extendedKeyUsages = extendedKeyUsages;
         this.serialNumber = serialNumber;
-        this.selectedKeyUsage = selectedKeyUsage;
+    }
+
+    public KeyPurposeId[] getExtendedKeyUsages() {
+        return extendedKeyUsages;
+    }
+
+    public void setExtendedKeyUsages(KeyPurposeId[] extendedKeyUsages) {
+        this.extendedKeyUsages = extendedKeyUsages;
     }
 
     public LocalDate getStartDate() {
@@ -70,11 +79,4 @@ public class ExtendedCertificateData {
         this.serialNumber = serialNumber;
     }
 
-    public SelectedKeyUsage getSelectedKeyUsage() {
-        return selectedKeyUsage;
-    }
-
-    public void setSelectedKeyUsage(SelectedKeyUsage selectedKeyUsage) {
-        this.selectedKeyUsage = selectedKeyUsage;
-    }
 }
