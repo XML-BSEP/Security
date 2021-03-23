@@ -6,7 +6,7 @@
           <button mat-icon-button  matTooltip="Save template" id="save" (click)="saveTemplate()" [disabled] ="!firstFormGroup.valid || !thirdFormGroup.valid">
             <mat-icon>save</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="All templates" id="showAll">
+          <button mat-icon-button matTooltip="All templates" id="showAll" (click)="viewSavedTemplates()">
             <mat-icon>favorite</mat-icon>
           </button>
 

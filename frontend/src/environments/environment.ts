@@ -9,8 +9,8 @@ export const environment = {
   auth:"auth",
   api: "api",
   template : "template",
-  add : "add"
-
+  add : "add",
+  findAll : "all"
 };
 
 /*

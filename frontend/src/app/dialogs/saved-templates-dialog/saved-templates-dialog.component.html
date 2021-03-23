@@ -1,0 +1,46 @@
+<div id="container-div">
+  <button mat-icon-button aria-label="Example icon-button with a heart icon" id="back-button" (click)="onNoClick()">
+      <mat-icon>keyboard_backspace
+      </mat-icon>
+    </button>
+  <h1>Saved templates</h1>
+  <div id="content">
+      <mat-card class="example-card" *ngFor="let item of savedTemplates">
+          <mat-card-header>
+            <mat-card-title>Template information</mat-card-title>
+          </mat-card-header>
+          <!-- public id :  Number;
+          public signatureAlgorithm : String;
+          public keyAlgorithm : String;
+          public name : String;
+          public timestamp : Date;
+          public keyUsage : String[];
+          public extendedKeyUsage : String[]; -->
+          <mat-card-content>
+            <p class="cert-info-p">
+              <b>Signature algorithm:</b> {{item?.signatureAlgorithm}}
+            </p>
+            <p class="cert-info-p">
+              <b>Key algorithm; </b>{{item?.keyAlgorithm}}
+            </p>
+            <p class="cert-info-p">
+              <b>Name: </b>{{item?.name}}
+            </p>
+            <p><b>Key usage:</b></p>
+            <div id="usages-div">
+            <p><i> {{ item.keyUsage }} </i></p>
+            </div>
+            <p><b>Extended key usage:</b></p>
+            <div id="usages-div">
+            <p><i> {{ item.extendedKeyUsage }} </i></p>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+              <button mat-flat-button *ngIf="!conflicting" id="choose-button" (click)="onSubmit(item)">Choose</button>
+              <!-- <button mat-flat-button *ngIf="conflicting" id="choose-button-conflict" (click)="warnKeyUsage()"
+              matTooltip="This certificate does not have some of your currently selected Key Usages and/or Extended Key Usages"
+              matTooltipPosition="below">Choose</button> -->
+          </mat-card-actions>
+        </mat-card>
+  </div>
+</div>

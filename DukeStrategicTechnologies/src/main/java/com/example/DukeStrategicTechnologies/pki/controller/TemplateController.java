@@ -28,7 +28,7 @@ public class TemplateController {
     }
 
     @GetMapping("/all")
-    @PreAuthorize("hasRole('ADMIN') || hasRole('CA')")
+//    @PreAuthorize("hasRole('ADMIN') || hasRole('CA')")
     public ResponseEntity<?> getAll() throws Exception{
         List<TemplateDTO> templateDTOS = templateService.getAllTemplates();
         return  new ResponseEntity<>(templateDTOS, HttpStatus.OK);

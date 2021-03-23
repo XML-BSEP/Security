@@ -12,6 +12,7 @@ import { ChooseIssuerDialogComponent } from '../dialogs/choose-issuer-dialog/cho
 import { SigningCertificate } from '../model/certificates/SigningCertificate';
 import { Template } from '../model/certificates/Template';
 import { TemplateService } from '../service/template/template.service';
+import { SavedTemplatesDialogComponent } from '../dialogs/saved-templates-dialog/saved-templates-dialog.component';
 
 @Component({
   selector: 'app-create-certificate',
@@ -35,6 +36,7 @@ export class CreateCertificateComponent implements OnInit {
   signingCertificate: SigningCertificate;
   minDate;
   public template;
+  chosenTemplate;
   // visible = true;
   // selectable = true;
   // removable = true;
@@ -48,7 +50,7 @@ export class CreateCertificateComponent implements OnInit {
 
   allExtendedKeyUsages: string[] = ["TLS Web server authentication", "TLS Web client authentication", "Sign (downloadable) executable code", "Email protection", "IPSEC End System", "IPSEC Tunnel", "IPSEC User", "Timestamping"];
 
-  constructor(private router : Router,    public signingCertDialog: MatDialog, private templateService : TemplateService ) { }
+  constructor(private router : Router,    public signingCertDialog: MatDialog, private templateService : TemplateService, public savedTemplates : MatDialog ) { }
 
   ngOnInit(): void {
 
@@ -119,6 +121,36 @@ export class CreateCertificateComponent implements OnInit {
     });
   }
 
+  viewSavedTemplates() {
+    let tempKeyUsage = undefined;
+    let tempExtKeyUsage = undefined;
+
+
+    const dialogRef = this.savedTemplates.open(SavedTemplatesDialogComponent, {
+      width: '80vw',
+      height: '90vh'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result) {
+        this.chosenTemplate = result.template;
+
+        this.firstFormGroup.patchValue({
+          "issuer": this.chosenTemplate.name,
+          "signatureAlgorithm" : this.chosenTemplate.signatureAlgorithm,
+          "pubKeyAlgorithm": this.chosenTemplate.keyAlgorithm
+        });
+
+        this.thirdFormGroup.patchValue({
+          "keyUsage" : this.chosenTemplate.keyUsage,
+          "extendedKeyUsage" : this.chosenTemplate.extendedKeyUsage
+        })
+        this.selectedKeyUsages = this.chosenTemplate.keyUsage;
+        this.selectedExtendedKeyUsages = this.chosenTemplate.extendedKeyUsage;
+      }
+    });
+  }
   // public id :  Number;
   // public signatureAlgorithm : String;
   // public keyAlgorithm : String;
