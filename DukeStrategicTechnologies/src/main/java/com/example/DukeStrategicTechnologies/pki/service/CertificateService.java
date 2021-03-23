@@ -2,8 +2,8 @@ package com.example.DukeStrategicTechnologies.pki.service;
 
 import com.example.DukeStrategicTechnologies.pki.dto.CertificateDTO;
 import com.example.DukeStrategicTechnologies.pki.dto.CreateCertificateDTO;
-import com.example.DukeStrategicTechnologies.pki.keystores.KeyStoreReader;
-import com.example.DukeStrategicTechnologies.pki.keystores.KeyStoreWriter;
+import com.example.DukeStrategicTechnologies.pki.util.keystores.KeyStoreReader;
+import com.example.DukeStrategicTechnologies.pki.util.keystores.KeyStoreWriter;
 import com.example.DukeStrategicTechnologies.pki.mapper.KeyUsagesMapper;
 import com.example.DukeStrategicTechnologies.pki.model.*;
 import com.example.DukeStrategicTechnologies.pki.repository.RevokedCertificateRepository;
@@ -250,7 +250,6 @@ public class CertificateService {
             parent.checkValidity();
 
         }
-
     }
 
     private Certificate[] createCertificateChain(KeyStore keyStore, String alias, X509Certificate certificate) throws KeyStoreException {
