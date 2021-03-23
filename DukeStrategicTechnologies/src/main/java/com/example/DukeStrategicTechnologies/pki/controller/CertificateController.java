@@ -46,8 +46,14 @@ public class CertificateController {
     @PostMapping("/downloadCertificate")
     public ResponseEntity<?> downloadCertificate(@RequestBody CertificateDTO dto) throws CertificateException, UnrecoverableKeyException, NoSuchAlgorithmException,
             KeyStoreException, CMSException, OperatorCreationException, NoSuchProviderException, IOException {
-        boolean retVal = base64Encoder.downloadCertificate(dto);
-        return new ResponseEntity<>(retVal, HttpStatus.OK);
+        base64Encoder.downloadCertificate(dto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/revokeCertificate")
+    public ResponseEntity<?> revokeCertificate(@RequestBody String serialNumber) {
+        certificateService.revokeCertificate(serialNumber);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 

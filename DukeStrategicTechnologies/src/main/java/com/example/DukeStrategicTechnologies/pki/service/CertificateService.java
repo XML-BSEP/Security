@@ -5,10 +5,8 @@ import com.example.DukeStrategicTechnologies.pki.dto.CreateCertificateDTO;
 import com.example.DukeStrategicTechnologies.pki.keystores.KeyStoreReader;
 import com.example.DukeStrategicTechnologies.pki.keystores.KeyStoreWriter;
 import com.example.DukeStrategicTechnologies.pki.mapper.KeyUsagesMapper;
-import com.example.DukeStrategicTechnologies.pki.model.ExtendedCertificateData;
-import com.example.DukeStrategicTechnologies.pki.model.Issuer;
-import com.example.DukeStrategicTechnologies.pki.model.Subject;
-import com.example.DukeStrategicTechnologies.pki.model.User;
+import com.example.DukeStrategicTechnologies.pki.model.*;
+import com.example.DukeStrategicTechnologies.pki.repository.RevokedCertificateRepository;
 import com.example.DukeStrategicTechnologies.pki.repository.UserRepository;
 import com.example.DukeStrategicTechnologies.pki.util.properties.KeyStoreProperties;
 import org.bouncycastle.asn1.x500.X500Name;
@@ -27,6 +25,7 @@ import java.security.cert.CertificateEncodingException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -49,6 +48,9 @@ public class CertificateService {
     private KeyStoreProperties keyStoreProperties;
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RevokedCertificateRepository revokedCertificateRepository;
 
     public CertificateService() {
         this.keyStoreWriter = new KeyStoreWriter();
@@ -123,6 +125,10 @@ public class CertificateService {
         user.setCertificateCount(user.getCertificateCount() + 1);
         userRepository.save(user);
 
+    }
+
+    public void revokeCertificate(String serialNumber) {
+        revokedCertificateRepository.save(new RevokedCertificate(new BigInteger(serialNumber), LocalDateTime.now()));
     }
 
     public String generateAliasByCertificate(X509Certificate certificate) throws CertificateEncodingException {
@@ -341,5 +347,7 @@ public class CertificateService {
             return "";
         }
     }
+
+
 }
 

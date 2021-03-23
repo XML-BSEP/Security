@@ -31,7 +31,7 @@ public class Base64Encoder {
     @Autowired
     private CertificateService certificateService;
 
-    public boolean downloadCertificate(CertificateDTO dto) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException, CMSException, OperatorCreationException, UnrecoverableKeyException {
+    public void downloadCertificate(CertificateDTO dto) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException, CMSException, OperatorCreationException, UnrecoverableKeyException {
         String certFileName = DOWNLOAD_PATH + "DTS" + dto.getSerialNumber() + ".p7b";
         String alias = dto.getEmail() + dto.getSerialNumber();
 
@@ -68,8 +68,6 @@ public class Base64Encoder {
                     outputStream.write("-----END CERTIFICATE-----\n".getBytes("US-ASCII"));
                     outputStream.close();
 
-                    return true;
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -78,9 +76,7 @@ public class Base64Encoder {
                 e.printStackTrace();
             }
         }
-
-        return false;
-}
+    }
 
     private byte[] encryptCertToPKCS7(X509Certificate certificate, Key key, List<Certificate> certificates)
             throws CertificateEncodingException, CMSException, IOException, OperatorCreationException {
