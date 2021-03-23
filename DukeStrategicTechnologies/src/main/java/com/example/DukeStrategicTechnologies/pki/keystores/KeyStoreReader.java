@@ -30,7 +30,7 @@ public class KeyStoreReader {
     public Certificate readCertificate(String keyStoreFile, String keyStorePass, String alias) {
         try {
 
-            KeyStore ks = getKeyStore(keyStoreFile, keyStorePass);
+            KeyStore ks = getKeyStore(keyStoreFile + ".jks", keyStorePass);
 
             if(ks.isKeyEntry(alias)) {
                 Certificate cert = ks.getCertificate(alias);
@@ -56,7 +56,7 @@ public class KeyStoreReader {
     public KeyStore getKeyStore(String keyStoreFile, String keyStorePass) throws KeyStoreException, NoSuchProviderException, IOException, NoSuchAlgorithmException, CertificateException {
         KeyStore ks = KeyStore.getInstance("JKS", "SUN");
 
-        BufferedInputStream in = new BufferedInputStream(new FileInputStream(keyStoreFile));
+        BufferedInputStream in = new BufferedInputStream(new FileInputStream(keyStoreFile + ".jks"));
         ks.load(in, keyStorePass.toCharArray());
         return ks;
     }

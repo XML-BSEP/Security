@@ -10,11 +10,10 @@ import com.example.DukeStrategicTechnologies.pki.model.Issuer;
 import com.example.DukeStrategicTechnologies.pki.model.Subject;
 import com.example.DukeStrategicTechnologies.pki.model.User;
 import com.example.DukeStrategicTechnologies.pki.repository.UserRepository;
+import com.example.DukeStrategicTechnologies.pki.util.properties.KeyStoreProperties;
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.X500NameBuilder;
 import org.bouncycastle.asn1.x500.style.BCStyle;
-import org.bouncycastle.asn1.x509.KeyPurposeId;
-import org.bouncycastle.asn1.x509.X509Name;
 import org.bouncycastle.cert.jcajce.JcaX509CertificateHolder;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,23 +29,31 @@ import java.time.LocalDate;
 import java.util.*;
 
 @Service
-public class CreateCertificateService {
+public class CertificateService {
 
     static {
         Security.addProvider(new BouncyCastleProvider());
     }
+    public static final String CERTIFICATE_NOT_VALID = "Certificate is not valid!";
+    public static final String CERTIFICATE_NOT_FOUND = "Certificate is not found!";
+    public static final String SUBJECT_NOT_FOUND = "Subject not found!";
+    public static final String ISSUER_NOT_FOUND = "Issuer not found!";
+    public static final String SELF_SIGNED_EXCEPTION = "Self-signed certificates can only be issued by root certificates!";
+    public static final String KEYSTORE_NOT_FOUND = "KeyStore not found!";
 
     private CertificateGenerator certificateGenerator;
     private KeyStoreWriter keyStoreWriter;
     private KeyStoreReader keystoreReader;
     private String issuerKeyStorePassword;
+    private KeyStoreProperties keyStoreProperties;
     @Autowired
     private UserRepository userRepository;
 
-    public CreateCertificateService() {
+    public CertificateService() {
         this.keyStoreWriter = new KeyStoreWriter();
         this.keystoreReader = new KeyStoreReader();
         this.certificateGenerator = new CertificateGenerator();
+        this.keyStoreProperties = new KeyStoreProperties();
     }
 
 
@@ -56,15 +63,14 @@ public class CreateCertificateService {
 
         User issuer = userRepository.findById(createCertificateDTO.getIssuerId()).get();
         if (issuer == null) {
-            throw new Exception();
+            throw new Exception(ISSUER_NOT_FOUND);
         }
-
 
         String issuerAllias = issuer.getEmail() + createCertificateDTO.getIssuerSerialNumber();
         KeyStore keyStore = getIssuerKeyStoreByAlias(issuerAllias);
 
         if(keyStore == null) {
-            throw new Exception("Znaci...");
+            throw new Exception(KEYSTORE_NOT_FOUND);
         }
         X509Certificate issuerCertificate = getCertificateByAlias(issuerAllias, keyStore);
 
@@ -73,13 +79,11 @@ public class CreateCertificateService {
 
         User user = userRepository.findById(createCertificateDTO.getSubjectId()).get();
         if (user == null) {
-            throw new Exception("Znaci...");
+            throw new Exception(SUBJECT_NOT_FOUND);
         }
 
         BigInteger subjectCertificateSerialNumber = generateSerialNumberForCertificate();
         String subjectAlias = user.getEmail() + subjectCertificateSerialNumber;
-
-
 
         ExtendedCertificateData extendedCertificateData = new ExtendedCertificateData(LocalDate.parse("2020-03-12"),
                 LocalDate.parse("2020-10-12"),
@@ -99,16 +103,16 @@ public class CreateCertificateService {
         String keyStorePass = "";
         String filePath = "";
         if (isCA(subjectCertificate)) {
-            keyStoreWriter.loadKeyStore("ca.jks", "456".toCharArray());
-            filePath = "ca.jks";
-            keyStorePass = "456";
-            subjectPassword = "456" + subjectCertificateSerialNumber;
+            keyStorePass = keyStoreProperties.readKeyStorePass((KeyStoreProperties.CA_FILE));
+            filePath = KeyStoreProperties.CA_FILE;
+            keyStoreWriter.loadKeyStore(KeyStoreProperties.CA_FILE, keyStorePass.toCharArray());
+            subjectPassword = keyStorePass + subjectCertificateSerialNumber;
         }
         else {
-            keyStoreWriter.loadKeyStore("end_entity.jks", "789".toCharArray());
-            filePath = "end_entity.jks";
-            keyStorePass = "789";
-            subjectPassword = "789" + subjectCertificateSerialNumber;
+            keyStorePass = keyStoreProperties.readKeyStorePass((KeyStoreProperties.END_ENTITY_FILE));
+            filePath = KeyStoreProperties.END_ENTITY_FILE;
+            keyStoreWriter.loadKeyStore(KeyStoreProperties.END_ENTITY_FILE, keyStorePass.toCharArray());
+            subjectPassword = keyStorePass + subjectCertificateSerialNumber;
         }
 
         Certificate[] certificateChain = createCertificateChain(keyStore, issuerAllias, subjectCertificate);
@@ -130,7 +134,7 @@ public class CreateCertificateService {
 
         User user = userRepository.findById(dto.getSubjectId()).get();
         if (user == null) {
-            throw new Exception();
+            throw new Exception(SUBJECT_NOT_FOUND);
         }
 
         X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
@@ -143,9 +147,7 @@ public class CreateCertificateService {
         builder.addRDN(BCStyle.E, user.getEmail());
 
         return new Subject(builder.build(), keyPairSubject);
-
     }
-
 
     public KeyPair generateKeyPair() {
         try {
@@ -168,21 +170,15 @@ public class CreateCertificateService {
     }
 
     private KeyStore getSelfSignedKeyStore() throws NoSuchAlgorithmException, CertificateException, NoSuchProviderException, KeyStoreException, IOException {
-        String filePath = "root.jks";
-        KeyStore keystore = keystoreReader.getKeyStore(filePath, "123");
-        return keystore;
+        return keystoreReader.getKeyStore(KeyStoreProperties.ROOT_FILE, keyStoreProperties.readKeyStorePass(KeyStoreProperties.ROOT_FILE));
     }
 
     private KeyStore getCAKeystore() throws NoSuchAlgorithmException, CertificateException, NoSuchProviderException, KeyStoreException, IOException {
-        String filePath = "ca.jks";
-        KeyStore keystore = keystoreReader.getKeyStore(filePath, "456");
-        return keystore;
+        return keystoreReader.getKeyStore(KeyStoreProperties.CA_FILE, keyStoreProperties.readKeyStorePass(KeyStoreProperties.CA_FILE));
     }
 
     private KeyStore getEndEntityKeyStore() throws NoSuchAlgorithmException, CertificateException, NoSuchProviderException, KeyStoreException, IOException {
-        String filePath = "end_entity.jks";
-        KeyStore keystore = keystoreReader.getKeyStore(filePath, "789");
-        return keystore;
+        return keystoreReader.getKeyStore(KeyStoreProperties.END_ENTITY_FILE, keyStoreProperties.readKeyStorePass(KeyStoreProperties.END_ENTITY_FILE));
     }
 
     private X509Certificate getCertificateByAlias(String alias, KeyStore keystore) throws KeyStoreException {
@@ -193,15 +189,15 @@ public class CreateCertificateService {
     private KeyStore getIssuerKeyStoreByAlias(String alias) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
         KeyStore keystore = null;
         if ((keystore = getCAKeystore()).containsAlias(alias)) {
-            issuerKeyStorePassword = "456";
+            issuerKeyStorePassword = keyStoreProperties.readKeyStorePass(KeyStoreProperties.CA_FILE);
             return keystore;
         }
         else if ((keystore = getSelfSignedKeyStore()).containsAlias(alias)) {
-            issuerKeyStorePassword = "123";
+            issuerKeyStorePassword = keyStoreProperties.readKeyStorePass(KeyStoreProperties.ROOT_FILE);
             return keystore;
         }
         else if((keystore = getEndEntityKeyStore()).containsAlias(alias)) {
-            issuerKeyStorePassword = "789";
+            issuerKeyStorePassword = keyStoreProperties.readKeyStorePass(KeyStoreProperties.END_ENTITY_FILE);
             return keystore;
         }
         else {

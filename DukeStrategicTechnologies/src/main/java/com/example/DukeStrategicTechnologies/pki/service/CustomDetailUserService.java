@@ -2,7 +2,7 @@ package com.example.DukeStrategicTechnologies.pki.service;
 
 
 import com.example.DukeStrategicTechnologies.pki.model.Account;
-import com.example.DukeStrategicTechnologies.pki.repository.AdminRepository;
+import com.example.DukeStrategicTechnologies.pki.repository.AccountRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class CustomDetailUserService implements UserDetailsService {
     protected final Log LOGGER = LogFactory.getLog(getClass());
 
     @Autowired
-    private AdminRepository adminRepository;
+    private AccountRepository accountRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -32,7 +32,7 @@ public class CustomDetailUserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Account user = adminRepository.findByEmail(username);
+        Account user = accountRepository.findByEmail(username);
         if (user == null) {
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
         } else {
@@ -60,7 +60,7 @@ public class CustomDetailUserService implements UserDetailsService {
         Account user = (Account) loadUserByUsername(username);
 
         user.setPassword(passwordEncoder.encode(newPassword));
-        adminRepository.save(user);
+        accountRepository.save(user);
 
     }
 }
