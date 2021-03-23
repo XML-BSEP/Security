@@ -26,8 +26,8 @@ const routes: Routes = [
 {
   path: 'allCertificates',
   component: AllCertificatesComponent,
-  canActivate : [AuthGuard],
-  data: {roles:[Role.Admin]}
+  // canActivate : [AuthGuard],
+  // data: {roles:[Role.Admin]}
 },
 {
   path: 'login',
