@@ -1,32 +1,31 @@
 package com.example.DukeStrategicTechnologies.pki.util;
 
-import com.example.DukeStrategicTechnologies.pki.keystores.KeyStoreWriter;
+import com.example.DukeStrategicTechnologies.pki.util.keystores.KeyStoreWriter;
 import com.example.DukeStrategicTechnologies.pki.model.ExtendedCertificateData;
 import com.example.DukeStrategicTechnologies.pki.model.Issuer;
 import com.example.DukeStrategicTechnologies.pki.model.Subject;
 import com.example.DukeStrategicTechnologies.pki.model.User;
-import com.example.DukeStrategicTechnologies.pki.model.enums.SelectedKeyUsage;
 import com.example.DukeStrategicTechnologies.pki.model.enums.SignatureAlgorithm;
 import com.example.DukeStrategicTechnologies.pki.repository.UserRepository;
 import com.example.DukeStrategicTechnologies.pki.service.CertificateGenerator;
-import com.example.DukeStrategicTechnologies.pki.service.CreateCertificateService;
+import com.example.DukeStrategicTechnologies.pki.service.CertificateService;
+import com.example.DukeStrategicTechnologies.pki.util.properties.KeyStoreProperties;
 import org.bouncycastle.asn1.x500.X500NameBuilder;
 import org.bouncycastle.asn1.x500.style.BCStyle;
+import org.bouncycastle.asn1.x509.KeyPurposeId;
 import org.bouncycastle.asn1.x509.KeyUsage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.criteria.Root;
+import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
-import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -39,17 +38,18 @@ public class InitializeCertificate implements ApplicationListener<ApplicationRea
     private UserRepository userRepository;
 
     @Autowired
-    private CreateCertificateService createCertificateService;
-
+    private CertificateService createCertificateService;
 
     private CertificateGenerator certificateGenerator;
 
-
     private KeyStoreWriter keyStoreWriter;
+
+    private KeyStoreProperties keyStoreProperties;
 
     public InitializeCertificate() {
         this.certificateGenerator = new CertificateGenerator();
         this.keyStoreWriter = new KeyStoreWriter();
+        this.keyStoreProperties = new KeyStoreProperties();
     }
 
     public void initialize() throws NoSuchProviderException, NoSuchAlgorithmException, IOException {
@@ -59,9 +59,16 @@ public class InitializeCertificate implements ApplicationListener<ApplicationRea
             return;
         }
 
+
         User newRoot = new User(2L, "root", "rootovic", "rootic", "org1", "orgunit1", "Serbia", "Novi Sad", "root@gmail.com", true, 1L);
 
         userRepository.save(newRoot);
+
+        String rootPath = KeyStoreProperties.ROOT_FILE + ".jks";
+        File f = new File(rootPath);
+        if(f.exists()) {
+            return;
+        }
 
         X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
         builder.addRDN(BCStyle.CN, newRoot.getCommonName());
@@ -78,6 +85,8 @@ public class InitializeCertificate implements ApplicationListener<ApplicationRea
         Subject subject = new Subject(issuer.getX500Name(), issuer.getKeyPair());
 
         ArrayList<Integer> keyUsageValues = new ArrayList<>();
+        ArrayList<KeyPurposeId> extendedKeyUsageValues = new ArrayList<>();
+
         keyUsageValues.add(KeyUsage.digitalSignature);
         keyUsageValues.add(KeyUsage.nonRepudiation);
         keyUsageValues.add(KeyUsage.keyEncipherment);
@@ -88,41 +97,51 @@ public class InitializeCertificate implements ApplicationListener<ApplicationRea
         keyUsageValues.add(KeyUsage.encipherOnly);
         keyUsageValues.add(KeyUsage.decipherOnly);
 
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_serverAuth);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_clientAuth);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_codeSigning);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_emailProtection);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_ipsecEndSystem);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_ipsecTunnel);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_ipsecUser);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_timeStamping);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_OCSPSigning);
+
+        KeyPurposeId[] extendedKeyUsageArray = new KeyPurposeId[extendedKeyUsageValues.size()];
+        extendedKeyUsageValues.toArray(extendedKeyUsageArray);
+
         LocalDate startDate = LocalDate.parse("2018-02-12");
         LocalDate endtDate = LocalDate.parse("2028-02-12");
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.SHA2_256_RSA;
         BigInteger serialNumber = BigInteger.valueOf(4438154030353282418L);
-        SelectedKeyUsage selectedKeyUsage = SelectedKeyUsage.KEY_USAGE;
-        ExtendedCertificateData extendedCertificateData = new ExtendedCertificateData(startDate, endtDate, signatureAlgorithm, keyUsageValues, serialNumber, selectedKeyUsage);
-        X509Certificate rootCertificate = certificateGenerator.generateCertificate(subject, issuer, extendedCertificateData);
 
+        ExtendedCertificateData extendedCertificateData = new ExtendedCertificateData(startDate, endtDate, signatureAlgorithm, keyUsageValues,
+                extendedKeyUsageArray, serialNumber);
+
+        X509Certificate rootCertificate = certificateGenerator.generateCertificate(subject, issuer, extendedCertificateData);
 
         createKeyStoreFiles();
 
-        String keyPassword = "123" + serialNumber;
+        String keyPassword = keyStoreProperties.readKeyStorePass(KeyStoreProperties.ROOT_FILE) + serialNumber;
 
         String rootAlias = newRoot.getEmail() + serialNumber;
 
-        String rootPass = "123";
-
-        keyStoreWriter.write(rootAlias, keyPair.getPrivate(), keyPassword, new X509Certificate[] {rootCertificate});
-        keyStoreWriter.saveKeyStore("root.jks", rootPass.toCharArray());
+        this.keyStoreWriter.write(rootAlias, keyPair.getPrivate(), keyPassword, new X509Certificate[] {rootCertificate});
+        this.keyStoreWriter.saveKeyStore(KeyStoreProperties.ROOT_FILE , keyStoreProperties.readKeyStorePass(KeyStoreProperties.ROOT_FILE).toCharArray());
 
     }
 
     private void createKeyStoreFiles() throws IOException {
 
-        String selfSignedPass = "123";
-        String caPass = "456";
-        String endEntityPass = "789";
+        this.keyStoreWriter.loadKeyStore(KeyStoreProperties.ROOT_FILE, keyStoreProperties.readKeyStorePass(KeyStoreProperties.ROOT_FILE).toCharArray());
+        this.keyStoreWriter.saveKeyStore(KeyStoreProperties.ROOT_FILE , keyStoreProperties.readKeyStorePass(KeyStoreProperties.ROOT_FILE).toCharArray());
 
-        this.keyStoreWriter.loadKeyStore("root.jks", selfSignedPass.toCharArray());
-        this.keyStoreWriter.loadKeyStore("ca.jks", caPass.toCharArray());
-        this.keyStoreWriter.loadKeyStore("end_entity.jks", endEntityPass.toCharArray());
+        this.keyStoreWriter.loadKeyStore(KeyStoreProperties.CA_FILE, keyStoreProperties.readKeyStorePass(KeyStoreProperties.CA_FILE).toCharArray());
+        this.keyStoreWriter.saveKeyStore(KeyStoreProperties.CA_FILE , keyStoreProperties.readKeyStorePass(KeyStoreProperties.CA_FILE).toCharArray());
 
-        this.keyStoreWriter.saveKeyStore("root.jks", selfSignedPass.toCharArray());
-        this.keyStoreWriter.saveKeyStore("ca.jks", caPass.toCharArray());
-        this.keyStoreWriter.saveKeyStore("end_entity.jks", endEntityPass.toCharArray());
+        this.keyStoreWriter.loadKeyStore(KeyStoreProperties.END_ENTITY_FILE, keyStoreProperties.readKeyStorePass(KeyStoreProperties.END_ENTITY_FILE).toCharArray());
+        this.keyStoreWriter.saveKeyStore(KeyStoreProperties.END_ENTITY_FILE, keyStoreProperties.readKeyStorePass(KeyStoreProperties.END_ENTITY_FILE).toCharArray());
+
     }
 
     @Override

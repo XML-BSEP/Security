@@ -1,6 +1,5 @@
 package com.example.DukeStrategicTechnologies.pki.dto;
 
-import com.example.DukeStrategicTechnologies.pki.model.enums.SelectedKeyUsage;
 import com.example.DukeStrategicTechnologies.pki.model.enums.SignatureAlgorithm;
 
 
@@ -12,23 +11,33 @@ public class CreateCertificateDTO {
 
     private Long subjectId;
     private Long issuerId;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private String startDate;
+    private String endDate;
     private SignatureAlgorithm signatureAlgorithm;
     private Collection<String> keyUsage;
-    private SelectedKeyUsage selectedKeyUsage;
+    private Collection<String> extendedKeyUsage;
     private String issuerSerialNumber;
 
-    public CreateCertificateDTO(Long subjectId, Long issuerId, LocalDate startDate, LocalDate endDate,
-                                SignatureAlgorithm signatureAlgorithm, Collection<String> keyUsage, SelectedKeyUsage selectedKeyUsage, String issuerSerialNumber) {
+    public CreateCertificateDTO(Long subjectId, Long issuerId, String startDate, String endDate,
+                                SignatureAlgorithm signatureAlgorithm, Collection<String> keyUsage,
+                                Collection<String> extendedKeyUsage,
+                                String issuerSerialNumber) {
         this.subjectId = subjectId;
         this.issuerId = issuerId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.signatureAlgorithm = signatureAlgorithm;
         this.keyUsage = keyUsage;
-        this.selectedKeyUsage = selectedKeyUsage;
+        this.extendedKeyUsage = extendedKeyUsage;
         this.issuerSerialNumber = issuerSerialNumber;
+    }
+
+    public Collection<String> getExtendedKeyUsage() {
+        return extendedKeyUsage;
+    }
+
+    public void setExtendedKeyUsage(Collection<String> extendedKeyUsage) {
+        this.extendedKeyUsage = extendedKeyUsage;
     }
 
     public Long getSubjectId() {
@@ -47,19 +56,19 @@ public class CreateCertificateDTO {
         this.issuerId = issuerId;
     }
 
-    public LocalDate getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
@@ -79,13 +88,6 @@ public class CreateCertificateDTO {
         this.keyUsage = keyUsage;
     }
 
-    public SelectedKeyUsage getSelectedKeyUsage() {
-        return selectedKeyUsage;
-    }
-
-    public void setSelectedKeyUsage(SelectedKeyUsage selectedKeyUsage) {
-        this.selectedKeyUsage = selectedKeyUsage;
-    }
 
     public String getIssuerSerialNumber() {
         return issuerSerialNumber;

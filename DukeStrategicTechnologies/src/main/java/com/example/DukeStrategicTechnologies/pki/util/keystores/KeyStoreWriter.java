@@ -1,4 +1,4 @@
-package com.example.DukeStrategicTechnologies.pki.keystores;
+package com.example.DukeStrategicTechnologies.pki.util.keystores;
 
 import java.io.*;
 import java.security.*;
@@ -21,9 +21,10 @@ public class KeyStoreWriter {
 
     public void loadKeyStore(String fileName, char[] password) {
         try {
-            File f = new File(fileName);
-            if(fileName != null && f.exists()) {
-                keyStore.load(new FileInputStream(fileName), password);
+            String fullPath = fileName + ".jks";
+            File f = new File(fullPath);
+            if(fullPath != null && f.exists()) {
+                keyStore.load(new FileInputStream(fullPath), password);
             } else {
                 keyStore.load(null, password);
 
@@ -42,7 +43,7 @@ public class KeyStoreWriter {
 
     public void saveKeyStore(String fileName, char[] password) {
         try {
-            keyStore.store(new FileOutputStream(fileName), password);
+            keyStore.store(new FileOutputStream(fileName + ".jks"), password);
         } catch (KeyStoreException e) {
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {

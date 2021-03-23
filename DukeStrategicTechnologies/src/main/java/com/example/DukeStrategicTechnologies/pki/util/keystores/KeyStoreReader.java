@@ -1,8 +1,4 @@
-package com.example.DukeStrategicTechnologies.pki.keystores;
-
-import com.example.DukeStrategicTechnologies.pki.model.Issuer;
-import org.bouncycastle.asn1.x500.X500Name;
-import org.bouncycastle.cert.jcajce.JcaX509CertificateHolder;
+package com.example.DukeStrategicTechnologies.pki.util.keystores;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -11,7 +7,6 @@ import java.io.IOException;
 import java.security.*;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
 
 public class KeyStoreReader {
 
@@ -30,7 +25,7 @@ public class KeyStoreReader {
     public Certificate readCertificate(String keyStoreFile, String keyStorePass, String alias) {
         try {
 
-            KeyStore ks = getKeyStore(keyStoreFile, keyStorePass);
+            KeyStore ks = getKeyStore(keyStoreFile + ".jks", keyStorePass);
 
             if(ks.isKeyEntry(alias)) {
                 Certificate cert = ks.getCertificate(alias);
@@ -56,7 +51,7 @@ public class KeyStoreReader {
     public KeyStore getKeyStore(String keyStoreFile, String keyStorePass) throws KeyStoreException, NoSuchProviderException, IOException, NoSuchAlgorithmException, CertificateException {
         KeyStore ks = KeyStore.getInstance("JKS", "SUN");
 
-        BufferedInputStream in = new BufferedInputStream(new FileInputStream(keyStoreFile));
+        BufferedInputStream in = new BufferedInputStream(new FileInputStream(keyStoreFile + ".jks"));
         ks.load(in, keyStorePass.toCharArray());
         return ks;
     }
