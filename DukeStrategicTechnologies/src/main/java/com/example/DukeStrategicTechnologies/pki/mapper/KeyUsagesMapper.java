@@ -32,12 +32,12 @@ public class KeyUsagesMapper {
         HashMap<Integer, String> map = KeyUsages.getKeyUsageMapString();
 
         for (int i = 0; i < keyUsages.length; i++) {
-            if(keyUsages[i]) {
+            if (keyUsages[i]) {
                 retval.add(map.get(i));
             }
         }
         return retval;
-
+    }
     public static KeyPurposeId[] extendedKeyUsagesDTOToValues(CreateCertificateDTO createCertificateDTO) {
         ArrayList<String> selectedExtendedKeys = new ArrayList<>();
         ArrayList<KeyPurposeId> extendedKeyUsageValues = new ArrayList<>();

@@ -84,7 +84,7 @@ public class CreateCertificateService {
         ExtendedCertificateData extendedCertificateData = new ExtendedCertificateData(LocalDate.parse("2020-03-12"),
                 LocalDate.parse("2020-10-12"),
                 createCertificateDTO.getSignatureAlgorithm(),
-                KeyUsagesMapper.eyUsagesDTOToKeyUsages(createCertificateDTO),
+                KeyUsagesMapper.keyUsagesDTOToKeyUsages(createCertificateDTO),
                 KeyUsagesMapper.extendedKeyUsagesDTOToValues(createCertificateDTO),
                 subjectCertificateSerialNumber);
 

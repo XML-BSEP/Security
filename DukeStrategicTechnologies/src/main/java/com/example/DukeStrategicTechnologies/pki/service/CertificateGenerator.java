@@ -41,13 +41,10 @@ public class CertificateGenerator {
                     subjectData.getKeyPair().getPublic());
 
 
-            if (extendedCertificateData.getKeyUsage().size() > 0) {
-                certGen.addExtension(Extension.keyUsage, true, new KeyUsage(generateKeyUsage(extendedCertificateData)));
-            }
 
-            if (extendedCertificateData.getExtendedKeyUsages().length > 0) {
+                certGen.addExtension(Extension.keyUsage, true, new KeyUsage(generateKeyUsage(extendedCertificateData)));
                 certGen.addExtension(Extension.extendedKeyUsage, true, new ExtendedKeyUsage(extendedCertificateData.getExtendedKeyUsages()));
-            }
+
 
             //extend
 
