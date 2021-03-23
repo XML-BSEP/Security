@@ -8,7 +8,7 @@ import com.example.DukeStrategicTechnologies.pki.model.User;
 import com.example.DukeStrategicTechnologies.pki.model.enums.SignatureAlgorithm;
 import com.example.DukeStrategicTechnologies.pki.repository.UserRepository;
 import com.example.DukeStrategicTechnologies.pki.service.CertificateGenerator;
-import com.example.DukeStrategicTechnologies.pki.service.CreateCertificateService;
+import com.example.DukeStrategicTechnologies.pki.service.CertificateService;
 import com.example.DukeStrategicTechnologies.pki.util.properties.KeyStoreProperties;
 import org.bouncycastle.asn1.x500.X500NameBuilder;
 import org.bouncycastle.asn1.x500.style.BCStyle;
@@ -38,7 +38,7 @@ public class InitializeCertificate implements ApplicationListener<ApplicationRea
     private UserRepository userRepository;
 
     @Autowired
-    private CreateCertificateService createCertificateService;
+    private CertificateService createCertificateService;
 
     private CertificateGenerator certificateGenerator;
 

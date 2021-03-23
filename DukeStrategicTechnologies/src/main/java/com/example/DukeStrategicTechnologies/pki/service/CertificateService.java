@@ -10,12 +10,9 @@ import com.example.DukeStrategicTechnologies.pki.model.Subject;
 import com.example.DukeStrategicTechnologies.pki.model.User;
 import com.example.DukeStrategicTechnologies.pki.repository.UserRepository;
 import com.example.DukeStrategicTechnologies.pki.util.properties.KeyStoreProperties;
-import org.apache.tomcat.jni.Local;
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.X500NameBuilder;
 import org.bouncycastle.asn1.x500.style.BCStyle;
-import org.bouncycastle.asn1.x509.KeyPurposeId;
-import org.bouncycastle.asn1.x509.X509Name;
 import org.bouncycastle.cert.jcajce.JcaX509CertificateHolder;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +25,19 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
 
 @Service
-public class CreateCertificateService {
+public class CertificateService {
 
     static {
         Security.addProvider(new BouncyCastleProvider());
     }
+    public static final String CERTIFICATE_NOT_VALID = "Certificate is not valid!";
+    public static final String CERTIFICATE_NOT_FOUND = "Certificate is not found!";
+    public static final String SUBJECT_NOT_FOUND = "Subject not found!";
+    public static final String ISSUER_NOT_FOUND = "Issuer not found!";
+    public static final String SELF_SIGNED_EXCEPTION = "Self-signed certificates can only be issued by root certificates!";
+    public static final String KEYSTORE_NOT_FOUND = "KeyStore not found!";
 
     private CertificateGenerator certificateGenerator;
     private KeyStoreWriter keyStoreWriter;
@@ -46,7 +47,7 @@ public class CreateCertificateService {
     @Autowired
     private UserRepository userRepository;
 
-    public CreateCertificateService() {
+    public CertificateService() {
         this.keyStoreWriter = new KeyStoreWriter();
         this.keystoreReader = new KeyStoreReader();
         this.certificateGenerator = new CertificateGenerator();
@@ -60,14 +61,14 @@ public class CreateCertificateService {
 
         User issuer = userRepository.findById(createCertificateDTO.getIssuerId()).get();
         if (issuer == null) {
-            throw new Exception();
+            throw new Exception(ISSUER_NOT_FOUND);
         }
 
         String issuerAllias = issuer.getEmail() + createCertificateDTO.getIssuerSerialNumber();
         KeyStore keyStore = getIssuerKeyStoreByAlias(issuerAllias);
 
         if(keyStore == null) {
-            throw new Exception("Znaci...");
+            throw new Exception(KEYSTORE_NOT_FOUND);
         }
         X509Certificate issuerCertificate = getCertificateByAlias(issuerAllias, keyStore);
 
@@ -76,13 +77,11 @@ public class CreateCertificateService {
 
         User user = userRepository.findById(createCertificateDTO.getSubjectId()).get();
         if (user == null) {
-            throw new Exception("Znaci...");
+            throw new Exception(SUBJECT_NOT_FOUND);
         }
 
         BigInteger subjectCertificateSerialNumber = generateSerialNumberForCertificate();
         String subjectAlias = user.getEmail() + subjectCertificateSerialNumber;
-
-
 
         ExtendedCertificateData extendedCertificateData = new ExtendedCertificateData(LocalDate.parse("2020-03-12"),
                 LocalDate.parse("2020-10-12"),
@@ -117,7 +116,6 @@ public class CreateCertificateService {
         Certificate[] certificateChain = createCertificateChain(keyStore, issuerAllias, subjectCertificate);
         keyStoreWriter.write(subjectAlias, subject.getKeyPair().getPrivate(), subjectPassword, certificateChain);
         keyStoreWriter.saveKeyStore(filePath, keyStorePass.toCharArray());
-
     }
 
 
@@ -130,7 +128,7 @@ public class CreateCertificateService {
 
         User user = userRepository.findById(dto.getSubjectId()).get();
         if (user == null) {
-            throw new Exception();
+            throw new Exception(SUBJECT_NOT_FOUND);
         }
 
         X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
@@ -144,7 +142,6 @@ public class CreateCertificateService {
 
         return new Subject(builder.build(), keyPairSubject);
     }
-
 
     public KeyPair generateKeyPair() {
         try {
