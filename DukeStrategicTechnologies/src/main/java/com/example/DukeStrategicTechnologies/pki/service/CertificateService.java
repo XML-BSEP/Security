@@ -87,7 +87,7 @@ public class CertificateService {
         String subjectAlias = user.getEmail() + subjectCertificateSerialNumber;
 
         ExtendedCertificateData extendedCertificateData = new ExtendedCertificateData(LocalDate.parse("2020-03-12"),
-                LocalDate.parse("2020-10-12"),
+                LocalDate.parse("2021-10-12"),
                 createCertificateDTO.getSignatureAlgorithm(),
                 KeyUsagesMapper.keyUsagesDTOToKeyUsages(createCertificateDTO),
                 KeyUsagesMapper.extendedKeyUsagesDTOToValues(createCertificateDTO),
