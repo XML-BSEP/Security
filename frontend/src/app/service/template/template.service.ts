@@ -9,9 +9,11 @@ import { environment } from 'src/environments/environment';
 })
 export class TemplateService {
 
-  constructor(private http: HttpClient, private router : Router) { }
+  constructor(private http: HttpClient) { }
 
   saveTemplate(template: Template) {
-    return this.http.post<Template>(`${environment.baseUrl}/${environment.templates}`, template);
+    return this.http.post(`${environment.baseUrl}/${environment.template}/${environment.add}`,template, {responseType : 'text'});
+    // return this.http.post<Template>(`${environment.baseUrl}/${environment.api}/${environment.template}/${environment.add}`, template, {responseType : 'text'});
   }
+
 }

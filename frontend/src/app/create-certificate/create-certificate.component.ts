@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ChooseIssuerDialogComponent } from '../dialogs/choose-issuer-dialog/choose-issuer-dialog.component';
 import { SigningCertificate } from '../model/certificates/SigningCertificate';
 import { Template } from '../model/certificates/Template';
+import { TemplateService } from '../service/template/template.service';
 
 @Component({
   selector: 'app-create-certificate',
@@ -33,6 +34,7 @@ export class CreateCertificateComponent implements OnInit {
   userLoggedIn: boolean;
   signingCertificate: SigningCertificate;
   minDate;
+  public template;
   // visible = true;
   // selectable = true;
   // removable = true;
@@ -46,7 +48,7 @@ export class CreateCertificateComponent implements OnInit {
 
   allExtendedKeyUsages: string[] = ["TLS Web server authentication", "TLS Web client authentication", "Sign (downloadable) executable code", "Email protection", "IPSEC End System", "IPSEC Tunnel", "IPSEC User", "Timestamping"];
 
-  constructor(private router : Router,    public signingCertDialog: MatDialog ) { }
+  constructor(private router : Router,    public signingCertDialog: MatDialog, private templateService : TemplateService ) { }
 
   ngOnInit(): void {
 
@@ -128,11 +130,22 @@ export class CreateCertificateComponent implements OnInit {
   saveTemplate(){
     let timestamp = new Date();
 
-    var template = new Template(null, this.firstFormGroup.controls.signatureAlgorithm.value, this.firstFormGroup.controls.pubKeyAlgorithm.value, this.firstFormGroup.controls.issuer.value, timestamp, this.selectedKeyUsages, this.selectedExtendedKeyUsages);
+    this.template = new Template(null, this.firstFormGroup.controls.signatureAlgorithm.value, this.firstFormGroup.controls.pubKeyAlgorithm.value, this.firstFormGroup.controls.issuer.value, timestamp, this.selectedKeyUsages, this.selectedExtendedKeyUsages);
 
-    console.log(template);
+    console.log(this.template);
+
+    this.templateService.saveTemplate(this.template).subscribe(
+      res=>{
+        alert('Success!');
+      },
+      error=>{
+        alert("Fail!");
+      }
+
+      )
 
   }
+
   download(){
 
   }

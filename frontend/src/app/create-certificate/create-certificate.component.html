@@ -3,7 +3,7 @@
         <button mat-icon-button matTooltip="Back" class="back" (click)="back()">
             <mat-icon>keyboard_backspace</mat-icon>
           </button>
-          <button mat-icon-button  matTooltip="Save template" id="save">
+          <button mat-icon-button  matTooltip="Save template" id="save" (click)="saveTemplate()" [disabled] ="!firstFormGroup.valid || !thirdFormGroup.valid">
             <mat-icon>save</mat-icon>
           </button>
           <button mat-icon-button matTooltip="All templates" id="showAll">
@@ -234,7 +234,7 @@
 
                       <button id="back" mat-button matStepperPrevious>Back</button>
 
-                      <button id="next" style="margin-right: 10%;" mat-button [disabled]="!firstFormGroup.valid || !secondFormGroup.valid || !thirdFormGroup.valid" (click)="saveTemplate()">Save</button>
+                      <!-- <button id="next" style="margin-right: 10%;" mat-button [disabled]="!firstFormGroup.valid || !secondFormGroup.valid || !thirdFormGroup.valid" (click)="saveTemplate()">Save</button> -->
 
 
                     </div>
