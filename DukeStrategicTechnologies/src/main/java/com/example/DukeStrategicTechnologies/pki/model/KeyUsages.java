@@ -22,5 +22,21 @@ public class KeyUsages {
         return keyUsageMap;
     }
 
+    public static HashMap<Integer, String> getKeyUsageMapString() {
+        HashMap<Integer, String> keyUsageMap = new HashMap<>();
+
+        keyUsageMap.put(0, "digitalSignature");
+        keyUsageMap.put(1, "nonRepudiation");
+        keyUsageMap.put(2, "keyEncipherment");
+        keyUsageMap.put(3, "dataEncipherment");
+        keyUsageMap.put(4, "keyAgreement");
+        keyUsageMap.put(5, "certificateSigning");
+        keyUsageMap.put(6, "crlSigning");
+        keyUsageMap.put(7, "encipherOnly");
+        keyUsageMap.put(8, "decipherOnly");
+
+        return keyUsageMap;
+    }
+
 
 }

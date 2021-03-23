@@ -21,6 +21,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.criteria.Root;
+import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.KeyPair;
@@ -62,6 +63,12 @@ public class InitializeCertificate implements ApplicationListener<ApplicationRea
         User newRoot = new User(2L, "root", "rootovic", "rootic", "org1", "orgunit1", "Serbia", "Novi Sad", "root@gmail.com", true, 1L);
 
         userRepository.save(newRoot);
+
+        String rootPath = "root.jks";
+        File f = new File(rootPath);
+        if(f.exists()) {
+            return;
+        }
 
         X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
         builder.addRDN(BCStyle.CN, newRoot.getCommonName());

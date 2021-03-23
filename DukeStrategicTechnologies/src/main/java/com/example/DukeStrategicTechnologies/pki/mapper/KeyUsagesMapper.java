@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class KeyUsagesMapper {
 
-    public static Collection<Integer> eyUsagesDTOToKeyUsages(CreateCertificateDTO dto) {
+    public static Collection<Integer> keyUsagesDTOToKeyUsages(CreateCertificateDTO dto) {
         Collection<String> usages = dto.getKeyUsage();
         Collection<Integer> retVal = new ArrayList<>();
 
@@ -22,5 +22,19 @@ public class KeyUsagesMapper {
         }
 
         return retVal;
+    }
+
+    public static Collection<String> keyUsagesBoolToKeyUsagesString(boolean[] keyUsages) {
+        Collection<String> retval = new ArrayList<>();
+
+        HashMap<Integer, String> map = KeyUsages.getKeyUsageMapString();
+
+        for (int i = 0; i < keyUsages.length; i++) {
+            if(keyUsages[i]) {
+                retval.add(map.get(i));
+            }
+        }
+        return retval;
+
     }
 }
