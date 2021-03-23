@@ -7,6 +7,10 @@ import { Observable } from 'rxjs';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import {map, startWith} from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { ChooseIssuerDialogComponent } from '../dialogs/choose-issuer-dialog/choose-issuer-dialog.component';
+import { SigningCertificate } from '../model/certificates/SigningCertificate';
+import { Template } from '../model/certificates/Template';
 
 @Component({
   selector: 'app-create-certificate',
@@ -27,6 +31,8 @@ export class CreateCertificateComponent implements OnInit {
   selectedKeyUsages;
   selectedExtendedKeyUsages;
   userLoggedIn: boolean;
+  signingCertificate: SigningCertificate;
+  minDate;
   // visible = true;
   // selectable = true;
   // removable = true;
@@ -39,14 +45,15 @@ export class CreateCertificateComponent implements OnInit {
   // @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   allExtendedKeyUsages: string[] = ["TLS Web server authentication", "TLS Web client authentication", "Sign (downloadable) executable code", "Email protection", "IPSEC End System", "IPSEC Tunnel", "IPSEC User", "Timestamping"];
-  
-  constructor(private router : Router) { }
+
+  constructor(private router : Router,    public signingCertDialog: MatDialog ) { }
 
   ngOnInit(): void {
 
     // this.filteredKeyUsages = this.keyUsageControl.valueChanges.pipe(
     //   startWith(null),
     //   map((keyUsage: string | null) => keyUsage ? this._filter(keyUsage) : this.allKeyUsages.slice()));
+    this.minDate = new Date(Date.now()).toISOString().split('T')[0];
 
     if(localStorage.getItem('userId')!==null){
       this.userLoggedIn = true;
@@ -69,7 +76,7 @@ export class CreateCertificateComponent implements OnInit {
       "org": new FormControl(null, [Validators.required]),
       "orgunit": new FormControl(null, [Validators.required]),
       "email": new FormControl(null, [Validators.required]),
-      "allias": new FormControl(null, [Validators.required]),
+      "password": new FormControl(null, [Validators.required]),
       "chosenSubject" : new FormControl(null)
     });
 
@@ -79,43 +86,54 @@ export class CreateCertificateComponent implements OnInit {
       'extendedKeyUsage' : new FormControl(null, Validators.required)
     })
   }
-  // add(event: MatChipInputEvent): void {
-  //   const input = event.input;
-  //   const value = event.value;
 
-  //   // Add our fruit
-  //   if ((value || '').trim()) {
-  //     this.chosenKeyUsages.push(value.trim());
-  //   }
-
-  //   // Reset the input value
-  //   if (input) {
-  //     input.value = '';
-  //   }
-
-  //   this.keyUsageControl.setValue(null);
-  // }
-
-  // remove(usage: string): void {
-  //   const index = this.chosenKeyUsages.indexOf(usage);
-
-  //   if (index >= 0) {
-  //     this.chosenKeyUsages.splice(index, 1);
-  //   }
-  // }
-  // selected(event: MatAutocompleteSelectedEvent): void {
-  //   this.chosenKeyUsages.push(event.option.viewValue);
-  //   this.keyUsageInput.nativeElement.value = '';
-  //   this.keyUsageControl.setValue(null);
-  // }
-
-  // private _filter(value: string): string[] {
-  //   const filterValue = value.toLowerCase();
-
-  //   return this.allKeyUsages.filter(usage => usage.toLowerCase().indexOf(filterValue) === 0);
-  // }
 
   back(){
     this.router.navigate(['/home']);
+  }
+  chooseCertificate() {
+    let tempKeyUsage = undefined;
+    let tempExtKeyUsage = undefined;
+
+
+    const dialogRef = this.signingCertDialog.open(ChooseIssuerDialogComponent, {
+      width: '80vw',
+      height: '90vh',
+      data: {
+        chosenKeyUsage: tempKeyUsage,
+        chosenExtendedKeyUsage: tempExtKeyUsage
+      }
+
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result) {
+        this.signingCertificate = result.certificate;
+        this.firstFormGroup.patchValue({
+          "issuer": this.signingCertificate.issuerCommonName
+        });
+      }
+    });
+  }
+
+  // public id :  Number;
+  // public signatureAlgorithm : String;
+  // public keyAlgorithm : String;
+  // public name : String;
+  // public timestamp : Date;
+  // public keyUsage : String[];
+  // public extendedKeyUsage : String[];
+
+  saveTemplate(){
+    let timestamp = new Date();
+
+    var template = new Template(null, this.firstFormGroup.controls.signatureAlgorithm.value, this.firstFormGroup.controls.pubKeyAlgorithm.value, this.firstFormGroup.controls.issuer.value, timestamp, this.selectedKeyUsages, this.selectedExtendedKeyUsages);
+
+    console.log(template);
+
+  }
+  download(){
+
   }
 }

@@ -11,6 +11,7 @@ import { AllCertificatesComponent } from './all-certificates/all-certificates.co
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ChooseIssuerDialogComponent } from './dialogs/choose-issuer-dialog/choose-issuer-dialog.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     CreateCertificateComponent,
     AllCertificatesComponent,
     LoginComponent,
+    ChooseIssuerDialogComponent,
   ],
   imports: [
     BrowserModule,
