@@ -3,6 +3,8 @@ package com.example.DukeStrategicTechnologies.pki.controller;
 import com.example.DukeStrategicTechnologies.pki.dto.CertificateDTO;
 import com.example.DukeStrategicTechnologies.pki.dto.CreateCertificateDTO;
 import com.example.DukeStrategicTechnologies.pki.dto.DownloadCertificateDTO;
+import com.example.DukeStrategicTechnologies.pki.dto.TemplateDTO;
+import com.example.DukeStrategicTechnologies.pki.model.Account;
 import com.example.DukeStrategicTechnologies.pki.service.Base64Encoder;
 import com.example.DukeStrategicTechnologies.pki.service.CertificateService;
 import org.bouncycastle.cms.CMSException;
@@ -10,6 +12,8 @@ import org.bouncycastle.operator.OperatorCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +36,7 @@ public class CertificateController {
     private Base64Encoder base64Encoder;
 
     @PostMapping("/createCertificate")
+    @PreAuthorize("hasRole('ADMIN') || hasRole('CA')")
     public ResponseEntity<?> createCertificate(@RequestBody CreateCertificateDTO dto) throws Exception {
         certificateService.createCertificate(dto);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -39,6 +44,7 @@ public class CertificateController {
 
 
     @GetMapping("/getAll")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<CertificateDTO>> getAll() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
         List<CertificateDTO> certificateAlias = certificateService.getAllCertificates();
         return new ResponseEntity<>(certificateAlias, HttpStatus.OK);
@@ -52,9 +58,18 @@ public class CertificateController {
     }
 
     @PostMapping("/revokeCertificate")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> revokeCertificate(@RequestBody String serialNumber) {
         certificateService.revokeCertificate(serialNumber);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/getCertificatesByUser")
+    public ResponseEntity<?> getCertificatesByUser() throws Exception{
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String mail = ((Account)user).getUsername();
+        List<CertificateDTO> certificatesByUser = certificateService.getAllCertificatesByUser(mail);
+        return  new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
     }
 
 

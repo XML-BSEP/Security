@@ -348,5 +348,28 @@ public class CertificateService {
     }
 
 
+    public List<CertificateDTO> getAllCertificatesByUser(String mail) {
+        List<CertificateDTO> certificatesByUser = new ArrayList<>();
+
+        certificatesByUser.addAll(checkEndEntityCertificates(mail));
+        certificatesByUser.addAll(checkCasCertificates(mail));
+        certificatesByUser.addAll(checkSelfSignedCertificates(mail));
+
+        return certificatesByUser;
+    }
+
+    private Collection<? extends CertificateDTO> checkSelfSignedCertificates(String mail) {
+        return null;
+    }
+
+    private Collection<? extends CertificateDTO> checkCasCertificates(String mail) {
+        return null;
+    }
+
+    private Collection<? extends CertificateDTO> checkEndEntityCertificates(String mail) {
+        return null;
+    }
+
+
 }
 
