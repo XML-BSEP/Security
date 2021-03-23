@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ChooseIssuerDialogComponent } from './dialogs/choose-issuer-dialog/choose-issuer-dialog.component';
+import { SavedTemplatesDialogComponent } from './dialogs/saved-templates-dialog/saved-templates-dialog.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ChooseIssuerDialogComponent } from './dialogs/choose-issuer-dialog/choo
     AllCertificatesComponent,
     LoginComponent,
     ChooseIssuerDialogComponent,
+    SavedTemplatesDialogComponent,
   ],
   imports: [
     BrowserModule,
