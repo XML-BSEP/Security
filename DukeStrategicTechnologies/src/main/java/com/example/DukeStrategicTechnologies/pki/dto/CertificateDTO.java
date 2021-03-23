@@ -9,22 +9,42 @@ public class CertificateDTO {
     private String serialNumber;
     private Date startDate;
     private Date endDate;
+    private String commonName;
+    private String email;
     private String signatureAlgorithm;
     private Collection<String> keyUsages;
     private Collection<String> extendedKeyUsages;
 
-    public CertificateDTO(String serialNumber, Date startDate,
-                          Date endDate, String signatureAlgorithm,
+    public CertificateDTO(String serialNumber, Date startDate, Date endDate,
+                          String commonName, String email, String signatureAlgorithm,
                           Collection<String> keyUsages, Collection<String> extendedKeyUsages) {
         this.serialNumber = serialNumber;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.commonName = commonName;
+        this.email = email;
         this.signatureAlgorithm = signatureAlgorithm;
         this.keyUsages = keyUsages;
         this.extendedKeyUsages = extendedKeyUsages;
     }
 
     public CertificateDTO() {
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCommonName() {
+        return commonName;
+    }
+
+    public void setCommonName(String commonName) {
+        this.commonName = commonName;
     }
 
     public String getSerialNumber() {

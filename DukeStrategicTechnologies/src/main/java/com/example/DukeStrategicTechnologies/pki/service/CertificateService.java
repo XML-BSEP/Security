@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.security.*;
 import java.security.cert.Certificate;
+import java.security.cert.CertificateEncodingException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.time.LocalDate;
@@ -124,6 +125,14 @@ public class CertificateService {
 
     }
 
+    public String generateAliasByCertificate(X509Certificate certificate) throws CertificateEncodingException {
+        X500Name subject = null;
+        subject = new JcaX509CertificateHolder(certificate).getSubject();
+
+        String subjectEmail = subject.getRDNs()[6].getFirst().getValue().toString();
+
+        return subjectEmail + certificate.getSerialNumber();
+    }
 
     private boolean isCA(X509Certificate certificate) {
         return certificate.getKeyUsage()[5];
@@ -181,7 +190,7 @@ public class CertificateService {
         return keystoreReader.getKeyStore(KeyStoreProperties.END_ENTITY_FILE, keyStoreProperties.readKeyStorePass(KeyStoreProperties.END_ENTITY_FILE));
     }
 
-    private X509Certificate getCertificateByAlias(String alias, KeyStore keystore) throws KeyStoreException {
+    public X509Certificate getCertificateByAlias(String alias, KeyStore keystore) throws KeyStoreException {
         X509Certificate certificate = (X509Certificate) keystore.getCertificate(alias);
         return certificate;
     }
@@ -198,6 +207,22 @@ public class CertificateService {
         }
         else if((keystore = getEndEntityKeyStore()).containsAlias(alias)) {
             issuerKeyStorePassword = keyStoreProperties.readKeyStorePass(KeyStoreProperties.END_ENTITY_FILE);
+            return keystore;
+        }
+        else {
+            return keystore;
+        }
+    }
+
+    public KeyStore getKeyStoreByAlias(String alias) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        KeyStore keystore = null;
+        if ((keystore = getCAKeystore()).containsAlias(alias)) {
+            return keystore;
+        }
+        else if ((keystore = getSelfSignedKeyStore()).containsAlias(alias)) {
+            return keystore;
+        }
+        else if((keystore = getEndEntityKeyStore()).containsAlias(alias)) {
             return keystore;
         }
         else {
@@ -300,6 +325,21 @@ public class CertificateService {
         certificateDTO.setSignatureAlgorithm(signatureAlgorithm);
         certificateDTO.setKeyUsages(keyUsages);
         return certificateDTO;
+    }
+
+    public String getKeyStorePassFromAlias(String alias) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        if ((getCAKeystore()).containsAlias(alias)) {
+            return keyStoreProperties.readKeyStorePass(KeyStoreProperties.CA_FILE);
+        }
+        else if ((getSelfSignedKeyStore()).containsAlias(alias)) {
+            return keyStoreProperties.readKeyStorePass(KeyStoreProperties.ROOT_FILE);
+        }
+        else if((getEndEntityKeyStore()).containsAlias(alias)) {
+            return keyStoreProperties.readKeyStorePass(KeyStoreProperties.END_ENTITY_FILE);
+        }
+        else {
+            return "";
+        }
     }
 }
 
