@@ -1,4 +1,4 @@
-package com.example.DukeStrategicTechnologies.pki.keystores;
+package com.example.DukeStrategicTechnologies.pki.util.keystores;
 
 import java.io.*;
 import java.security.*;

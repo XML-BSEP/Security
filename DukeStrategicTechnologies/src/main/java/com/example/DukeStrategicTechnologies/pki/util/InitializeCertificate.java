@@ -1,6 +1,6 @@
 package com.example.DukeStrategicTechnologies.pki.util;
 
-import com.example.DukeStrategicTechnologies.pki.keystores.KeyStoreWriter;
+import com.example.DukeStrategicTechnologies.pki.util.keystores.KeyStoreWriter;
 import com.example.DukeStrategicTechnologies.pki.model.ExtendedCertificateData;
 import com.example.DukeStrategicTechnologies.pki.model.Issuer;
 import com.example.DukeStrategicTechnologies.pki.model.Subject;
@@ -19,7 +19,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
-import javax.persistence.criteria.Root;
+
 import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
