@@ -3,7 +3,6 @@ package com.example.DukeStrategicTechnologies.pki.controller;
 import com.example.DukeStrategicTechnologies.pki.dto.CertificateDTO;
 import com.example.DukeStrategicTechnologies.pki.dto.CreateCertificateDTO;
 import com.example.DukeStrategicTechnologies.pki.dto.DownloadCertificateDTO;
-import com.example.DukeStrategicTechnologies.pki.dto.TemplateDTO;
 import com.example.DukeStrategicTechnologies.pki.model.Account;
 import com.example.DukeStrategicTechnologies.pki.service.Base64Encoder;
 import com.example.DukeStrategicTechnologies.pki.service.CertificateService;
@@ -42,7 +41,6 @@ public class CertificateController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
     @GetMapping("/getAll")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<CertificateDTO>> getAll() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
@@ -69,9 +67,29 @@ public class CertificateController {
         Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String mail = ((Account)user).getUsername();
         List<CertificateDTO> certificatesByUser = certificateService.getAllCertificatesByUser(mail);
-        return  new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
+        return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
     }
 
+    @GetMapping("/getRootCertificates")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> getSelfSignedCertificates() throws Exception{
+        List<CertificateDTO> certificatesByUser = certificateService.getRootCertificates();
+        return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
+    }
+
+    @GetMapping("/getCaCertificates")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> getCaCertificates() throws Exception{
+        List<CertificateDTO> certificatesByUser = certificateService.getCaCertificates();
+        return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
+    }
+
+    @GetMapping("/getEndEntityCertificates")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> getEndEntityCertificates() throws Exception{
+        List<CertificateDTO> certificatesByUser = certificateService.getEndEntityCertificates();
+        return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
+    }
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)

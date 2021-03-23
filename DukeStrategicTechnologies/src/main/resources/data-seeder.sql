@@ -1,6 +1,6 @@
 insert into authority(id, name) values (1, 'ROLE_ADMIN');
 insert into authority(id, name) values (2, 'ROLE_END_ENTITY_USER');
-insert into authority(id, name) values (2, 'ROLE_CA');
+insert into authority(id, name) values (3, 'ROLE_CA');
 
 insert into users values ('23', 0, 'Novi Sad', 'user1', 'user1@gmail.com', 'user11', false, 'org23', 'orgunit23', 'Serbia', 'userovic');
 insert into users values ('24', 0, 'Novi Sad', 'user2', 'user2@gmail.com', 'user12', false, 'org24', 'orgunit24', 'Serbia', 'userovic');
