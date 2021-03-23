@@ -1,6 +1,5 @@
 package com.example.DukeStrategicTechnologies.pki.dto;
 
-import com.example.DukeStrategicTechnologies.pki.model.enums.SelectedKeyUsage;
 import com.example.DukeStrategicTechnologies.pki.model.enums.SignatureAlgorithm;
 
 
@@ -16,19 +15,29 @@ public class CreateCertificateDTO {
     private LocalDate endDate;
     private SignatureAlgorithm signatureAlgorithm;
     private Collection<String> keyUsage;
-    private SelectedKeyUsage selectedKeyUsage;
+    private Collection<String> extendedKeyUsage;
     private String issuerSerialNumber;
 
     public CreateCertificateDTO(Long subjectId, Long issuerId, LocalDate startDate, LocalDate endDate,
-                                SignatureAlgorithm signatureAlgorithm, Collection<String> keyUsage, SelectedKeyUsage selectedKeyUsage, String issuerSerialNumber) {
+                                SignatureAlgorithm signatureAlgorithm, Collection<String> keyUsage,
+                                Collection<String> extendedKeyUsage,
+                                String issuerSerialNumber) {
         this.subjectId = subjectId;
         this.issuerId = issuerId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.signatureAlgorithm = signatureAlgorithm;
         this.keyUsage = keyUsage;
-        this.selectedKeyUsage = selectedKeyUsage;
+        this.extendedKeyUsage = extendedKeyUsage;
         this.issuerSerialNumber = issuerSerialNumber;
+    }
+
+    public Collection<String> getExtendedKeyUsage() {
+        return extendedKeyUsage;
+    }
+
+    public void setExtendedKeyUsage(Collection<String> extendedKeyUsage) {
+        this.extendedKeyUsage = extendedKeyUsage;
     }
 
     public Long getSubjectId() {
@@ -79,13 +88,6 @@ public class CreateCertificateDTO {
         this.keyUsage = keyUsage;
     }
 
-    public SelectedKeyUsage getSelectedKeyUsage() {
-        return selectedKeyUsage;
-    }
-
-    public void setSelectedKeyUsage(SelectedKeyUsage selectedKeyUsage) {
-        this.selectedKeyUsage = selectedKeyUsage;
-    }
 
     public String getIssuerSerialNumber() {
         return issuerSerialNumber;
