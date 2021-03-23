@@ -5,7 +5,7 @@ import com.example.DukeStrategicTechnologies.pki.model.Issuer;
 import com.example.DukeStrategicTechnologies.pki.model.Subject;
 
 
-import com.example.DukeStrategicTechnologies.pki.model.enums.SelectedKeyUsage;
+import org.bouncycastle.asn1.x509.ExtendedKeyUsage;
 import org.bouncycastle.asn1.x509.Extension;
 import org.bouncycastle.asn1.x509.KeyUsage;
 import org.bouncycastle.cert.CertIOException;
@@ -41,8 +41,12 @@ public class CertificateGenerator {
                     subjectData.getKeyPair().getPublic());
 
 
-            if (extendedCertificateData.getSelectedKeyUsage() == SelectedKeyUsage.KEY_USAGE) {
+            if (extendedCertificateData.getKeyUsage().size() > 0) {
                 certGen.addExtension(Extension.keyUsage, true, new KeyUsage(generateKeyUsage(extendedCertificateData)));
+            }
+
+            if (extendedCertificateData.getExtendedKeyUsages().length > 0) {
+                certGen.addExtension(Extension.extendedKeyUsage, true, new ExtendedKeyUsage(extendedCertificateData.getExtendedKeyUsages()));
             }
 
             //extend

@@ -13,6 +13,7 @@ import org.apache.tomcat.jni.Local;
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.X500NameBuilder;
 import org.bouncycastle.asn1.x500.style.BCStyle;
+import org.bouncycastle.asn1.x509.KeyPurposeId;
 import org.bouncycastle.asn1.x509.X509Name;
 import org.bouncycastle.cert.jcajce.JcaX509CertificateHolder;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
@@ -80,12 +81,13 @@ public class CreateCertificateService {
         String subjectAlias = user.getEmail() + subjectCertificateSerialNumber;
 
 
+
         ExtendedCertificateData extendedCertificateData = new ExtendedCertificateData(LocalDate.parse("2020-03-12"),
                 LocalDate.parse("2020-10-12"),
                 createCertificateDTO.getSignatureAlgorithm(),
                 KeyUsagesMapper.eyUsagesDTOToKeyUsages(createCertificateDTO),
-                subjectCertificateSerialNumber,
-                createCertificateDTO.getSelectedKeyUsage());
+                KeyUsagesMapper.extendedKeyUsagesDTOToValues(createCertificateDTO),
+                subjectCertificateSerialNumber);
 
         X500Name issureX509Name = new JcaX509CertificateHolder(issuerCertificate).getSubject();
         Key issuerPrivateKey =  keyStore.getKey(issuerAllias, issuerPassword.toCharArray());

@@ -2,7 +2,9 @@ package com.example.DukeStrategicTechnologies.pki.mapper;
 
 import com.example.DukeStrategicTechnologies.pki.dto.CreateCertificateDTO;
 import com.example.DukeStrategicTechnologies.pki.model.KeyUsages;
+import org.bouncycastle.asn1.x509.KeyPurposeId;
 import org.bouncycastle.asn1.x509.KeyUsage;
+import org.springframework.security.core.parameters.P;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,5 +24,21 @@ public class KeyUsagesMapper {
         }
 
         return retVal;
+    }
+
+    public static KeyPurposeId[] extendedKeyUsagesDTOToValues(CreateCertificateDTO createCertificateDTO) {
+        ArrayList<String> selectedExtendedKeys = new ArrayList<>();
+        ArrayList<KeyPurposeId> extendedKeyUsageValues = new ArrayList<>();
+        HashMap<String, KeyPurposeId> extendedKeyMap = KeyUsages.getExtendedKeyUsageMap();
+
+        for (String s : selectedExtendedKeys) {
+            if (extendedKeyMap.containsKey(s)) {
+                extendedKeyUsageValues.add(extendedKeyMap.get(s));
+            }
+        }
+
+        KeyPurposeId[] extendedKeyUsages = new KeyPurposeId[extendedKeyUsageValues.size()];
+        extendedKeyUsageValues.toArray(extendedKeyUsages);
+        return extendedKeyUsages;
     }
 }
