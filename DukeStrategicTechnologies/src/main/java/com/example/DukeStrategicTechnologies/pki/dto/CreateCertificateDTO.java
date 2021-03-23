@@ -11,14 +11,14 @@ public class CreateCertificateDTO {
 
     private Long subjectId;
     private Long issuerId;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private String startDate;
+    private String endDate;
     private SignatureAlgorithm signatureAlgorithm;
     private Collection<String> keyUsage;
     private Collection<String> extendedKeyUsage;
     private String issuerSerialNumber;
 
-    public CreateCertificateDTO(Long subjectId, Long issuerId, LocalDate startDate, LocalDate endDate,
+    public CreateCertificateDTO(Long subjectId, Long issuerId, String startDate, String endDate,
                                 SignatureAlgorithm signatureAlgorithm, Collection<String> keyUsage,
                                 Collection<String> extendedKeyUsage,
                                 String issuerSerialNumber) {
@@ -56,19 +56,19 @@ public class CreateCertificateDTO {
         this.issuerId = issuerId;
     }
 
-    public LocalDate getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 

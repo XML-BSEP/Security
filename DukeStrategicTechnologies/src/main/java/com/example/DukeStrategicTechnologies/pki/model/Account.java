@@ -1,10 +1,13 @@
 package com.example.DukeStrategicTechnologies.pki.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 
 @Entity
@@ -17,6 +20,12 @@ public class Account implements UserDetails {
     private String password;
     @Column(insertable = false, updatable = false)
     private String role;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinTable(name = "user_authority",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Authority> authorities;
 
     public Account() {
     }
@@ -45,7 +54,7 @@ public class Account implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     public String getPassword() {

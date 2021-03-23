@@ -35,10 +35,10 @@ public class CertificateService {
         Security.addProvider(new BouncyCastleProvider());
     }
     public static final String CERTIFICATE_NOT_VALID = "Certificate is not valid!";
-    public static final String CERTIFICATE_NOT_FOUND = "Certificate is not found!";
+    public static final String CERTIFICATE_REVOKED = "Certificate is revoked!";
     public static final String SUBJECT_NOT_FOUND = "Subject not found!";
     public static final String ISSUER_NOT_FOUND = "Issuer not found!";
-    public static final String SELF_SIGNED_EXCEPTION = "Self-signed certificates can only be issued by root certificates!";
+    public static final String SELF_SIGNED_EXCEPTION = "Self-signed certificates can only be issued by self-signed certificates!";
     public static final String KEYSTORE_NOT_FOUND = "KeyStore not found!";
 
     private CertificateGenerator certificateGenerator;
@@ -69,34 +69,42 @@ public class CertificateService {
             throw new Exception(ISSUER_NOT_FOUND);
         }
 
-        String issuerAllias = issuer.getEmail() + createCertificateDTO.getIssuerSerialNumber();
-        KeyStore keyStore = getIssuerKeyStoreByAlias(issuerAllias);
+        String issuerAlias = issuer.getEmail() + createCertificateDTO.getIssuerSerialNumber();
+        KeyStore keyStore = getIssuerKeyStoreByAlias(issuerAlias);
 
         if(keyStore == null) {
             throw new Exception(KEYSTORE_NOT_FOUND);
         }
-        X509Certificate issuerCertificate = getCertificateByAlias(issuerAllias, keyStore);
-
-        String issuerPassword = issuerKeyStorePassword + issuerCertificate.getSerialNumber();
-        isCertificateValid(keyStore, issuerAllias);
 
         User user = userRepository.findById(createCertificateDTO.getSubjectId()).get();
         if (user == null) {
             throw new Exception(SUBJECT_NOT_FOUND);
         }
 
+        if (user.getEmail().equals(issuer.getEmail())) {
+            if (!isSelfSignedCertificate(issuerAlias)) {
+                throw new Exception(SELF_SIGNED_EXCEPTION);
+            }
+        }
+
+        X509Certificate issuerCertificate = getCertificateByAlias(issuerAlias, keyStore);
+
+        String issuerPassword = issuerKeyStorePassword + issuerCertificate.getSerialNumber();
+        isCertificateValid(keyStore, issuerAlias);
+
+
         BigInteger subjectCertificateSerialNumber = generateSerialNumberForCertificate();
         String subjectAlias = user.getEmail() + subjectCertificateSerialNumber;
 
-        ExtendedCertificateData extendedCertificateData = new ExtendedCertificateData(LocalDate.parse("2020-03-12"),
-                LocalDate.parse("2021-10-12"),
+        ExtendedCertificateData extendedCertificateData = new ExtendedCertificateData(LocalDate.parse(createCertificateDTO.getStartDate()),
+                LocalDate.parse(createCertificateDTO.getEndDate()),
                 createCertificateDTO.getSignatureAlgorithm(),
                 KeyUsagesMapper.keyUsagesDTOToKeyUsages(createCertificateDTO),
                 KeyUsagesMapper.extendedKeyUsagesDTOToValues(createCertificateDTO),
                 subjectCertificateSerialNumber);
 
         X500Name issureX509Name = new JcaX509CertificateHolder(issuerCertificate).getSubject();
-        Key issuerPrivateKey =  keyStore.getKey(issuerAllias, issuerPassword.toCharArray());
+        Key issuerPrivateKey =  keyStore.getKey(issuerAlias, issuerPassword.toCharArray());
         PublicKey issuerPublicKey = issuerCertificate.getPublicKey();
         KeyPair issuerKeyPair = new KeyPair(issuerPublicKey, (PrivateKey) issuerPrivateKey);
         Issuer issuerData = new Issuer(issureX509Name, issuerKeyPair);
@@ -118,7 +126,7 @@ public class CertificateService {
             subjectPassword = keyStorePass + subjectCertificateSerialNumber;
         }
 
-        Certificate[] certificateChain = createCertificateChain(keyStore, issuerAllias, subjectCertificate);
+        Certificate[] certificateChain = createCertificateChain(keyStore, issuerAlias, subjectCertificate);
         keyStoreWriter.write(subjectAlias, subject.getKeyPair().getPrivate(), subjectPassword, certificateChain);
         keyStoreWriter.saveKeyStore(filePath, keyStorePass.toCharArray());
 
@@ -127,8 +135,17 @@ public class CertificateService {
 
     }
 
+    private boolean isSelfSignedCertificate(String issuerAlias) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        KeyStore keyStore = getSelfSignedKeyStore();
+        return keyStore.containsAlias(issuerAlias);
+    }
+
     public void revokeCertificate(String serialNumber) {
         revokedCertificateRepository.save(new RevokedCertificate(new BigInteger(serialNumber), LocalDateTime.now()));
+    }
+
+    private boolean isRevoked(String serialNumber) {
+        return revokedCertificateRepository.findAll().stream().anyMatch(c -> c.getSerialNumber().equals(serialNumber));
     }
 
     public String generateAliasByCertificate(X509Certificate certificate) throws CertificateEncodingException {
@@ -143,6 +160,7 @@ public class CertificateService {
     private boolean isCA(X509Certificate certificate) {
         return certificate.getKeyUsage()[5];
     }
+
     private Subject generateSubject(CreateCertificateDTO dto) throws Exception {
 
         KeyPair keyPairSubject = generateKeyPair();
@@ -236,19 +254,29 @@ public class CertificateService {
         }
     }
 
-    private void isCertificateValid(KeyStore keyStore, String alias) throws KeyStoreException, NoSuchProviderException, CertificateException, NoSuchAlgorithmException, InvalidKeyException, SignatureException {
+    private void isCertificateValid(KeyStore keyStore, String alias) throws Exception {
         Certificate[] certificates = keyStore.getCertificateChain(alias);
-        for(int i = certificates.length - 1; i >= 0; i--) {
-            if(i == 0) {
-                X509Certificate certificate = (X509Certificate) certificates[i];
-                certificate.checkValidity();
-                break;
-            }
-            X509Certificate parent = (X509Certificate) certificates[i];
-            X509Certificate child = (X509Certificate) certificates[i-1];
-            child.verify(parent.getPublicKey());
-            parent.checkValidity();
+        try {
 
+            for (int i = certificates.length - 1; i >= 0; i--) {
+
+                if (isRevoked(generateAliasByCertificate((X509Certificate) certificates[i]))) {
+                    throw new Exception(CERTIFICATE_REVOKED);
+                }
+
+                if (i == 0) {
+                    X509Certificate certificate = (X509Certificate) certificates[i];
+                    certificate.checkValidity();
+                    break;
+                }
+
+                X509Certificate parent = (X509Certificate) certificates[i];
+                X509Certificate child = (X509Certificate) certificates[i - 1];
+                child.verify(parent.getPublicKey());
+                parent.checkValidity();
+            }
+        } catch (Exception e) {
+            throw new Exception(CERTIFICATE_NOT_VALID);
         }
     }
 
@@ -272,7 +300,7 @@ public class CertificateService {
         return certificates;
     }
 
-    private List<CertificateDTO> getRootCertificates() throws NoSuchAlgorithmException, CertificateException, NoSuchProviderException, KeyStoreException, IOException {
+    public List<CertificateDTO> getRootCertificates() throws NoSuchAlgorithmException, CertificateException, NoSuchProviderException, KeyStoreException, IOException {
         List<CertificateDTO> certificates = new ArrayList<>();
         KeyStore rootKeyStore = getSelfSignedKeyStore();
 
@@ -286,7 +314,7 @@ public class CertificateService {
         return certificates;
     }
 
-    private List<CertificateDTO> getEndEntityCertificates() throws NoSuchAlgorithmException, CertificateException, NoSuchProviderException, KeyStoreException, IOException {
+    public List<CertificateDTO> getEndEntityCertificates() throws NoSuchAlgorithmException, CertificateException, NoSuchProviderException, KeyStoreException, IOException {
         List<CertificateDTO> certificates = new ArrayList<>();
         KeyStore endEntityKeyStore = getEndEntityKeyStore();
 
@@ -300,7 +328,7 @@ public class CertificateService {
         return certificates;
     }
 
-    private List<CertificateDTO> getCaCertificates() throws NoSuchAlgorithmException, CertificateException, NoSuchProviderException, KeyStoreException, IOException {
+    public List<CertificateDTO> getCaCertificates() throws NoSuchAlgorithmException, CertificateException, NoSuchProviderException, KeyStoreException, IOException {
         List<CertificateDTO> certificates = new ArrayList<>();
         KeyStore caKeyStore = getCAKeystore();
 
@@ -345,6 +373,56 @@ public class CertificateService {
         else {
             return "";
         }
+    }
+
+
+    public List<CertificateDTO> getAllCertificatesByUser(String mail) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        List<CertificateDTO> certificatesByUser = new ArrayList<>();
+
+        certificatesByUser.addAll(checkEndEntityCertificates(mail));
+        certificatesByUser.addAll(checkCaCertificates(mail));
+        certificatesByUser.addAll(checkSelfSignedCertificates(mail));
+
+        return certificatesByUser;
+    }
+
+    private Collection<? extends CertificateDTO> checkSelfSignedCertificates(String mail) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        List<CertificateDTO> certificateDTOS = new ArrayList<>();
+        List<CertificateDTO> allCertificatesByKeyStore = getRootCertificates();
+
+        for (CertificateDTO certificateDTO : allCertificatesByKeyStore) {
+            if (certificateDTO.getEmail().equals(mail)) {
+                certificateDTOS.add(certificateDTO);
+            }
+        }
+
+        return certificateDTOS;
+    }
+
+    private Collection<? extends CertificateDTO> checkCaCertificates(String mail) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        List<CertificateDTO> certificateDTOS = new ArrayList<>();
+        List<CertificateDTO> allCertificatesByKeyStore = getCaCertificates();
+
+        for (CertificateDTO certificateDTO : allCertificatesByKeyStore) {
+            if (certificateDTO.getEmail().equals(mail)) {
+                certificateDTOS.add(certificateDTO);
+            }
+        }
+
+        return certificateDTOS;
+    }
+
+    private Collection<? extends CertificateDTO> checkEndEntityCertificates(String mail) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        List<CertificateDTO> certificateDTOS = new ArrayList<>();
+        List<CertificateDTO> allCertificatesByKeyStore = getEndEntityCertificates();
+
+        for (CertificateDTO certificateDTO : allCertificatesByKeyStore) {
+            if (certificateDTO.getEmail().equals(mail)) {
+                certificateDTOS.add(certificateDTO);
+            }
+        }
+
+        return certificateDTOS;
     }
 
 
