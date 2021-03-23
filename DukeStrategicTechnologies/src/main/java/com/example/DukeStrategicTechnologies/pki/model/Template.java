@@ -1,5 +1,8 @@
 package com.example.DukeStrategicTechnologies.pki.model;
 
+import org.hibernate.annotations.Proxy;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -18,12 +21,12 @@ public class Template {
     @Column(name = "key_algorithm")
     private String keyAlgorithm;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "key_usages", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "key_usage")
     private Set<String> keyUsage;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "extended_key_usages", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "extended_key_usage")
     private Set<String> extendedKeyUsage;
@@ -35,6 +38,17 @@ public class Template {
     private LocalDateTime timestamp;
 
     public Template() {
+    }
+
+    public Template(Long id, String signatureAlgorithm, String keyAlgorithm,
+                    Set<String> keyUsage, Set<String> extendedKeyUsage, String name, LocalDateTime timestamp) {
+        this.id = id;
+        this.signatureAlgorithm = signatureAlgorithm;
+        this.keyAlgorithm = keyAlgorithm;
+        this.keyUsage = keyUsage;
+        this.extendedKeyUsage = extendedKeyUsage;
+        this.name = name;
+        this.timestamp = timestamp;
     }
 
     public Long getId() {
