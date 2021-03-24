@@ -25,7 +25,8 @@ import java.security.cert.CertificateException;
 import java.util.List;
 
 @Controller
-@RequestMapping("api/certificate")
+@CrossOrigin
+@RequestMapping("/certificate")
 public class CertificateController {
 
     @Autowired
@@ -61,6 +62,10 @@ public class CertificateController {
         certificateService.revokeCertificate(serialNumber);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    //TODO: realizovati i metodu koja vraca samo sertifikate sa kojima sme da potpise druge sertifikate (obican user)
+    /*
+    * insert code here
+    * */
 
     @GetMapping("/getCertificatesByUser")
     public ResponseEntity<?> getCertificatesByUser() throws Exception{
@@ -70,15 +75,16 @@ public class CertificateController {
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
     }
 
+    //AAAAAAAAAAAA OVO SRANJE TREA DA GADJAM AAAAAAAAAAA SAMO ADMIN AAAAAAA
     @GetMapping("/getRootCertificates")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getSelfSignedCertificates() throws Exception{
         List<CertificateDTO> certificatesByUser = certificateService.getRootCertificates();
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
     }
-
+    //AAAAAAAAAAAA I OVO SRANJE TREA DA GADJAM AAAAAAAAAAA SAMO ADMIN AAAAAA
     @GetMapping("/getCaCertificates")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getCaCertificates() throws Exception{
         List<CertificateDTO> certificatesByUser = certificateService.getCaCertificates();
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);

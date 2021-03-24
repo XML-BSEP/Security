@@ -1,3 +1,4 @@
+import { UsersService } from './../service/users/users.service';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -13,6 +14,8 @@ import { SigningCertificate } from '../model/certificates/SigningCertificate';
 import { Template } from '../model/certificates/Template';
 import { TemplateService } from '../service/template/template.service';
 import { SavedTemplatesDialogComponent } from '../dialogs/saved-templates-dialog/saved-templates-dialog.component';
+import { User } from '../model/user/user';
+import { CertificatesService } from '../certificates.service';
 
 @Component({
   selector: 'app-create-certificate',
@@ -25,6 +28,8 @@ import { SavedTemplatesDialogComponent } from '../dialogs/saved-templates-dialog
 export class CreateCertificateComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  secondFormGroup1: FormGroup;
+
   thirdFormGroup: FormGroup;
   keyUsageChecked: boolean;
   extendedKeyUsageChecked: boolean;
@@ -35,8 +40,13 @@ export class CreateCertificateComponent implements OnInit {
   userLoggedIn: boolean;
   signingCertificate: SigningCertificate;
   minDate;
+  chosenSubject;
+  subjects : User[];
   public template;
   chosenTemplate;
+  createdSertificate : SigningCertificate;
+  allCA;
+  allRoot;
   // visible = true;
   // selectable = true;
   // removable = true;
@@ -50,7 +60,7 @@ export class CreateCertificateComponent implements OnInit {
 
   allExtendedKeyUsages: string[] = ["TLS Web server authentication", "TLS Web client authentication", "Sign (downloadable) executable code", "Email protection", "IPSEC End System", "IPSEC Tunnel", "IPSEC User", "Timestamping"];
 
-  constructor(private router : Router,    public signingCertDialog: MatDialog, private templateService : TemplateService, public savedTemplates : MatDialog ) { }
+  constructor(private certificateService :CertificatesService, private router : Router,    public signingCertDialog: MatDialog, private templateService : TemplateService, public savedTemplates : MatDialog , private userService : UsersService) { }
 
   ngOnInit(): void {
 
@@ -73,22 +83,26 @@ export class CreateCertificateComponent implements OnInit {
 
     });
     this.secondFormGroup = new FormGroup({
-      "firstName": new FormControl(null, [Validators.required]),
-      "lastName": new FormControl(null, [Validators.required]),
-      "state": new FormControl(null, [Validators.required]),
-      "city": new FormControl(null, [Validators.required]),
-      "org": new FormControl(null, [Validators.required]),
-      "orgunit": new FormControl(null, [Validators.required]),
-      "email": new FormControl(null, [Validators.required]),
-      "password": new FormControl(null, [Validators.required]),
+      "firstName": new FormControl(null),
+      "lastName": new FormControl(null),
+      "state": new FormControl(null),
+      "city": new FormControl(null),
+      "org": new FormControl(null),
+      "orgunit": new FormControl(null),
+      "email": new FormControl(null),
+      "password": new FormControl(null),
+    });
+    this.secondFormGroup1 = new FormGroup({
+
       "chosenSubject" : new FormControl(null)
     });
-
 
     this.thirdFormGroup = new FormGroup({
       'keyUsage' : new FormControl(null, Validators.required),
       'extendedKeyUsage' : new FormControl(null, Validators.required)
     })
+    this.loadSubjects();
+    this.loadCACertificates();
   }
 
 
@@ -117,9 +131,74 @@ export class CreateCertificateComponent implements OnInit {
         this.firstFormGroup.patchValue({
           "issuer": this.signingCertificate.issuerCommonName
         });
+
       }
     });
   }
+  loadCACertificates(){
+    this.certificateService.getAllCA().subscribe(data =>
+      {
+        this.allCA = data;
+        console.log(this.allCA);
+      });
+  }
+  loadRootCertificates(){
+    this.certificateService.getAllRoot().subscribe(data =>
+      {
+        this.allRoot = data;
+        console.log(this.allCA);
+      });
+  }
+  /*
+      "firstName": new FormControl(null),
+      "lastName": new FormControl(null),
+      "state": new FormControl(null),
+      "city": new FormControl(null),
+      "org": new FormControl(null),
+      "orgunit": new FormControl(null),
+      "email": new FormControl(null),
+      "password": new FormControl(null),
+  */
+
+  // validateSecondForm(){
+  //   if(this.secondFormGroup.controls.chosenSubject.value !==null){
+  //     return true;
+  //   }else{
+  //     return this.validateName() && this.validateEmail() && this.validateLastName() && this.validateCity() && this.validateState() && this.validateOrg() && this.validateOrgUnit() && this.validatePassword();
+  //   }
+  // }
+  // validateName(){
+  //   return this.secondFormGroup.controls.firstName.value.trim().length>0;
+  // }
+
+  // validateLastName(){
+  //   return this.secondFormGroup.controls.lastName.value.trim().length>0;
+  // }
+
+  // validateState(){
+  //   return this.secondFormGroup.controls.state.value.trim().length>0;
+  // }
+
+  // validateCity(){
+  //   return this.secondFormGroup.controls.city.value.trim().length>0;
+  // }
+
+  // validateOrg(){
+  //   return this.secondFormGroup.controls.org.value.trim().length>0;
+  // }
+
+  // validateOrgUnit(){
+  //   return this.secondFormGroup.controls.orgunit.value.trim().length>0;
+  // }
+
+  // validateEmail(){
+  //   return this.secondFormGroup.controls.email.value.trim().length>0;
+  // }
+
+  // validatePassword(){
+  //   return this.secondFormGroup.controls.password.value.trim().length>0;
+  // }
+
 
   viewSavedTemplates() {
     let tempKeyUsage = undefined;
@@ -177,8 +256,22 @@ export class CreateCertificateComponent implements OnInit {
       )
 
   }
+  loadSubjects(){
+    this.userService.getAll().subscribe(data =>
+      {
+        this.subjects = data;
+        console.log(this.subjects);
+      });
+  }
+  saveCertificate(){
+    if(this.secondFormGroup.controls.email.value.length > 0){
+      var subjectEmail = this.secondFormGroup.controls.email.value;
+    }else{
+      var subjectEmail = this.chosenSubject.email;
+    }
+    this.createdSertificate = new SigningCertificate(this.firstFormGroup.controls.issuer.value, this.signingCertificate.issuerEmail, subjectEmail,null, this.signingCertificate.serialNum, this.firstFormGroup.controls.validFrom.value,
+      this.firstFormGroup.controls.validTo.value, this.selectedKeyUsages, this.selectedExtendedKeyUsages, this.firstFormGroup.controls.signatureAlgorithm.value)
 
-  download(){
-
+    console.log(this.createdSertificate);
   }
 }
