@@ -7,7 +7,8 @@ export const environment = {
   baseUrl: 'http://localhost:8088',
   login:"login",
   auth:"auth",
-  templates : "templates"
+  templates : "templates",
+  certificates: "certificate"
 
 };
 

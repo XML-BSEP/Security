@@ -10,6 +10,7 @@ import org.bouncycastle.cms.CMSException;
 import org.bouncycastle.operator.OperatorCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,8 +25,9 @@ import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 import java.util.List;
 
-@Controller
-@RequestMapping("api/certificate")
+@RestController
+@RequestMapping(value = "/certificate", produces = MediaType.APPLICATION_JSON_VALUE)
+@CrossOrigin
 public class CertificateController {
 
     @Autowired
@@ -70,22 +72,23 @@ public class CertificateController {
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
     }
 
-    @GetMapping("/getRootCertificates")
-    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping(value = "/getRootCertificates")
+   // @PreAuthorize("hasRole('ADMIN')")
+    //@CrossOrigin(origins = "*", allowedHeaders = "*")
     public ResponseEntity<?> getSelfSignedCertificates() throws Exception{
         List<CertificateDTO> certificatesByUser = certificateService.getRootCertificates();
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
     }
 
     @GetMapping("/getCaCertificates")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getCaCertificates() throws Exception{
         List<CertificateDTO> certificatesByUser = certificateService.getCaCertificates();
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
     }
 
     @GetMapping("/getEndEntityCertificates")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getEndEntityCertificates() throws Exception{
         List<CertificateDTO> certificatesByUser = certificateService.getEndEntityCertificates();
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
