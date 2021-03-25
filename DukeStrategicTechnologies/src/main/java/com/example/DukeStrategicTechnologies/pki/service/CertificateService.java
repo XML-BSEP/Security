@@ -48,6 +48,10 @@ public class CertificateService {
     private KeyStoreReader keystoreReader;
     private String issuerKeyStorePassword;
     private KeyStoreProperties keyStoreProperties;
+
+    @Autowired
+    private OCSPService ocspService;
+
     @Autowired
     private UserRepository userRepository;
 
@@ -146,11 +150,7 @@ public class CertificateService {
     }
 
     public void revokeCertificate(String serialNumber) {
-        revokedCertificateRepository.save(new RevokedCertificate(new BigInteger(serialNumber), LocalDateTime.now()));
-    }
-
-    private boolean isRevoked(String serialNumber) {
-        return revokedCertificateRepository.findAll().stream().anyMatch(c -> c.getSerialNumber().equals(serialNumber));
+        revokedCertificateRepository.save(new RevokedCertificate(serialNumber, new Date()));
     }
 
     public String generateAliasByCertificate(X509Certificate certificate) throws CertificateEncodingException {
@@ -262,10 +262,20 @@ public class CertificateService {
     private void isCertificateValid(KeyStore keyStore, String alias) throws Exception {
         Certificate[] certificates = keyStore.getCertificateChain(alias);
         try {
-
+            PrivateKey password;
+            String aliasPassword = "";
+            String currentAlias = "";
+            String keyStorePass = "";
+            KeyStore currentKeyStore = null;
             for (int i = certificates.length - 1; i >= 0; i--) {
 
-                if (isRevoked(generateAliasByCertificate((X509Certificate) certificates[i]))) {
+                currentAlias = generateAliasByCertificate((X509Certificate) certificates[i]);
+                currentKeyStore = getKeyStoreByAlias(currentAlias);
+                keyStorePass = getKeyStorePassFromAlias(currentAlias);
+                aliasPassword = keyStorePass + ((X509Certificate) certificates[i]).getSerialNumber();
+
+                if (ocspService.isCertificateRevoked((X509Certificate) certificates[i],
+                        (PrivateKey) currentKeyStore.getKey(currentAlias, aliasPassword.toCharArray()))) {
                     throw new Exception(CERTIFICATE_REVOKED);
                 }
 

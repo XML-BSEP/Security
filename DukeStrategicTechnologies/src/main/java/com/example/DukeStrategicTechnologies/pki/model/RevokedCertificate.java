@@ -3,6 +3,7 @@ package com.example.DukeStrategicTechnologies.pki.model;
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "revoked_certificates")
@@ -14,15 +15,15 @@ public class RevokedCertificate {
     private Long id;
 
     @Column(name = "serial_number")
-    private BigInteger serialNumber;
+    private String serialNumber;
 
     @Column(name = "timestamp")
-    private LocalDateTime timestamp;
+    private Date timestamp;
 
     public RevokedCertificate() {
     }
 
-    public RevokedCertificate(BigInteger serialNumber, LocalDateTime timestamp) {
+    public RevokedCertificate(String serialNumber, Date timestamp) {
         this.serialNumber = serialNumber;
         this.timestamp = timestamp;
     }
@@ -35,19 +36,19 @@ public class RevokedCertificate {
         this.id = id;
     }
 
-    public BigInteger getSerialNumber() {
+    public String getSerialNumber() {
         return serialNumber;
     }
 
-    public void setSerialNumber(BigInteger serialNumber) {
+    public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
     }
 
-    public LocalDateTime getTimestamp() {
+    public Date getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
+    public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
 }
