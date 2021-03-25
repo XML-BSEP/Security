@@ -44,9 +44,8 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String givenName, String surname, String commonName, String organization, String organizationUnit,
+    public User(String givenName, String surname, String commonName, String organization, String organizationUnit,
                 String state, String city, String email, boolean isCA, Long certificateCount) {
-        this.id = id;
         this.givenName = givenName;
         this.surname = surname;
         this.commonName = commonName;

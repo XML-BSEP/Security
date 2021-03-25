@@ -41,6 +41,7 @@ public class CertificateService {
     public static final String ISSUER_NOT_FOUND = "Issuer not found!";
     public static final String SELF_SIGNED_EXCEPTION = "Self-signed certificates can only be issued by self-signed certificates!";
     public static final String KEYSTORE_NOT_FOUND = "KeyStore not found!";
+    public static final String END_DATE_BEFORE_START = "End date must be after start date!";
 
     private CertificateGenerator certificateGenerator;
     private KeyStoreWriter keyStoreWriter;
@@ -62,6 +63,9 @@ public class CertificateService {
 
 
     public void createCertificate(CreateCertificateDTO createCertificateDTO) throws Exception {
+        if (LocalDate.parse(createCertificateDTO.getEndDate()).compareTo(LocalDate.parse(createCertificateDTO.getStartDate())) < 0) {
+            throw new Exception(END_DATE_BEFORE_START);
+        }
 
         Subject subject = generateSubject(createCertificateDTO);
 
@@ -340,6 +344,7 @@ public class CertificateService {
             CertificateDTO certificateDTO = extractCertificateData(certificate);
             certificates.add(certificateDTO);
         }
+
         return certificates;
     }
 
