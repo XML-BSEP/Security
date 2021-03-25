@@ -10,8 +10,10 @@ import { CreateCertificateComponent } from './create-certificate/create-certific
 import { AllCertificatesComponent } from './all-certificates/all-certificates.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ChooseIssuerDialogComponent } from './dialogs/choose-issuer-dialog/choose-issuer-dialog.component';
+import { SavedTemplatesDialogComponent } from './dialogs/saved-templates-dialog/saved-templates-dialog.component';
+import { ErrorInterceptor, JwtInterceptor } from './helpers';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { ChooseIssuerDialogComponent } from './dialogs/choose-issuer-dialog/choo
     AllCertificatesComponent,
     LoginComponent,
     ChooseIssuerDialogComponent,
+    SavedTemplatesDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { ChooseIssuerDialogComponent } from './dialogs/choose-issuer-dialog/choo
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{provide : HTTP_INTERCEPTORS, useClass : JwtInterceptor, multi : true},
+              {provide : HTTP_INTERCEPTORS, useClass : ErrorInterceptor, multi : true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

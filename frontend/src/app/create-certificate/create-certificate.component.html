@@ -3,10 +3,10 @@
         <button mat-icon-button matTooltip="Back" class="back" (click)="back()">
             <mat-icon>keyboard_backspace</mat-icon>
           </button>
-          <button mat-icon-button  matTooltip="Save template" id="save">
+          <button mat-icon-button  matTooltip="Save template" id="save" (click)="saveTemplate()" [disabled] ="!firstFormGroup.valid || !thirdFormGroup.valid">
             <mat-icon>save</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="All templates" id="showAll">
+          <button mat-icon-button matTooltip="All templates" id="showAll" (click)="viewSavedTemplates()">
             <mat-icon>favorite</mat-icon>
           </button>
 
@@ -137,22 +137,26 @@
                         </mat-form-field>
 
                       </div>
+                    </form>
+                    <form [formGroup]="secondFormGroup1">
+
                       <div class="input_div1">
+
                         <p><b>Or</b></p>
                       </div>
                       <div class="input_div1">
                         <mat-form-field style="width: 80%;">
                           <mat-label>Subject</mat-label>
                           <mat-select formControlName="chosenSubject">
-                            <mat-option *ngFor="let sub of allSubjects"  [value]="sub">{{sub}}</mat-option>
+                            <mat-option *ngFor="let sub of subjects" (click)="selectionChange(sub)"  [value]="sub">{{sub.commonName}}</mat-option>
                           </mat-select>
                         </mat-form-field>
                       </div>
+                    </form>
                       <div>
                         <button id="back" mat-button matStepperPrevious>Back</button>
-                        <button id="next" mat-button matStepperNext>Next</button>
+                        <button id="next" mat-button matStepperNext >Next</button>
                       </div>
-                    </form>
                   </mat-step>
 
 
@@ -228,13 +232,12 @@
                     <p *ngIf="firstFormGroup.valid && secondFormGroup.valid && thirdFormGroup.valid">Your certificate is created!</p>
                     <p *ngIf="!firstFormGroup.valid || !secondFormGroup.valid || !thirdFormGroup.valid">Please fill form acording to instructions!</p>
 
-                    <button id="next" mat-button [disabled]="!firstFormGroup.valid || !secondFormGroup.valid || !thirdFormGroup.valid" (click)="download()">Download</button>
 
                     <div>
 
                       <button id="back" mat-button matStepperPrevious>Back</button>
 
-                      <button id="next" style="margin-right: 10%;" mat-button [disabled]="!firstFormGroup.valid || !secondFormGroup.valid || !thirdFormGroup.valid" (click)="saveTemplate()">Save</button>
+                      <button id="next" style="margin-right: 10%;" mat-button  (click)="saveCertificate()" [disabled]="!firstFormGroup.valid || !secondFormGroup.valid || !thirdFormGroup.valid">Save</button>
 
 
                     </div>

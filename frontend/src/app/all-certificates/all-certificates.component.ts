@@ -3,6 +3,9 @@ import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CertificateService } from "../service/certificate/certificate.service";
 import { SigningCertificate } from '../model/certificates/SigningCertificate';
+import { BehaviorSubject } from 'rxjs';
+import { CertificatesService } from '../certificates.service';
+import { AuthenticatedUser } from '../model/user/authenticatedUser';
 
 @Component({
   selector: 'app-all-certificates',
@@ -12,13 +15,17 @@ import { SigningCertificate } from '../model/certificates/SigningCertificate';
 
 })
 export class AllCertificatesComponent implements OnInit {
+
   public panelColor = new FormControl('red');
   userLoggedIn: boolean;
-  selected: string;
   isSelfSigned: boolean;
   signingCertificates: Array<SigningCertificate>;
+  selectedOption : string;
+  certificates : SigningCertificate[]
+  currentUserSubject: BehaviorSubject<AuthenticatedUser>;
+  isAdmin : boolean;
 
-  constructor(private router : Router, private certificateService: CertificateService) { 
+  constructor(private router : Router, private certificateService : CertificatesService) { 
     
     if(localStorage.getItem('userId')!==null){
       this.userLoggedIn = true;
@@ -28,35 +35,49 @@ export class AllCertificatesComponent implements OnInit {
   }
 
   ngOnInit(): void{
-    console.log("usao");
-    this.selected = "option1";
     this.getRootCerificates;
     this.isSelfSigned = true;
+
+      //this.getAllCertificatesByUser();
+      this.isAdmin = this.isAdminLoggedIn();
+      /*
+      if(this.isAdmin) {
+        this.getAllCertificates()
+      }
+      else {
+        this.getAllCertificatesByUser();
+      }*/
+      this.isAdmin ? this.selectedOption = "option1" : this.selectedOption = "option2";
     
   }
 
   
   onTypeChange() {
-    /*
-    if (this.isSelfSigned){
-      console.log("usao3");
-      this.getRootCerificates;
-    }*/
-
-    if(this.selected == "option1"){
-      console.log("usao3");
-      this.isSelfSigned = true;
-      this.getRootCerificates();
-      console.log(this.signingCertificates);
-    }else if(this.selected == "option2"){
-      this.getCACerificates();
-    }else if(this.selected == "option3"){
-      this.getEECerificates();
+    if(this.isAdmin){
+      if(this.selectedOption == "option1" ){
+     
+        this.isSelfSigned = true;
+        this.getRootCerificates();
+        console.log(this.signingCertificates);
+      }else if(this.selectedOption == "option2"){
+        this.getCACerificates();
+      }else if(this.selectedOption == "option3"){
+        this.getEECerificates();
+      }
+    }else{
+      if(this.selectedOption == "option2"){
+        console.log("usao hehe2")
+        this.getCACerificatesByUser();
+      }else if(this.selectedOption == "option3"){
+        console.log("usao hehe3")
+        this.getEECerificatesByUser();
+      }
     }
+    
   }
 
 
-    getRootCerificates(){console.log("usao2"); this.certificateService.getRootCertificates().subscribe(
+    getRootCerificates(){ this.certificateService.getAllRoot().subscribe(
       {
         next: (result) => {
           this.signingCertificates = result;
@@ -71,7 +92,22 @@ export class AllCertificatesComponent implements OnInit {
     );
   }
 
-  getCACerificates(){console.log("usao2"); this.certificateService.getCACertificates().subscribe(
+    getCACerificates(){console.log("usao2"); this.certificateService.getAllCA().subscribe(
+      {
+        next: (result) => {
+          this.signingCertificates = result;
+        },
+        error: data => {
+          if (data.error && typeof data.error === "string")
+          console.log("pokusaj opet")
+          else
+          console.log("nije ucitao")
+        }
+      }
+    );
+  }
+
+  getEECerificates(){console.log("usao2"); this.certificateService.getAllEndEntity().subscribe(
     {
       next: (result) => {
         this.signingCertificates = result;
@@ -84,24 +120,63 @@ export class AllCertificatesComponent implements OnInit {
       }
     }
   );
-}
-
-getEECerificates(){console.log("usao2"); this.certificateService.getEECertificates().subscribe(
-  {
-    next: (result) => {
-      this.signingCertificates = result;
-    },
-    error: data => {
-      if (data.error && typeof data.error === "string")
-      console.log("pokusaj opet")
-      else
-      console.log("nije ucitao")
-    }
   }
+
+  getCACerificatesByUser(){console.log("usao2"); this.certificateService.getCaCertificatesByUser().subscribe(
+    {
+      next: (result) => {
+        this.signingCertificates = result;
+      },
+      error: data => {
+        if (data.error && typeof data.error === "string")
+        console.log("pokusaj opet")
+        else
+        console.log("nije ucitao")
+      }
+    }
+  );
+  }
+
+getEECerificatesByUser(){console.log("usao2"); this.certificateService.getEeCertificatesByUser().subscribe(
+{
+  next: (result) => {
+    this.signingCertificates = result;
+  },
+  error: data => {
+    if (data.error && typeof data.error === "string")
+    console.log("pokusaj opet")
+    else
+    console.log("nije ucitao")
+  }
+}
 );
 }
 
   back(){
     this.router.navigate(['/home']);
   }
+
+  getAllCertificatesByUser() {
+    this.certificateService.getCertificatesByUser().subscribe(data => {
+      this.signingCertificates = data;
+
+    })
+  }
+
+  //obrisi mozda 
+  getAllCertificates() {
+    this.certificateService.getAll().subscribe(data => {
+      this.certificates = data;
+    })
+  }
+
+  isAdminLoggedIn() : boolean {
+    this.currentUserSubject = new BehaviorSubject<AuthenticatedUser>(JSON.parse(localStorage.getItem('currentUser')));
+    if(this.currentUserSubject.value.role == "Admin") {
+      return true;
+    }
+    return false;
+  }
+
+
 }

@@ -12,15 +12,5 @@ export class CertificateService {
     private http: HttpClient
   ) { }
 
-  getRootCertificates() {
-    return this.http.get<SigningCertificate[]>(`${environment.baseUrl}/${environment.certificates}/getRootCertificates`);
-  }
 
-  getCACertificates() {
-    return this.http.get<SigningCertificate[]>(`${environment.baseUrl}/${environment.certificates}/getCaCertificates`);
-  }
-
-  getEECertificates() {
-    return this.http.get<SigningCertificate[]>(`${environment.baseUrl}/${environment.certificates}/getEndEntityCertificates`);
-  }
 }

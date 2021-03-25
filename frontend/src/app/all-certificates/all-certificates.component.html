@@ -12,8 +12,8 @@
             <div id="select-div">
               <mat-form-field id="select" appearance="fill">
                 <mat-label>Select certificate type</mat-label>
-                <mat-select [(value)]="selected" (selectionChange)="onTypeChange()">
-                  <mat-option value="option1">Self-signed certificates</mat-option>
+                <mat-select [(value)] = "selectedOption" (selectionChange)="onTypeChange()">
+                  <mat-option *ngIf="isAdmin" value="option1">Self-signed certificates</mat-option>
                   <mat-option value="option2">Intermediate certificates</mat-option>
                   <mat-option value="option3">End-entity certificates</mat-option>
                 </mat-select>

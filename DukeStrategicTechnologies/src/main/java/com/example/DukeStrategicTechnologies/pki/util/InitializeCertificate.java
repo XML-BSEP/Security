@@ -29,6 +29,7 @@ import java.security.NoSuchProviderException;
 import java.security.cert.X509Certificate;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Locale;
 
 @Component
 @EnableAutoConfiguration
@@ -60,7 +61,7 @@ public class InitializeCertificate implements ApplicationListener<ApplicationRea
         }
 
 
-        User newRoot = new User(2L, "root", "rootovic", "rootic", "org1", "orgunit1", "Serbia", "Novi Sad", "root@gmail.com", true, 1L);
+        User newRoot = new User(100L, "root", "rootovic", "rootic", "org1", "orgunit1", "Serbia", "Novi Sad", "root@gmail.com", true, 1L);
 
         userRepository.save(newRoot);
 

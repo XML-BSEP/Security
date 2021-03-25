@@ -7,9 +7,22 @@ export const environment = {
   baseUrl: 'http://localhost:8088',
   login:"login",
   auth:"auth",
-  templates : "templates",
-  certificates: "certificate"
-
+  api: "api",
+  template : "template",
+  add : "add",
+  findAll : "all",
+  users : "users",
+  getCaCertificates : "getCaCertificates",
+  getRootCertificates : "getRootCertificates",
+  certificate : "certificate",
+  getCertificatesByUser : "getCertificatesByUser",
+  createCertificate : "createCertificate",
+  all : "getAll",
+  getEndEntityCertificates : "getEndEntityCertificates",
+  getAllForSigning : "getAllForSigning",
+  getAllForSigningByUser : "getAllForSigningByUser",
+  getCaCertificatesByUser: "getCaCertificatesByUser",
+  getEndEntityCertificatesByUser: "getEndEntityCertificatesByUser"
 };
 
 /*
