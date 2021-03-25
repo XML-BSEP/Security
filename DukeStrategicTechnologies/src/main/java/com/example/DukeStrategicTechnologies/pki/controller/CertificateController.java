@@ -25,7 +25,8 @@ import java.security.cert.CertificateException;
 import java.util.List;
 
 @Controller
-@RequestMapping("api/certificate")
+@CrossOrigin
+@RequestMapping("certificate")
 public class CertificateController {
 
     @Autowired
@@ -34,6 +35,8 @@ public class CertificateController {
     @Autowired
     private Base64Encoder base64Encoder;
 
+
+    //ADD OTHER ROLES
     @PostMapping("/createCertificate")
     @PreAuthorize("hasRole('ADMIN') || hasRole('CA')")
     public ResponseEntity<?> createCertificate(@RequestBody CreateCertificateDTO dto) throws Exception {
@@ -45,6 +48,13 @@ public class CertificateController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<CertificateDTO>> getAll() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
         List<CertificateDTO> certificateAlias = certificateService.getAllCertificates();
+        return new ResponseEntity<>(certificateAlias, HttpStatus.OK);
+    }
+
+    @GetMapping("/getAllForSigning")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<CertificateDTO>> getAllForSigning() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        List<CertificateDTO> certificateAlias = certificateService.getAllCertificatesForSigning();
         return new ResponseEntity<>(certificateAlias, HttpStatus.OK);
     }
 
@@ -61,7 +71,12 @@ public class CertificateController {
         certificateService.revokeCertificate(serialNumber);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    //TODO: realizovati i metodu koja vraca samo sertifikate sa kojima sme da potpise druge sertifikate (obican user)
+    /*
+    * insert code here
+    * */
 
+    //ADD ROLES
     @GetMapping("/getCertificatesByUser")
     public ResponseEntity<?> getCertificatesByUser() throws Exception{
         Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -70,6 +85,7 @@ public class CertificateController {
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
     }
 
+    //AAAAAAAAAAAA OVO SRANJE TREA DA GADJAM AAAAAAAAAAA SAMO ADMIN AAAAAAA
     @GetMapping("/getRootCertificates")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getSelfSignedCertificates() throws Exception{
@@ -77,6 +93,7 @@ public class CertificateController {
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
     }
 
+    //ADD OTHER ROLES
     @GetMapping("/getCaCertificates")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getCaCertificates() throws Exception{
@@ -84,11 +101,22 @@ public class CertificateController {
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
     }
 
+
+    //ADD OTHER ROLES
     @GetMapping("/getEndEntityCertificates")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getEndEntityCertificates() throws Exception{
         List<CertificateDTO> certificatesByUser = certificateService.getEndEntityCertificates();
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
+    }
+
+    @GetMapping("/getAllForSigningByUser")
+
+    public ResponseEntity<List<CertificateDTO>> getAllForSigningByUser() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String mail = ((Account)user).getUsername();
+        List<CertificateDTO> certificateAlias = certificateService.getAllCertificatesForSigningByUser(mail);
+        return new ResponseEntity<>(certificateAlias, HttpStatus.OK);
     }
 
     @ExceptionHandler(Exception.class)

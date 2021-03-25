@@ -10,7 +10,17 @@ export const environment = {
   api: "api",
   template : "template",
   add : "add",
-  findAll : "all"
+  findAll : "all",
+  users : "users",
+  getCaCertificates : "getCaCertificates",
+  getRootCertificates : "getRootCertificates",
+  certificate : "certificate",
+  getCertificatesByUser : "getCertificatesByUser",
+  createCertificate : "createCertificate",
+  all : "getAll",
+  getEndEntityCertificates : "getEndEntityCertificates",
+  getAllForSigning : "getAllForSigning",
+  getAllForSigningByUser : "getAllForSigningByUser"
 };
 
 /*

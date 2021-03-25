@@ -1,26 +1,27 @@
 export class SigningCertificate {
-    
-    public issuerCommonName: string;
-    public issuerIssuerEmail: string;
-    public issuerEmail: string;
-    public issuerId: number;
-    public serialNum: string;
-    public validFrom: string;
-    public validTo: string;
-    public keyUsage: string[];
-    public extendedKeyUsage: string[];
 
-    constructor(issuerCommonName: string, issuerIssuerEmail: string, issuerEmail: string, issuerId: number, serialNum: string, validFrom: string,
-        validTo: string, keyUsage: string[], extendedKeyUsage: string[]) {
-        this.issuerCommonName = issuerCommonName;
-        this.issuerIssuerEmail = issuerIssuerEmail;
+    public commonName: string;
+    public issuerEmail: string;
+    public subjectEmail: string;
+    public issuerId: number;
+    public serialNumber: string;
+    public startDate: Date;
+    public endDate: Date;
+    public keyUsages: string[];
+    public extendedKeyUsages: string[];
+    public signatureAlgorithm : string;
+    constructor(issuerCommonName: string, issuerEmail: string, subjectEmail: string, issuerId: number, serialNumber: string, validFrom: Date,
+        validTo: Date, keyUsage: string[], extendedKeyUsage: string[], signatureAlgorithm : string) {
+        this.commonName = issuerCommonName;
+        this.subjectEmail = subjectEmail;
         this.issuerEmail = issuerEmail;
         this.issuerId = issuerId;
-        this.serialNum = serialNum;
-        this.validFrom = validFrom;
-        this.validTo = validTo;
-        this.keyUsage = keyUsage;
-        this.extendedKeyUsage = extendedKeyUsage;
+        this.serialNumber = serialNumber;
+        this.startDate = validFrom;
+        this.endDate = validTo;
+        this.keyUsages = keyUsage;
+        this.extendedKeyUsages = extendedKeyUsage;
+        this.signatureAlgorithm = signatureAlgorithm;
     }
-    
+
 }

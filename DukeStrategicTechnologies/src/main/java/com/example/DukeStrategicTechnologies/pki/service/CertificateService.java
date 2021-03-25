@@ -2,6 +2,7 @@ package com.example.DukeStrategicTechnologies.pki.service;
 
 import com.example.DukeStrategicTechnologies.pki.dto.CertificateDTO;
 import com.example.DukeStrategicTechnologies.pki.dto.CreateCertificateDTO;
+import com.example.DukeStrategicTechnologies.pki.mapper.ExtendedKeyUsagesMapper;
 import com.example.DukeStrategicTechnologies.pki.util.keystores.KeyStoreReader;
 import com.example.DukeStrategicTechnologies.pki.util.keystores.KeyStoreWriter;
 import com.example.DukeStrategicTechnologies.pki.mapper.KeyUsagesMapper;
@@ -9,9 +10,11 @@ import com.example.DukeStrategicTechnologies.pki.model.*;
 import com.example.DukeStrategicTechnologies.pki.repository.RevokedCertificateRepository;
 import com.example.DukeStrategicTechnologies.pki.repository.UserRepository;
 import com.example.DukeStrategicTechnologies.pki.util.properties.KeyStoreProperties;
+import org.bouncycastle.asn1.x500.RDN;
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.X500NameBuilder;
 import org.bouncycastle.asn1.x500.style.BCStyle;
+import org.bouncycastle.asn1.x500.style.IETFUtils;
 import org.bouncycastle.cert.jcajce.JcaX509CertificateHolder;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +23,8 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.*;
+import java.security.cert.*;
 import java.security.cert.Certificate;
-import java.security.cert.CertificateEncodingException;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -342,7 +343,7 @@ public class CertificateService {
         return certificates;
     }
 
-    private CertificateDTO extractCertificateData(X509Certificate certificate) {
+    private CertificateDTO extractCertificateData(X509Certificate certificate) throws CertificateParsingException, CertificateEncodingException {
         CertificateDTO certificateDTO = new CertificateDTO();
 
         String serialNumber = certificate.getSerialNumber().toString();
@@ -351,12 +352,21 @@ public class CertificateService {
         String signatureAlgorithm = certificate.getSigAlgName();
         boolean[] keyUsage = certificate.getKeyUsage();
         Collection<String> keyUsages = KeyUsagesMapper.keyUsagesBoolToKeyUsagesString(keyUsage);
+        Collection<String> extendedKeyUsages = ExtendedKeyUsagesMapper.extendedKeyUsagesToStringCollection(certificate.getExtendedKeyUsage());
+        X500Name x500Name = new JcaX509CertificateHolder(certificate).getSubject();
+        RDN emailRdn = x500Name.getRDNs(BCStyle.EmailAddress)[0];
+        String email = IETFUtils.valueToString(emailRdn.getFirst().getValue());
+        RDN cnRdn = x500Name.getRDNs(BCStyle.CN)[0];
+        String commonName = IETFUtils.valueToString(cnRdn.getFirst().getValue());
 
         certificateDTO.setSerialNumber(serialNumber);
         certificateDTO.setStartDate(startDate);
         certificateDTO.setEndDate(endDate);
         certificateDTO.setSignatureAlgorithm(signatureAlgorithm);
         certificateDTO.setKeyUsages(keyUsages);
+        certificateDTO.setExtendedKeyUsages(extendedKeyUsages);
+        certificateDTO.setEmail(email);
+        certificateDTO.setCommonName(commonName);
         return certificateDTO;
     }
 
@@ -425,6 +435,41 @@ public class CertificateService {
         return certificateDTOS;
     }
 
+
+    public List<CertificateDTO> getAllCertificatesForSigning() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        List<CertificateDTO> certificates = getAllCertificates();
+        List<CertificateDTO> certificatesForSiging = new ArrayList<>();
+
+        for(CertificateDTO certificate : certificates) {
+            if(isCA(certificate)) {
+                certificatesForSiging.add(certificate);
+            }
+        }
+
+        return certificatesForSiging;
+    }
+
+    public List<CertificateDTO> getAllCertificatesForSigningByUser(String mail) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        List<CertificateDTO> certificates = getAllCertificatesByUser(mail);
+        List<CertificateDTO> certificatesForSiging = new ArrayList<>();
+
+        for(CertificateDTO certificate : certificates) {
+            if(isCA(certificate)) {
+                certificatesForSiging.add(certificate);
+            }
+        }
+
+        return certificatesForSiging;
+    }
+
+    private boolean isCA(CertificateDTO certificateDTO) {
+        Collection<String> keyUsages = certificateDTO.getKeyUsages();
+        if(keyUsages.contains("digitalSignature")) {
+            return true;
+        }
+
+        return false;
+    }
 
 }
 

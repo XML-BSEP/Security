@@ -4,16 +4,13 @@
 
     <div class="content">
 
-        <div class="main-card" *ngIf="userLoggedIn">
+        <div class="main-card">
             <h1 class="title">Duke Strategic Technologies PKI System</h1>
             <button mat-raised-button class="button" (click)="createCertificate()"><mat-icon>add</mat-icon>Create certificate</button>
             <button mat-raised-button class="button" (click)="allCertificates()"><mat-icon>view_headline</mat-icon>All certificates</button>            
         </div>
 
-        <div class="main-card" *ngIf="!userLoggedIn">
-            <h1 class="title">Duke Strategic Technologies PKI System</h1>
-            <button mat-raised-button class="button" (click)="allCertificates()"><mat-icon>view_headline</mat-icon>All certificates</button>            
-        </div>
+    
 
     </div>
 
