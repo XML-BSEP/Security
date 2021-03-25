@@ -33,22 +33,21 @@
                           <button mat-flat-button id="choose_issuer" (click)="chooseCertificate()">Choose</button>
 
 
-                          <!-- <br> -->
 
                         </div>
                         <div class="input_div1">
                           <mat-form-field class="input1">
                             <mat-label>Valid from:</mat-label>
-                            <input matInput [matDatepicker]="picker1" [min]="minDate" formControlName="validFrom">
+                            <input matInput [matDatepicker]="picker1" [min]="minDate" formControlName="validFrom" disabled>
                             <mat-datepicker-toggle matSuffix [for]="picker1" ></mat-datepicker-toggle>
-                            <mat-datepicker #picker1></mat-datepicker>
+                            <mat-datepicker #picker1 disabled="false"></mat-datepicker>
                           </mat-form-field>
 
                           <mat-form-field class="input1">
                             <mat-label>Valid to:</mat-label>
-                            <input matInput [matDatepicker]="picker2" [min]="minDate" formControlName="validTo">
+                            <input matInput [matDatepicker]="picker2" [min]="minDate" formControlName="validTo" disabled>
                             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                            <mat-datepicker #picker2 ></mat-datepicker>
+                            <mat-datepicker #picker2 disabled="false"></mat-datepicker>
                           </mat-form-field>
                         </div>
 
@@ -137,23 +136,23 @@
                         </mat-form-field>
 
                       </div>
-                    </form>
-                    <form [formGroup]="secondFormGroup1">
 
                       <div class="input_div1">
 
                         <p><b>Or</b></p>
                       </div>
                       <div class="input_div1">
-                        <mat-form-field style="width: 80%;">
+                        <mat-form-field style="width: 50%;">
                           <mat-label>Subject</mat-label>
                           <mat-select formControlName="chosenSubject" >
-                            <mat-option [value]="null">None</mat-option>
                             <mat-option *ngFor="let sub of subjects" (click)="selectionChange(sub)"  [value]="sub">{{sub.commonName}}</mat-option>
                           </mat-select>
                         </mat-form-field>
+                        <button id="next" mat-button (click)="resetSubject()" >Reset</button>
                       </div>
-                    </form>
+
+                      </form>
+
                       <div>
                         <button id="back" mat-button matStepperPrevious>Back</button>
                         <button id="next" mat-button matStepperNext >Next</button>

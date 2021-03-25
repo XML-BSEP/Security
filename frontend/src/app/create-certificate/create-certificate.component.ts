@@ -34,7 +34,6 @@ import { AuthenticatedUser } from '../model/user/authenticatedUser';
 export class CreateCertificateComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  secondFormGroup1: FormGroup;
 
   thirdFormGroup: FormGroup;
   keyUsageChecked: boolean;
@@ -56,7 +55,7 @@ export class CreateCertificateComponent implements OnInit {
   pku : PossibleKeyUsages;
 
   selectedSubject : User;
-
+  isSelectedSubject:boolean;
 
   // allKeyUsages : string[] = ["digitalSignature", "nonRepudiation", "keyEncipherment", "dataEncipherment", "keyAgreement", "certificateSigning", "crlSigning", "encipherOnly", "decipherOnly" ];
   allKeyUsages : string[];
@@ -68,7 +67,7 @@ export class CreateCertificateComponent implements OnInit {
   ngOnInit(): void {
 
       this.minDate = new Date(Date.now()).toISOString().split('T')[0];
-
+    this.isSelectedSubject = false;
     if(localStorage.getItem('userId')!==null){
       this.userLoggedIn = true;
     }else{
@@ -83,19 +82,18 @@ export class CreateCertificateComponent implements OnInit {
 
     });
     this.secondFormGroup = new FormGroup({
-      "firstName": new FormControl(null),
-      "lastName": new FormControl(null),
-      "state": new FormControl(null),
-      "city": new FormControl(null),
-      "org": new FormControl(null),
-      "orgunit": new FormControl(null),
-      "email": new FormControl(null),
-      "password": new FormControl(null),
-    });
-    this.secondFormGroup1 = new FormGroup({
+      "firstName": new FormControl(null,[Validators.required]),
+      "lastName": new FormControl(null,[Validators.required]),
+      "state": new FormControl(null,[Validators.required]),
+      "city": new FormControl(null,[Validators.required]),
+      "org": new FormControl(null,[Validators.required]),
+      "orgunit": new FormControl(null,[Validators.required]),
+      "email": new FormControl(null,[Validators.required]),
+      "password": new FormControl(null,[Validators.required]),
+      "chosenSubject" : new FormControl(null,[Validators.required])
 
-      "chosenSubject" : new FormControl(null)
     });
+
 
     this.thirdFormGroup = new FormGroup({
       'keyUsage' : new FormControl(null),
@@ -244,25 +242,40 @@ export class CreateCertificateComponent implements OnInit {
     return createCertificate;
   }
 
-  onTypeChange() {
-
-      if(this.selectedSubject === null ){
-        console.log("KURCINA")
-
-      }else{
-        console.log(this.selectedSubject)
-      }
-
-
-  }
 
   selectionChange(user : User) {
     this.subjectId = user.id;
     console.log(this.subjectId);
+    this.isSelectedSubject=true;
+    this.secondFormGroup = new FormGroup({
+      "firstName": new FormControl({value:null, disabled: true}),
+      "lastName": new FormControl({value:null, disabled: true}),
+      "state": new FormControl({value:null, disabled: true}),
+      "city": new FormControl({value:null, disabled: true}),
+      "org": new FormControl({value:null, disabled: true}),
+      "orgunit": new FormControl({value:null, disabled: true}),
+      "email": new FormControl({value:null, disabled: true}),
+      "password": new FormControl({value:null, disabled: true}),
+      "chosenSubject": new FormControl(user)
+    });
   }
 
+  resetSubject(){
+    this.secondFormGroup = new FormGroup({
+      "firstName": new FormControl({value:null, disabled: false}, Validators.required),
+      "lastName": new FormControl({value:null, disabled: false}, Validators.required),
+      "state": new FormControl({value:null, disabled: false}, Validators.required),
+      "city": new FormControl({value:null, disabled: false}, Validators.required),
+      "org": new FormControl({value:null, disabled: false},Validators.required),
+      "orgunit": new FormControl({value:null, disabled: false},Validators.required),
+      "email": new FormControl({value:null, disabled: false},Validators.required),
+      "password": new FormControl({value:null, disabled: false},Validators.required),
+      "chosenSubject": new FormControl(null)
+    });
+  }
   getLoggedInUserId() : number {
       return parseInt(localStorage.getItem('userId'));
+
   }
 
   parseDate(date : Date) : string {
