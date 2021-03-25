@@ -44,6 +44,22 @@ public class User {
     public User() {
     }
 
+    public User(Long id, String givenName, String surname, String commonName,
+                String organization, String organizationUnit, String state, String city,
+                String email, boolean isCA, Long certificateCount) {
+        this.id = id;
+        this.givenName = givenName;
+        this.surname = surname;
+        this.commonName = commonName;
+        this.organization = organization;
+        this.organizationUnit = organizationUnit;
+        this.state = state;
+        this.city = city;
+        this.email = email;
+        this.isCA = isCA;
+        this.certificateCount = certificateCount;
+    }
+
     public User(String givenName, String surname, String commonName, String organization, String organizationUnit,
                 String state, String city, String email, boolean isCA, Long certificateCount) {
         this.givenName = givenName;
