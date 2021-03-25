@@ -273,6 +273,7 @@ export class CreateCertificateComponent implements OnInit {
       "chosenSubject": new FormControl(null)
     });
   }
+
   getLoggedInUserId() : number {
       return parseInt(localStorage.getItem('userId'));
 
