@@ -411,6 +411,22 @@ public class CertificateService {
         return certificatesByUser;
     }
 
+    public List<CertificateDTO> getAllCaCertificatesByUser(String mail) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        List<CertificateDTO> certificateDTOS = new ArrayList<>();
+
+        certificateDTOS.addAll(checkCaCertificates(mail));
+
+        return  certificateDTOS;
+    }
+
+    public List<CertificateDTO> getAllEndEntityCertificatesByUser(String mail) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        List<CertificateDTO> certificateDTOS = new ArrayList<>();
+
+        certificateDTOS.addAll(checkEndEntityCertificates(mail));
+
+        return  certificateDTOS;
+    }
+
     private Collection<? extends CertificateDTO> checkSelfSignedCertificates(String mail) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
         List<CertificateDTO> certificateDTOS = new ArrayList<>();
         List<CertificateDTO> allCertificatesByKeyStore = getRootCertificates();

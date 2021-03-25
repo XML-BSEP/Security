@@ -43,4 +43,14 @@ export class CertificatesService {
   saveCertificate(certificate : CreateCertificate) {
     return this.http.post(`${environment.baseUrl}/${environment.certificate}/${environment.createCertificate}`, certificate);
   }
+
+  getCaCertificatesByUser(): Observable<SigningCertificate[]> {
+    return this.http.get<SigningCertificate[]>(`${environment.baseUrl}/${environment.certificate}/${environment.getCaCertificatesByUser}`)
+  }
+
+  
+  getEeCertificatesByUser(): Observable<SigningCertificate[]> {
+    return this.http.get<SigningCertificate[]>(`${environment.baseUrl}/${environment.certificate}/${environment.getEndEntityCertificatesByUser}`)
+  }
+
 }

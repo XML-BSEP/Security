@@ -10,6 +10,7 @@ import org.bouncycastle.cms.CMSException;
 import org.bouncycastle.operator.OperatorCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +24,7 @@ import java.security.NoSuchProviderException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 import java.util.List;
+
 
 @Controller
 @CrossOrigin
@@ -85,7 +87,7 @@ public class CertificateController {
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
     }
 
-    //AAAAAAAAAAAA OVO SRANJE TREA DA GADJAM AAAAAAAAAAA SAMO ADMIN AAAAAAA
+
     @GetMapping("/getRootCertificates")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getSelfSignedCertificates() throws Exception{
@@ -93,9 +95,29 @@ public class CertificateController {
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
     }
 
+    @GetMapping("/getCaCertificatesByUser")
+    public ResponseEntity<?> getCaCertificatesByUser() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String mail = ((Account)user).getUsername();
+        List<CertificateDTO> certificateDTOS = certificateService.getAllCaCertificatesByUser(mail);
+
+        return new ResponseEntity<>(certificateDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping("/getEndEntityCertificatesByUser")
+    public ResponseEntity<?> getEndEntityCertificatesByUser() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String mail = ((Account)user).getUsername();
+        List<CertificateDTO> certificateDTOS = certificateService.getAllEndEntityCertificatesByUser(mail);
+
+        return new ResponseEntity<>(certificateDTOS, HttpStatus.OK);
+    }
+
     //ADD OTHER ROLES
     @GetMapping("/getCaCertificates")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getCaCertificates() throws Exception{
         List<CertificateDTO> certificatesByUser = certificateService.getCaCertificates();
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
@@ -104,7 +126,7 @@ public class CertificateController {
 
     //ADD OTHER ROLES
     @GetMapping("/getEndEntityCertificates")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getEndEntityCertificates() throws Exception{
         List<CertificateDTO> certificatesByUser = certificateService.getEndEntityCertificates();
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
