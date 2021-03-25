@@ -1,0 +1,98 @@
+
+#container{
+    background-image:url('/assets/large-material.jpeg');
+    width:100%;
+    height:100%; 
+    
+}
+#content{
+    display:flex;
+    justify-content:center;
+    
+}
+#title{
+    color:white;
+    font-size: 2.4rem;
+    font-weight:600;
+}
+button {
+    background-color: rgb(28, 133, 165);
+    color:white;
+    margin-top:20px;
+    width:50px;
+    height:50px;
+}
+/* .button{
+
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    margin-left: 20%;
+    width:60%;
+    height:20%;
+} */
+button:hover{
+    background-color:white;
+    color: rgb(28, 133, 165);
+    border: 1px solid rgb(28, 133, 165);
+    
+}
+#main-card{
+    margin-top:3%;
+    width:60%;
+    height:50rem;
+    border-radius: 10px;
+}
+.smaller_div{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+.input_div1{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+
+}
+
+.input1{
+    width:30%;
+    margin-top:20px;
+    margin-bottom: 20px;
+}
+.back{
+    position:fixed;
+    margin-right:94%;
+
+}
+#save{
+    position:fixed;
+    margin-right:87%;
+
+}
+
+#showAll{
+    position:fixed;
+    margin-right:80%;
+
+}
+#choose_issuer{
+    width:10%;
+    margin-left: 10%;
+    margin-right: 10%;
+
+}
+#next{
+    width:10%;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+#back{
+    width:10%;
+    margin-left: 1%;
+    margin-right: 1%;
+
+}

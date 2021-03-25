@@ -1,0 +1,250 @@
+<div id="container">
+    <div id="content">
+        <button mat-icon-button matTooltip="Back" class="back" (click)="back()">
+            <mat-icon>keyboard_backspace</mat-icon>
+          </button>
+          <button mat-icon-button  matTooltip="Save template" id="save" (click)="saveTemplate()" [disabled] ="!firstFormGroup.valid || !thirdFormGroup.valid">
+            <mat-icon>save</mat-icon>
+          </button>
+          <button mat-icon-button matTooltip="All templates" id="showAll" (click)="viewSavedTemplates()">
+            <mat-icon>favorite</mat-icon>
+          </button>
+
+        <mat-card id="main-card">
+            <mat-card-header >
+                <mat-card-title >
+                  <label style="font-weight:bold; font-size: 25px;">Create certificate</label>
+                </mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+
+                <mat-horizontal-stepper #stepper>
+                  <mat-step [stepControl]="firstFormGroup" errorMessage="Please fill out all fields.">
+                    <form [formGroup]="firstFormGroup">
+                      <ng-template matStepLabel>Choose issuer, valid dates and algorithm</ng-template>
+                      <div class="smaller_div">
+
+                        <div class="input_div1">
+                          <mat-form-field class="input1">
+                            <mat-label>Issuer</mat-label>
+                            <input matInput formControlName="issuer" required readonly>
+                          </mat-form-field>
+
+                          <button mat-flat-button id="choose_issuer" (click)="chooseCertificate()">Choose</button>
+
+
+                          <!-- <br> -->
+
+                        </div>
+                        <div class="input_div1">
+                          <mat-form-field class="input1">
+                            <mat-label>Valid from:</mat-label>
+                            <input matInput [matDatepicker]="picker1" [min]="minDate" formControlName="validFrom">
+                            <mat-datepicker-toggle matSuffix [for]="picker1" ></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                          </mat-form-field>
+
+                          <mat-form-field class="input1">
+                            <mat-label>Valid to:</mat-label>
+                            <input matInput [matDatepicker]="picker2" [min]="minDate" formControlName="validTo">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2 ></mat-datepicker>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="input_div1">
+                          <mat-form-field class="input1">
+                            <mat-label>Signature algorithm</mat-label>
+                            <mat-select formControlName="signatureAlgorithm">
+                              <mat-option value="SHA2_256_RSA">
+                                SHA2_256withRSA
+                              </mat-option>
+                              <mat-option value="SHA2_384_RSA">
+                                SHA2_384withRSA
+                              </mat-option>
+                              <mat-option value="SHA2_512_RSA">
+                                SHA2_512withRSA
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+
+                          <mat-form-field class="input1">
+                            <mat-label>Public key algorithm</mat-label>
+                            <input matInput formControlName="pubKeyAlgorithm" readonly>
+                          </mat-form-field>
+                        </div>
+                        <div>
+                          <button id="next" mat-button matStepperNext>Next</button>
+                        </div>
+                      </div>
+
+                    </form>
+                  </mat-step>
+
+
+                  <mat-step [stepControl]="secondFormGroup" errorMessage="Please choose or fill subject.">
+                    <form [formGroup]="secondFormGroup">
+                      <ng-template matStepLabel>Choose or fill in subject</ng-template>
+
+                      <div class="input_div1">
+                        <mat-form-field class="input1">
+                          <mat-label>First name</mat-label>
+                          <input matInput placeholder="First name" formControlName="firstName" required >
+                        </mat-form-field>
+
+                        <mat-form-field class="input1">
+                          <mat-label>Last name</mat-label>
+                          <input matInput placeholder="Last name" formControlName="lastName" required >
+                        </mat-form-field>
+
+                      </div>
+
+                      <div class="input_div1">
+                        <mat-form-field class="input1">
+                          <mat-label>State</mat-label>
+                          <input matInput placeholder="State" formControlName="state" required >
+                        </mat-form-field>
+
+                        <mat-form-field class="input1">
+                          <mat-label>City</mat-label>
+                          <input matInput placeholder="City" formControlName="city" required >
+                        </mat-form-field>
+
+                      </div>
+
+                      <div class="input_div1">
+                        <mat-form-field class="input1">
+                          <mat-label>Organization</mat-label>
+                          <input matInput placeholder="Organization" formControlName="org" required >
+                        </mat-form-field>
+
+                        <mat-form-field class="input1">
+                          <mat-label>Organizational unit</mat-label>
+                          <input matInput placeholder="Organizational unit" formControlName="orgunit" required >
+                        </mat-form-field>
+
+                      </div>
+
+                      <div class="input_div1">
+                        <mat-form-field class="input1">
+                          <mat-label>Email</mat-label>
+                          <input matInput placeholder="Email" formControlName="email" required >
+                        </mat-form-field>
+
+                        <mat-form-field class="input1">
+                          <mat-label>Password</mat-label>
+                          <input matInput type="password" placeholder="Password" formControlName="password" required >
+                        </mat-form-field>
+
+                      </div>
+                    </form>
+                    <form [formGroup]="secondFormGroup1">
+
+                      <div class="input_div1">
+
+                        <p><b>Or</b></p>
+                      </div>
+                      <div class="input_div1">
+                        <mat-form-field style="width: 80%;">
+                          <mat-label>Subject</mat-label>
+                          <mat-select formControlName="chosenSubject">
+                            <mat-option *ngFor="let sub of subjects" (click)="selectionChange(sub)"  [value]="sub">{{sub.commonName}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </form>
+                      <div>
+                        <button id="back" mat-button matStepperPrevious>Back</button>
+                        <button id="next" mat-button matStepperNext >Next</button>
+                      </div>
+                  </mat-step>
+
+
+
+                  <mat-step [stepControl]="thirdFormGroup" errorMessage="Please choose extensions">
+                    <form [formGroup]="thirdFormGroup">
+                      <ng-template matStepLabel>Choose extensions</ng-template>
+                      <div id="extensions-div" >
+                        <mat-accordion >
+                          <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                              <mat-panel-title>
+                                Key usage extension
+                              </mat-panel-title>
+                              <mat-panel-description>
+                                Add Key usage extensions to your certificate
+                              </mat-panel-description>
+                            </mat-expansion-panel-header>
+
+                            <!-- <mat-card class="extension-card"> -->
+                              <!-- <mat-card-content > -->
+                                <mat-form-field  style="margin-left: 30% ;width: 40%;">
+                                  <mat-label>Key usage extensions</mat-label>
+                                  <mat-select [(value)]="selectedKeyUsages" formControlName="keyUsage" multiple>
+                                    <mat-option *ngFor="let keyusageext of allKeyUsages"  [value]="keyusageext">{{keyusageext}}</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                                <p *ngIf="selectedKeyUsages!==undefined">
+                                  <b>Chosen key usage extensions:</b> {{selectedKeyUsages}}
+                                </p>
+
+
+
+
+                          </mat-expansion-panel>
+                        </mat-accordion>
+                        <mat-accordion>
+                          <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                              <mat-panel-title>
+                                Extended key usage
+                              </mat-panel-title>
+                              <mat-panel-description>
+                                Add extended key usages to your certificate
+                              </mat-panel-description>
+                            </mat-expansion-panel-header>
+
+
+
+                            <mat-form-field  style="margin-left: 30% ;width: 40%;">
+                              <mat-label>Key usage extensions</mat-label>
+                              <mat-select [(value)]="selectedExtendedKeyUsages" formControlName="extendedKeyUsage" multiple>
+                                <mat-option *ngFor="let keyusageext of allExtendedKeyUsages"  [value]="keyusageext">{{keyusageext}}</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            <p *ngIf="selectedExtendedKeyUsages!==undefined">
+                              <b>Chosen extended key usage extensions:</b> {{selectedExtendedKeyUsages}}
+                            </p>
+
+                          </mat-expansion-panel>
+                        </mat-accordion>
+                      </div>
+
+
+                      <div>
+                        <button id="back" mat-button matStepperPrevious>Back</button>
+                        <button id="next" mat-button matStepperNext>Next</button>
+                      </div>
+                    </form>
+                  </mat-step>
+                  <mat-step>
+                    <ng-template matStepLabel>Done</ng-template>
+                    <p *ngIf="firstFormGroup.valid && secondFormGroup.valid && thirdFormGroup.valid">Your certificate is created!</p>
+                    <p *ngIf="!firstFormGroup.valid || !secondFormGroup.valid || !thirdFormGroup.valid">Please fill form acording to instructions!</p>
+
+
+                    <div>
+
+                      <button id="back" mat-button matStepperPrevious>Back</button>
+
+                      <button id="next" style="margin-right: 10%;" mat-button  (click)="saveCertificate()" [disabled]="!firstFormGroup.valid || !secondFormGroup.valid || !thirdFormGroup.valid">Save</button>
+
+
+                    </div>
+                  </mat-step>
+                </mat-horizontal-stepper>
+              </mat-card-content>
+        </mat-card>
+
+    </div>
+</div>
