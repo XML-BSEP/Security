@@ -146,6 +146,14 @@ public class CertificateController {
         return new ResponseEntity<>(certificateAlias, HttpStatus.OK);
     }
 
+    @PostMapping("/createRootCertificate")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> createRootCertificate(@RequestBody CreateCertificateDTO dto) throws Exception {
+        certificateService.createRootCertificate(dto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public @ResponseBody
