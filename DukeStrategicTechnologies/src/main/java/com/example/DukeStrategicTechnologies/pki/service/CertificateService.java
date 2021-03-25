@@ -196,7 +196,7 @@ public class CertificateService {
     private void checkCertificateChain(Certificate[] certificateChain, String serialNumber) {
         int position = -1;
         for (int i = 0; i < certificateChain.length; i++) {
-            if (((X509Certificate) certificateChain[i]).getSerialNumber().equals(serialNumber)) {
+            if (((X509Certificate) certificateChain[i]).getSerialNumber().equals(new BigInteger(serialNumber))) {
                 position = i;
             }
         }
