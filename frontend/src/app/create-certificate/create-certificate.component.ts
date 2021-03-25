@@ -1,3 +1,4 @@
+import { PossibleKeyUsages } from '../model/certificates/PossibleKeyUsages';
 import { UsersService } from './../service/users/users.service';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
@@ -52,27 +53,21 @@ export class CreateCertificateComponent implements OnInit {
   createdSertificate : SigningCertificate;
   certificates : SigningCertificate[];
   subjectId : number;
-  // visible = true;
-  // selectable = true;
-  // removable = true;
-  // separatorKeysCodes: number[] = [ENTER, COMMA];
-  // keyUsageControl = new FormControl();
-  // filteredKeyUsages: Observable<string[]>;
-  allKeyUsages : string[] = ["digitalSignature", "nonRepudiation", "keyEncipherment", "dataEncipherment", "keyAgreement", "certificateSigning", "crlSigning", "encipherOnly", "decipherOnly" ];
+  pku : PossibleKeyUsages;
 
-  // @ViewChild('keyUsageInput') keyUsageInput: ElementRef<HTMLInputElement>;
-  // @ViewChild('auto') matAutocomplete: MatAutocomplete;
+  selectedSubject : User;
 
-  allExtendedKeyUsages: string[] = ["serverAuth", "clientAuth", "signExecCode", "emailProtection", "ipsecEndSystem", "ipsecTunnel", "ipsecUser", "timeStamping", "ocspSigning"];
 
+  // allKeyUsages : string[] = ["digitalSignature", "nonRepudiation", "keyEncipherment", "dataEncipherment", "keyAgreement", "certificateSigning", "crlSigning", "encipherOnly", "decipherOnly" ];
+  allKeyUsages : string[];
+
+  // allExtendedKeyUsages: string[] = ["serverAuth", "clientAuth", "signExecCode", "emailProtection", "ipsecEndSystem", "ipsecTunnel", "ipsecUser", "timeStamping", "ocspSigning"];
+  allExtendedKeyUsages: string[];
   constructor(private certificateService :CertificatesService, private router : Router,    public signingCertDialog: MatDialog, private templateService : TemplateService, public savedTemplates : MatDialog , private userService : UsersService) { }
 
   ngOnInit(): void {
 
-    // this.filteredKeyUsages = this.keyUsageControl.valueChanges.pipe(
-    //   startWith(null),
-    //   map((keyUsage: string | null) => keyUsage ? this._filter(keyUsage) : this.allKeyUsages.slice()));
-    this.minDate = new Date(Date.now()).toISOString().split('T')[0];
+      this.minDate = new Date(Date.now()).toISOString().split('T')[0];
 
     if(localStorage.getItem('userId')!==null){
       this.userLoggedIn = true;
@@ -107,7 +102,7 @@ export class CreateCertificateComponent implements OnInit {
       'extendedKeyUsage' : new FormControl(null)
     })
     this.loadSubjects();
-    
+
   }
 
 
@@ -136,61 +131,29 @@ export class CreateCertificateComponent implements OnInit {
         this.firstFormGroup.patchValue({
           "issuer": this.signingCertificate.commonName
         });
+        var alias = result.certificate.email+this.signingCertificate.serialNumber;
 
+        // console.log(result.certificate.email);
+        this.loadPossibleKeyUsages(alias)
       }
     });
   }
-  
-  
-  /*
-      "firstName": new FormControl(null),
-      "lastName": new FormControl(null),
-      "state": new FormControl(null),
-      "city": new FormControl(null),
-      "org": new FormControl(null),
-      "orgunit": new FormControl(null),
-      "email": new FormControl(null),
-      "password": new FormControl(null),
-  */
+  loadPossibleKeyUsages(alias){
 
-  // validateSecondForm(){
-  //   if(this.secondFormGroup.controls.chosenSubject.value !==null){
-  //     return true;
-  //   }else{
-  //     return this.validateName() && this.validateEmail() && this.validateLastName() && this.validateCity() && this.validateState() && this.validateOrg() && this.validateOrgUnit() && this.validatePassword();
-  //   }
-  // }
-  // validateName(){
-  //   return this.secondFormGroup.controls.firstName.value.trim().length>0;
-  // }
+    this.certificateService.getPossibleKeyUsages(alias).subscribe(
+      res=>{
+        this.pku = res;
+        this.allKeyUsages = this.pku.possibleKeyUsages;
+        this.allExtendedKeyUsages = this.pku.possibleExtendedKeyUsages;
+      },
+      error=>{
+        alert("Fail!");
+      }
 
-  // validateLastName(){
-  //   return this.secondFormGroup.controls.lastName.value.trim().length>0;
-  // }
+      )
 
-  // validateState(){
-  //   return this.secondFormGroup.controls.state.value.trim().length>0;
-  // }
+  }
 
-  // validateCity(){
-  //   return this.secondFormGroup.controls.city.value.trim().length>0;
-  // }
-
-  // validateOrg(){
-  //   return this.secondFormGroup.controls.org.value.trim().length>0;
-  // }
-
-  // validateOrgUnit(){
-  //   return this.secondFormGroup.controls.orgunit.value.trim().length>0;
-  // }
-
-  // validateEmail(){
-  //   return this.secondFormGroup.controls.email.value.trim().length>0;
-  // }
-
-  // validatePassword(){
-  //   return this.secondFormGroup.controls.password.value.trim().length>0;
-  // }
 
 
   viewSavedTemplates() {
@@ -223,13 +186,6 @@ export class CreateCertificateComponent implements OnInit {
       }
     });
   }
-  // public id :  Number;
-  // public signatureAlgorithm : String;
-  // public keyAlgorithm : String;
-  // public name : String;
-  // public timestamp : Date;
-  // public keyUsage : String[];
-  // public extendedKeyUsage : String[];
 
   saveTemplate(){
     let timestamp = new Date();
@@ -257,7 +213,7 @@ export class CreateCertificateComponent implements OnInit {
       });
   }
   saveCertificate(){
-    
+
     var certificate = this.createCertificateObj();
     console.log("Start date: " + certificate.startDate + "\n");
     console.log("End date: " + certificate.endDate + "\n");
@@ -288,9 +244,21 @@ export class CreateCertificateComponent implements OnInit {
     return createCertificate;
   }
 
-  
+  onTypeChange() {
+
+      if(this.selectedSubject === null ){
+        console.log("KURCINA")
+
+      }else{
+        console.log(this.selectedSubject)
+      }
+
+
+  }
+
   selectionChange(user : User) {
     this.subjectId = user.id;
+    console.log(this.subjectId);
   }
 
   getLoggedInUserId() : number {

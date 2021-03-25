@@ -147,7 +147,8 @@
                       <div class="input_div1">
                         <mat-form-field style="width: 80%;">
                           <mat-label>Subject</mat-label>
-                          <mat-select formControlName="chosenSubject">
+                          <mat-select formControlName="chosenSubject" >
+                            <mat-option [value]="null">None</mat-option>
                             <mat-option *ngFor="let sub of subjects" (click)="selectionChange(sub)"  [value]="sub">{{sub.commonName}}</mat-option>
                           </mat-select>
                         </mat-form-field>
@@ -180,7 +181,7 @@
                               <!-- <mat-card-content > -->
                                 <mat-form-field  style="margin-left: 30% ;width: 40%;">
                                   <mat-label>Key usage extensions</mat-label>
-                                  <mat-select [(value)]="selectedKeyUsages" formControlName="keyUsage" multiple>
+                                  <mat-select [(value)]="selectedKeyUsages" formControlName="keyUsage" multiple >
                                     <mat-option *ngFor="let keyusageext of allKeyUsages"  [value]="keyusageext">{{keyusageext}}</mat-option>
                                   </mat-select>
                                 </mat-form-field>

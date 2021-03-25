@@ -22,7 +22,8 @@ export const environment = {
   getAllForSigning : "getAllForSigning",
   getAllForSigningByUser : "getAllForSigningByUser",
   getCaCertificatesByUser: "getCaCertificatesByUser",
-  getEndEntityCertificatesByUser: "getEndEntityCertificatesByUser"
+  getEndEntityCertificatesByUser: "getEndEntityCertificatesByUser",
+  getPossibleKeyUsages : "getPossibleKeyUsages"
 };
 
 /*

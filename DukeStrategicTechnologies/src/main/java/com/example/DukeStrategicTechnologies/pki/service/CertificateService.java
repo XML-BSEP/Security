@@ -552,10 +552,14 @@ public class CertificateService {
 
     private boolean isCA(CertificateDTO certificateDTO) {
         Collection<String> keyUsages = certificateDTO.getKeyUsages();
-        if(keyUsages.contains("digitalSignature")) {
-            return true;
+//        if(keyUsages.contains("certficateSigning")) {
+//            return true;
+//        }
+        for(String keyUsage : keyUsages){
+            if(keyUsage.equalsIgnoreCase("certificateSigning")){
+                return true;
+            }
         }
-
         return false;
     }
 

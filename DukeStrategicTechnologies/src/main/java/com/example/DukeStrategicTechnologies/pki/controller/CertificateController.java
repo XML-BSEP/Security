@@ -96,7 +96,7 @@ public class CertificateController {
     }
 
     @GetMapping("/getPossibleKeyUsages")
-    public ResponseEntity<?> getPossibleKeyUsages(@RequestBody String alias) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+    public ResponseEntity<?> getPossibleKeyUsages(@RequestParam("alias") String alias) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
         return new ResponseEntity<>(certificateService.getPossibleKeyUsages(alias), HttpStatus.OK);
     }
 
@@ -145,6 +145,7 @@ public class CertificateController {
         List<CertificateDTO> certificateAlias = certificateService.getAllCertificatesForSigningByUser(mail);
         return new ResponseEntity<>(certificateAlias, HttpStatus.OK);
     }
+
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
