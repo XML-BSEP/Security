@@ -42,6 +42,7 @@ public class CertificateService {
     public static final String SELF_SIGNED_EXCEPTION = "Self-signed certificates can only be issued by self-signed certificates!";
     public static final String KEYSTORE_NOT_FOUND = "KeyStore not found!";
     public static final String END_DATE_BEFORE_START = "End date must be after start date!";
+    public static final String INVALID_DATE = "Invalid date!";
 
     private CertificateGenerator certificateGenerator;
     private KeyStoreWriter keyStoreWriter;
@@ -100,7 +101,7 @@ public class CertificateService {
 
         String issuerPassword = issuerKeyStorePassword + issuerCertificate.getSerialNumber();
         isCertificateValid(keyStore, issuerAlias);
-
+        isDateValid(issuerCertificate, LocalDate.parse(createCertificateDTO.getStartDate()), LocalDate.parse(createCertificateDTO.getEndDate()));
 
         BigInteger subjectCertificateSerialNumber = generateSerialNumberForCertificate();
         String subjectAlias = user.getEmail() + subjectCertificateSerialNumber;
@@ -141,6 +142,23 @@ public class CertificateService {
 
         user.setCertificateCount(user.getCertificateCount() + 1);
         userRepository.save(user);
+
+    }
+
+    public void isDateValid(X509Certificate issuerCertificate, LocalDate subjectNotBefore, LocalDate subjectNotAfter) throws Exception {
+        Date issuerNotBefore = issuerCertificate.getNotBefore();
+        Date issuerNotAfter = issuerCertificate.getNotAfter();
+
+        Date subjectNotBeforeDate = java.sql.Date.valueOf(subjectNotBefore);
+        Date subjectNotAfterDate = java.sql.Date.valueOf(subjectNotAfter);
+
+        if(subjectNotBeforeDate.before(new Date()) || subjectNotBeforeDate.before(issuerNotBefore)) {
+            throw new Exception(INVALID_DATE);
+        }
+
+        if(subjectNotAfterDate.after(issuerNotAfter)) {
+            throw new Exception(INVALID_DATE);
+        }
 
     }
 
