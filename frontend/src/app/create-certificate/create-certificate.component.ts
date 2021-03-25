@@ -18,7 +18,9 @@ import { User } from '../model/user/user';
 import { CertificatesService } from '../certificates.service';
 import { CreateCertificate } from '../model/certificates/CreateCertificate';
 import { DatePipe } from '@angular/common';
-import { format } from 'node:util';
+import { BehaviorSubject } from 'rxjs';
+import { AuthenticatedUser } from '../model/user/authenticatedUser';
+
 
 @Component({
   selector: 'app-create-certificate',
@@ -48,8 +50,7 @@ export class CreateCertificateComponent implements OnInit {
   public template;
   chosenTemplate;
   createdSertificate : SigningCertificate;
-  allCA;
-  allRoot;
+  certificates : SigningCertificate[];
   subjectId : number;
   // visible = true;
   // selectable = true;
@@ -57,12 +58,12 @@ export class CreateCertificateComponent implements OnInit {
   // separatorKeysCodes: number[] = [ENTER, COMMA];
   // keyUsageControl = new FormControl();
   // filteredKeyUsages: Observable<string[]>;
-  allKeyUsages : string[] = ["Digital Signature", "Non-repudiation", "Key encipherment", "Data encipherment", "Key agreement", "Certificate signing", "CRL signing", "Encipher only", "Decipher only" ];
+  allKeyUsages : string[] = ["digitalSignature", "nonRepudiation", "keyEncipherment", "dataEncipherment", "keyAgreement", "certificateSigning", "crlSigning", "encipherOnly", "decipherOnly" ];
 
   // @ViewChild('keyUsageInput') keyUsageInput: ElementRef<HTMLInputElement>;
   // @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
-  allExtendedKeyUsages: string[] = ["TLS Web server authentication", "TLS Web client authentication", "Sign (downloadable) executable code", "Email protection", "IPSEC End System", "IPSEC Tunnel", "IPSEC User", "Timestamping"];
+  allExtendedKeyUsages: string[] = ["serverAuth", "clientAuth", "signExecCode", "emailProtection", "ipsecEndSystem", "ipsecTunnel", "ipsecUser", "timeStamping", "ocspSigning"];
 
   constructor(private certificateService :CertificatesService, private router : Router,    public signingCertDialog: MatDialog, private templateService : TemplateService, public savedTemplates : MatDialog , private userService : UsersService) { }
 
@@ -106,7 +107,7 @@ export class CreateCertificateComponent implements OnInit {
       'extendedKeyUsage' : new FormControl(null, Validators.required)
     })
     this.loadSubjects();
-    this.loadCACertificates();
+    
   }
 
 
@@ -139,20 +140,8 @@ export class CreateCertificateComponent implements OnInit {
       }
     });
   }
-  loadCACertificates(){
-    this.certificateService.getAllCA().subscribe(data =>
-      {
-        this.allCA = data;
-        console.log(this.allCA);
-      });
-  }
-  loadRootCertificates(){
-    this.certificateService.getAllRoot().subscribe(data =>
-      {
-        this.allRoot = data;
-        console.log(this.allCA);
-      });
-  }
+  
+  
   /*
       "firstName": new FormControl(null),
       "lastName": new FormControl(null),
@@ -269,8 +258,16 @@ export class CreateCertificateComponent implements OnInit {
   }
   saveCertificate(){
     
-    this.createCertificateObj();
-    
+    var certificate = this.createCertificateObj();
+    console.log(certificate);
+    this.certificateService.saveCertificate(certificate).subscribe(
+      success => {
+        alert("Success");
+      },
+      error => {
+        alert("Error");
+      }
+    )
 
     console.log(this.createdSertificate);
   }
@@ -284,18 +281,16 @@ export class CreateCertificateComponent implements OnInit {
     var startDate = new Date(validFrom);
     var endDate = new Date(validTo);
     var issuerId = this.getLoggedInUserId();
-    var createSertificate = new CreateCertificate(this.subjectId, issuerId, startDate, endDate, signatureAlgorithm, this.selectedKeyUsages, this.selectedExtendedKeyUsages, issuerSerialNumber);
-    console.log(createSertificate.extendedKeyUsage);
-    return null;
+    var createCertificate = new CreateCertificate(this.subjectId, issuerId, startDate, endDate, signatureAlgorithm, this.selectedKeyUsages, this.selectedExtendedKeyUsages, issuerSerialNumber);
+    return createCertificate;
   }
 
+  
   selectionChange(user : User) {
     this.subjectId = user.id;
   }
 
   getLoggedInUserId() : number {
       return parseInt(localStorage.getItem('userId'));
-  } 
-
-
+  }
 }

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { SigningCertificate } from './model/certificates/SigningCertificate';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CreateCertificate } from './model/certificates/CreateCertificate';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,19 @@ export class CertificatesService {
     return this.http.get<SigningCertificate[]>(`${environment.baseUrl}/${environment.certificate}/${environment.getRootCertificates}`);
   }
 
+  getAllEndEntity() : Observable<SigningCertificate[]> {
+    return this.http.get<SigningCertificate[]>(`${environment.baseUrl}/${environment.certificate}/${environment.getEndEntityCertificates}`)
+  }
+
+  getAll() : Observable<SigningCertificate[]> {
+    return this.http.get<SigningCertificate[]>(`${environment.baseUrl}/${environment.certificate}/${environment.all}`);
+  }
+
   getCertificatesByUser() : Observable<SigningCertificate[]> {
-    return this.http.get<SigningCertificate[]>(`${environment.baseUrl}/${environment.api}/${environment.getCertificatesByUser}`)
+    return this.http.get<SigningCertificate[]>(`${environment.baseUrl}/${environment.certificate}/${environment.getCertificatesByUser}`)
+  }
+
+  saveCertificate(certificate : CreateCertificate) {
+    return this.http.post(`${environment.baseUrl}/${environment.certificate}/${environment.createCertificate}`, certificate);
   }
 }

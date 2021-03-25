@@ -1,7 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { BehaviorSubject } from 'rxjs';
 import { CertificatesService } from 'src/app/certificates.service';
 import { SigningCertificate } from 'src/app/model/certificates/SigningCertificate';
+import { AuthenticatedUser } from 'src/app/model/user/authenticatedUser';
 
 @Component({
   selector: 'app-choose-issuer-dialog',
@@ -14,36 +16,40 @@ export class ChooseIssuerDialogComponent implements OnInit {
   chosenExtendedKeyUsage;
   keyUsages;
   allCertificates : SigningCertificate[] = [];
-  allCA;
-  allRoot;
+  certificates : SigningCertificate[];
+  currentUserSubject: BehaviorSubject<AuthenticatedUser>
   constructor(public dialogRef: MatDialogRef<ChooseIssuerDialogComponent>,@Inject(MAT_DIALOG_DATA) data, private certificateService : CertificatesService) {
       this.chosenKeyUsage = data.chosenKeyUsage;
       this.chosenExtendedKeyUsage = data.chosenExtendedKeyUsage;
   }
 
   ngOnInit(): void {
-    this.loadCACertificates();
-    this.loadRootCertificates();
+    if(this.isAdminLoggedIn()) {
+      this.loadAllCertificates();
+    }
+    else {
+      this.loadCertificatesByUser();
+    }
   }
 
-  loadCACertificates(){
-    this.certificateService.getAllCA().subscribe(data =>
-      {
-        for(let i=0;i<data.length;i++){
-          this.allCertificates.push(data[i]);
-        }
-        console.log(this.allCertificates);
-      });
+  loadAllCertificates() {
+    this.certificateService.getAll().subscribe(data => {
+      this.certificates = data;
+    })
   }
-  loadRootCertificates(){
-    this.certificateService.getAllRoot().subscribe(data =>
-      {
-        this.allRoot = data;
-        for(let i=0;i<data.length;i++){
-          this.allCertificates.push(data[i]);
-        }
-        console.log(this.allCertificates);
-      });
+
+  isAdminLoggedIn() : boolean {
+    this.currentUserSubject = new BehaviorSubject<AuthenticatedUser>(JSON.parse(localStorage.getItem('currentUser')));
+    if(this.currentUserSubject.value.role == "Admin") {
+      return true;
+    }
+    return false;
+  }
+
+  loadCertificatesByUser() {
+    this.certificateService.getCertificatesByUser().subscribe(data => {
+      this.certificates = data;
+    })
   }
   updateKeyUsage(item) {
     this.keyUsages = "";

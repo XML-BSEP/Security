@@ -13,8 +13,8 @@ insert into accounts(id, email, password, role) VALUES (3, 'user2@gmail.com', '$
 insert into accounts(id, email, password, role) VALUES (4, 'user3@gmail.com', '$2y$12$x/JI8Vrzn3IWCPZpbLn4qOpqObD0npAA6DV6EcHv7GojslHdL1n4K', 'User');
 insert into accounts(id, email, password, role) VALUES (5, 'user4@gmail.com', '$2y$12$x/JI8Vrzn3IWCPZpbLn4qOpqObD0npAA6DV6EcHv7GojslHdL1n4K', 'User');
 
-insert into user_authority(user_id, authority_id) values (100, 1);
-insert into user_authority(user_id, authority_id) values (101, 2);
-insert into user_authority(user_id, authority_id) values (102, 2);
-insert into user_authority(user_id, authority_id) values (103, 2);
-insert into user_authority(user_id, authority_id) values (104, 2);
+insert into user_authority(user_id, authority_id) values (1, 1);
+insert into user_authority(user_id, authority_id) values (2, 2);
+insert into user_authority(user_id, authority_id) values (3, 2);
+insert into user_authority(user_id, authority_id) values (4, 2);
+insert into user_authority(user_id, authority_id) values (5, 2);

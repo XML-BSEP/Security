@@ -26,7 +26,7 @@ import java.util.List;
 
 @Controller
 @CrossOrigin
-@RequestMapping("/certificate")
+@RequestMapping("certificate")
 public class CertificateController {
 
     @Autowired
@@ -35,8 +35,10 @@ public class CertificateController {
     @Autowired
     private Base64Encoder base64Encoder;
 
+
+    //ADD OTHER ROLES
     @PostMapping("/createCertificate")
-    @PreAuthorize("hasRole('ADMIN') || hasRole('CA')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> createCertificate(@RequestBody CreateCertificateDTO dto) throws Exception {
         certificateService.createCertificate(dto);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -67,6 +69,7 @@ public class CertificateController {
     * insert code here
     * */
 
+    //ADD ROLES
     @GetMapping("/getCertificatesByUser")
     public ResponseEntity<?> getCertificatesByUser() throws Exception{
         Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -77,21 +80,24 @@ public class CertificateController {
 
     //AAAAAAAAAAAA OVO SRANJE TREA DA GADJAM AAAAAAAAAAA SAMO ADMIN AAAAAAA
     @GetMapping("/getRootCertificates")
-    //@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getSelfSignedCertificates() throws Exception{
         List<CertificateDTO> certificatesByUser = certificateService.getRootCertificates();
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
     }
-    //AAAAAAAAAAAA I OVO SRANJE TREA DA GADJAM AAAAAAAAAAA SAMO ADMIN AAAAAA
+
+    //ADD OTHER ROLES
     @GetMapping("/getCaCertificates")
-//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getCaCertificates() throws Exception{
         List<CertificateDTO> certificatesByUser = certificateService.getCaCertificates();
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
     }
 
+
+    //ADD OTHER ROLES
     @GetMapping("/getEndEntityCertificates")
-    //@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getEndEntityCertificates() throws Exception{
         List<CertificateDTO> certificatesByUser = certificateService.getEndEntityCertificates();
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
