@@ -3,6 +3,7 @@ package com.example.DukeStrategicTechnologies.pki.controller;
 import com.example.DukeStrategicTechnologies.pki.dto.CertificateDTO;
 import com.example.DukeStrategicTechnologies.pki.dto.CreateCertificateDTO;
 import com.example.DukeStrategicTechnologies.pki.dto.DownloadCertificateDTO;
+import com.example.DukeStrategicTechnologies.pki.dto.PossibleKeyUsagesDTO;
 import com.example.DukeStrategicTechnologies.pki.model.Account;
 import com.example.DukeStrategicTechnologies.pki.service.Base64Encoder;
 import com.example.DukeStrategicTechnologies.pki.service.CertificateService;
@@ -10,7 +11,6 @@ import org.bouncycastle.cms.CMSException;
 import org.bouncycastle.operator.OperatorCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -69,10 +69,11 @@ public class CertificateController {
 
     @PostMapping("/revokeCertificate")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> revokeCertificate(@RequestBody String serialNumber) {
+    public ResponseEntity<?> revokeCertificate(@RequestBody String serialNumber) throws Exception {
         certificateService.revokeCertificate(serialNumber);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     //TODO: realizovati i metodu koja vraca samo sertifikate sa kojima sme da potpise druge sertifikate (obican user)
     /*
     * insert code here
@@ -87,12 +88,16 @@ public class CertificateController {
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
     }
 
-
     @GetMapping("/getRootCertificates")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getSelfSignedCertificates() throws Exception{
         List<CertificateDTO> certificatesByUser = certificateService.getRootCertificates();
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
+    }
+
+    @GetMapping("/getPossibleKeyUsages")
+    public ResponseEntity<?> getPossibleKeyUsages(@RequestBody String alias) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        return new ResponseEntity<>(certificateService.getPossibleKeyUsages(alias), HttpStatus.OK);
     }
 
     @GetMapping("/getCaCertificatesByUser")

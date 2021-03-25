@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RevokedCertificateRepository extends JpaRepository<RevokedCertificate, Long> {
+    RevokedCertificate findBySerialNumber(String serialNumber);
 }
