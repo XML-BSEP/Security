@@ -103,8 +103,8 @@ export class CreateCertificateComponent implements OnInit {
     });
 
     this.thirdFormGroup = new FormGroup({
-      'keyUsage' : new FormControl(null, Validators.required),
-      'extendedKeyUsage' : new FormControl(null, Validators.required)
+      'keyUsage' : new FormControl(null),
+      'extendedKeyUsage' : new FormControl(null)
     })
     this.loadSubjects();
     

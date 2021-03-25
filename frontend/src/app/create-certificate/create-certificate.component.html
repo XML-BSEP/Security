@@ -237,7 +237,7 @@
 
                       <button id="back" mat-button matStepperPrevious>Back</button>
 
-                      <button id="next" style="margin-right: 10%;" mat-button  (click)="saveCertificate()">Save</button>
+                      <button id="next" style="margin-right: 10%;" mat-button  (click)="saveCertificate()" [disabled]="!firstFormGroup.valid || !secondFormGroup.valid || !thirdFormGroup.valid">Save</button>
 
 
                     </div>

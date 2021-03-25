@@ -46,3 +46,38 @@
     border: 1px solid rgb(28, 133, 165);
     
 }
+
+button {
+background-color:black;
+color: black;
+
+margin-top:20px;
+width:50px;
+height:50px;
+}
+
+button:hover{
+background-color:white;
+color: rgb(28, 133, 165);
+border: 1px solid rgb(28, 133, 165);
+
+}
+#choose-button{
+width:100px;
+}
+
+.example-card{
+display: flex;
+flex-direction: column;
+justify-content: center;
+margin-left:30%;
+margin-right: 30%;
+width:40%;
+margin-bottom: 20px;
+
+}
+
+#usages-div{
+    word-wrap: break-word;
+}
+
