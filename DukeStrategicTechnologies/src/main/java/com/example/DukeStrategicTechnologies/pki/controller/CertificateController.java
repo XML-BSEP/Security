@@ -38,7 +38,7 @@ public class CertificateController {
 
     //ADD OTHER ROLES
     @PostMapping("/createCertificate")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') || hasRole('CA')")
     public ResponseEntity<?> createCertificate(@RequestBody CreateCertificateDTO dto) throws Exception {
         certificateService.createCertificate(dto);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -48,6 +48,13 @@ public class CertificateController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<CertificateDTO>> getAll() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
         List<CertificateDTO> certificateAlias = certificateService.getAllCertificates();
+        return new ResponseEntity<>(certificateAlias, HttpStatus.OK);
+    }
+
+    @GetMapping("/getAllForSigning")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<CertificateDTO>> getAllForSigning() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        List<CertificateDTO> certificateAlias = certificateService.getAllCertificatesForSigning();
         return new ResponseEntity<>(certificateAlias, HttpStatus.OK);
     }
 
@@ -101,6 +108,15 @@ public class CertificateController {
     public ResponseEntity<?> getEndEntityCertificates() throws Exception{
         List<CertificateDTO> certificatesByUser = certificateService.getEndEntityCertificates();
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
+    }
+
+    @GetMapping("/getAllForSigningByUser")
+
+    public ResponseEntity<List<CertificateDTO>> getAllForSigningByUser() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String mail = ((Account)user).getUsername();
+        List<CertificateDTO> certificateAlias = certificateService.getAllCertificatesForSigningByUser(mail);
+        return new ResponseEntity<>(certificateAlias, HttpStatus.OK);
     }
 
     @ExceptionHandler(Exception.class)

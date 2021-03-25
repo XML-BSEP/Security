@@ -18,7 +18,9 @@ export const environment = {
   getCertificatesByUser : "getCertificatesByUser",
   createCertificate : "createCertificate",
   all : "getAll",
-  getEndEntityCertificates : "getEndEntityCertificates"
+  getEndEntityCertificates : "getEndEntityCertificates",
+  getAllForSigning : "getAllForSigning",
+  getAllForSigningByUser : "getAllForSigningByUser"
 };
 
 /*

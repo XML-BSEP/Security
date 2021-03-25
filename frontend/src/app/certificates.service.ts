@@ -28,6 +28,14 @@ export class CertificatesService {
     return this.http.get<SigningCertificate[]>(`${environment.baseUrl}/${environment.certificate}/${environment.all}`);
   }
 
+  getAllForSigning() : Observable<SigningCertificate[]> {
+    return this.http.get<SigningCertificate[]>(`${environment.baseUrl}/${environment.certificate}/${environment.getAllForSigning}`)
+  }
+
+  getAllForSigningByUser() : Observable<SigningCertificate[]> {
+    return this.http.get<SigningCertificate[]>(`${environment.baseUrl}/${environment.certificate}/${environment.getAllForSigningByUser}`)
+  }
+
   getCertificatesByUser() : Observable<SigningCertificate[]> {
     return this.http.get<SigningCertificate[]>(`${environment.baseUrl}/${environment.certificate}/${environment.getCertificatesByUser}`)
   }

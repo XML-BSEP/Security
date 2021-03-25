@@ -33,6 +33,12 @@ export class AllCertificatesComponent implements OnInit {
   ngOnInit(): void {
     //this.getAllCertificatesByUser();
     this.isAdmin = this.isAdminLoggedIn();
+    if(this.isAdmin) {
+      this.getAllCertificates()
+    }
+    else {
+      this.getAllCertificatesByUser();
+    }
     this.isAdmin ? this.selectedOption = "option1" : this.selectedOption = "option2";
   }
   back(){
@@ -42,8 +48,13 @@ export class AllCertificatesComponent implements OnInit {
   getAllCertificatesByUser() {
     this.certificateService.getCertificatesByUser().subscribe(data => {
       this.certificates = data;
-      console.log(this.certificates);
 
+    })
+  }
+
+  getAllCertificates() {
+    this.certificateService.getAll().subscribe(data => {
+      this.certificates = data;
     })
   }
 
@@ -54,4 +65,6 @@ export class AllCertificatesComponent implements OnInit {
     }
     return false;
   }
+
+
 }

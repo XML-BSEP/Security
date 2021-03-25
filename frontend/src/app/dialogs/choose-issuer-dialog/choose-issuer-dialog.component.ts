@@ -25,15 +25,21 @@ export class ChooseIssuerDialogComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.isAdminLoggedIn()) {
-      this.loadAllCertificates();
+      this.loadAllCertificatesForSigning();
     }
     else {
-      this.loadCertificatesByUser();
+      this.loadAllCertificatesForSigningByUser();
     }
   }
 
-  loadAllCertificates() {
-    this.certificateService.getAll().subscribe(data => {
+  loadAllCertificatesForSigning() {
+    this.certificateService.getAllForSigning().subscribe(data => {
+      this.certificates = data;
+    })
+  }
+
+  loadAllCertificatesForSigningByUser() {
+    this.certificateService.getAllForSigningByUser().subscribe(data => {
       this.certificates = data;
     })
   }

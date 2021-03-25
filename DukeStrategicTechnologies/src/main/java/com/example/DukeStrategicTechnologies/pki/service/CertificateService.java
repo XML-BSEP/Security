@@ -356,6 +356,8 @@ public class CertificateService {
         X500Name x500Name = new JcaX509CertificateHolder(certificate).getSubject();
         RDN emailRdn = x500Name.getRDNs(BCStyle.EmailAddress)[0];
         String email = IETFUtils.valueToString(emailRdn.getFirst().getValue());
+        RDN cnRdn = x500Name.getRDNs(BCStyle.CN)[0];
+        String commonName = IETFUtils.valueToString(cnRdn.getFirst().getValue());
 
         certificateDTO.setSerialNumber(serialNumber);
         certificateDTO.setStartDate(startDate);
@@ -364,6 +366,7 @@ public class CertificateService {
         certificateDTO.setKeyUsages(keyUsages);
         certificateDTO.setExtendedKeyUsages(extendedKeyUsages);
         certificateDTO.setEmail(email);
+        certificateDTO.setCommonName(commonName);
         return certificateDTO;
     }
 
@@ -432,6 +435,41 @@ public class CertificateService {
         return certificateDTOS;
     }
 
+
+    public List<CertificateDTO> getAllCertificatesForSigning() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        List<CertificateDTO> certificates = getAllCertificates();
+        List<CertificateDTO> certificatesForSiging = new ArrayList<>();
+
+        for(CertificateDTO certificate : certificates) {
+            if(isCA(certificate)) {
+                certificatesForSiging.add(certificate);
+            }
+        }
+
+        return certificatesForSiging;
+    }
+
+    public List<CertificateDTO> getAllCertificatesForSigningByUser(String mail) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        List<CertificateDTO> certificates = getAllCertificatesByUser(mail);
+        List<CertificateDTO> certificatesForSiging = new ArrayList<>();
+
+        for(CertificateDTO certificate : certificates) {
+            if(isCA(certificate)) {
+                certificatesForSiging.add(certificate);
+            }
+        }
+
+        return certificatesForSiging;
+    }
+
+    private boolean isCA(CertificateDTO certificateDTO) {
+        Collection<String> keyUsages = certificateDTO.getKeyUsages();
+        if(keyUsages.contains("digitalSignature")) {
+            return true;
+        }
+
+        return false;
+    }
 
 }
 

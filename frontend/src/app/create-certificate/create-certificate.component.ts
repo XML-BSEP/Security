@@ -134,7 +134,7 @@ export class CreateCertificateComponent implements OnInit {
       if (result) {
         this.signingCertificate = result.certificate;
         this.firstFormGroup.patchValue({
-          "issuer": this.signingCertificate.serialNumber
+          "issuer": this.signingCertificate.commonName
         });
 
       }
@@ -259,7 +259,8 @@ export class CreateCertificateComponent implements OnInit {
   saveCertificate(){
     
     var certificate = this.createCertificateObj();
-    console.log(certificate);
+    console.log("Start date: " + certificate.startDate + "\n");
+    console.log("End date: " + certificate.endDate + "\n");
     this.certificateService.saveCertificate(certificate).subscribe(
       success => {
         alert("Success");
@@ -269,19 +270,21 @@ export class CreateCertificateComponent implements OnInit {
       }
     )
 
-    console.log(this.createdSertificate);
+
   }
 
   createCertificateObj() : CreateCertificate {
-    var issuerSerialNumber = this.firstFormGroup.value.issuer;
+    var issuerSerialNumber = this.signingCertificate.serialNumber;
     var validFrom = this.firstFormGroup.value.validFrom;
     var validTo = this.firstFormGroup.value.validTo;
     var signatureAlgorithm = this.firstFormGroup.value.signatureAlgorithm;
     var pubKeyAlgorithm = this.firstFormGroup.value.pubKeyAlgorithm;
     var startDate = new Date(validFrom);
+    var startDateString = this.parseDate(startDate);
     var endDate = new Date(validTo);
+    var endDateString = this.parseDate(endDate);
     var issuerId = this.getLoggedInUserId();
-    var createCertificate = new CreateCertificate(this.subjectId, issuerId, startDate, endDate, signatureAlgorithm, this.selectedKeyUsages, this.selectedExtendedKeyUsages, issuerSerialNumber);
+    var createCertificate = new CreateCertificate(this.subjectId, issuerId, startDateString, endDateString, signatureAlgorithm, this.selectedKeyUsages, this.selectedExtendedKeyUsages, issuerSerialNumber);
     return createCertificate;
   }
 
@@ -292,5 +295,20 @@ export class CreateCertificateComponent implements OnInit {
 
   getLoggedInUserId() : number {
       return parseInt(localStorage.getItem('userId'));
+  }
+
+  parseDate(date : Date) : string {
+    var month = '' + (date.getMonth() + 1)
+    var day = '' + date.getDate();
+    var year = '' + date.getFullYear();
+
+    if(month.length < 2) {
+      month = '0' + month;
+    }
+    if(day.length < 2) {
+      day = '0' + day;
+    }
+
+    return [year, month, day].join('-');
   }
 }
