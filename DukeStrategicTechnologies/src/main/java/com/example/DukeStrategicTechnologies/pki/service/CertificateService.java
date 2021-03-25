@@ -77,8 +77,22 @@ public class CertificateService {
             throw new Exception("Znaci...");
         }
 
-        Subject subject = generateSubject(createCertificateDTO);
-        Issuer issuer = new Issuer(subject.getX500Name(), subject.getKeyPair());
+        if(createCertificateDTO.getIssuerId() != createCertificateDTO.getSubjectId()) {
+            throw new Exception("Znaci...");
+        }
+
+        X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
+        builder.addRDN(BCStyle.CN, root.getCommonName());
+        builder.addRDN(BCStyle.SURNAME, root.getSurname());
+        builder.addRDN(BCStyle.GIVENNAME, root.getGivenName());
+        builder.addRDN(BCStyle.O, root.getOrganization());
+        builder.addRDN(BCStyle.OU, root.getOrganizationUnit());
+        builder.addRDN(BCStyle.C, root.getState());
+        builder.addRDN(BCStyle.E, root.getEmail());
+
+        KeyPair keyPair = generateKeyPair();
+        Issuer issuer = new Issuer(builder.build(), keyPair);
+        Subject subject = new Subject(issuer.getX500Name(), issuer.getKeyPair());
         BigInteger serialNumber = generateSerialNumberForCertificate();
 
         ArrayList<Integer> keyUsageValues = new ArrayList<>();
@@ -123,6 +137,7 @@ public class CertificateService {
 
         String rootAlias = root.getEmail() + serialNumber;
 
+        keyStoreWriter.loadKeyStore(KeyStoreProperties.ROOT_FILE, keyStoreProperties.readKeyStorePass(KeyStoreProperties.ROOT_FILE).toCharArray());
         keyStoreWriter.write(rootAlias, subject.getKeyPair().getPrivate(), keyStorePass, new X509Certificate[] {rootCertificate});
         keyStoreWriter.saveKeyStore(KeyStoreProperties.ROOT_FILE, keyStoreProperties.readKeyStorePass(KeyStoreProperties.ROOT_FILE).toCharArray());
     }
@@ -212,7 +227,7 @@ public class CertificateService {
         Date subjectNotBeforeDate = java.sql.Date.valueOf(subjectNotBefore);
         Date subjectNotAfterDate = java.sql.Date.valueOf(subjectNotAfter);
 
-        if(subjectNotBeforeDate.before(new Date()) || subjectNotBeforeDate.before(issuerNotBefore)) {
+        if(subjectNotBeforeDate.compareTo(new Date((new Date()).getTime() + 24*60*60*1000)) >= 0|| subjectNotBeforeDate.before(issuerNotBefore)) {
             throw new Exception(INVALID_DATE);
         }
 
