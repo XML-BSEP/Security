@@ -53,4 +53,8 @@ export class CertificatesService {
     return this.http.get<SigningCertificate[]>(`${environment.baseUrl}/${environment.certificate}/${environment.getEndEntityCertificatesByUser}`)
   }
 
+  revokeCertificate(serialNumber : String) {
+    return this.http.post(`${environment.baseUrl}/${environment.certificate}/${environment.revokeCertificate}`, serialNumber);
+  }
+
 }
