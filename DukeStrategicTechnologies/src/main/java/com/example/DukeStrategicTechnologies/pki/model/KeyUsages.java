@@ -55,4 +55,20 @@ public class KeyUsages {
 
         return extendedKeyUsageMap;
     }
+
+    public static HashMap<String, String> getExtendedKeyUsageMapString() {
+        HashMap<String, String> extendedKeyUsageMap = new HashMap<>();
+
+        extendedKeyUsageMap.put(KeyPurposeId.id_kp_serverAuth.toString(), "serverAuth");
+        extendedKeyUsageMap.put(KeyPurposeId.id_kp_clientAuth.toString(), "clientAuth");
+        extendedKeyUsageMap.put(KeyPurposeId.id_kp_codeSigning.toString(), "signExecCode");
+        extendedKeyUsageMap.put(KeyPurposeId.id_kp_emailProtection.toString(), "emailProtection");
+        extendedKeyUsageMap.put(KeyPurposeId.id_kp_ipsecEndSystem.toString(), "ipsecEndSystem");
+        extendedKeyUsageMap.put(KeyPurposeId.id_kp_ipsecTunnel.toString(), "ipsecTunnel");
+        extendedKeyUsageMap.put(KeyPurposeId.id_kp_ipsecUser.toString(), "ipsecUser");
+        extendedKeyUsageMap.put(KeyPurposeId.id_kp_timeStamping.toString(), "timeStamping");
+        extendedKeyUsageMap.put(KeyPurposeId.id_kp_OCSPSigning.toString(), "ocspSigning");
+
+        return extendedKeyUsageMap;
+    }
 }

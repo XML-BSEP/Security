@@ -20,8 +20,8 @@ const routes: Routes = [
 {
   path: 'createCertificate',
   component: CreateCertificateComponent,
-  canActivate : [AuthGuard],
-  data: {roles:[Role.Admin]}
+  //canActivate : [AuthGuard],
+  //data: {roles:[Role.Admin]}
 },
 {
   path: 'allCertificates',

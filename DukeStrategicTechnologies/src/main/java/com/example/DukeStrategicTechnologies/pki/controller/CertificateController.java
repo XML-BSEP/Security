@@ -77,7 +77,7 @@ public class CertificateController {
 
     //AAAAAAAAAAAA OVO SRANJE TREA DA GADJAM AAAAAAAAAAA SAMO ADMIN AAAAAAA
     @GetMapping("/getRootCertificates")
-//    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getSelfSignedCertificates() throws Exception{
         List<CertificateDTO> certificatesByUser = certificateService.getRootCertificates();
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
@@ -91,7 +91,7 @@ public class CertificateController {
     }
 
     @GetMapping("/getEndEntityCertificates")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getEndEntityCertificates() throws Exception{
         List<CertificateDTO> certificatesByUser = certificateService.getEndEntityCertificates();
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);

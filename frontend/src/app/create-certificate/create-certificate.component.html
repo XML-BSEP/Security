@@ -148,7 +148,7 @@
                         <mat-form-field style="width: 80%;">
                           <mat-label>Subject</mat-label>
                           <mat-select formControlName="chosenSubject">
-                            <mat-option *ngFor="let sub of subjects"  [value]="sub">{{sub.commonName}}</mat-option>
+                            <mat-option *ngFor="let sub of subjects" (click)="selectionChange(sub)"  [value]="sub">{{sub.commonName}}</mat-option>
                           </mat-select>
                         </mat-form-field>
                       </div>
@@ -237,7 +237,7 @@
 
                       <button id="back" mat-button matStepperPrevious>Back</button>
 
-                      <button id="next" style="margin-right: 10%;" mat-button [disabled]="!firstFormGroup.valid || (!secondFormGroup.valid && !secondFormGroup1.valid) || !thirdFormGroup.valid" (click)="saveCertificate()">Save</button>
+                      <button id="next" style="margin-right: 10%;" mat-button  (click)="saveCertificate()">Save</button>
 
 
                     </div>

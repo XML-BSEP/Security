@@ -29,11 +29,10 @@ export class ChooseIssuerDialogComponent implements OnInit {
   loadCACertificates(){
     this.certificateService.getAllCA().subscribe(data =>
       {
-        this.allCA = data;
         for(let i=0;i<data.length;i++){
           this.allCertificates.push(data[i]);
         }
-        console.log(this.allCA);
+        console.log(this.allCertificates);
       });
   }
   loadRootCertificates(){
@@ -43,7 +42,7 @@ export class ChooseIssuerDialogComponent implements OnInit {
         for(let i=0;i<data.length;i++){
           this.allCertificates.push(data[i]);
         }
-        console.log(this.allCA);
+        console.log(this.allCertificates);
       });
   }
   updateKeyUsage(item) {

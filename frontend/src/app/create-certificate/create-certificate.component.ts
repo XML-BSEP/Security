@@ -3,7 +3,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {COMMA, ENTER, L} from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
@@ -16,6 +16,9 @@ import { TemplateService } from '../service/template/template.service';
 import { SavedTemplatesDialogComponent } from '../dialogs/saved-templates-dialog/saved-templates-dialog.component';
 import { User } from '../model/user/user';
 import { CertificatesService } from '../certificates.service';
+import { CreateCertificate } from '../model/certificates/CreateCertificate';
+import { DatePipe } from '@angular/common';
+import { format } from 'node:util';
 
 @Component({
   selector: 'app-create-certificate',
@@ -47,6 +50,7 @@ export class CreateCertificateComponent implements OnInit {
   createdSertificate : SigningCertificate;
   allCA;
   allRoot;
+  subjectId : number;
   // visible = true;
   // selectable = true;
   // removable = true;
@@ -129,7 +133,7 @@ export class CreateCertificateComponent implements OnInit {
       if (result) {
         this.signingCertificate = result.certificate;
         this.firstFormGroup.patchValue({
-          "issuer": this.signingCertificate.issuerCommonName
+          "issuer": this.signingCertificate.serialNumber
         });
 
       }
@@ -264,14 +268,34 @@ export class CreateCertificateComponent implements OnInit {
       });
   }
   saveCertificate(){
-    if(this.secondFormGroup.controls.email.value.length > 0){
-      var subjectEmail = this.secondFormGroup.controls.email.value;
-    }else{
-      var subjectEmail = this.chosenSubject.email;
-    }
-    this.createdSertificate = new SigningCertificate(this.firstFormGroup.controls.issuer.value, this.signingCertificate.issuerEmail, subjectEmail,null, this.signingCertificate.serialNum, this.firstFormGroup.controls.validFrom.value,
-      this.firstFormGroup.controls.validTo.value, this.selectedKeyUsages, this.selectedExtendedKeyUsages, this.firstFormGroup.controls.signatureAlgorithm.value)
+    
+    this.createCertificateObj();
+    
 
     console.log(this.createdSertificate);
   }
+
+  createCertificateObj() : CreateCertificate {
+    var issuerSerialNumber = this.firstFormGroup.value.issuer;
+    var validFrom = this.firstFormGroup.value.validFrom;
+    var validTo = this.firstFormGroup.value.validTo;
+    var signatureAlgorithm = this.firstFormGroup.value.signatureAlgorithm;
+    var pubKeyAlgorithm = this.firstFormGroup.value.pubKeyAlgorithm;
+    var startDate = new Date(validFrom);
+    var endDate = new Date(validTo);
+    var issuerId = this.getLoggedInUserId();
+    var createSertificate = new CreateCertificate(this.subjectId, issuerId, startDate, endDate, signatureAlgorithm, this.selectedKeyUsages, this.selectedExtendedKeyUsages, issuerSerialNumber);
+    console.log(createSertificate.extendedKeyUsage);
+    return null;
+  }
+
+  selectionChange(user : User) {
+    this.subjectId = user.id;
+  }
+
+  getLoggedInUserId() : number {
+      return parseInt(localStorage.getItem('userId'));
+  } 
+
+
 }

@@ -14,7 +14,8 @@ export const environment = {
   users : "users",
   getCaCertificates : "getCaCertificates",
   getRootCertificates : "getRootCertificates",
-  certificate : "certificate"
+  certificate : "certificate",
+  getCertificatesByUser : "getCertificatesByUser"
 };
 
 /*

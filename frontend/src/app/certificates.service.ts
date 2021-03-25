@@ -18,4 +18,8 @@ export class CertificatesService {
   getAllRoot() : Observable<SigningCertificate[]>{
     return this.http.get<SigningCertificate[]>(`${environment.baseUrl}/${environment.certificate}/${environment.getRootCertificates}`);
   }
+
+  getCertificatesByUser() : Observable<SigningCertificate[]> {
+    return this.http.get<SigningCertificate[]>(`${environment.baseUrl}/${environment.api}/${environment.getCertificatesByUser}`)
+  }
 }
