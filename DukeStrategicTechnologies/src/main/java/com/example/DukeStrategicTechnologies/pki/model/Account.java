@@ -30,8 +30,7 @@ public class Account implements UserDetails {
     public Account() {
     }
 
-    public Account(Long id, String email, String password) {
-        this.id = id;
+    public Account(String email, String password) {
         this.email = email;
         this.password = password;
     }

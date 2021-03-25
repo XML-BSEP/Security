@@ -41,6 +41,7 @@ public class CertificateService {
     public static final String ISSUER_NOT_FOUND = "Issuer not found!";
     public static final String SELF_SIGNED_EXCEPTION = "Self-signed certificates can only be issued by self-signed certificates!";
     public static final String KEYSTORE_NOT_FOUND = "KeyStore not found!";
+    public static final String END_DATE_BEFORE_START = "End date must be after start date!";
     public static final String INVALID_DATE = "Invalid date!";
 
     private CertificateGenerator certificateGenerator;
@@ -48,6 +49,10 @@ public class CertificateService {
     private KeyStoreReader keystoreReader;
     private String issuerKeyStorePassword;
     private KeyStoreProperties keyStoreProperties;
+
+    @Autowired
+    private OCSPService ocspService;
+
     @Autowired
     private UserRepository userRepository;
 
@@ -63,6 +68,9 @@ public class CertificateService {
 
 
     public void createCertificate(CreateCertificateDTO createCertificateDTO) throws Exception {
+        if (LocalDate.parse(createCertificateDTO.getEndDate()).compareTo(LocalDate.parse(createCertificateDTO.getStartDate())) < 0) {
+            throw new Exception(END_DATE_BEFORE_START);
+        }
 
         Subject subject = generateSubject(createCertificateDTO);
 
@@ -160,11 +168,7 @@ public class CertificateService {
     }
 
     public void revokeCertificate(String serialNumber) {
-        revokedCertificateRepository.save(new RevokedCertificate(new BigInteger(serialNumber), LocalDateTime.now()));
-    }
-
-    private boolean isRevoked(String serialNumber) {
-        return revokedCertificateRepository.findAll().stream().anyMatch(c -> c.getSerialNumber().equals(serialNumber));
+        revokedCertificateRepository.save(new RevokedCertificate(serialNumber, new Date()));
     }
 
     public String generateAliasByCertificate(X509Certificate certificate) throws CertificateEncodingException {
@@ -276,10 +280,20 @@ public class CertificateService {
     private void isCertificateValid(KeyStore keyStore, String alias) throws Exception {
         Certificate[] certificates = keyStore.getCertificateChain(alias);
         try {
-
+            PrivateKey password;
+            String aliasPassword = "";
+            String currentAlias = "";
+            String keyStorePass = "";
+            KeyStore currentKeyStore = null;
             for (int i = certificates.length - 1; i >= 0; i--) {
 
-                if (isRevoked(generateAliasByCertificate((X509Certificate) certificates[i]))) {
+                currentAlias = generateAliasByCertificate((X509Certificate) certificates[i]);
+                currentKeyStore = getKeyStoreByAlias(currentAlias);
+                keyStorePass = getKeyStorePassFromAlias(currentAlias);
+                aliasPassword = keyStorePass + ((X509Certificate) certificates[i]).getSerialNumber();
+
+                if (ocspService.isCertificateRevoked((X509Certificate) certificates[i],
+                        (PrivateKey) currentKeyStore.getKey(currentAlias, aliasPassword.toCharArray()))) {
                     throw new Exception(CERTIFICATE_REVOKED);
                 }
 
@@ -358,6 +372,7 @@ public class CertificateService {
             CertificateDTO certificateDTO = extractCertificateData(certificate);
             certificates.add(certificateDTO);
         }
+
         return certificates;
     }
 
