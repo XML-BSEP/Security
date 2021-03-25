@@ -3,6 +3,7 @@ package com.example.DukeStrategicTechnologies.pki.service;
 import com.example.DukeStrategicTechnologies.pki.dto.CertificateDTO;
 import com.example.DukeStrategicTechnologies.pki.dto.CreateCertificateDTO;
 import com.example.DukeStrategicTechnologies.pki.mapper.ExtendedKeyUsagesMapper;
+import com.example.DukeStrategicTechnologies.pki.model.enums.SignatureAlgorithm;
 import com.example.DukeStrategicTechnologies.pki.util.keystores.KeyStoreReader;
 import com.example.DukeStrategicTechnologies.pki.util.keystores.KeyStoreWriter;
 import com.example.DukeStrategicTechnologies.pki.mapper.KeyUsagesMapper;
@@ -15,6 +16,8 @@ import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.X500NameBuilder;
 import org.bouncycastle.asn1.x500.style.BCStyle;
 import org.bouncycastle.asn1.x500.style.IETFUtils;
+import org.bouncycastle.asn1.x509.KeyPurposeId;
+import org.bouncycastle.asn1.x509.KeyUsage;
 import org.bouncycastle.cert.jcajce.JcaX509CertificateHolder;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +69,63 @@ public class CertificateService {
         this.keyStoreProperties = new KeyStoreProperties();
     }
 
+
+    public void createRootCertificate(CreateCertificateDTO createCertificateDTO) throws Exception {
+        User root = userRepository.findAll().stream().filter(user -> user.getEmail().equals("root@gmail.com")).findFirst().orElse(null);
+
+        if(root == null) {
+            throw new Exception("Znaci...");
+        }
+
+        Subject subject = generateSubject(createCertificateDTO);
+        Issuer issuer = new Issuer(subject.getX500Name(), subject.getKeyPair());
+        BigInteger serialNumber = generateSerialNumberForCertificate();
+
+        ArrayList<Integer> keyUsageValues = new ArrayList<>();
+        ArrayList<KeyPurposeId> extendedKeyUsageValues = new ArrayList<>();
+
+        keyUsageValues.add(KeyUsage.digitalSignature);
+        keyUsageValues.add(KeyUsage.nonRepudiation);
+        keyUsageValues.add(KeyUsage.keyEncipherment);
+        keyUsageValues.add(KeyUsage.dataEncipherment);
+        keyUsageValues.add(KeyUsage.keyAgreement);
+        keyUsageValues.add(KeyUsage.keyCertSign);
+        keyUsageValues.add(KeyUsage.cRLSign);
+        keyUsageValues.add(KeyUsage.encipherOnly);
+        keyUsageValues.add(KeyUsage.decipherOnly);
+
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_serverAuth);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_clientAuth);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_codeSigning);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_emailProtection);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_ipsecEndSystem);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_ipsecTunnel);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_ipsecUser);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_timeStamping);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_OCSPSigning);
+
+        KeyPurposeId[] extendedKeyUsageArray = new KeyPurposeId[extendedKeyUsageValues.size()];
+        extendedKeyUsageValues.toArray(extendedKeyUsageArray);
+
+        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.SHA2_256_RSA;
+
+        ExtendedCertificateData extendedCertificateData = new ExtendedCertificateData(LocalDate.parse(createCertificateDTO.getStartDate()),
+                LocalDate.parse(createCertificateDTO.getEndDate()),
+                signatureAlgorithm,
+                keyUsageValues,
+                extendedKeyUsageArray,
+                serialNumber
+        );
+
+        X509Certificate rootCertificate = certificateGenerator.generateCertificate(subject, issuer, extendedCertificateData);
+
+        String keyStorePass = keyStoreProperties.readKeyStorePass(KeyStoreProperties.ROOT_FILE) + serialNumber;
+
+        String rootAlias = root.getEmail() + serialNumber;
+
+        keyStoreWriter.write(rootAlias, subject.getKeyPair().getPrivate(), keyStorePass, new X509Certificate[] {rootCertificate});
+        keyStoreWriter.saveKeyStore(KeyStoreProperties.ROOT_FILE, keyStoreProperties.readKeyStorePass(KeyStoreProperties.ROOT_FILE).toCharArray());
+    }
 
     public void createCertificate(CreateCertificateDTO createCertificateDTO) throws Exception {
         if (LocalDate.parse(createCertificateDTO.getEndDate()).compareTo(LocalDate.parse(createCertificateDTO.getStartDate())) < 0) {
