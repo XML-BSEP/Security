@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { CertificatesService } from '../certificates.service';
+import { AuthenticatedUser } from '../model/user/authenticatedUser';
 import { AuthenticationService } from '../service/authentication/authentication.service';
 
 @Component({
@@ -9,16 +12,38 @@ import { AuthenticationService } from '../service/authentication/authentication.
 })
 export class HomeComponent implements OnInit {
   userLoggedIn : Boolean;
-  constructor(private router : Router, private authenticationService : AuthenticationService) { }
+  hasCA: boolean = true;
+  currentUserSubject;
+  constructor(private router : Router, private authenticationService : AuthenticationService, private certificateService: CertificatesService) { }
 
   ngOnInit(): void {
     console.log(localStorage.getItem('userId'));
     if(localStorage.getItem('userId')!==null){
       this.userLoggedIn = true;
+      if(!this.isAdminLoggedIn()){
+        this.getAllForSigningByUser();
+      }
     }else{
       this.userLoggedIn=false;
     }
-    
+
+  }
+  isAdminLoggedIn() : boolean {
+    this.currentUserSubject = new BehaviorSubject<AuthenticatedUser>(JSON.parse(localStorage.getItem('currentUser')));
+    if(this.currentUserSubject.value.role == "Admin") {
+      return true;
+    }
+    return false;
+  }
+  getAllForSigningByUser() {
+    this.certificateService.getAllForSigningByUser().subscribe(data => {
+      if(data.length>0){
+        this.hasCA=true;
+      }else{
+        this.hasCA = false;
+      }
+    })
+
   }
   createCertificate(){
     this.router.navigate(['/createCertificate']);
@@ -27,7 +52,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/allCertificates']);
 
   }
-  
+
   login(){
     this.router.navigate(['/login']);
   }
@@ -36,5 +61,5 @@ export class HomeComponent implements OnInit {
     this.authenticationService.logout();
     this.router.navigate(['/login']);
   }
-  
+
 }
