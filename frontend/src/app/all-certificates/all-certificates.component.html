@@ -65,7 +65,7 @@
 
               <button mat-flat-button *ngIf="!conflicting && (isAdmin)" id="choose-button"
               (click)="revokeCertificate(item)" [disabled]="item.revoked">Revoke</button>
-              <button id="choose-button" style="background-color: rgb(28, 133, 165); color: white;" mat-button (click)="downloadCertificate(item)">Download</button>
+              <button id="choose-button" mat-button (click)="downloadCertificate(item)" [disabled]="item.revoked" >Download</button>
 
               <!-- <button mat-flat-button *ngIf="conflicting" id="choose-button-conflict" (click)="warnKeyUsage()"
               matTooltip="This certificate does not have some of your currently selected Key Usages and/or Extended Key Usages"

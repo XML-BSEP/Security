@@ -25,7 +25,8 @@ export const environment = {
   getEndEntityCertificatesByUser: "getEndEntityCertificatesByUser",
   getPossibleKeyUsages : "getPossibleKeyUsages",
   downloadCertificate : "downloadCertificate",
-  revokeCertificate: "revokeCertificate"
+  revokeCertificate: "revokeCertificate",
+  createRootCertificate : "createRootCertificate"
 };
 
 /*

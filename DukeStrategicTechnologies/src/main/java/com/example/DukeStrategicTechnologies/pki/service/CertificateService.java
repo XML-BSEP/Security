@@ -127,7 +127,7 @@ public class CertificateService {
         KeyPurposeId[] extendedKeyUsageArray = new KeyPurposeId[extendedKeyUsageValues.size()];
         extendedKeyUsageValues.toArray(extendedKeyUsageArray);
 
-        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.SHA2_256_RSA;
+        SignatureAlgorithm signatureAlgorithm = createCertificateDTO.getSignatureAlgorithm();
 
         ExtendedCertificateData extendedCertificateData = new ExtendedCertificateData(LocalDate.parse(createCertificateDTO.getStartDate()),
                 LocalDate.parse(createCertificateDTO.getEndDate()),

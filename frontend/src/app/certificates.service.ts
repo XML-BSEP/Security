@@ -66,4 +66,8 @@ export class CertificatesService {
     return this.http.post(`${environment.baseUrl}/${environment.certificate}/${environment.downloadCertificate}`, download);
   }
 
+  saveRootCertificate(certificate : CreateCertificate) {
+    return this.http.post(`${environment.baseUrl}/${environment.certificate}/${environment.createRootCertificate}`, certificate);
+  }
+
 }

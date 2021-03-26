@@ -215,8 +215,6 @@ export class CreateCertificateComponent implements OnInit {
   saveCertificate(){
 
     var certificate = this.createCertificateObj();
-    console.log("Start date: " + certificate.startDate + "\n");
-    console.log("End date: " + certificate.endDate + "\n");
     this.certificateService.saveCertificate(certificate).subscribe(
       success => {
         alert("Success");
@@ -334,5 +332,37 @@ export class CreateCertificateComponent implements OnInit {
     }
 
     return [year, month, day].join('-');
+  }
+
+  createRoot() {
+    var validFrom = this.firstFormGroup.value.validFrom;
+    var validTo = this.firstFormGroup.value.validTo;
+    var startDate = new Date(validFrom);
+    var startDateString = this.parseDate(startDate);
+    var endDate = new Date(validTo);
+    var endDateString = this.parseDate(endDate);
+    var issuerId = 1;
+    var subjectId = issuerId;
+    var signatureAlgorithm = this.firstFormGroup.value.signatureAlgorithm;
+
+    var certificate = new CreateCertificate(subjectId, issuerId, startDateString, endDateString, signatureAlgorithm, String[""], String[""], "1");
+
+    this.certificateService.saveRootCertificate(certificate).subscribe(
+      success => {
+        alert("Success");
+      },
+      error => {
+        alert("Error");
+      }
+    
+    );
+  }
+
+  isAdminLoggedIn() : boolean {
+    var currentUserSubject = new BehaviorSubject<AuthenticatedUser>(JSON.parse(localStorage.getItem('currentUser')));
+    if(currentUserSubject.value.role == "Admin") {
+      return true;
+    }
+    return false;
   }
 }

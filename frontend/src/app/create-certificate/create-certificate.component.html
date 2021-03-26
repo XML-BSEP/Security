@@ -74,6 +74,7 @@
                         </div>
                         <div>
                           <button id="next" mat-button matStepperNext>Next</button>
+                          <button *ngIf="isAdminLoggedIn()" id="next" mat-button (click)="createRoot()">Create root</button>
                         </div>
                       </div>
 
