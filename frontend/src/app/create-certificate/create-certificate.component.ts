@@ -239,7 +239,7 @@ export class CreateCertificateComponent implements OnInit {
     var startDateString = this.parseDate(startDate);
     var endDate = new Date(validTo);
     var endDateString = this.parseDate(endDate);
-    var issuerId = this.getLoggedInUserId();
+    var issuerId = this.signingCertificate.issuerId;
     var createCertificate = new CreateCertificate(this.subjectId, issuerId, startDateString, endDateString, signatureAlgorithm, this.selectedKeyUsages, this.selectedExtendedKeyUsages, issuerSerialNumber);
     return createCertificate;
   }

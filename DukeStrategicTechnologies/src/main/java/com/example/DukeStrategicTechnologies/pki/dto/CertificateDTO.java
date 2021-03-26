@@ -15,13 +15,15 @@ public class CertificateDTO {
     private Collection<String> keyUsages;
     private Collection<String> extendedKeyUsages;
     private boolean isRevoked;
+    private Long issuerId;
 
 
     public CertificateDTO(String serialNumber, Date startDate, Date endDate,
                           String commonName, String email, String signatureAlgorithm,
-                          Collection<String> keyUsages, Collection<String> extendedKeyUsages, boolean isRevoked) {
+                          Collection<String> keyUsages, Collection<String> extendedKeyUsages, boolean isRevoked, Long issuerId) {
         this.serialNumber = serialNumber;
         this.startDate = startDate;
+        this.issuerId = issuerId;
         this.endDate = endDate;
         this.commonName = commonName;
         this.email = email;
@@ -40,6 +42,14 @@ public class CertificateDTO {
     }
 
     public CertificateDTO() {
+    }
+
+    public Long getIssuerId() {
+        return issuerId;
+    }
+
+    public void setIssuerId(Long issuerId) {
+        this.issuerId = issuerId;
     }
 
     public String getEmail() {

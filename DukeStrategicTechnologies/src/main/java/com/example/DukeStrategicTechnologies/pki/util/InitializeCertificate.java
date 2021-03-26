@@ -127,6 +127,7 @@ public class InitializeCertificate implements ApplicationListener<ApplicationRea
 
         String rootAlias = newRoot.getEmail() + serialNumber;
 
+        keyStoreWriter.loadKeyStore(KeyStoreProperties.ROOT_FILE, keyStoreProperties.readKeyStorePass(KeyStoreProperties.ROOT_FILE).toCharArray());
         this.keyStoreWriter.write(rootAlias, keyPair.getPrivate(), keyPassword, new X509Certificate[] {rootCertificate});
         this.keyStoreWriter.saveKeyStore(KeyStoreProperties.ROOT_FILE , keyStoreProperties.readKeyStorePass(KeyStoreProperties.ROOT_FILE).toCharArray());
 
