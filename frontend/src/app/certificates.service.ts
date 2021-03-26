@@ -4,6 +4,7 @@ import { SigningCertificate } from './model/certificates/SigningCertificate';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CreateCertificate } from './model/certificates/CreateCertificate';
+import { PossibleKeyUsages } from './model/certificates/PossibleKeyUsages';
 
 @Injectable({
   providedIn: 'root'
@@ -48,11 +49,14 @@ export class CertificatesService {
     return this.http.get<SigningCertificate[]>(`${environment.baseUrl}/${environment.certificate}/${environment.getCaCertificatesByUser}`)
   }
 
-  
+
   getEeCertificatesByUser(): Observable<SigningCertificate[]> {
     return this.http.get<SigningCertificate[]>(`${environment.baseUrl}/${environment.certificate}/${environment.getEndEntityCertificatesByUser}`)
   }
 
+  getPossibleKeyUsages(alias: String) : Observable<PossibleKeyUsages>{
+    return this.http.get<PossibleKeyUsages>(`${environment.baseUrl}/${environment.certificate}/${environment.getPossibleKeyUsages}?alias=${alias}`)
+  }
   revokeCertificate(serialNumber : String) {
     return this.http.post(`${environment.baseUrl}/${environment.certificate}/${environment.revokeCertificate}`, serialNumber);
   }

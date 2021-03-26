@@ -5,6 +5,7 @@ import com.example.DukeStrategicTechnologies.pki.dto.CreateCertificateDTO;
 import com.example.DukeStrategicTechnologies.pki.dto.PossibleKeyUsagesDTO;
 import com.example.DukeStrategicTechnologies.pki.mapper.ExtendedKeyUsagesMapper;
 import com.example.DukeStrategicTechnologies.pki.model.enums.SignatureAlgorithm;
+import com.example.DukeStrategicTechnologies.pki.repository.AccountRepository;
 import com.example.DukeStrategicTechnologies.pki.util.keystores.KeyStoreReader;
 import com.example.DukeStrategicTechnologies.pki.util.keystores.KeyStoreWriter;
 import com.example.DukeStrategicTechnologies.pki.mapper.KeyUsagesMapper;
@@ -47,6 +48,7 @@ public class CertificateService {
     public static final String END_DATE_BEFORE_START = "End date must be after start date!";
     public static final String INVALID_DATE = "Invalid date!";
     public static final String INVALID_KEY_USAGE = "Key usage can't be added because issuer has no permission!";
+    public static final String NO_USER_PERMISSIONS = "Only admins can revoke certificate";
 
     private CertificateGenerator certificateGenerator;
     private KeyStoreWriter keyStoreWriter;
@@ -62,6 +64,9 @@ public class CertificateService {
 
     @Autowired
     private RevokedCertificateRepository revokedCertificateRepository;
+
+    @Autowired
+    private AccountRepository accountRepository;
 
     public CertificateService() {
         this.keyStoreWriter = new KeyStoreWriter();
@@ -175,7 +180,7 @@ public class CertificateService {
 
         X509Certificate issuerCertificate = getCertificateByAlias(issuerAlias, keyStore);
 
-        String issuerPassword = issuerKeyStorePassword + issuerCertificate.getSerialNumber();
+        String issuerPassword = getKeyStorePassFromAlias(issuerAlias) + issuerCertificate.getSerialNumber();
         isCertificateValid(keyStore, issuerAlias);
         isDateValid(issuerCertificate, LocalDate.parse(createCertificateDTO.getStartDate()), LocalDate.parse(createCertificateDTO.getEndDate()));
 
@@ -243,7 +248,12 @@ public class CertificateService {
         return keyStore.containsAlias(issuerAlias);
     }
 
-    public void revokeCertificate(String serialNumber) throws Exception {
+    public void revokeCertificate(String serialNumber, String mail) throws Exception {
+        Account user = accountRepository.findByEmail(mail);
+        if (!user.getRole().equals("Admin")) {
+            throw new Exception(NO_USER_PERMISSIONS);
+        }
+
         if (revokedCertificateRepository.findBySerialNumber(serialNumber) != null) {
             throw new Exception(CERTIFICATE_REVOKED);
         }
@@ -504,6 +514,7 @@ public class CertificateService {
         String email = IETFUtils.valueToString(emailRdn.getFirst().getValue());
         RDN cnRdn = x500Name.getRDNs(BCStyle.CN)[0];
         String commonName = IETFUtils.valueToString(cnRdn.getFirst().getValue());
+        User user = userRepository.findByEmail(email);
 
         certificateDTO.setSerialNumber(serialNumber);
         certificateDTO.setStartDate(startDate);
@@ -514,6 +525,8 @@ public class CertificateService {
         certificateDTO.setEmail(email);
         certificateDTO.setCommonName(commonName);
         certificateDTO.setRevoked(ocspService.isRevoked(serialNumber));
+        certificateDTO.setIssuerId(user.getId());
+
         return certificateDTO;
     }
 
@@ -627,10 +640,14 @@ public class CertificateService {
 
     private boolean isCA(CertificateDTO certificateDTO) {
         Collection<String> keyUsages = certificateDTO.getKeyUsages();
-        if(keyUsages.contains("digitalSignature")) {
-            return true;
+//        if(keyUsages.contains("certficateSigning")) {
+//            return true;
+//        }
+        for(String keyUsage : keyUsages){
+            if(keyUsage.equalsIgnoreCase("certificateSigning")){
+                return true;
+            }
         }
-
         return false;
     }
 
