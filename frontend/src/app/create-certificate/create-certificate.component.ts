@@ -220,6 +220,7 @@ export class CreateCertificateComponent implements OnInit {
     this.certificateService.saveCertificate(certificate).subscribe(
       success => {
         alert("Success");
+        this.router.navigate(["/"]);
       },
       error => {
         alert("Error");
