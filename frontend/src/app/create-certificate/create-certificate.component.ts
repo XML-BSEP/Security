@@ -21,6 +21,7 @@ import { CreateCertificate } from '../model/certificates/CreateCertificate';
 import { DatePipe } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 import { AuthenticatedUser } from '../model/user/authenticatedUser';
+import { newUser } from '../model/user/newUser';
 
 
 @Component({
@@ -279,6 +280,32 @@ export class CreateCertificateComponent implements OnInit {
 
   }
 
+  createUser(){
+    let user = new newUser(this.secondFormGroup.controls.firstName.value,
+                    this.secondFormGroup.controls.lastName.value,
+                    null,
+                    this.secondFormGroup.controls.org.value,
+                    this.secondFormGroup.controls.orgunit.value,
+                    this.secondFormGroup.controls.state.value,
+                    this.secondFormGroup.controls.city.value,
+                    this.secondFormGroup.controls.email.value,
+                    null,
+                    this.secondFormGroup.controls.password.value);
+
+                    console.log(user)
+
+    this.userService.createSubject(user).subscribe(
+      res=>{
+        alert('Success!');
+        this.loadSubjects();
+
+      },
+      error=>{
+        alert("Fail!");
+      }
+
+      )
+  }
   parseDate(date : Date) : string {
     var month = '' + (date.getMonth() + 1)
     var day = '' + date.getDate();
