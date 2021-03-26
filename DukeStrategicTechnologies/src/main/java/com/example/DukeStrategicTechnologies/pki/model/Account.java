@@ -30,10 +30,13 @@ public class Account implements UserDetails {
     public Account() {
     }
 
-    public Account(Long id, String email, String password) {
-        this.id = id;
+    public Account(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+    public void setAuthorities(List<Authority> authorities) {
+        this.authorities = authorities;
     }
 
     public Long getId() {
@@ -53,9 +56,11 @@ public class Account implements UserDetails {
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public Collection<Authority> getAuthorities() {
         return authorities;
     }
+
+
 
     public String getPassword() {
         return password;

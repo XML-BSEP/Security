@@ -20,10 +20,9 @@ export class User{
   public state : String;
   public city : String;
   public email : String;
-  public isCA : boolean;
-  public certificateCount : Number;
 
-  constructor(givenName : String, surname : String, commonName : String, organization:String, organizationUnit : String, state :String, city:String, email : String, isCA:boolean, certificaCount:Number, id:number){
+
+  constructor(givenName : String, surname : String, commonName : String, organization:String, organizationUnit : String, state :String, city:String, email : String, id:number){
     this.givenName = givenName;
     this.surname = surname;
     this.commonName = commonName;
@@ -32,8 +31,7 @@ export class User{
     this.state = state;
     this.city = city;
     this.email = email;
-    this.isCA = isCA;
-    this.certificateCount = certificaCount;
+
     this.id = id;
   }
 

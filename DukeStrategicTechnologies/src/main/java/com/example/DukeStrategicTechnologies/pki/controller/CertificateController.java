@@ -3,6 +3,7 @@ package com.example.DukeStrategicTechnologies.pki.controller;
 import com.example.DukeStrategicTechnologies.pki.dto.CertificateDTO;
 import com.example.DukeStrategicTechnologies.pki.dto.CreateCertificateDTO;
 import com.example.DukeStrategicTechnologies.pki.dto.DownloadCertificateDTO;
+import com.example.DukeStrategicTechnologies.pki.dto.PossibleKeyUsagesDTO;
 import com.example.DukeStrategicTechnologies.pki.model.Account;
 import com.example.DukeStrategicTechnologies.pki.service.Base64Encoder;
 import com.example.DukeStrategicTechnologies.pki.service.CertificateService;
@@ -10,7 +11,6 @@ import org.bouncycastle.cms.CMSException;
 import org.bouncycastle.operator.OperatorCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -61,18 +61,20 @@ public class CertificateController {
     }
 
     @PostMapping("/downloadCertificate")
-    public ResponseEntity<?> downloadCertificate(@RequestBody DownloadCertificateDTO dto) throws CertificateException, UnrecoverableKeyException, NoSuchAlgorithmException,
-            KeyStoreException, CMSException, OperatorCreationException, NoSuchProviderException, IOException {
+    public ResponseEntity<?> downloadCertificate(@RequestBody DownloadCertificateDTO dto) throws Exception {
         base64Encoder.downloadCertificate(dto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/revokeCertificate")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> revokeCertificate(@RequestBody String serialNumber) {
-        certificateService.revokeCertificate(serialNumber);
+    public ResponseEntity<?> revokeCertificate(@RequestBody String serialNumber) throws Exception {
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String mail = ((Account)user).getUsername();
+        certificateService.revokeCertificate(serialNumber, mail);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     //TODO: realizovati i metodu koja vraca samo sertifikate sa kojima sme da potpise druge sertifikate (obican user)
     /*
     * insert code here
@@ -87,12 +89,16 @@ public class CertificateController {
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
     }
 
-
     @GetMapping("/getRootCertificates")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getSelfSignedCertificates() throws Exception{
         List<CertificateDTO> certificatesByUser = certificateService.getRootCertificates();
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
+    }
+
+    @GetMapping("/getPossibleKeyUsages")
+    public ResponseEntity<?> getPossibleKeyUsages(@RequestParam("alias") String alias) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        return new ResponseEntity<>(certificateService.getPossibleKeyUsages(alias), HttpStatus.OK);
     }
 
     @GetMapping("/getCaCertificatesByUser")
@@ -139,6 +145,13 @@ public class CertificateController {
         String mail = ((Account)user).getUsername();
         List<CertificateDTO> certificateAlias = certificateService.getAllCertificatesForSigningByUser(mail);
         return new ResponseEntity<>(certificateAlias, HttpStatus.OK);
+    }
+
+    @PostMapping("/createRootCertificate")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> createRootCertificate(@RequestBody CreateCertificateDTO dto) throws Exception {
+        certificateService.createRootCertificate(dto);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @ExceptionHandler(Exception.class)

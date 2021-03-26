@@ -2,7 +2,10 @@ package com.example.DukeStrategicTechnologies.pki.service;
 
 import com.example.DukeStrategicTechnologies.pki.dto.CertificateDTO;
 import com.example.DukeStrategicTechnologies.pki.dto.CreateCertificateDTO;
+import com.example.DukeStrategicTechnologies.pki.dto.PossibleKeyUsagesDTO;
 import com.example.DukeStrategicTechnologies.pki.mapper.ExtendedKeyUsagesMapper;
+import com.example.DukeStrategicTechnologies.pki.model.enums.SignatureAlgorithm;
+import com.example.DukeStrategicTechnologies.pki.repository.AccountRepository;
 import com.example.DukeStrategicTechnologies.pki.util.keystores.KeyStoreReader;
 import com.example.DukeStrategicTechnologies.pki.util.keystores.KeyStoreWriter;
 import com.example.DukeStrategicTechnologies.pki.mapper.KeyUsagesMapper;
@@ -15,6 +18,8 @@ import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.X500NameBuilder;
 import org.bouncycastle.asn1.x500.style.BCStyle;
 import org.bouncycastle.asn1.x500.style.IETFUtils;
+import org.bouncycastle.asn1.x509.KeyPurposeId;
+import org.bouncycastle.asn1.x509.KeyUsage;
 import org.bouncycastle.cert.jcajce.JcaX509CertificateHolder;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +31,6 @@ import java.security.*;
 import java.security.cert.*;
 import java.security.cert.Certificate;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -41,17 +45,28 @@ public class CertificateService {
     public static final String ISSUER_NOT_FOUND = "Issuer not found!";
     public static final String SELF_SIGNED_EXCEPTION = "Self-signed certificates can only be issued by self-signed certificates!";
     public static final String KEYSTORE_NOT_FOUND = "KeyStore not found!";
+    public static final String END_DATE_BEFORE_START = "End date must be after start date!";
+    public static final String INVALID_DATE = "Invalid date!";
+    public static final String INVALID_KEY_USAGE = "Key usage can't be added because issuer has no permission!";
+    public static final String NO_USER_PERMISSIONS = "Only admins can revoke certificate";
 
     private CertificateGenerator certificateGenerator;
     private KeyStoreWriter keyStoreWriter;
     private KeyStoreReader keystoreReader;
     private String issuerKeyStorePassword;
     private KeyStoreProperties keyStoreProperties;
+
+    @Autowired
+    private OCSPService ocspService;
+
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private RevokedCertificateRepository revokedCertificateRepository;
+
+    @Autowired
+    private AccountRepository accountRepository;
 
     public CertificateService() {
         this.keyStoreWriter = new KeyStoreWriter();
@@ -61,7 +76,82 @@ public class CertificateService {
     }
 
 
+    public void createRootCertificate(CreateCertificateDTO createCertificateDTO) throws Exception {
+        User root = userRepository.findAll().stream().filter(user -> user.getEmail().equals("root@gmail.com")).findFirst().orElse(null);
+
+        if(root == null) {
+            throw new Exception("Znaci...");
+        }
+
+        if(createCertificateDTO.getIssuerId() != createCertificateDTO.getSubjectId()) {
+            throw new Exception("Znaci...");
+        }
+
+        X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
+        builder.addRDN(BCStyle.CN, root.getCommonName());
+        builder.addRDN(BCStyle.SURNAME, root.getSurname());
+        builder.addRDN(BCStyle.GIVENNAME, root.getGivenName());
+        builder.addRDN(BCStyle.O, root.getOrganization());
+        builder.addRDN(BCStyle.OU, root.getOrganizationUnit());
+        builder.addRDN(BCStyle.C, root.getState());
+        builder.addRDN(BCStyle.E, root.getEmail());
+
+        KeyPair keyPair = generateKeyPair();
+        Issuer issuer = new Issuer(builder.build(), keyPair);
+        Subject subject = new Subject(issuer.getX500Name(), issuer.getKeyPair());
+        BigInteger serialNumber = generateSerialNumberForCertificate();
+
+        ArrayList<Integer> keyUsageValues = new ArrayList<>();
+        ArrayList<KeyPurposeId> extendedKeyUsageValues = new ArrayList<>();
+
+        keyUsageValues.add(KeyUsage.digitalSignature);
+        keyUsageValues.add(KeyUsage.nonRepudiation);
+        keyUsageValues.add(KeyUsage.keyEncipherment);
+        keyUsageValues.add(KeyUsage.dataEncipherment);
+        keyUsageValues.add(KeyUsage.keyAgreement);
+        keyUsageValues.add(KeyUsage.keyCertSign);
+        keyUsageValues.add(KeyUsage.cRLSign);
+        keyUsageValues.add(KeyUsage.encipherOnly);
+        keyUsageValues.add(KeyUsage.decipherOnly);
+
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_serverAuth);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_clientAuth);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_codeSigning);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_emailProtection);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_ipsecEndSystem);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_ipsecTunnel);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_ipsecUser);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_timeStamping);
+        extendedKeyUsageValues.add(KeyPurposeId.id_kp_OCSPSigning);
+
+        KeyPurposeId[] extendedKeyUsageArray = new KeyPurposeId[extendedKeyUsageValues.size()];
+        extendedKeyUsageValues.toArray(extendedKeyUsageArray);
+
+        SignatureAlgorithm signatureAlgorithm = createCertificateDTO.getSignatureAlgorithm();
+
+        ExtendedCertificateData extendedCertificateData = new ExtendedCertificateData(LocalDate.parse(createCertificateDTO.getStartDate()),
+                LocalDate.parse(createCertificateDTO.getEndDate()),
+                signatureAlgorithm,
+                keyUsageValues,
+                extendedKeyUsageArray,
+                serialNumber
+        );
+
+        X509Certificate rootCertificate = certificateGenerator.generateCertificate(subject, issuer, extendedCertificateData);
+
+        String keyStorePass = keyStoreProperties.readKeyStorePass(KeyStoreProperties.ROOT_FILE) + serialNumber;
+
+        String rootAlias = root.getEmail() + serialNumber;
+
+        keyStoreWriter.loadKeyStore(KeyStoreProperties.ROOT_FILE, keyStoreProperties.readKeyStorePass(KeyStoreProperties.ROOT_FILE).toCharArray());
+        keyStoreWriter.write(rootAlias, subject.getKeyPair().getPrivate(), keyStorePass, new X509Certificate[] {rootCertificate});
+        keyStoreWriter.saveKeyStore(KeyStoreProperties.ROOT_FILE, keyStoreProperties.readKeyStorePass(KeyStoreProperties.ROOT_FILE).toCharArray());
+    }
+
     public void createCertificate(CreateCertificateDTO createCertificateDTO) throws Exception {
+        if (LocalDate.parse(createCertificateDTO.getEndDate()).compareTo(LocalDate.parse(createCertificateDTO.getStartDate())) < 0) {
+            throw new Exception(END_DATE_BEFORE_START);
+        }
 
         Subject subject = generateSubject(createCertificateDTO);
 
@@ -90,9 +180,9 @@ public class CertificateService {
 
         X509Certificate issuerCertificate = getCertificateByAlias(issuerAlias, keyStore);
 
-        String issuerPassword = issuerKeyStorePassword + issuerCertificate.getSerialNumber();
+        String issuerPassword = getKeyStorePassFromAlias(issuerAlias) + issuerCertificate.getSerialNumber();
         isCertificateValid(keyStore, issuerAlias);
-
+        isDateValid(issuerCertificate, LocalDate.parse(createCertificateDTO.getStartDate()), LocalDate.parse(createCertificateDTO.getEndDate()));
 
         BigInteger subjectCertificateSerialNumber = generateSerialNumberForCertificate();
         String subjectAlias = user.getEmail() + subjectCertificateSerialNumber;
@@ -115,6 +205,14 @@ public class CertificateService {
         String keyStorePass = "";
         String filePath = "";
         if (isCA(subjectCertificate)) {
+            User user1 = userRepository.findById(createCertificateDTO.getSubjectId()).get();
+            Account account = accountRepository.findByEmail(user1.getEmail());
+
+            List<Authority> authorities = new ArrayList<>();
+            authorities.add(new Authority(3L, "ROLE_CA"));
+            account.setAuthorities(new ArrayList<>(authorities));
+            accountRepository.save(account);
+
             keyStorePass = keyStoreProperties.readKeyStorePass((KeyStoreProperties.CA_FILE));
             filePath = KeyStoreProperties.CA_FILE;
             keyStoreWriter.loadKeyStore(KeyStoreProperties.CA_FILE, keyStorePass.toCharArray());
@@ -136,17 +234,72 @@ public class CertificateService {
 
     }
 
+    public void isDateValid(X509Certificate issuerCertificate, LocalDate subjectNotBefore, LocalDate subjectNotAfter) throws Exception {
+        Date issuerNotBefore = issuerCertificate.getNotBefore();
+        Date issuerNotAfter = issuerCertificate.getNotAfter();
+
+        Date subjectNotBeforeDate = java.sql.Date.valueOf(subjectNotBefore);
+        Date subjectNotAfterDate = java.sql.Date.valueOf(subjectNotAfter);
+
+        if(subjectNotBeforeDate.compareTo(new Date((new Date()).getTime() + 24*60*60*1000)) >= 0|| subjectNotBeforeDate.before(issuerNotBefore)) {
+            throw new Exception(INVALID_DATE);
+        }
+
+        if(subjectNotAfterDate.after(issuerNotAfter)) {
+            throw new Exception(INVALID_DATE);
+        }
+
+    }
+
     private boolean isSelfSignedCertificate(String issuerAlias) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
         KeyStore keyStore = getSelfSignedKeyStore();
         return keyStore.containsAlias(issuerAlias);
     }
 
-    public void revokeCertificate(String serialNumber) {
-        revokedCertificateRepository.save(new RevokedCertificate(new BigInteger(serialNumber), LocalDateTime.now()));
+    public void revokeCertificate(String serialNumber, String mail) throws Exception {
+        Account user = accountRepository.findByEmail(mail);
+        if (!user.getRole().equals("Admin")) {
+            throw new Exception(NO_USER_PERMISSIONS);
+        }
+
+        if (revokedCertificateRepository.findBySerialNumber(serialNumber) != null) {
+            throw new Exception(CERTIFICATE_REVOKED);
+        }
+
+        revokeAllCertificatesInHierarchyBelow(serialNumber);
+        revokedCertificateRepository.save(new RevokedCertificate(serialNumber, new Date()));
     }
 
-    private boolean isRevoked(String serialNumber) {
-        return revokedCertificateRepository.findAll().stream().anyMatch(c -> c.getSerialNumber().equals(serialNumber));
+    private void revokeAllCertificatesInHierarchyBelow(String serialNumber) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        KeyStore currentKeyStore = getEndEntityKeyStore();
+        revokeAllByKeyStore(currentKeyStore, serialNumber);
+        currentKeyStore = getCAKeystore();
+        revokeAllByKeyStore(currentKeyStore, serialNumber);
+        currentKeyStore = getSelfSignedKeyStore();
+        revokeAllByKeyStore(currentKeyStore, serialNumber);
+    }
+
+    private void revokeAllByKeyStore(KeyStore currentKeyStore, String serialNumber) throws KeyStoreException {
+        List<String> aliases = Collections.list(currentKeyStore.aliases());
+        for (String alias : aliases) {
+            checkCertificateChain(currentKeyStore.getCertificateChain(alias), serialNumber);
+        }
+    }
+
+    private void checkCertificateChain(Certificate[] certificateChain, String serialNumber) {
+        int position = -1;
+        for (int i = 0; i < certificateChain.length; i++) {
+            if (((X509Certificate) certificateChain[i]).getSerialNumber().equals(new BigInteger(serialNumber))) {
+                position = i;
+            }
+        }
+
+        if (position != -1) {
+            for (int i = 0; i < position; i++) {
+                X509Certificate certificate = (X509Certificate) certificateChain[i];
+                revokedCertificateRepository.save(new RevokedCertificate(certificate.getSerialNumber().toString(), new Date()));
+            }
+        }
     }
 
     public String generateAliasByCertificate(X509Certificate certificate) throws CertificateEncodingException {
@@ -258,10 +411,20 @@ public class CertificateService {
     private void isCertificateValid(KeyStore keyStore, String alias) throws Exception {
         Certificate[] certificates = keyStore.getCertificateChain(alias);
         try {
-
+            PrivateKey password;
+            String aliasPassword = "";
+            String currentAlias = "";
+            String keyStorePass = "";
+            KeyStore currentKeyStore = null;
             for (int i = certificates.length - 1; i >= 0; i--) {
 
-                if (isRevoked(generateAliasByCertificate((X509Certificate) certificates[i]))) {
+                currentAlias = generateAliasByCertificate((X509Certificate) certificates[i]);
+                currentKeyStore = getKeyStoreByAlias(currentAlias);
+                keyStorePass = getKeyStorePassFromAlias(currentAlias);
+                aliasPassword = keyStorePass + ((X509Certificate) certificates[i]).getSerialNumber();
+
+                if (ocspService.isCertificateRevoked((X509Certificate) certificates[i],
+                        (PrivateKey) currentKeyStore.getKey(currentAlias, aliasPassword.toCharArray()))) {
                     throw new Exception(CERTIFICATE_REVOKED);
                 }
 
@@ -340,6 +503,7 @@ public class CertificateService {
             CertificateDTO certificateDTO = extractCertificateData(certificate);
             certificates.add(certificateDTO);
         }
+
         return certificates;
     }
 
@@ -358,6 +522,7 @@ public class CertificateService {
         String email = IETFUtils.valueToString(emailRdn.getFirst().getValue());
         RDN cnRdn = x500Name.getRDNs(BCStyle.CN)[0];
         String commonName = IETFUtils.valueToString(cnRdn.getFirst().getValue());
+        User user = userRepository.findByEmail(email);
 
         certificateDTO.setSerialNumber(serialNumber);
         certificateDTO.setStartDate(startDate);
@@ -367,6 +532,9 @@ public class CertificateService {
         certificateDTO.setExtendedKeyUsages(extendedKeyUsages);
         certificateDTO.setEmail(email);
         certificateDTO.setCommonName(commonName);
+        certificateDTO.setRevoked(ocspService.isRevoked(serialNumber));
+        certificateDTO.setIssuerId(user.getId());
+
         return certificateDTO;
     }
 
@@ -480,12 +648,27 @@ public class CertificateService {
 
     private boolean isCA(CertificateDTO certificateDTO) {
         Collection<String> keyUsages = certificateDTO.getKeyUsages();
-        if(keyUsages.contains("digitalSignature")) {
-            return true;
+//        if(keyUsages.contains("certficateSigning")) {
+//            return true;
+//        }
+        for(String keyUsage : keyUsages){
+            if(keyUsage.equalsIgnoreCase("certificateSigning")){
+                return true;
+            }
         }
-
         return false;
     }
 
+    public PossibleKeyUsagesDTO getPossibleKeyUsages(String alias) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        KeyStore keyStore = getKeyStoreByAlias(alias);
+        X509Certificate certificate = getCertificateByAlias(alias, keyStore);
+
+        PossibleKeyUsagesDTO possibleKeyUsagesDTO = new PossibleKeyUsagesDTO();
+
+        possibleKeyUsagesDTO.setPossibleKeyUsages(KeyUsagesMapper.keyUsagesBoolToKeyUsagesString(certificate.getKeyUsage()));
+        possibleKeyUsagesDTO.setPossibleExtendedKeyUsages(ExtendedKeyUsagesMapper.extendedKeyUsagesToStringCollection(certificate.getExtendedKeyUsage()));
+
+        return possibleKeyUsagesDTO;
+    }
 }
 

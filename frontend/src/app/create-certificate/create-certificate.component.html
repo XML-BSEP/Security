@@ -33,22 +33,21 @@
                           <button mat-flat-button id="choose_issuer" (click)="chooseCertificate()">Choose</button>
 
 
-                          <!-- <br> -->
 
                         </div>
                         <div class="input_div1">
                           <mat-form-field class="input1">
                             <mat-label>Valid from:</mat-label>
-                            <input matInput [matDatepicker]="picker1" [min]="minDate" formControlName="validFrom">
+                            <input matInput [matDatepicker]="picker1" [min]="minDate" formControlName="validFrom" disabled>
                             <mat-datepicker-toggle matSuffix [for]="picker1" ></mat-datepicker-toggle>
-                            <mat-datepicker #picker1></mat-datepicker>
+                            <mat-datepicker #picker1 disabled="false"></mat-datepicker>
                           </mat-form-field>
 
                           <mat-form-field class="input1">
                             <mat-label>Valid to:</mat-label>
-                            <input matInput [matDatepicker]="picker2" [min]="minDate" formControlName="validTo">
+                            <input matInput [matDatepicker]="picker2" [min]="minDate" formControlName="validTo" disabled>
                             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                            <mat-datepicker #picker2 ></mat-datepicker>
+                            <mat-datepicker #picker2 disabled="false"></mat-datepicker>
                           </mat-form-field>
                         </div>
 
@@ -75,6 +74,7 @@
                         </div>
                         <div>
                           <button id="next" mat-button matStepperNext>Next</button>
+                          <button *ngIf="isAdminLoggedIn()" id="next" mat-button (click)="createRoot()">Create root</button>
                         </div>
                       </div>
 
@@ -85,74 +85,86 @@
                   <mat-step [stepControl]="secondFormGroup" errorMessage="Please choose or fill subject.">
                     <form [formGroup]="secondFormGroup">
                       <ng-template matStepLabel>Choose or fill in subject</ng-template>
+                      <mat-card style="width:97%; height:fit-content">
+                        <div class="input_div1">
+                          <mat-form-field class="input1">
+                            <mat-label>First name</mat-label>
+                            <input matInput placeholder="First name" formControlName="firstName" required >
+                          </mat-form-field>
+
+                          <mat-form-field class="input1">
+                            <mat-label>Last name</mat-label>
+                            <input matInput placeholder="Last name" formControlName="lastName" required >
+                          </mat-form-field>
+
+                        </div>
+
+                        <div class="input_div1">
+                          <mat-form-field class="input1">
+                            <mat-label>State</mat-label>
+                            <input matInput placeholder="State" formControlName="state" required >
+                          </mat-form-field>
+
+                          <mat-form-field class="input1">
+                            <mat-label>City</mat-label>
+                            <input matInput placeholder="City" formControlName="city" required >
+                          </mat-form-field>
+
+                        </div>
+
+                        <div class="input_div1">
+                          <mat-form-field class="input1">
+                            <mat-label>Organization</mat-label>
+                            <input matInput placeholder="Organization" formControlName="org" required >
+                          </mat-form-field>
+
+                          <mat-form-field class="input1">
+                            <mat-label>Organizational unit</mat-label>
+                            <input matInput placeholder="Organizational unit" formControlName="orgunit" required >
+                          </mat-form-field>
+
+                        </div>
+
+                        <div class="input_div1">
+                          <mat-form-field class="input1">
+                            <mat-label>Email</mat-label>
+                            <input matInput placeholder="Email" formControlName="email" required >
+                          </mat-form-field>
+
+                          <mat-form-field class="input1">
+                            <mat-label>Password</mat-label>
+                            <input matInput type="password" placeholder="Password" formControlName="password" required >
+                          </mat-form-field>
+
+
+                        </div>
+                        <div class="input_div2">
+
+                          <button id="back" mat-button (click)="createUser()" [disabled]="createSubjectDisable">Create</button>
+
+                        </div>
+                      </mat-card>
+
 
                       <div class="input_div1">
-                        <mat-form-field class="input1">
-                          <mat-label>First name</mat-label>
-                          <input matInput placeholder="First name" formControlName="firstName" required >
-                        </mat-form-field>
 
-                        <mat-form-field class="input1">
-                          <mat-label>Last name</mat-label>
-                          <input matInput placeholder="Last name" formControlName="lastName" required >
-                        </mat-form-field>
-
+                        <p style="margin-top: 20px;"><b>Or</b></p>
                       </div>
+                      <mat-card style="width:97%; height:fit-content; margin-bottom: 20px;">
+                        <div class="input_div1">
+                          <mat-form-field style="width: 50%;">
+                            <mat-label>Subject</mat-label>
+                            <mat-select formControlName="chosenSubject" >
+                              <mat-option *ngFor="let sub of subjects" (click)="selectionChange(sub)"  [value]="sub">{{sub.commonName}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <button id="next" mat-button (click)="resetSubject()" >Reset</button>
+                        </div>
+                      </mat-card>
 
-                      <div class="input_div1">
-                        <mat-form-field class="input1">
-                          <mat-label>State</mat-label>
-                          <input matInput placeholder="State" formControlName="state" required >
-                        </mat-form-field>
 
-                        <mat-form-field class="input1">
-                          <mat-label>City</mat-label>
-                          <input matInput placeholder="City" formControlName="city" required >
-                        </mat-form-field>
+                      </form>
 
-                      </div>
-
-                      <div class="input_div1">
-                        <mat-form-field class="input1">
-                          <mat-label>Organization</mat-label>
-                          <input matInput placeholder="Organization" formControlName="org" required >
-                        </mat-form-field>
-
-                        <mat-form-field class="input1">
-                          <mat-label>Organizational unit</mat-label>
-                          <input matInput placeholder="Organizational unit" formControlName="orgunit" required >
-                        </mat-form-field>
-
-                      </div>
-
-                      <div class="input_div1">
-                        <mat-form-field class="input1">
-                          <mat-label>Email</mat-label>
-                          <input matInput placeholder="Email" formControlName="email" required >
-                        </mat-form-field>
-
-                        <mat-form-field class="input1">
-                          <mat-label>Password</mat-label>
-                          <input matInput type="password" placeholder="Password" formControlName="password" required >
-                        </mat-form-field>
-
-                      </div>
-                    </form>
-                    <form [formGroup]="secondFormGroup1">
-
-                      <div class="input_div1">
-
-                        <p><b>Or</b></p>
-                      </div>
-                      <div class="input_div1">
-                        <mat-form-field style="width: 80%;">
-                          <mat-label>Subject</mat-label>
-                          <mat-select formControlName="chosenSubject">
-                            <mat-option *ngFor="let sub of subjects" (click)="selectionChange(sub)"  [value]="sub">{{sub.commonName}}</mat-option>
-                          </mat-select>
-                        </mat-form-field>
-                      </div>
-                    </form>
                       <div>
                         <button id="back" mat-button matStepperPrevious>Back</button>
                         <button id="next" mat-button matStepperNext >Next</button>
@@ -180,7 +192,7 @@
                               <!-- <mat-card-content > -->
                                 <mat-form-field  style="margin-left: 30% ;width: 40%;">
                                   <mat-label>Key usage extensions</mat-label>
-                                  <mat-select [(value)]="selectedKeyUsages" formControlName="keyUsage" multiple>
+                                  <mat-select [(value)]="selectedKeyUsages" formControlName="keyUsage" multiple >
                                     <mat-option *ngFor="let keyusageext of allKeyUsages"  [value]="keyusageext">{{keyusageext}}</mat-option>
                                   </mat-select>
                                 </mat-form-field>
@@ -222,18 +234,16 @@
 
 
                       <div>
-                        <button id="back" mat-button matStepperPrevious>Back</button>
-                        <button id="next" mat-button matStepperNext>Next</button>
+                        <button id="back" style="margin-top: 20px;" mat-button matStepperPrevious>Back</button>
+                        <button id="next" style="margin-top: 20px;" mat-button matStepperNext>Next</button>
                       </div>
                     </form>
                   </mat-step>
                   <mat-step>
                     <ng-template matStepLabel>Done</ng-template>
-                    <p *ngIf="firstFormGroup.valid && secondFormGroup.valid && thirdFormGroup.valid">Your certificate is created!</p>
-                    <p *ngIf="!firstFormGroup.valid || !secondFormGroup.valid || !thirdFormGroup.valid">Please fill form acording to instructions!</p>
 
 
-                    <div>
+                    <div class="input_div1">
 
                       <button id="back" mat-button matStepperPrevious>Back</button>
 

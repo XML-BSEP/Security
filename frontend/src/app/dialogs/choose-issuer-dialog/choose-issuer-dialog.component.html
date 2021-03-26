@@ -20,22 +20,22 @@
               </p>
               <p style="display: inline;"><b>Key usage:</b></p>
               <div id="usages-div" style="display: inline;">
-                  <p style="display: inline;" *ngFor="let keyUsage of item?.keyUsages; last as isLast">
+                  <p style="display: inline;" *ngFor="let keyUsage of item?.keyUsages">
                     <i> {{ keyUsage }}, </i>
-                    <i *ngIf="isLast"> {{ keyUsage }} </i>
+                    <!-- <i *ngIf="isLast"> {{ keyUsage }} </i> -->
                   </p>
               </div>
               <br>
               <p style="display: inline;"><b>Extended key usage:</b></p>
               <div id="usages-div" style="display: inline;">
-                <p style="display: inline;" *ngFor="let extendedKeyUsage of item?.extendedKeyUsages; last as isLast">
+                <p style="display: inline;" *ngFor="let extendedKeyUsage of item?.extendedKeyUsages">
                   <i> {{ extendedKeyUsage }}, </i>
-                  <i *ngIf="isLast"> {{ extendedKeyUsage }} </i>
+                  <!-- <i *ngIf="isLast"> {{ extendedKeyUsage }} </i> -->
                 </p>
               </div>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-flat-button *ngIf="!conflicting" id="choose-button" (click)="onSubmit(item)">Choose</button>
+                <button mat-flat-button *ngIf="!conflicting" id="choose-button" (click)="onSubmit(item)" [disabled]="item.revoked">Choose</button>
                 <!-- <button mat-flat-button *ngIf="conflicting" id="choose-button-conflict" (click)="warnKeyUsage()"
                 matTooltip="This certificate does not have some of your currently selected Key Usages and/or Extended Key Usages"
                 matTooltipPosition="below">Choose</button> -->

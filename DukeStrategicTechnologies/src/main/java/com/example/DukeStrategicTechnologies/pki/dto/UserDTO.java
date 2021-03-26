@@ -12,13 +12,14 @@ public class UserDTO {
     private String state;
     private String city;
     private String email;
+    private String password;
     private boolean isCA;
     private Long certificateCount;
 
     public UserDTO() {
     }
 
-    public UserDTO(Long id, String givenName, String surname, String commonName, String organization, String organizationUnit, String state, String city, String email, boolean isCA, Long certificateCount) {
+    public UserDTO(Long id, String givenName, String surname, String commonName, String organization, String organizationUnit, String state, String city, String email, String password,  boolean isCA, Long certificateCount) {
         this.id = id;
         this.givenName = givenName;
         this.surname = surname;
@@ -28,6 +29,7 @@ public class UserDTO {
         this.state = state;
         this.city = city;
         this.email = email;
+        this.password = password;
         this.isCA = isCA;
         this.certificateCount = certificateCount;
     }
@@ -38,6 +40,14 @@ public class UserDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getGivenName() {

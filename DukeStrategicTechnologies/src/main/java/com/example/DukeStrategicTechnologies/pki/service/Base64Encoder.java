@@ -5,6 +5,7 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import org.bouncycastle.cert.jcajce.JcaCertStore;
 import org.bouncycastle.cms.*;
 import org.bouncycastle.cms.jcajce.JcaSignerInfoGeneratorBuilder;
+import org.bouncycastle.jce.exception.ExtCertificateEncodingException;
 import org.bouncycastle.operator.ContentSigner;
 import org.bouncycastle.operator.OperatorCreationException;
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
@@ -29,8 +30,13 @@ public class Base64Encoder {
     @Autowired
     private CertificateService certificateService;
 
-    public void downloadCertificate(DownloadCertificateDTO dto) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException, CMSException, OperatorCreationException, UnrecoverableKeyException {
+    @Autowired
+    private OCSPService ocspService;
+    public void downloadCertificate(DownloadCertificateDTO dto) throws Exception {
 
+        if(ocspService.isRevoked(dto.getSerialNumber())) {
+            throw new Exception("Can not download revoked certificate!");
+        }
         String alias = dto.getSubjectEmail() + dto.getSerialNumber();
 
         KeyStore keyStore = certificateService.getKeyStoreByAlias(alias);

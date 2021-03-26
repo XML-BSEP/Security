@@ -14,21 +14,42 @@ public class CertificateDTO {
     private String signatureAlgorithm;
     private Collection<String> keyUsages;
     private Collection<String> extendedKeyUsages;
+    private boolean isRevoked;
+    private Long issuerId;
+
 
     public CertificateDTO(String serialNumber, Date startDate, Date endDate,
                           String commonName, String email, String signatureAlgorithm,
-                          Collection<String> keyUsages, Collection<String> extendedKeyUsages) {
+                          Collection<String> keyUsages, Collection<String> extendedKeyUsages, boolean isRevoked, Long issuerId) {
         this.serialNumber = serialNumber;
         this.startDate = startDate;
+        this.issuerId = issuerId;
         this.endDate = endDate;
         this.commonName = commonName;
         this.email = email;
         this.signatureAlgorithm = signatureAlgorithm;
         this.keyUsages = keyUsages;
         this.extendedKeyUsages = extendedKeyUsages;
+        this.isRevoked = isRevoked;
+    }
+
+    public boolean isRevoked() {
+        return isRevoked;
+    }
+
+    public void setRevoked(boolean revoked) {
+        isRevoked = revoked;
     }
 
     public CertificateDTO() {
+    }
+
+    public Long getIssuerId() {
+        return issuerId;
+    }
+
+    public void setIssuerId(Long issuerId) {
+        this.issuerId = issuerId;
     }
 
     public String getEmail() {
