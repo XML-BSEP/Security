@@ -300,6 +300,18 @@ export class CreateCertificateComponent implements OnInit {
       res=>{
         alert('Success!');
         this.loadSubjects();
+        this.secondFormGroup = new FormGroup({
+          "firstName": new FormControl({value:user.givenName, disabled: true}),
+          "lastName": new FormControl({value:user.surname, disabled: true}),
+          "state": new FormControl({value:user.state, disabled: true}),
+          "city": new FormControl({value:user.city, disabled: true}),
+          "org": new FormControl({value:user.organization, disabled: true}),
+          "orgunit": new FormControl({value:user.organizationUnit, disabled: true}),
+          "email": new FormControl({value:user.email, disabled: true}),
+          "password": new FormControl({value:user.password, disabled: true}),
+          "chosenSubject": new FormControl(null)
+        });
+        this.createSubjectDisable = true;
 
       },
       error=>{
