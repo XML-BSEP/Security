@@ -1,3 +1,4 @@
+import { DownloadCertificate } from './model/certificates/DownloadCertificate';
 import { environment } from './../environments/environment';
 import { Observable } from 'rxjs';
 import { SigningCertificate } from './model/certificates/SigningCertificate';
@@ -59,6 +60,10 @@ export class CertificatesService {
   }
   revokeCertificate(serialNumber : String) {
     return this.http.post(`${environment.baseUrl}/${environment.certificate}/${environment.revokeCertificate}`, serialNumber);
+  }
+
+  downloadCertificate(download : DownloadCertificate){
+    return this.http.post(`${environment.baseUrl}/${environment.certificate}/${environment.downloadCertificate}`, download);
   }
 
 }

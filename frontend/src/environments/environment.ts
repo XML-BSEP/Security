@@ -24,6 +24,7 @@ export const environment = {
   getCaCertificatesByUser: "getCaCertificatesByUser",
   getEndEntityCertificatesByUser: "getEndEntityCertificatesByUser",
   getPossibleKeyUsages : "getPossibleKeyUsages",
+  downloadCertificate : "downloadCertificate",
   revokeCertificate: "revokeCertificate"
 };
 

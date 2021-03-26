@@ -21,6 +21,7 @@ import { CreateCertificate } from '../model/certificates/CreateCertificate';
 import { DatePipe } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 import { AuthenticatedUser } from '../model/user/authenticatedUser';
+import { newUser } from '../model/user/newUser';
 
 
 @Component({
@@ -56,7 +57,7 @@ export class CreateCertificateComponent implements OnInit {
 
   selectedSubject : User;
   isSelectedSubject:boolean;
-
+  createSubjectDisable : boolean = false;
   // allKeyUsages : string[] = ["digitalSignature", "nonRepudiation", "keyEncipherment", "dataEncipherment", "keyAgreement", "certificateSigning", "crlSigning", "encipherOnly", "decipherOnly" ];
   allKeyUsages : string[];
 
@@ -143,6 +144,7 @@ export class CreateCertificateComponent implements OnInit {
         this.pku = res;
         this.allKeyUsages = this.pku.possibleKeyUsages;
         this.allExtendedKeyUsages = this.pku.possibleExtendedKeyUsages;
+        console.log(this.pku.possibleExtendedKeyUsages);
       },
       error=>{
         alert("Fail!");
@@ -258,6 +260,7 @@ export class CreateCertificateComponent implements OnInit {
       "password": new FormControl({value:null, disabled: true}),
       "chosenSubject": new FormControl(user)
     });
+    this.createSubjectDisable = true;
   }
 
   resetSubject(){
@@ -279,6 +282,32 @@ export class CreateCertificateComponent implements OnInit {
 
   }
 
+  createUser(){
+    let user = new newUser(this.secondFormGroup.controls.firstName.value,
+                    this.secondFormGroup.controls.lastName.value,
+                    null,
+                    this.secondFormGroup.controls.org.value,
+                    this.secondFormGroup.controls.orgunit.value,
+                    this.secondFormGroup.controls.state.value,
+                    this.secondFormGroup.controls.city.value,
+                    this.secondFormGroup.controls.email.value,
+                    null,
+                    this.secondFormGroup.controls.password.value);
+
+                    console.log(user)
+
+    this.userService.createSubject(user).subscribe(
+      res=>{
+        alert('Success!');
+        this.loadSubjects();
+
+      },
+      error=>{
+        alert("Fail!");
+      }
+
+      )
+  }
   parseDate(date : Date) : string {
     var month = '' + (date.getMonth() + 1)
     var day = '' + date.getDate();
