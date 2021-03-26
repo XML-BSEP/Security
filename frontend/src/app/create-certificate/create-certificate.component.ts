@@ -57,7 +57,7 @@ export class CreateCertificateComponent implements OnInit {
 
   selectedSubject : User;
   isSelectedSubject:boolean;
-
+  createSubjectDisable : boolean = false;
   // allKeyUsages : string[] = ["digitalSignature", "nonRepudiation", "keyEncipherment", "dataEncipherment", "keyAgreement", "certificateSigning", "crlSigning", "encipherOnly", "decipherOnly" ];
   allKeyUsages : string[];
 
@@ -144,6 +144,7 @@ export class CreateCertificateComponent implements OnInit {
         this.pku = res;
         this.allKeyUsages = this.pku.possibleKeyUsages;
         this.allExtendedKeyUsages = this.pku.possibleExtendedKeyUsages;
+        console.log(this.pku.possibleExtendedKeyUsages);
       },
       error=>{
         alert("Fail!");
@@ -259,6 +260,7 @@ export class CreateCertificateComponent implements OnInit {
       "password": new FormControl({value:null, disabled: true}),
       "chosenSubject": new FormControl(user)
     });
+    this.createSubjectDisable = true;
   }
 
   resetSubject(){

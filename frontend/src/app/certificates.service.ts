@@ -1,3 +1,4 @@
+import { DownloadCertificate } from './model/certificates/DownloadCertificate';
 import { environment } from './../environments/environment';
 import { Observable } from 'rxjs';
 import { SigningCertificate } from './model/certificates/SigningCertificate';
@@ -56,6 +57,10 @@ export class CertificatesService {
 
   getPossibleKeyUsages(alias: String) : Observable<PossibleKeyUsages>{
     return this.http.get<PossibleKeyUsages>(`${environment.baseUrl}/${environment.certificate}/${environment.getPossibleKeyUsages}?alias=${alias}`)
+  }
+
+  downloadCertificate(download : DownloadCertificate){
+    return this.http.post(`${environment.baseUrl}/${environment.certificate}/${environment.downloadCertificate}`, download);
   }
 
 }

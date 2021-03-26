@@ -1,3 +1,4 @@
+import { DownloadCertificate } from './../model/certificates/DownloadCertificate';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -25,8 +26,8 @@ export class AllCertificatesComponent implements OnInit {
   currentUserSubject: BehaviorSubject<AuthenticatedUser>;
   isAdmin : boolean;
 
-  constructor(private router : Router, private certificateService : CertificatesService) { 
-    
+  constructor(private router : Router, private certificateService : CertificatesService) {
+
     if(localStorage.getItem('userId')!==null){
       this.userLoggedIn = true;
     }else{
@@ -48,14 +49,28 @@ export class AllCertificatesComponent implements OnInit {
         this.getAllCertificatesByUser();
       }*/
       this.isAdmin ? this.selectedOption = "option1" : this.selectedOption = "option2";
-    
+
   }
 
-  
+  downloadCertificate(item){
+
+    var downlaodCertificate = new DownloadCertificate(item.email, item.serialNumber, item.commonName);
+    this.certificateService.downloadCertificate(downlaodCertificate).subscribe(
+      res=>{
+        alert('Success! You can find your certificate in your downloads folder');
+      },
+      error=>{
+        alert("Fail!");
+      }
+
+      )
+
+  }
+
   onTypeChange() {
     if(this.isAdmin){
       if(this.selectedOption == "option1" ){
-     
+
         this.isSelfSigned = true;
         this.getRootCerificates();
         console.log(this.signingCertificates);
@@ -73,7 +88,7 @@ export class AllCertificatesComponent implements OnInit {
         this.getEECerificatesByUser();
       }
     }
-    
+
   }
 
 
@@ -163,7 +178,7 @@ getEECerificatesByUser(){console.log("usao2"); this.certificateService.getEeCert
     })
   }
 
-  //obrisi mozda 
+  //obrisi mozda
   getAllCertificates() {
     this.certificateService.getAll().subscribe(data => {
       this.certificates = data;

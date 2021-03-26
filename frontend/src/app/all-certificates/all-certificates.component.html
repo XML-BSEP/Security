@@ -54,7 +54,7 @@
           <mat-card-actions>
               <button mat-flat-button *ngIf="!conflicting" id="choose-button" style="background-color: rgb(28, 133, 165); color: white;"
               (click)="onSubmit(item)">Revoke</button>
-              <button id="choose-button" style="background-color: rgb(28, 133, 165); color: white;" mat-button>Download</button>
+              <button id="choose-button" style="background-color: rgb(28, 133, 165); color: white;" mat-button (click)="downloadCertificate(item)">Download</button>
 
           </mat-card-actions>
         </mat-card>

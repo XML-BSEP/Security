@@ -139,7 +139,7 @@
                         </div>
                         <div class="input_div2">
 
-                          <button id="back" mat-button (click)="createUser()">Create</button>
+                          <button id="back" mat-button (click)="createUser()" [disabled]="createSubjectDisable">Create</button>
 
                         </div>
                       </mat-card>
@@ -233,18 +233,16 @@
 
 
                       <div>
-                        <button id="back" mat-button matStepperPrevious>Back</button>
-                        <button id="next" mat-button matStepperNext>Next</button>
+                        <button id="back" style="margin-top: 20px;" mat-button matStepperPrevious>Back</button>
+                        <button id="next" style="margin-top: 20px;" mat-button matStepperNext>Next</button>
                       </div>
                     </form>
                   </mat-step>
                   <mat-step>
                     <ng-template matStepLabel>Done</ng-template>
-                    <p *ngIf="firstFormGroup.valid && secondFormGroup.valid && thirdFormGroup.valid">Your certificate is created!</p>
-                    <p *ngIf="!firstFormGroup.valid || !secondFormGroup.valid || !thirdFormGroup.valid">Please fill form acording to instructions!</p>
 
 
-                    <div>
+                    <div class="input_div1">
 
                       <button id="back" mat-button matStepperPrevious>Back</button>
 

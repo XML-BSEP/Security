@@ -23,7 +23,8 @@ export const environment = {
   getAllForSigningByUser : "getAllForSigningByUser",
   getCaCertificatesByUser: "getCaCertificatesByUser",
   getEndEntityCertificatesByUser: "getEndEntityCertificatesByUser",
-  getPossibleKeyUsages : "getPossibleKeyUsages"
+  getPossibleKeyUsages : "getPossibleKeyUsages",
+  downloadCertificate : "downloadCertificate"
 };
 
 /*
