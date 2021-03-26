@@ -57,5 +57,8 @@ export class CertificatesService {
   getPossibleKeyUsages(alias: String) : Observable<PossibleKeyUsages>{
     return this.http.get<PossibleKeyUsages>(`${environment.baseUrl}/${environment.certificate}/${environment.getPossibleKeyUsages}?alias=${alias}`)
   }
+  revokeCertificate(serialNumber : String) {
+    return this.http.post(`${environment.baseUrl}/${environment.certificate}/${environment.revokeCertificate}`, serialNumber);
+  }
 
 }

@@ -70,7 +70,9 @@ public class CertificateController {
     @PostMapping("/revokeCertificate")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> revokeCertificate(@RequestBody String serialNumber) throws Exception {
-        certificateService.revokeCertificate(serialNumber);
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String mail = ((Account)user).getUsername();
+        certificateService.revokeCertificate(serialNumber, mail);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -146,6 +148,12 @@ public class CertificateController {
         return new ResponseEntity<>(certificateAlias, HttpStatus.OK);
     }
 
+    @PostMapping("/createRootCertificate")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> createRootCertificate(@RequestBody CreateCertificateDTO dto) throws Exception {
+        certificateService.createRootCertificate(dto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)

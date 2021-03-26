@@ -40,14 +40,7 @@ export class AllCertificatesComponent implements OnInit {
 
       //this.getAllCertificatesByUser();
       this.isAdmin = this.isAdminLoggedIn();
-      /*
-      if(this.isAdmin) {
-        this.getAllCertificates()
-      }
-      else {
-        this.getAllCertificatesByUser();
-      }*/
-      this.isAdmin ? this.selectedOption = "option1" : this.selectedOption = "option2";
+     // this.isAdmin ? this.selectedOption = "option1" : this.selectedOption = "option2";
     
   }
 
@@ -177,6 +170,21 @@ getEECerificatesByUser(){console.log("usao2"); this.certificateService.getEeCert
     }
     return false;
   }
+
+  revokeCertificate(item : SigningCertificate) {
+      if(this.isAdmin) {
+        this.certificateService.revokeCertificate(item.serialNumber).subscribe(
+          res=>{
+            alert('Success!');
+            location.reload();
+          },
+          error=>{
+            alert("Fail!");
+          }
+        )
+      }
+    }
+   
 
 
 }

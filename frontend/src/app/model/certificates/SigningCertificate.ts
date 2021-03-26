@@ -10,8 +10,9 @@ export class SigningCertificate {
     public keyUsages: string[];
     public extendedKeyUsages: string[];
     public signatureAlgorithm : string;
+    public isRevoked : boolean;
     constructor(issuerCommonName: string, issuerEmail: string, subjectEmail: string, issuerId: number, serialNumber: string, validFrom: Date,
-        validTo: Date, keyUsage: string[], extendedKeyUsage: string[], signatureAlgorithm : string) {
+        validTo: Date, keyUsage: string[], extendedKeyUsage: string[], signatureAlgorithm : string, isRevoked : boolean) {
         this.commonName = issuerCommonName;
         this.subjectEmail = subjectEmail;
         this.issuerEmail = issuerEmail;
@@ -22,6 +23,7 @@ export class SigningCertificate {
         this.keyUsages = keyUsage;
         this.extendedKeyUsages = extendedKeyUsage;
         this.signatureAlgorithm = signatureAlgorithm;
+        this.isRevoked = isRevoked;
     }
 
 }
