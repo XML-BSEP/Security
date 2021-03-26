@@ -35,6 +35,10 @@ public class Account implements UserDetails {
         this.password = password;
     }
 
+    public void setAuthorities(List<Authority> authorities) {
+        this.authorities = authorities;
+    }
+
     public Long getId() {
         return id;
     }
@@ -52,9 +56,11 @@ public class Account implements UserDetails {
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public Collection<Authority> getAuthorities() {
         return authorities;
     }
+
+
 
     public String getPassword() {
         return password;

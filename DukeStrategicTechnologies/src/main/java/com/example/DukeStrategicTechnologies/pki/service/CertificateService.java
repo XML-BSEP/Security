@@ -205,6 +205,14 @@ public class CertificateService {
         String keyStorePass = "";
         String filePath = "";
         if (isCA(subjectCertificate)) {
+            User user1 = userRepository.findById(createCertificateDTO.getSubjectId()).get();
+            Account account = accountRepository.findByEmail(user1.getEmail());
+
+            List<Authority> authorities = new ArrayList<>();
+            authorities.add(new Authority(3L, "ROLE_CA"));
+            account.setAuthorities(new ArrayList<>(authorities));
+            accountRepository.save(account);
+
             keyStorePass = keyStoreProperties.readKeyStorePass((KeyStoreProperties.CA_FILE));
             filePath = KeyStoreProperties.CA_FILE;
             keyStoreWriter.loadKeyStore(KeyStoreProperties.CA_FILE, keyStorePass.toCharArray());
