@@ -5,6 +5,7 @@ import com.example.DukeStrategicTechnologies.pki.dto.UserDTO;
 import com.example.DukeStrategicTechnologies.pki.mapper.TemplateMapper;
 import com.example.DukeStrategicTechnologies.pki.mapper.UserMapper;
 import com.example.DukeStrategicTechnologies.pki.model.Account;
+import com.example.DukeStrategicTechnologies.pki.model.Authority;
 import com.example.DukeStrategicTechnologies.pki.model.Template;
 import com.example.DukeStrategicTechnologies.pki.model.User;
 import com.example.DukeStrategicTechnologies.pki.repository.AccountRepository;
@@ -42,8 +43,12 @@ public class UserService {
         User newUser = new User(userDTO.getGivenName(), userDTO.getSurname(), commonName, userDTO.getOrganization(), userDTO.getOrganizationUnit(),
                 userDTO.getState(), userDTO.getCity(), userDTO.getEmail(), false, 0L);
 
-        Account newAccount = new Account(userDTO.getEmail(), passwordEncoder.encode(userDTO.getPassword()));
+        List<Authority> authorities = new ArrayList<>();
+        authorities.add(new Authority(2L, "ROLE_END_ENTITY_USER"));
 
+        Account newAccount = new Account(userDTO.getEmail(), passwordEncoder.encode(userDTO.getPassword()));
+        newAccount.setRole("User");
+        newAccount.setAuthorities(authorities);
         accountRepository.save(newAccount);
         userRepository.save(newUser);
     }
