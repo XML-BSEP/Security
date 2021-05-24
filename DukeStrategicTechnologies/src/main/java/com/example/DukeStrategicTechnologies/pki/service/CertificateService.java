@@ -13,11 +13,14 @@ import com.example.DukeStrategicTechnologies.pki.model.*;
 import com.example.DukeStrategicTechnologies.pki.repository.RevokedCertificateRepository;
 import com.example.DukeStrategicTechnologies.pki.repository.UserRepository;
 import com.example.DukeStrategicTechnologies.pki.util.properties.KeyStoreProperties;
+import org.bouncycastle.asn1.DERSequence;
 import org.bouncycastle.asn1.x500.RDN;
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.X500NameBuilder;
 import org.bouncycastle.asn1.x500.style.BCStyle;
 import org.bouncycastle.asn1.x500.style.IETFUtils;
+import org.bouncycastle.asn1.x509.GeneralName;
+import org.bouncycastle.asn1.x509.GeneralNames;
 import org.bouncycastle.asn1.x509.KeyPurposeId;
 import org.bouncycastle.asn1.x509.KeyUsage;
 import org.bouncycastle.cert.jcajce.JcaX509CertificateHolder;
@@ -137,7 +140,7 @@ public class CertificateService {
                 serialNumber
         );
 
-        X509Certificate rootCertificate = certificateGenerator.generateCertificate(subject, issuer, extendedCertificateData);
+        X509Certificate rootCertificate = certificateGenerator.generateCertificate(subject, issuer, extendedCertificateData, false);
 
         String keyStorePass = keyStoreProperties.readKeyStorePass(KeyStoreProperties.ROOT_FILE) + serialNumber;
 
@@ -200,7 +203,7 @@ public class CertificateService {
         KeyPair issuerKeyPair = new KeyPair(issuerPublicKey, (PrivateKey) issuerPrivateKey);
         Issuer issuerData = new Issuer(issureX509Name, issuerKeyPair);
 
-        X509Certificate subjectCertificate = certificateGenerator.generateCertificate(subject, issuerData, extendedCertificateData);
+        X509Certificate subjectCertificate = certificateGenerator.generateCertificate(subject, issuerData, extendedCertificateData, false);
         String subjectPassword = "";
         String keyStorePass = "";
         String filePath = "";
@@ -325,7 +328,7 @@ public class CertificateService {
         }
 
         X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
-        builder.addRDN(BCStyle.CN, user.getCommonName());
+        builder.addRDN(BCStyle.CN, "localhost");
         builder.addRDN(BCStyle.SURNAME, user.getSurname());
         builder.addRDN(BCStyle.GIVENNAME, user.getGivenName());
         builder.addRDN(BCStyle.O, user.getOrganization());

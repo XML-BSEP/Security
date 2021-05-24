@@ -5,9 +5,8 @@ import com.example.DukeStrategicTechnologies.pki.model.Issuer;
 import com.example.DukeStrategicTechnologies.pki.model.Subject;
 
 
-import org.bouncycastle.asn1.x509.ExtendedKeyUsage;
-import org.bouncycastle.asn1.x509.Extension;
-import org.bouncycastle.asn1.x509.KeyUsage;
+import org.bouncycastle.asn1.DERSequence;
+import org.bouncycastle.asn1.x509.*;
 import org.bouncycastle.cert.CertIOException;
 import org.bouncycastle.cert.X509CertificateHolder;
 import org.bouncycastle.cert.X509v3CertificateBuilder;
@@ -21,11 +20,14 @@ import java.security.cert.CertificateEncodingException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class CertificateGenerator {
     public CertificateGenerator() {}
 
-    public X509Certificate generateCertificate(Subject subjectData, Issuer issuerData, ExtendedCertificateData extendedCertificateData) {
+    public X509Certificate generateCertificate(Subject subjectData, Issuer issuerData, ExtendedCertificateData extendedCertificateData, boolean isRoot) {
         try {
 
             JcaContentSignerBuilder builder = new JcaContentSignerBuilder(extendedCertificateData.getSignatureAlgorithm().toString());
@@ -40,8 +42,17 @@ public class CertificateGenerator {
                     subjectData.getX500Name(),
                     subjectData.getKeyPair().getPublic());
 
+            List<GeneralName> altNames = new ArrayList<GeneralName>();
+            altNames.add(new GeneralName(GeneralName.rfc822Name, "user@mail.com"));
+            altNames.add(new GeneralName(GeneralName.dNSName, "localhost"));
+            altNames.add(new GeneralName(GeneralName.iPAddress, "127.0.0.1"));
 
+            GeneralNames subjectAltNames = GeneralNames.getInstance(new DERSequence((GeneralName[]) altNames.toArray(new GeneralName[] {})));
+            certGen.addExtension(Extension.subjectAlternativeName, false, subjectAltNames);
 
+            if(isCA(extendedCertificateData)) {
+                certGen.addExtension(Extension.basicConstraints, false, new BasicConstraints(true));
+            }
             certGen.addExtension(Extension.keyUsage, true, new KeyUsage(generateKeyUsage(extendedCertificateData)));
             certGen.addExtension(Extension.extendedKeyUsage, true, new ExtendedKeyUsage(extendedCertificateData.getExtendedKeyUsages()));
 
@@ -78,5 +89,17 @@ public class CertificateGenerator {
         }
 
         return retVal;
+    }
+
+    private boolean isCA(ExtendedCertificateData extendedCertificateData) {
+        Collection<Integer> keyUsages = extendedCertificateData.getKeyUsage();
+
+        for(Integer keyUsage : keyUsages) {
+            if(keyUsage == KeyUsage.keyCertSign) {
+                return true;
+            }
+        }
+        return false;
+
     }
 }

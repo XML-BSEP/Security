@@ -119,7 +119,8 @@ public class InitializeCertificate implements ApplicationListener<ApplicationRea
         ExtendedCertificateData extendedCertificateData = new ExtendedCertificateData(startDate, endtDate, signatureAlgorithm, keyUsageValues,
                 extendedKeyUsageArray, serialNumber);
 
-        X509Certificate rootCertificate = certificateGenerator.generateCertificate(subject, issuer, extendedCertificateData);
+
+        X509Certificate rootCertificate = certificateGenerator.generateCertificate(subject, issuer, extendedCertificateData, true);
 
         createKeyStoreFiles();
 
