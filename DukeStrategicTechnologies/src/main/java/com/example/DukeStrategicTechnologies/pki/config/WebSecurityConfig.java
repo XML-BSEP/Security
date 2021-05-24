@@ -59,7 +59,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     // Definisemo prava pristupa odredjenim URL-ovima
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+//        XSS PREVENTION Making an Application XSS Safe with Spring Security https://www.baeldung.com/spring-prevent-xss
         http
+                .headers()
+                .xssProtection()
+                .and()
+                .contentSecurityPolicy("script-src 'self'");
+
+        http
+
                 // komunikacija izmedju klijenta i servera je stateless posto je u pitanju REST aplikacija
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 
@@ -73,6 +81,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/template/add").permitAll()
                 .antMatchers("/template/all").permitAll()
                 .antMatchers("/users/all").permitAll()
+                .antMatchers("/users/add").permitAll()
+
                 .antMatchers("/certificate/getCaCertificates").permitAll()
                 .antMatchers("/certificate/getRootCertificates").permitAll()
 
