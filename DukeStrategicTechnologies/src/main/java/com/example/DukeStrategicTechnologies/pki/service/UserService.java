@@ -38,7 +38,7 @@ public class UserService {
             throw new Exception(USER_ALREADY_EXIST);
         }
 
-        String commonName = userDTO.getGivenName() + (userRepository.findAll().size() + 1);
+        String commonName = "localhost"; //userDTO.getGivenName() + (userRepository.findAll().size() + 1);
 
         User newUser = new User(userDTO.getGivenName(), userDTO.getSurname(), commonName, userDTO.getOrganization(), userDTO.getOrganizationUnit(),
                 userDTO.getState(), userDTO.getCity(), userDTO.getEmail(), false, 0L);
