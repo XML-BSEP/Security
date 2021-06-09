@@ -1,0 +1,99 @@
+<div class="container">
+  <div class="content">
+    <div id="left-part">
+      <div id="title">
+        <h1 id="title-text">Welcome to Duke's Strategic Technologies</h1>
+      </div>
+
+    </div>
+    <div id="right-part">
+      <mat-card class="main-card">
+        <h1 class="register-text">Register</h1>
+        <form [formGroup]="registrationForm" >
+          <div>
+            <mat-form-field appearance="fill" id="text-ff">
+              <mat-label>Name*</mat-label>
+              <input matInput placeholder="Name"
+                    formControlName="name">
+              <mat-error
+                *ngIf="!registrationForm.get('name').valid && registrationForm.get('name').touched && registrationForm.get('name').errors['required']">
+                Please enter name</mat-error>
+
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="fill" id="text-ff">
+              <mat-label>Lastname*</mat-label>
+              <input matInput placeholder="Lastname"
+                    formControlName="lastname">
+              <mat-error
+                *ngIf="!registrationForm.get('lastname').valid && registrationForm.get('lastname').touched && registrationForm.get('lastname').errors['required']">
+                Please enter lastname</mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="fill" id="text-ff">
+              <mat-label>Username*</mat-label>
+              <input matInput placeholder="Username"
+                    formControlName="username">
+              <mat-error
+                *ngIf="!registrationForm.get('username').valid && registrationForm.get('username').touched && registrationForm.get('username').errors['required']">
+                Please enter email</mat-error>
+
+            </mat-form-field>
+          </div>
+            <div>
+            <mat-form-field appearance="fill" id="text-ff">
+              <mat-label>Email*</mat-label>
+              <input matInput placeholder="Email"
+                    formControlName="email">
+              <mat-error
+                *ngIf="!registrationForm.get('email').valid && registrationForm.get('email').touched && registrationForm.get('email').errors['required']">
+                Please enter email</mat-error>
+                <mat-error
+                *ngIf="!registrationForm.get('email').valid && registrationForm.get('email').touched && registrationForm.get('email').errors['email']">
+                Please enter email</mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="fill" id="text-ff">
+              <mat-label>Password*</mat-label>
+              <input matInput type="password" placeholder="Password"
+                    formControlName="password" (change)="checkPassword()">
+                    <mat-hint>Password must have minimum 1 uppercase letter, 1 lowercase letter, 1 digit and 1 special character</mat-hint>
+
+              <mat-error
+                *ngIf="!registrationForm.get('password').valid && registrationForm.get('password').touched && registrationForm.get('password').errors['required']">
+                Please enter password</mat-error>
+                <mat-error
+                *ngIf="!registrationForm.get('password').valid && registrationForm.get('password').touched && registrationForm.get('password').errors['pattern']">
+                Password must have minimum 1 uppercase letter, 1 lowercase letter, 1 digit and 1 special character and needs to be minimum 8 characters long.</mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="fill" id="text-ff">
+              <mat-label>Confirm password*</mat-label>
+              <input matInput type="password" placeholder="Password"
+                    formControlName="confirmPassword" >
+                    <mat-hint>Password must have minimum 1 uppercase letter, 1 lowercase letter, 1 digit and 1 special character</mat-hint>
+
+              <mat-error
+                *ngIf="!registrationForm.get('confirmPassword').valid && registrationForm.get('confirmPassword').touched && registrationForm.get('confirmPassword').errors['required']">
+                Please confirm password</mat-error>
+                <mat-error
+                *ngIf="!registrationForm.get('confirmPassword').valid && registrationForm.get('confirmPassword').touched && registrationForm.get('confirmPassword').errors['pattern']">
+                Password must have minimum 1 uppercase letter, 1 lowercase letter, 1 digit and 1 special character and needs to be minimum 8 characters long.</mat-error>
+
+            </mat-form-field>
+          </div>
+
+
+          </form>
+          <button mat-raised-button id="register" [disabled]="!registrationForm.valid" (click)="register()">Register</button>
+          <p id="login">Already have an account? <a href="/login"> Sign in!</a></p>
+
+    </mat-card>
+  </div>
+  </div>
+
+</div>

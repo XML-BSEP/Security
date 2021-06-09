@@ -1,0 +1,135 @@
+
+.container{
+  background-image:url('/assets/large-material.jpeg');
+
+  width:100%;
+  height:100%;
+}
+.content{
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+    /* flex-direction:column; */
+}
+#left-part{
+  width:50%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  flex-direction: column;
+}
+#title{
+  margin-left: 5%;
+  margin-top: 20%;
+  width:90%;
+  justify-content:center;
+  height:30%;
+}
+#browse{
+  margin-left: 5%;
+  width:50%;
+  justify-content:center;
+  height:20%;
+}
+
+#browse-button{
+  background-color: rgb(28, 133, 165);
+  color:white;
+  font-size: 1.2rem;
+  margin-left: 5%;
+  width:60%;
+  height:40%;
+  border-radius: 20px;
+  border: 4px solid white;
+}
+#browse-button:hover{
+  background-color:white;
+  color: rgb(28, 133, 165);
+  border: 1px solid rgb(28, 133, 165);
+
+}
+#title-text{
+  font-size: 5rem;
+  font-weight:500;
+  color:white;
+  line-height:100%;
+  font-family: 'Roboto', sans-serif;
+}
+#right-part{
+  width:50%;
+  height:100%;
+  display:flex;
+  /*  If I uncomment this then it will be even on both sides and like mroe on the right  */
+  /* justify-content:center; */
+  flex-direction:row;
+}
+
+.register-text{
+    color:black;
+    font-size: 2.4rem;
+    background-color:white;
+    margin-left: 36%;
+
+}
+
+#register{
+    background-color: #2980B9;
+    color:white;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    margin-left: 20%;
+    width:60%;
+    height:7%;
+    border-radius: 20px;
+
+}
+#register:hover{
+    background-color:white;
+    color: #2980B9;
+    border: 1px solid #2980B9;
+
+}
+.main-card{
+    margin-top:15%;
+    margin-left: 0%;
+    width:60%;
+    height:70%;
+    display:flex;
+    justify-content:center;
+    flex-direction: column;
+}
+#list-element{
+  color:black;
+  font-size: 14px;
+  margin: -15px 0;
+
+}
+#login{
+  margin-top:5%;
+  margin-left:25%;
+  font-size:1.3rem;
+}
+#text-ff{
+    width:80%;
+    margin-left:10%;
+    background-color: white;
+    margin-top:0.8rem;
+}
+#list{
+  width: 80%;
+  margin-left:15%;
+}
+#toggler{
+  margin-left:10%;
+  display:flex;
+  justify-content:center;
+  flex-direction: row;
+}
+#tips{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width:100%;
+  height:10rem;
+}
+

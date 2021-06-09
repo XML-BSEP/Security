@@ -2,12 +2,12 @@
 .container{
     background-image:url('/assets/large-material.jpeg');
     width:100%;
-    height:100%; 
+    height:100%;
 }
 .content{
     display:flex;
     justify-content:center;
-    
+
 }
 .title{
     color:black;
@@ -28,7 +28,7 @@
     background-color:white;
     color: rgb(28, 133, 165);
     border: 1px solid rgb(28, 133, 165);
-    
+
 }
 .main-card{
     margin-top:10%;
@@ -67,5 +67,10 @@
     background-color:white;
     color: rgb(28, 133, 165);
     border: 1px solid rgb(28, 133, 165);
-    
+
+}
+#forgottenPassword{
+    margin-top:5%;
+    margin-left:25%;
+    font-size:1.3rem;
 }
