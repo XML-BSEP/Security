@@ -14,7 +14,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ChooseIssuerDialogComponent } from './dialogs/choose-issuer-dialog/choose-issuer-dialog.component';
 import { SavedTemplatesDialogComponent } from './dialogs/saved-templates-dialog/saved-templates-dialog.component';
 import { ErrorInterceptor, JwtInterceptor } from './helpers';
-
+import { ToastrModule } from 'ngx-toastr';
+import {RegisterComponent} from '../app/register/register.component';
+import { RegistrationConfirmationComponent } from './registration-confirmation/registration-confirmation.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +28,10 @@ import { ErrorInterceptor, JwtInterceptor } from './helpers';
     LoginComponent,
     ChooseIssuerDialogComponent,
     SavedTemplatesDialogComponent,
+    RegisterComponent,
+    RegistrationConfirmationComponent,
+    ForgotPasswordComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -33,7 +40,8 @@ import { ErrorInterceptor, JwtInterceptor } from './helpers';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot()
   ],
   providers: [{provide : HTTP_INTERCEPTORS, useClass : JwtInterceptor, multi : true},
               {provide : HTTP_INTERCEPTORS, useClass : ErrorInterceptor, multi : true}],

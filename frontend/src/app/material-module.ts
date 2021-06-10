@@ -72,7 +72,7 @@ import {MatFormFieldControl, MatFormFieldModule} from '@angular/material/form-fi
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-    MatFormFieldModule
+    MatFormFieldModule,
     ]
 })
 export class MaterialModule {}

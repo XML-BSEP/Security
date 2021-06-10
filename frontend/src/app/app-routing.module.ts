@@ -1,3 +1,5 @@
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { RegisterComponent } from './register/register.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AllCertificatesComponent } from './all-certificates/all-certificates.component';
@@ -6,9 +8,10 @@ import { AuthGuard } from './helpers';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { Role } from './model/user/role';
+import { RegistrationConfirmationComponent } from './registration-confirmation/registration-confirmation.component';
 
 const routes: Routes = [
-  { 
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
@@ -30,8 +33,21 @@ const routes: Routes = [
   // data: {roles:[Role.Admin]}
 },
 {
+  path: 'register',
+  component: RegisterComponent
+},
+{
+  path:'regconfirm',
+  component: RegistrationConfirmationComponent
+
+},
+{
   path: 'login',
   component: LoginComponent
+},
+{
+  path:'forgotPassword',
+  component: ForgotPasswordComponent
 }
 ];
 

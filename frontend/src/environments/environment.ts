@@ -26,7 +26,14 @@ export const environment = {
   getPossibleKeyUsages : "getPossibleKeyUsages",
   downloadCertificate : "downloadCertificate",
   revokeCertificate: "revokeCertificate",
-  createRootCertificate : "createRootCertificate"
+  createRootCertificate : "createRootCertificate",
+  registration : "register",
+  confirmAccount : "confirmAccount",
+  resendPassCode : "resendPassCode",
+  resetPassword : "resetPassword",
+  resendRegCode : "resendRegistrationCode",
+  resetPasswordMail : "resetPasswordMail",
+
 };
 
 /*
