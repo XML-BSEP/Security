@@ -536,7 +536,9 @@ public class CertificateService {
         certificateDTO.setEmail(email);
         certificateDTO.setCommonName(commonName);
         certificateDTO.setRevoked(ocspService.isRevoked(serialNumber));
-        certificateDTO.setIssuerId(user.getId());
+        if (user != null) {
+            certificateDTO.setIssuerId(user.getId());
+        }
 
         return certificateDTO;
     }
