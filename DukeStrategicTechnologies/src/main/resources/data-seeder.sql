@@ -7,6 +7,7 @@ insert into users values ('103', 0, 'Novi Sad', 'user2', 'user2@gmail.com', 'use
 insert into users values ('104', 0, 'Novi Sad', 'user3', 'user3@gmail.com', 'user13', false, 'org25', 'orgunit25', 'Serbia', 'userovic');
 insert into users values ('105', 0, 'Novi Sad', 'user4', 'user4@gmail.com', 'user14', false, 'org26', 'orgunit26', 'Serbia', 'userovic');
 
+--SIFRA JE 12345
 insert into accounts(id, email, password, role) VALUES (101, 'rootic@gmail.com', '$2y$12$.KPz1YKXZWpuHf504I07BOQrH2mfEP4qIxKNQ4scVhTu/uxsi4Eqm', 'Admin');
 insert into accounts(id, email, password, role) VALUES (102, 'user1@gmail.com', '$2y$12$x/JI8Vrzn3IWCPZpbLn4qOpqObD0npAA6DV6EcHv7GojslHdL1n4K', 'User');
 insert into accounts(id, email, password, role) VALUES (103, 'user2@gmail.com', '$2y$12$x/JI8Vrzn3IWCPZpbLn4qOpqObD0npAA6DV6EcHv7GojslHdL1n4K', 'User');

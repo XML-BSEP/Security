@@ -1,5 +1,7 @@
 package com.example.DukeStrategicTechnologies.pki.service;
 
+import com.example.DukeStrategicTechnologies.pki.dto.NewUserDTO;
+import com.example.DukeStrategicTechnologies.pki.dto.RegisteredUserDTO;
 import com.example.DukeStrategicTechnologies.pki.dto.TemplateDTO;
 import com.example.DukeStrategicTechnologies.pki.dto.UserDTO;
 import com.example.DukeStrategicTechnologies.pki.mapper.TemplateMapper;
@@ -28,7 +30,33 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
     public static final String USER_ALREADY_EXIST = "Email already exists!";
+    public static final String WRONG_PASSWORD = "Passwords do not match!";
+
     public UserService(){
+
+    }
+
+    public void register(NewUserDTO userDTO) throws Exception{
+        User userExist = userRepository.findByEmail(userDTO.getEmail());
+        if (userExist != null) {
+            throw new Exception(USER_ALREADY_EXIST);
+        }
+        User newUser = new User(userDTO.getName(), userDTO.getSurname(), userDTO.getCommonName(), userDTO.getOrganization(), userDTO.getOrganizationUnit(),
+                userDTO.getState(), userDTO.getCity(), userDTO.getEmail(), false, 0L);
+
+        List<Authority> authorities = new ArrayList<>();
+        authorities.add(new Authority(2L, "ROLE_END_ENTITY_USER"));
+
+        if(!userDTO.getPassword().equals(userDTO.getConfirmPassword())){
+            throw new Exception(WRONG_PASSWORD);
+        }
+
+        Account newAccount = new Account(userDTO.getEmail(), passwordEncoder.encode(userDTO.getPassword()));
+
+        newAccount.setRole("User");
+        newAccount.setAuthorities(authorities);
+        accountRepository.save(newAccount);
+        userRepository.save(newUser);
 
     }
 

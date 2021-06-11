@@ -85,6 +85,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/certificate/getCaCertificates").permitAll()
                 .antMatchers("/certificate/getRootCertificates").permitAll()
+                .antMatchers("/users/register").permitAll()
 
                 // za svaki drugi zahtev korisnik mora biti autentifikovan
                 .anyRequest().authenticated().and()

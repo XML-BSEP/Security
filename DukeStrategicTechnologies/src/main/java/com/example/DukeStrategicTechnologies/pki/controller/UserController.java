@@ -1,5 +1,6 @@
 package com.example.DukeStrategicTechnologies.pki.controller;
 
+import com.example.DukeStrategicTechnologies.pki.dto.NewUserDTO;
 import com.example.DukeStrategicTechnologies.pki.dto.TemplateDTO;
 import com.example.DukeStrategicTechnologies.pki.dto.UserDTO;
 import com.example.DukeStrategicTechnologies.pki.service.UserService;
@@ -29,6 +30,10 @@ public class UserController {
     public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO) throws Exception {
         userService.saveUser(userDTO);
         return  new ResponseEntity<>(HttpStatus.OK);
-
+    }
+    @PostMapping(value="/register", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> register(@RequestBody NewUserDTO userDTO) throws Exception {
+        userService.register(userDTO);
+        return  new ResponseEntity<>(HttpStatus.OK);
     }
 }
