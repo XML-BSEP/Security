@@ -1,6 +1,7 @@
 package com.example.DukeStrategicTechnologies.pki.controller;
 
 import com.example.DukeStrategicTechnologies.pki.dto.TemplateDTO;
+import com.example.DukeStrategicTechnologies.pki.dto.UserTemplateDTO;
 import com.example.DukeStrategicTechnologies.pki.service.TemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,16 +22,23 @@ public class TemplateController {
     private TemplateService templateService;
 
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN') || hasAuthority('ROLE_END_ENTITY_USER') || hasAuthority('ROLE_CA')")
     public ResponseEntity<?> createTemplate(@RequestBody TemplateDTO templateDTO) throws Exception {
         templateService.createTemplate(templateDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping("/all")
-//    @PreAuthorize("hasRole('ADMIN') || hasRole('CA')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN') || hasAuthority('ROLE_END_ENTITY_USER') || hasAuthority('ROLE_CA')")
     public ResponseEntity<?> getAll() throws Exception{
         List<TemplateDTO> templateDTOS = templateService.getAllTemplates();
+        return  new ResponseEntity<>(templateDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping("/allByUser")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN') || hasAuthority('ROLE_END_ENTITY_USER') || hasAuthority('ROLE_CA')")
+    public ResponseEntity<?> getAllByUser(@RequestParam Long userId) throws Exception{
+        List<TemplateDTO> templateDTOS = templateService.getAllTemplatesByUser(userId);
         return  new ResponseEntity<>(templateDTOS, HttpStatus.OK);
     }
 }

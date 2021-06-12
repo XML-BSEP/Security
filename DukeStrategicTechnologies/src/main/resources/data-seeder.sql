@@ -2,11 +2,11 @@
         insert into authority(id, name) values (2, 'ROLE_END_ENTITY_USER');
         insert into authority(id, name) values (3, 'ROLE_CA');
 
-        insert into users values ('102', 0, 'Novi Sad', 'user1', 'user1@gmail.com', 'user11', false, 'org23', 'orgunit23', 'Serbia', 'userovic');
-        insert into users values ('103', 0, 'Novi Sad', 'user2', 'user2@gmail.com', 'user12', false, 'org24', 'orgunit24', 'Serbia', 'userovic');
-        insert into users values ('104', 0, 'Novi Sad', 'user3', 'user3@gmail.com', 'user13', false, 'org25', 'orgunit25', 'Serbia', 'userovic');
-        insert into users values ('105', 0, 'Novi Sad', 'user4', 'user4@gmail.com', 'user14', false, 'org26', 'orgunit26', 'Serbia', 'userovic');
-        insert into users values ('106', 0, 'Novi Sad', 'user5', 'alexignjat1998@gmail.com', 'user15', false, 'org27', 'orgunit27', 'Serbia', 'userovic');
+        insert into users values (102, 0, 'Novi Sad', 'user1', 'user1@gmail.com', 'user11', false, 'org23', 'orgunit23', 'Serbia', 'userovic');
+        insert into users values (103, 0, 'Novi Sad', 'user2', 'user2@gmail.com', 'user12', false, 'org24', 'orgunit24', 'Serbia', 'userovic');
+        insert into users values (104, 0, 'Novi Sad', 'user3', 'user3@gmail.com', 'user13', false, 'org25', 'orgunit25', 'Serbia', 'userovic');
+        insert into users values (105, 0, 'Novi Sad', 'user4', 'user4@gmail.com', 'user14', false, 'org26', 'orgunit26', 'Serbia', 'userovic');
+        insert into users values (106, 0, 'Novi Sad', 'user5', 'alexignjat1998@gmail.com', 'user15', false, 'org27', 'orgunit27', 'Serbia', 'userovic');
 
         --SIFRA JE 12345
         insert into accounts(id, email, password, role) VALUES (101, 'rootic@gmail.com', '$2y$12$.KPz1YKXZWpuHf504I07BOQrH2mfEP4qIxKNQ4scVhTu/uxsi4Eqm', 'Admin');

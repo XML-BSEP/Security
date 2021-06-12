@@ -104,6 +104,8 @@ public class CertificateService {
         Subject subject = new Subject(issuer.getX500Name(), issuer.getKeyPair());
         BigInteger serialNumber = generateSerialNumberForCertificate();
 
+        String commonName = root.getCommonName();
+        String email = root.getEmail();
         ArrayList<Integer> keyUsageValues = new ArrayList<>();
         ArrayList<KeyPurposeId> extendedKeyUsageValues = new ArrayList<>();
 
@@ -140,7 +142,7 @@ public class CertificateService {
                 serialNumber
         );
 
-        X509Certificate rootCertificate = certificateGenerator.generateCertificate(subject, issuer, extendedCertificateData, false);
+        X509Certificate rootCertificate = certificateGenerator.generateCertificate(commonName, email, subject, issuer, extendedCertificateData, false);
 
         String keyStorePass = keyStoreProperties.readKeyStorePass(KeyStoreProperties.ROOT_FILE) + serialNumber;
 
@@ -174,6 +176,8 @@ public class CertificateService {
         if (user == null) {
             throw new Exception(SUBJECT_NOT_FOUND);
         }
+        String commonName = user.getCommonName();
+        String email = user.getEmail();
 
         if (user.getEmail().equals(issuer.getEmail())) {
             if (!isSelfSignedCertificate(issuerAlias)) {
@@ -203,7 +207,7 @@ public class CertificateService {
         KeyPair issuerKeyPair = new KeyPair(issuerPublicKey, (PrivateKey) issuerPrivateKey);
         Issuer issuerData = new Issuer(issureX509Name, issuerKeyPair);
 
-        X509Certificate subjectCertificate = certificateGenerator.generateCertificate(subject, issuerData, extendedCertificateData, false);
+        X509Certificate subjectCertificate = certificateGenerator.generateCertificate(commonName, email, subject, issuerData, extendedCertificateData, false);
         String subjectPassword = "";
         String keyStorePass = "";
         String filePath = "";
@@ -244,10 +248,14 @@ public class CertificateService {
         Date subjectNotBeforeDate = java.sql.Date.valueOf(subjectNotBefore);
         Date subjectNotAfterDate = java.sql.Date.valueOf(subjectNotAfter);
 
-        if(subjectNotBeforeDate.compareTo(new Date((new Date()).getTime() + 24*60*60*1000)) >= 0|| subjectNotBeforeDate.before(issuerNotBefore)) {
-            throw new Exception(INVALID_DATE);
-        }
+        if(subjectNotBeforeDate.compareTo(new Date(((new Date()).getTime())-24*60*60*1000)) <=0){
 
+                    throw new Exception(INVALID_DATE);
+        }
+        if(subjectNotBeforeDate.before(issuerNotBefore)) {
+            throw new Exception(INVALID_DATE);
+
+        }
         if(subjectNotAfterDate.after(issuerNotAfter)) {
             throw new Exception(INVALID_DATE);
         }
@@ -327,8 +335,10 @@ public class CertificateService {
             throw new Exception(SUBJECT_NOT_FOUND);
         }
 
+        String commonName = user.getGivenName() + (userRepository.findAll().size() + 1);
+
         X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
-        builder.addRDN(BCStyle.CN, "localhost");
+        builder.addRDN(BCStyle.CN, commonName);
         builder.addRDN(BCStyle.SURNAME, user.getSurname());
         builder.addRDN(BCStyle.GIVENNAME, user.getGivenName());
         builder.addRDN(BCStyle.O, user.getOrganization());

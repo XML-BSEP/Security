@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,13 +19,14 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/all")
-//    @PreAuthorize("hasRole('ADMIN') || hasRole('CA')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN') || hasAuthority('ROLE_END_ENTITY_USER') || hasAuthority('ROLE_CA')")
     public ResponseEntity<?> getAll() throws Exception{
         List<UserDTO> dtos = userService.getAllUsers();
         return  new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 
     @PostMapping(value="/add", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAuthority('ROLE_ADMIN') || hasAuthority('ROLE_USER')")
     public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO) throws Exception {
         userService.saveUser(userDTO);
         return  new ResponseEntity<>(HttpStatus.OK);

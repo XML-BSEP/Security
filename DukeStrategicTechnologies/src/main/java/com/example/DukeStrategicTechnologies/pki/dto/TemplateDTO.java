@@ -13,10 +13,10 @@ public class TemplateDTO {
     private LocalDateTime timestamp;
     private Set<String> keyUsage;
     private Set<String> extendedKeyUsage;
-
+    private Long user;
 
     public TemplateDTO(Long id, String signatureAlgorithm, String keyAlgorithm, String name,
-                       LocalDateTime timestamp, Set<String> keyUsage, Set<String> extendedKeyUsage) {
+                       LocalDateTime timestamp, Set<String> keyUsage, Set<String> extendedKeyUsage, Long user) {
         this.id = id;
         this.signatureAlgorithm = signatureAlgorithm;
         this.keyAlgorithm = keyAlgorithm;
@@ -24,8 +24,16 @@ public class TemplateDTO {
         this.timestamp = timestamp;
         this.keyUsage = keyUsage;
         this.extendedKeyUsage = extendedKeyUsage;
+        this.user = user;
     }
 
+    public Long getUser() {
+        return user;
+    }
+
+    public void setUser(Long user) {
+        this.user = user;
+    }
 
     public Long getId() {
         return id;

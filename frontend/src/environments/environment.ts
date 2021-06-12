@@ -33,7 +33,7 @@ export const environment = {
   resetPassword : "resetPassword",
   resendRegCode : "resendRegistrationCode",
   resetPasswordMail : "resetPasswordMail",
-
+  allByUser : "allByUser"
 };
 
 /*

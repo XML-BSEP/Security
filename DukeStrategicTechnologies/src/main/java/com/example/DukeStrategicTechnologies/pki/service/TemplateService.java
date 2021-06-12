@@ -40,5 +40,17 @@ public class TemplateService {
         return dtoTemplates;
     }
 
+    public List<TemplateDTO> getAllTemplatesByUser(Long userId){
+
+        List<Template> templates = templateRepository.findAll();
+        List<TemplateDTO> dtoTemplates = new ArrayList<>();
+
+        for (Template template : templates) {
+            if(template.getAccount().getId().equals(userId)){
+                dtoTemplates.add(templateMapper.templateToDTO(template));
+            }
+        }
+        return dtoTemplates;
+    }
 
 }

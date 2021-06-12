@@ -60,7 +60,7 @@ export class CreateCertificateComponent implements OnInit {
   createSubjectDisable : boolean = false;
   // allKeyUsages : string[] = ["digitalSignature", "nonRepudiation", "keyEncipherment", "dataEncipherment", "keyAgreement", "certificateSigning", "crlSigning", "encipherOnly", "decipherOnly" ];
   allKeyUsages : string[];
-
+  user : Number;
   // allExtendedKeyUsages: string[] = ["serverAuth", "clientAuth", "signExecCode", "emailProtection", "ipsecEndSystem", "ipsecTunnel", "ipsecUser", "timeStamping", "ocspSigning"];
   allExtendedKeyUsages: string[];
   constructor(private certificateService :CertificatesService, private router : Router,    public signingCertDialog: MatDialog, private templateService : TemplateService, public savedTemplates : MatDialog , private userService : UsersService) { }
@@ -71,6 +71,7 @@ export class CreateCertificateComponent implements OnInit {
     this.isSelectedSubject = false;
     if(localStorage.getItem('userId')!==null){
       this.userLoggedIn = true;
+      this.user = Number(localStorage.getItem('userId'))
     }else{
       this.userLoggedIn=false;
     }
@@ -190,7 +191,7 @@ export class CreateCertificateComponent implements OnInit {
   saveTemplate(){
     let timestamp = new Date();
 
-    this.template = new Template(null, this.firstFormGroup.controls.signatureAlgorithm.value, this.firstFormGroup.controls.pubKeyAlgorithm.value, this.firstFormGroup.controls.issuer.value, timestamp, this.selectedKeyUsages, this.selectedExtendedKeyUsages);
+    this.template = new Template(null, this.firstFormGroup.controls.signatureAlgorithm.value, this.firstFormGroup.controls.pubKeyAlgorithm.value, this.firstFormGroup.controls.issuer.value, timestamp, this.selectedKeyUsages, this.selectedExtendedKeyUsages, this.user);
 
     console.log(this.template);
 
@@ -354,7 +355,7 @@ export class CreateCertificateComponent implements OnInit {
       error => {
         alert("Error");
       }
-    
+
     );
   }
 

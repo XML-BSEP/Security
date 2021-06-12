@@ -1,3 +1,4 @@
+import { User } from 'src/app/model/user/user';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { RegisterComponent } from './register/register.component';
 import { NgModule } from '@angular/core';
@@ -18,19 +19,21 @@ const routes: Routes = [
 },
 {
   path: 'home',
-  component: HomeComponent
+  component: HomeComponent,
+  canActivate : [AuthGuard],
+  data: {roles:[Role.Admin, Role.User]}
 },
 {
   path: 'createCertificate',
   component: CreateCertificateComponent,
-  //canActivate : [AuthGuard],
-  //data: {roles:[Role.Admin]}
+  canActivate : [AuthGuard],
+  data: {roles:[Role.Admin, Role.User]}
 },
 {
   path: 'allCertificates',
   component: AllCertificatesComponent,
-  // canActivate : [AuthGuard],
-  // data: {roles:[Role.Admin]}
+  canActivate : [AuthGuard],
+  data: {roles:[Role.Admin, Role.User]}
 },
 {
   path: 'register',

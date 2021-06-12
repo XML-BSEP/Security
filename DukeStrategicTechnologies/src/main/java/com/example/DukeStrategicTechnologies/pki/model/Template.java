@@ -37,11 +37,15 @@ public class Template {
     @Column(name = "timestamp")
     private LocalDateTime timestamp;
 
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
+//    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private Account account;
+
     public Template() {
     }
 
     public Template(Long id, String signatureAlgorithm, String keyAlgorithm,
-                    Set<String> keyUsage, Set<String> extendedKeyUsage, String name, LocalDateTime timestamp) {
+                    Set<String> keyUsage, Set<String> extendedKeyUsage, String name, LocalDateTime timestamp, Account user) {
         this.id = id;
         this.signatureAlgorithm = signatureAlgorithm;
         this.keyAlgorithm = keyAlgorithm;
@@ -49,6 +53,7 @@ public class Template {
         this.extendedKeyUsage = extendedKeyUsage;
         this.name = name;
         this.timestamp = timestamp;
+        this.account = user;
     }
 
     public Long getId() {
@@ -105,5 +110,13 @@ public class Template {
 
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account user) {
+        this.account = user;
     }
 }

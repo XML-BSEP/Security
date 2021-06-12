@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Template } from 'src/app/model/certificates/Template';
+import { UserTemplate } from 'src/app/model/user/userTemplate';
 import { TemplateService } from 'src/app/service/template/template.service';
 
 @Component({
@@ -10,10 +11,13 @@ import { TemplateService } from 'src/app/service/template/template.service';
 })
 export class SavedTemplatesDialogComponent implements OnInit {
   savedTemplates : Template[] = [];
+  user : Number
   constructor(public dialogRef: MatDialogRef<SavedTemplatesDialogComponent>, public templateService : TemplateService) { }
 
   ngOnInit(): void {
+    this.user = Number(localStorage.getItem('userId'))
     this.loadSavedTemplates();
+
   }
   onSubmit(template) {
     console.log(template);
@@ -25,7 +29,7 @@ export class SavedTemplatesDialogComponent implements OnInit {
   }
 
   loadSavedTemplates(){
-    this.templateService.getAll().subscribe(data =>
+    this.templateService.getAllByUser(this.user).subscribe(data =>
       {
         this.savedTemplates = data;
         console.log(this.savedTemplates);
