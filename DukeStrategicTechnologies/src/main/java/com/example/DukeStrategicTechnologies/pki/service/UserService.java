@@ -1,6 +1,8 @@
 package com.example.DukeStrategicTechnologies.pki.service;
 
 import com.example.DukeStrategicTechnologies.pki.dto.*;
+import com.example.DukeStrategicTechnologies.pki.helpers.Validator;
+import com.example.DukeStrategicTechnologies.pki.helpers.validatorErrors.StringInputException;
 import com.example.DukeStrategicTechnologies.pki.mapper.UserMapper;
 import com.example.DukeStrategicTechnologies.pki.model.Account;
 import com.example.DukeStrategicTechnologies.pki.model.Authority;
@@ -31,6 +33,9 @@ public class UserService {
 
     @Autowired
     private EmailService emailService;
+
+
+
     public static final String USER_ALREADY_EXIST = "Email already exists!";
     public static final String WRONG_PASSWORD = "Passwords do not match!";
     public static final String WRONG_CODE = "Codes do not match!";
@@ -38,6 +43,7 @@ public class UserService {
     public static final String USER_DOES_NOT_EXIST = "User doesnt exist in db!";
 
     public static final String PKI_REDIS = "registrationRequest";
+    public static final String PKI_PASSWORD_REDIS = "passwordResetRequest";
 
     public UserService(){
 
@@ -48,6 +54,9 @@ public class UserService {
         if (userExist != null) {
             throw new Exception(USER_ALREADY_EXIST);
         }
+
+        Validator.validateRegistrationForm(userDTO);
+
         User newUser = new User(userDTO.getName(), userDTO.getSurname(), userDTO.getCommonName(), userDTO.getOrganization(), userDTO.getOrganizationUnit(),
                 userDTO.getState(), userDTO.getCity(), userDTO.getEmail(), false, 0L);
 
@@ -83,7 +92,12 @@ public class UserService {
 //        userRepository.save(newUser);
 
     }
+
     public void activateAccount(ActivationDTO dto) throws Exception{
+
+        Validator.validateActivationForm(dto);
+
+
         String redisKey = PKI_REDIS+dto.getEmail();
 
         JedisPool jedisPool = new JedisPool("localhost", 6379);
@@ -115,7 +129,66 @@ public class UserService {
         }
 
     }
-    public void resendCode(ResendCodeDTO dto) throws Exception{
+    public void sendPasswordResetCode(ResendCodeDTO dto) throws Exception{
+        Validator.validateResendCodeForm(dto);
+
+        String redisKey = PKI_PASSWORD_REDIS+dto.getEmail();
+
+        JedisPool jedisPool = new JedisPool("localhost", 6379);
+        int length = 8;
+        boolean useLetters = true;
+        boolean useNumbers = false;
+        String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
+
+
+        try (Jedis jedis = jedisPool.getResource()) {
+            jedis.set(redisKey,generatedString);
+            System.out.println(jedis.get(redisKey));
+        }
+
+        emailService.sendPasswordResetEmail(EmailService.generateEmailInfo(dto,generatedString));
+
+    }
+    public void resetPassword(PasswordResetDTO dto) throws Exception{
+        Validator.validatePasswordResetForm(dto);
+
+        String redisKey = PKI_PASSWORD_REDIS+dto.getEmail();
+        String code;
+        JedisPool jedisPool = new JedisPool("localhost", 6379);
+        try (Jedis jedis = jedisPool.getResource()) {
+            code = jedis.get(redisKey);
+            if (code == null){
+                throw new Exception(USER_DOES_NOT_EXIST);
+            }
+        }
+        if(code.equals(dto.getCode())){
+            if(dto.getPassword().equals(dto.getConfirmedpassword())){
+                Account a = accountRepository.findByEmail(dto.getEmail());
+                if(a!=null){
+                    a.setPassword(passwordEncoder.encode(dto.getPassword()));
+                    accountRepository.save(a);
+                    try(Jedis jedis = jedisPool.getResource()){
+                        jedis.del(redisKey);
+                    }
+
+                }
+            }else{
+                throw new Exception(WRONG_PASSWORD);
+            }
+        }else{
+            throw new Exception(WRONG_CODE);
+
+        }
+
+
+//        emailService.sendPasswordResetEmail(EmailService.generateEmailInfo(dto,generatedString));
+
+    }
+
+
+    public void resendCode(ResendCodeDTO dto) throws Exception, StringInputException {
+        Validator.validateResendCodeForm(dto);
+
         String redisKey = PKI_REDIS+dto.getEmail();
 
         JedisPool jedisPool = new JedisPool("localhost", 6379);
@@ -126,7 +199,7 @@ public class UserService {
                 throw new Exception(USER_DOES_NOT_EXIST);
             }
         }
-        
+
         try(Jedis jedis = jedisPool.getResource()){
             jedis.del(redisKey);
         }
@@ -146,6 +219,7 @@ public class UserService {
     }
 
     public void saveUser(UserDTO userDTO) throws Exception {
+        Validator.validateSaveUserForm(userDTO);
         User userExist = userRepository.findByEmail(userDTO.getEmail());
         if (userExist != null) {
             throw new Exception(USER_ALREADY_EXIST);

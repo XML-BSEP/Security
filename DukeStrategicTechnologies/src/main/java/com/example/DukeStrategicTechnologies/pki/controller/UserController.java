@@ -45,4 +45,16 @@ public class UserController {
         userService.resendCode(dto);
         return  new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PostMapping(value= "/resetPasswordMail", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> sendResetPasswordCode(@RequestBody ResendCodeDTO dto) throws Exception {
+        userService.sendPasswordResetCode(dto);
+        return  new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(value= "/resetPassword", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> ResetPassword(@RequestBody PasswordResetDTO dto) throws Exception {
+        userService.resetPassword(dto);
+        return  new ResponseEntity<>(HttpStatus.OK);
+    }
 }

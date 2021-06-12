@@ -2,6 +2,7 @@ package com.example.DukeStrategicTechnologies.pki.service;
 
 import com.example.DukeStrategicTechnologies.pki.dto.EmailDTO;
 import com.example.DukeStrategicTechnologies.pki.dto.RedisDTO;
+import com.example.DukeStrategicTechnologies.pki.dto.ResendCodeDTO;
 import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -37,6 +38,15 @@ public class EmailService {
         return emailDTO;
     }
 
+    public static EmailDTO generateEmailInfo(ResendCodeDTO p, String verCode) {
+
+        String email = p.getEmail();
+        EmailDTO emailDTO = new EmailDTO();
+        emailDTO.setEmail(email);
+        emailDTO.setSubject("Password reset");
+        emailDTO.setVerificationCode(verCode);
+        return emailDTO;
+    }
     public void sendConfirmationEmail(EmailDTO p) throws FileNotFoundException, IOException, MessagingException {
         String FilePath = "./template.html";
         File starting = new File(System.getProperty("user.dir"));
@@ -64,6 +74,33 @@ public class EmailService {
 
         javaMailSender.send(message);
 
+    }
+
+    public void sendPasswordResetEmail(EmailDTO p) throws FileNotFoundException, IOException, MessagingException {
+        String FilePath = "./template_reset.html";
+        File starting = new File(System.getProperty("user.dir"));
+        File file = new File(starting,"src/main/java/com/example/DukeStrategicTechnologies/pki/service/template_reset.html");
+
+
+
+        Document doc = Jsoup.parse(file, "utf-8");
+
+        MimeMessage message = javaMailSender.createMimeMessage();
+        Multipart multiPart = new MimeMultipart("alternative");
+
+        MimeBodyPart htmlPart = new MimeBodyPart();
+        String body = doc.body().getElementsByTag("body").toString();
+        body = body.replace("[code]", p.getVerificationCode());
+
+        htmlPart.setContent(body, "text/html; charset=utf-8");
+        multiPart.addBodyPart(htmlPart);
+
+        message.setContent(multiPart);
+        message.setRecipients(Message.RecipientType.TO, p.getEmail());
+
+        message.setSubject(p.getSubject());
+
+        javaMailSender.send(message);
 
     }
 }
