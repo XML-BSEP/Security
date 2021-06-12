@@ -9,6 +9,8 @@ import com.example.DukeStrategicTechnologies.pki.service.Base64Encoder;
 import com.example.DukeStrategicTechnologies.pki.service.CertificateService;
 import org.bouncycastle.cms.CMSException;
 import org.bouncycastle.operator.OperatorCreationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +34,7 @@ import java.util.List;
 @RequestMapping("certificate")
 public class CertificateController {
 
+    private final Logger LOGGER = LoggerFactory.getLogger(CertificateController.class);
     @Autowired
     private CertificateService certificateService;
 
@@ -43,6 +46,8 @@ public class CertificateController {
     @PostMapping("/createCertificate")
     @PreAuthorize("hasRole('ADMIN') || hasRole('CA')")
     public ResponseEntity<?> createCertificate(@RequestBody CreateCertificateDTO dto) throws Exception {
+        LOGGER.info("Handling CREATING CERTIFICATE");
+
         certificateService.createCertificate(dto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -50,6 +55,8 @@ public class CertificateController {
     @GetMapping("/getAll")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<CertificateDTO>> getAll() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        LOGGER.info("Handling GETTING ALL CERTIFICATES");
+
         List<CertificateDTO> certificateAlias = certificateService.getAllCertificates();
         return new ResponseEntity<>(certificateAlias, HttpStatus.OK);
     }
@@ -57,10 +64,13 @@ public class CertificateController {
     @GetMapping("/getAllForSigning")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<CertificateDTO>> getAllForSigning() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        LOGGER.info("Handling GETTING ALL CERTIFICATES FOR SIGNING");
+
         List<CertificateDTO> certificateAlias = new ArrayList<>();
         try{
             certificateAlias = certificateService.getAllCertificatesForSigning();
         }catch(Exception e){
+            LOGGER.error("Failed to getting all certificates for signing " +  e.getMessage());
             e.printStackTrace();
         }
 
@@ -70,6 +80,8 @@ public class CertificateController {
     @PostMapping("/downloadCertificate")
     @PreAuthorize("hasAuthority('ROLE_ADMIN') || hasAuthority('ROLE_END_ENTITY_USER') || hasAuthority('ROLE_CA')")
     public ResponseEntity<?> downloadCertificate(@RequestBody DownloadCertificateDTO dto) throws Exception {
+        LOGGER.info("Handling DOWNLOADING CERTIFICATE");
+
         base64Encoder.downloadCertificate(dto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -77,6 +89,8 @@ public class CertificateController {
     @PostMapping("/revokeCertificate")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> revokeCertificate(@RequestBody String serialNumber) throws Exception {
+        LOGGER.info("Handling REVOKING CERTIFICATE");
+
         Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String mail = ((Account)user).getUsername();
         certificateService.revokeCertificate(serialNumber, mail);
@@ -92,7 +106,10 @@ public class CertificateController {
     @GetMapping("/getCertificatesByUser")
     @PreAuthorize("hasAuthority('ROLE_ADMIN') || hasAuthority('ROLE_END_ENTITY_USER') || hasAuthority('ROLE_CA')")
     public ResponseEntity<?> getCertificatesByUser() throws Exception{
+
         Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        LOGGER.info(String.format("Handling GETTING ALL CERTIFICATES FOR SIGNING BY USER, USERNAME %s", ((Account)user).getUsername()));
         String mail = ((Account)user).getUsername();
         List<CertificateDTO> certificatesByUser = certificateService.getAllCertificatesByUser(mail);
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
@@ -101,6 +118,8 @@ public class CertificateController {
     @GetMapping("/getRootCertificates")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getSelfSignedCertificates() throws Exception{
+        LOGGER.info("Handling GETTING ROOT CERTIFICATES");
+
         List<CertificateDTO> certificatesByUser = certificateService.getRootCertificates();
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
     }
@@ -108,6 +127,8 @@ public class CertificateController {
     @GetMapping("/getPossibleKeyUsages")
     @PreAuthorize("hasAuthority('ROLE_ADMIN') || hasAuthority('ROLE_END_ENTITY_USER') || hasAuthority('ROLE_CA')")
     public ResponseEntity<?> getPossibleKeyUsages(@RequestParam("alias") String alias) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+        LOGGER.info(String.format("Handling GETTING POSSIBLE KEY USAGES, ALIAS %s", alias));
+
         return new ResponseEntity<>(certificateService.getPossibleKeyUsages(alias), HttpStatus.OK);
     }
 
@@ -115,7 +136,10 @@ public class CertificateController {
     @PreAuthorize("hasAuthority('ROLE_ADMIN') || hasAuthority('ROLE_CA')")
     public ResponseEntity<?> getCaCertificatesByUser() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
 
+
         Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        LOGGER.info(String.format("Handling GETTING ALL CERTIFICATES FOR SIGNING BY USER, USERNAME %s", ((Account)user).getUsername()));
         String mail = ((Account)user).getUsername();
         List<CertificateDTO> certificateDTOS = certificateService.getAllCaCertificatesByUser(mail);
 
@@ -126,7 +150,10 @@ public class CertificateController {
     @PreAuthorize("hasAuthority('ROLE_ADMIN') || hasAuthority('ROLE_END_ENTITY_USER') || hasAuthority('ROLE_CA')")
     public ResponseEntity<?> getEndEntityCertificatesByUser() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
 
+
         Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        LOGGER.info(String.format("Handling GETTING ALL CERTIFICATES FOR SIGNING BY USER, USERNAME %s", ((Account)user).getUsername()));
         String mail = ((Account)user).getUsername();
         List<CertificateDTO> certificateDTOS = certificateService.getAllEndEntityCertificatesByUser(mail);
 
@@ -137,6 +164,8 @@ public class CertificateController {
     @GetMapping("/getCaCertificates")
     @PreAuthorize("hasAuthority('ROLE_ADMIN') || hasAuthority('ROLE_CA')")
     public ResponseEntity<?> getCaCertificates() throws Exception{
+        LOGGER.info("Handling GETTING ALL CA CERTIFICATES ");
+
         List<CertificateDTO> certificatesByUser = certificateService.getCaCertificates();
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
     }
@@ -146,6 +175,8 @@ public class CertificateController {
     @GetMapping("/getEndEntityCertificates")
     @PreAuthorize("hasAuthority('ROLE_ADMIN') || hasAuthority('ROLE_END_ENTITY_USER') || hasAuthority('ROLE_CA')")
     public ResponseEntity<?> getEndEntityCertificates() throws Exception{
+        LOGGER.info("Handling GETTING ALL END ENTITY CERTIFICATES");
+
         List<CertificateDTO> certificatesByUser = certificateService.getEndEntityCertificates();
         return new ResponseEntity<>(certificatesByUser, HttpStatus.OK);
     }
@@ -153,8 +184,12 @@ public class CertificateController {
     @GetMapping("/getAllForSigningByUser")
     @PreAuthorize("hasAuthority('ROLE_ADMIN') || hasAuthority('ROLE_END_ENTITY_USER') || hasAuthority('ROLE_CA')")
     public ResponseEntity<List<CertificateDTO>> getAllForSigningByUser() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
+
         Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         String mail = ((Account)user).getUsername();
+        LOGGER.info(String.format("Handling GETTING ALL CERTIFICATES FOR SIGNING BY USER, USERNAME %s", ((Account)user).getUsername()));
+
         List<CertificateDTO> certificateAlias = certificateService.getAllCertificatesForSigningByUser(mail);
         return new ResponseEntity<>(certificateAlias, HttpStatus.OK);
     }
@@ -162,6 +197,7 @@ public class CertificateController {
     @PostMapping("/createRootCertificate")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> createRootCertificate(@RequestBody CreateCertificateDTO dto) throws Exception {
+        LOGGER.info("Handling CREATING ROOT CERTIFICATE");
         certificateService.createRootCertificate(dto);
         return new ResponseEntity<>(HttpStatus.OK);
     }

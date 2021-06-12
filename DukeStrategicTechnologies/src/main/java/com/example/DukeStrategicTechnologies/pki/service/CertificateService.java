@@ -25,6 +25,8 @@ import org.bouncycastle.asn1.x509.KeyPurposeId;
 import org.bouncycastle.asn1.x509.KeyUsage;
 import org.bouncycastle.cert.jcajce.JcaX509CertificateHolder;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +44,7 @@ public class CertificateService {
     static {
         Security.addProvider(new BouncyCastleProvider());
     }
+    private final Logger LOGGER = LoggerFactory.getLogger(CertificateService.class);
     public static final String CERTIFICATE_NOT_VALID = "Certificate is not valid!";
     public static final String CERTIFICATE_REVOKED = "Certificate is revoked!";
     public static final String SUBJECT_NOT_FOUND = "Subject not found!";
@@ -83,10 +86,12 @@ public class CertificateService {
         User root = userRepository.findAll().stream().filter(user -> user.getEmail().equals("root@gmail.com")).findFirst().orElse(null);
 
         if(root == null) {
+            LOGGER.error("failed to find root");
             throw new Exception("Znaci...");
         }
 
         if(createCertificateDTO.getIssuerId() != createCertificateDTO.getSubjectId()) {
+            LOGGER.error("issuer and subject are different");
             throw new Exception("Znaci...");
         }
 
@@ -155,6 +160,7 @@ public class CertificateService {
 
     public void createCertificate(CreateCertificateDTO createCertificateDTO) throws Exception {
         if (LocalDate.parse(createCertificateDTO.getEndDate()).compareTo(LocalDate.parse(createCertificateDTO.getStartDate())) < 0) {
+            LOGGER.error("failed to create certificate " + END_DATE_BEFORE_START);
             throw new Exception(END_DATE_BEFORE_START);
         }
 
@@ -162,6 +168,7 @@ public class CertificateService {
 
         User issuer = userRepository.findById(createCertificateDTO.getIssuerId()).get();
         if (issuer == null) {
+            LOGGER.error("failed to create certificate " + ISSUER_NOT_FOUND);
             throw new Exception(ISSUER_NOT_FOUND);
         }
 
@@ -169,11 +176,13 @@ public class CertificateService {
         KeyStore keyStore = getIssuerKeyStoreByAlias(issuerAlias);
 
         if(keyStore == null) {
+            LOGGER.error("failed to create certificate " + KEYSTORE_NOT_FOUND);
             throw new Exception(KEYSTORE_NOT_FOUND);
         }
 
         User user = userRepository.findById(createCertificateDTO.getSubjectId()).get();
         if (user == null) {
+            LOGGER.error("failed to create certificate " + SUBJECT_NOT_FOUND);
             throw new Exception(SUBJECT_NOT_FOUND);
         }
         String commonName = user.getCommonName();
@@ -181,6 +190,7 @@ public class CertificateService {
 
         if (user.getEmail().equals(issuer.getEmail())) {
             if (!isSelfSignedCertificate(issuerAlias)) {
+                LOGGER.error("failed to create certificate " + SELF_SIGNED_EXCEPTION);
                 throw new Exception(SELF_SIGNED_EXCEPTION);
             }
         }
@@ -249,14 +259,16 @@ public class CertificateService {
         Date subjectNotAfterDate = java.sql.Date.valueOf(subjectNotAfter);
 
         if(subjectNotBeforeDate.compareTo(new Date(((new Date()).getTime())-24*60*60*1000)) <=0){
-
+            LOGGER.error("failed to check if subject not before date " + INVALID_DATE);
                     throw new Exception(INVALID_DATE);
         }
         if(subjectNotBeforeDate.before(issuerNotBefore)) {
+            LOGGER.error("failed to check if subject not before date " + INVALID_DATE);
             throw new Exception(INVALID_DATE);
 
         }
         if(subjectNotAfterDate.after(issuerNotAfter)) {
+            LOGGER.error("failed to check if subject not after date " + INVALID_DATE);
             throw new Exception(INVALID_DATE);
         }
 
@@ -270,10 +282,12 @@ public class CertificateService {
     public void revokeCertificate(String serialNumber, String mail) throws Exception {
         Account user = accountRepository.findByEmail(mail);
         if (!user.getRole().equals("Admin")) {
+            LOGGER.error("failed to revoke certificate while " + NO_USER_PERMISSIONS);
             throw new Exception(NO_USER_PERMISSIONS);
         }
 
         if (revokedCertificateRepository.findBySerialNumber(serialNumber) != null) {
+            LOGGER.error("failed to check if subject not after date " + CERTIFICATE_REVOKED);
             throw new Exception(CERTIFICATE_REVOKED);
         }
 
@@ -332,6 +346,7 @@ public class CertificateService {
 
         User user = userRepository.findById(dto.getSubjectId()).get();
         if (user == null) {
+            LOGGER.error("failed to generate subject while " + SUBJECT_NOT_FOUND);
             throw new Exception(SUBJECT_NOT_FOUND);
         }
 
@@ -357,7 +372,9 @@ public class CertificateService {
             return keyGen.generateKeyPair();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
+            LOGGER.error("failed to generate key pair " + e.getMessage());
         } catch (NoSuchProviderException e) {
+            LOGGER.error("failed to generate key pair " + e.getMessage());
             e.printStackTrace();
         }
         return null;
@@ -453,6 +470,7 @@ public class CertificateService {
                 parent.checkValidity();
             }
         } catch (Exception e) {
+            LOGGER.error("failed to check if certificate is valid");
             throw new Exception(CERTIFICATE_NOT_VALID);
         }
     }

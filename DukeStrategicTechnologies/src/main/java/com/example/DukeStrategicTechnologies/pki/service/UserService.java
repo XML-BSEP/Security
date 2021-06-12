@@ -11,6 +11,8 @@ import com.example.DukeStrategicTechnologies.pki.repository.AccountRepository;
 import com.example.DukeStrategicTechnologies.pki.repository.UserRepository;
 import com.google.gson.Gson;
 import org.apache.commons.lang.RandomStringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,8 @@ import java.util.List;
 
 @Service
 public class UserService {
+
+    private final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
     @Autowired
     private UserRepository userRepository;
 
@@ -52,6 +56,7 @@ public class UserService {
     public void register(NewUserDTO userDTO) throws Exception{
         User userExist = userRepository.findByEmail(userDTO.getEmail());
         if (userExist != null) {
+            LOGGER.error("failed registration " + USER_ALREADY_EXIST);
             throw new Exception(USER_ALREADY_EXIST);
         }
 
@@ -64,6 +69,7 @@ public class UserService {
         authorities.add(new Authority(2L, "ROLE_END_ENTITY_USER"));
 
         if(!userDTO.getPassword().equals(userDTO.getConfirmPassword())){
+            LOGGER.error("failed registration " + WRONG_PASSWORD);
             throw new Exception(WRONG_PASSWORD);
         }
 
@@ -105,6 +111,7 @@ public class UserService {
         try (Jedis jedis = jedisPool.getResource()) {
             redis = new Gson().fromJson(jedis.get(redisKey), RedisDTO.class);
             if (redis == null){
+                LOGGER.error("failed to activate account " + USER_DOES_NOT_EXIST);
                 throw new Exception(USER_DOES_NOT_EXIST);
             }
         }
@@ -125,6 +132,7 @@ public class UserService {
             Jedis jedis = jedisPool.getResource();
             jedis.del(redisKey);
         }else{
+            LOGGER.error("failed to activate account " + WRONG_CODE);
             throw new Exception(WRONG_CODE);
         }
 
@@ -158,6 +166,7 @@ public class UserService {
         try (Jedis jedis = jedisPool.getResource()) {
             code = jedis.get(redisKey);
             if (code == null){
+                LOGGER.error("failed to reset password " + USER_DOES_NOT_EXIST);
                 throw new Exception(USER_DOES_NOT_EXIST);
             }
         }
@@ -173,9 +182,11 @@ public class UserService {
 
                 }
             }else{
+                LOGGER.error("failed to reset password " + WRONG_PASSWORD);
                 throw new Exception(WRONG_PASSWORD);
             }
         }else{
+            LOGGER.error("failed to reset password " + WRONG_CODE);
             throw new Exception(WRONG_CODE);
 
         }
@@ -196,6 +207,7 @@ public class UserService {
         try (Jedis jedis = jedisPool.getResource()) {
             redis = new Gson().fromJson(jedis.get(redisKey), RedisDTO.class);
             if (redis == null){
+                LOGGER.error("failed to resend code " + USER_DOES_NOT_EXIST);
                 throw new Exception(USER_DOES_NOT_EXIST);
             }
         }
@@ -222,6 +234,7 @@ public class UserService {
         Validator.validateSaveUserForm(userDTO);
         User userExist = userRepository.findByEmail(userDTO.getEmail());
         if (userExist != null) {
+            LOGGER.error("failed to save user " + USER_ALREADY_EXIST);
             throw new Exception(USER_ALREADY_EXIST);
         }
 

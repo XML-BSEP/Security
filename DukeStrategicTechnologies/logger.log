@@ -1,0 +1,1105 @@
+2021-06-12 18:57:03.178  INFO 9836 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Starting DukeStrategicTechnologiesApplication using Java 16.0.1 on DESKTOP-OSFVFMG with PID 9836 (P:\Faks xml\Security\DukeStrategicTechnologies\target\classes started by STEFAN-PC in P:\Faks xml\Security\DukeStrategicTechnologies)
+2021-06-12 18:57:03.182  INFO 9836 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : The following profiles are active: development
+2021-06-12 18:57:03.267  INFO 9836 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\xalan\2.7.2\xalan-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xercesImpl.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xml-apis.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/serializer.jar
+2021-06-12 18:57:03.276  INFO 9836 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\serializer\2.7.2\serializer-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/serializer/2.7.2/xml-apis.jar
+2021-06-12 18:57:03.277  INFO 9836 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-06-12 18:57:03.278  INFO 9836 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-06-12 18:57:04.391  INFO 9836 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-12 18:57:04.632  INFO 9836 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 232 ms. Found 4 JPA repository interfaces.
+2021-06-12 18:57:05.045  INFO 9836 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@35c841b' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 18:57:05.051  INFO 9836 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 18:57:05.490  INFO 9836 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2021-06-12 18:57:05.499  INFO 9836 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-12 18:57:05.500  INFO 9836 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.44]
+2021-06-12 18:57:05.633  INFO 9836 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-12 18:57:05.633  INFO 9836 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2354 ms
+2021-06-12 18:57:05.893  INFO 9836 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-12 18:57:05.939  INFO 9836 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.29.Final
+2021-06-12 18:57:06.070  INFO 9836 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-12 18:57:06.179  INFO 9836 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-12 18:57:06.344  INFO 9836 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-12 18:57:06.359  INFO 9836 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2021-06-12 18:57:07.570  WARN 9836 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 18:57:07.570  WARN 9836 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : constraint "fkrh4ixw0ra5ddouyhqpk4omi0u" of relation "templates" does not exist, skipping
+2021-06-12 18:57:07.709  INFO 9836 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-12 18:57:07.722  INFO 9836 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-12 18:57:07.865  INFO 9836 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-06-12 18:57:09.025  INFO 9836 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-12 18:57:09.366  INFO 9836 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/auth/login', POST] with []
+2021-06-12 18:57:09.366  INFO 9836 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/', GET] with []
+2021-06-12 18:57:09.367  INFO 9836 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/webjars/**', GET] with []
+2021-06-12 18:57:09.367  INFO 9836 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/*.html', GET] with []
+2021-06-12 18:57:09.367  INFO 9836 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/favicon.ico', GET] with []
+2021-06-12 18:57:09.368  INFO 9836 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.html', GET] with []
+2021-06-12 18:57:09.368  INFO 9836 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.css', GET] with []
+2021-06-12 18:57:09.368  INFO 9836 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.js', GET] with []
+2021-06-12 18:57:09.422  INFO 9836 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6f30fdfe, org.springframework.security.web.context.SecurityContextPersistenceFilter@5b7bbf27, org.springframework.security.web.header.HeaderWriterFilter@1475f06, org.springframework.web.filter.CorsFilter@6a4b8941, org.springframework.security.web.authentication.logout.LogoutFilter@233f5349, com.example.DukeStrategicTechnologies.pki.security.auth.TokenAuthenticationFilter@32df4eb, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3b160f2b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@9964555, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5659c17f, org.springframework.security.web.session.SessionManagementFilter@701a78bc, org.springframework.security.web.access.ExceptionTranslationFilter@733499b0, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@27efd0c]
+2021-06-12 18:57:09.525  INFO 9836 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path ''
+2021-06-12 18:57:09.541  INFO 9836 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Started DukeStrategicTechnologiesApplication in 7.138 seconds (JVM running for 9.186)
+2021-06-12 18:59:31.478  INFO 10468 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Starting DukeStrategicTechnologiesApplication using Java 16.0.1 on DESKTOP-OSFVFMG with PID 10468 (P:\Faks xml\Security\DukeStrategicTechnologies\target\classes started by STEFAN-PC in P:\Faks xml\Security\DukeStrategicTechnologies)
+2021-06-12 18:59:31.482  INFO 10468 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : The following profiles are active: development
+2021-06-12 18:59:31.573  INFO 10468 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\xalan\2.7.2\xalan-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xercesImpl.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xml-apis.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/serializer.jar
+2021-06-12 18:59:31.573  INFO 10468 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\serializer\2.7.2\serializer-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/serializer/2.7.2/xml-apis.jar
+2021-06-12 18:59:31.574  INFO 10468 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-06-12 18:59:31.575  INFO 10468 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-06-12 18:59:32.563  INFO 10468 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-12 18:59:32.885  INFO 10468 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 314 ms. Found 4 JPA repository interfaces.
+2021-06-12 18:59:33.283  INFO 10468 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@4665571c' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 18:59:33.288  INFO 10468 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 18:59:33.656  INFO 10468 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2021-06-12 18:59:33.667  INFO 10468 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-12 18:59:33.667  INFO 10468 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.44]
+2021-06-12 18:59:33.804  INFO 10468 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-12 18:59:33.805  INFO 10468 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2227 ms
+2021-06-12 18:59:34.062  INFO 10468 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-12 18:59:34.118  INFO 10468 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.29.Final
+2021-06-12 18:59:34.251  INFO 10468 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-12 18:59:34.372  INFO 10468 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-12 18:59:34.544  INFO 10468 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-12 18:59:34.561  INFO 10468 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2021-06-12 18:59:35.964  INFO 10468 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-12 18:59:35.975  INFO 10468 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-12 18:59:36.061  INFO 10468 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-06-12 18:59:37.221  INFO 10468 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-12 18:59:37.611  INFO 10468 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/auth/login', POST] with []
+2021-06-12 18:59:37.612  INFO 10468 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/', GET] with []
+2021-06-12 18:59:37.612  INFO 10468 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/webjars/**', GET] with []
+2021-06-12 18:59:37.612  INFO 10468 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/*.html', GET] with []
+2021-06-12 18:59:37.612  INFO 10468 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/favicon.ico', GET] with []
+2021-06-12 18:59:37.613  INFO 10468 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.html', GET] with []
+2021-06-12 18:59:37.613  INFO 10468 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.css', GET] with []
+2021-06-12 18:59:37.613  INFO 10468 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.js', GET] with []
+2021-06-12 18:59:37.672  INFO 10468 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@79619c4, org.springframework.security.web.context.SecurityContextPersistenceFilter@6c60719a, org.springframework.security.web.header.HeaderWriterFilter@3d8fac81, org.springframework.web.filter.CorsFilter@5826741f, org.springframework.security.web.authentication.logout.LogoutFilter@6cd80d2d, com.example.DukeStrategicTechnologies.pki.security.auth.TokenAuthenticationFilter@7b0c413c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@386e76f9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2aae3f33, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@56582f5a, org.springframework.security.web.session.SessionManagementFilter@1faa6722, org.springframework.security.web.access.ExceptionTranslationFilter@74669483, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@346e43f0]
+2021-06-12 18:59:37.966  INFO 10468 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path ''
+2021-06-12 18:59:37.988  INFO 10468 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Started DukeStrategicTechnologiesApplication in 7.295 seconds (JVM running for 9.048)
+2021-06-12 18:59:55.457  INFO 10468 --- [http-nio-8088-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-12 18:59:55.458  INFO 10468 --- [http-nio-8088-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-06-12 18:59:55.459  INFO 10468 --- [http-nio-8088-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2021-06-12 19:01:19.753  INFO 3200 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Starting DukeStrategicTechnologiesApplication using Java 16.0.1 on DESKTOP-OSFVFMG with PID 3200 (P:\Faks xml\Security\DukeStrategicTechnologies\target\classes started by STEFAN-PC in P:\Faks xml\Security\DukeStrategicTechnologies)
+2021-06-12 19:01:19.757  INFO 3200 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : The following profiles are active: development
+2021-06-12 19:01:19.867  INFO 3200 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\xalan\2.7.2\xalan-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xercesImpl.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xml-apis.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/serializer.jar
+2021-06-12 19:01:19.868  INFO 3200 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\serializer\2.7.2\serializer-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/serializer/2.7.2/xml-apis.jar
+2021-06-12 19:01:19.870  INFO 3200 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-06-12 19:01:19.871  INFO 3200 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-06-12 19:01:21.103  INFO 3200 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-12 19:01:21.343  INFO 3200 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 231 ms. Found 4 JPA repository interfaces.
+2021-06-12 19:01:21.763  INFO 3200 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@5ee7dbb4' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 19:01:21.767  INFO 3200 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 19:01:22.132  INFO 3200 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2021-06-12 19:01:22.141  INFO 3200 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-12 19:01:22.141  INFO 3200 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.44]
+2021-06-12 19:01:22.270  INFO 3200 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-12 19:01:22.270  INFO 3200 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2397 ms
+2021-06-12 19:01:22.509  INFO 3200 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-12 19:01:22.555  INFO 3200 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.29.Final
+2021-06-12 19:01:22.667  INFO 3200 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-12 19:01:22.794  INFO 3200 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-12 19:01:22.968  INFO 3200 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-12 19:01:22.983  INFO 3200 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2021-06-12 19:01:24.330  INFO 3200 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-12 19:01:24.343  INFO 3200 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-12 19:01:24.463  INFO 3200 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-06-12 19:01:25.603  INFO 3200 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-12 19:01:25.955  INFO 3200 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/auth/login', POST] with []
+2021-06-12 19:01:25.956  INFO 3200 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/', GET] with []
+2021-06-12 19:01:25.956  INFO 3200 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/webjars/**', GET] with []
+2021-06-12 19:01:25.957  INFO 3200 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/*.html', GET] with []
+2021-06-12 19:01:25.957  INFO 3200 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/favicon.ico', GET] with []
+2021-06-12 19:01:25.957  INFO 3200 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.html', GET] with []
+2021-06-12 19:01:25.957  INFO 3200 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.css', GET] with []
+2021-06-12 19:01:25.958  INFO 3200 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.js', GET] with []
+2021-06-12 19:01:26.003  INFO 3200 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7ceb0ab6, org.springframework.security.web.context.SecurityContextPersistenceFilter@3834bd1, org.springframework.security.web.header.HeaderWriterFilter@125111f1, org.springframework.web.filter.CorsFilter@4ab14432, org.springframework.security.web.authentication.logout.LogoutFilter@1ccde8c6, com.example.DukeStrategicTechnologies.pki.security.auth.TokenAuthenticationFilter@2d007c3, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@539d59d2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1c9b8acc, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@75d7cdd0, org.springframework.security.web.session.SessionManagementFilter@3d0e27c3, org.springframework.security.web.access.ExceptionTranslationFilter@188ec630, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@47cc470b]
+2021-06-12 19:01:26.103  INFO 3200 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path ''
+2021-06-12 19:01:26.114  INFO 3200 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Started DukeStrategicTechnologiesApplication in 7.174 seconds (JVM running for 9.066)
+2021-06-12 19:01:38.972  INFO 3200 --- [http-nio-8088-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-12 19:01:38.973  INFO 3200 --- [http-nio-8088-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-06-12 19:01:38.976  INFO 3200 --- [http-nio-8088-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2021-06-12 19:01:39.160  INFO 3200 --- [http-nio-8088-exec-1] c.e.D.pki.controller.UserController      : Handler GETTING ALL USERS
+2021-06-12 19:03:06.268  INFO 6716 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Starting DukeStrategicTechnologiesApplication using Java 16.0.1 on DESKTOP-OSFVFMG with PID 6716 (P:\Faks xml\Security\DukeStrategicTechnologies\target\classes started by STEFAN-PC in P:\Faks xml\Security\DukeStrategicTechnologies)
+2021-06-12 19:03:06.273  INFO 6716 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : The following profiles are active: development
+2021-06-12 19:03:06.381  INFO 6716 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\xalan\2.7.2\xalan-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xercesImpl.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xml-apis.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/serializer.jar
+2021-06-12 19:03:06.382  INFO 6716 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\serializer\2.7.2\serializer-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/serializer/2.7.2/xml-apis.jar
+2021-06-12 19:03:06.383  INFO 6716 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-06-12 19:03:06.385  INFO 6716 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-06-12 19:03:07.311  INFO 6716 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-12 19:03:07.552  INFO 6716 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 228 ms. Found 4 JPA repository interfaces.
+2021-06-12 19:03:07.932  INFO 6716 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@386d8baf' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 19:03:07.938  INFO 6716 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 19:03:08.400  INFO 6716 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2021-06-12 19:03:08.412  INFO 6716 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-12 19:03:08.413  INFO 6716 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.44]
+2021-06-12 19:03:08.631  INFO 6716 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-12 19:03:08.632  INFO 6716 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2243 ms
+2021-06-12 19:03:09.062  INFO 6716 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-12 19:03:09.108  INFO 6716 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.29.Final
+2021-06-12 19:03:09.216  INFO 6716 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-12 19:03:09.402  INFO 6716 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-12 19:03:09.677  INFO 6716 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-12 19:03:09.703  INFO 6716 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2021-06-12 19:03:11.549  INFO 6716 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-12 19:03:11.562  INFO 6716 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-12 19:03:11.657  INFO 6716 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-06-12 19:03:12.801  INFO 6716 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-12 19:03:13.121  INFO 6716 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/auth/login', POST] with []
+2021-06-12 19:03:13.122  INFO 6716 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/', GET] with []
+2021-06-12 19:03:13.122  INFO 6716 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/webjars/**', GET] with []
+2021-06-12 19:03:13.122  INFO 6716 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/*.html', GET] with []
+2021-06-12 19:03:13.123  INFO 6716 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/favicon.ico', GET] with []
+2021-06-12 19:03:13.123  INFO 6716 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.html', GET] with []
+2021-06-12 19:03:13.123  INFO 6716 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.css', GET] with []
+2021-06-12 19:03:13.124  INFO 6716 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.js', GET] with []
+2021-06-12 19:03:13.166  INFO 6716 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5611dc2f, org.springframework.security.web.context.SecurityContextPersistenceFilter@3558032d, org.springframework.security.web.header.HeaderWriterFilter@63db390d, org.springframework.web.filter.CorsFilter@12d3ddd3, org.springframework.security.web.authentication.logout.LogoutFilter@6f60f7c9, com.example.DukeStrategicTechnologies.pki.security.auth.TokenAuthenticationFilter@439954f0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4af8eaca, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@11542ea2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@662a4dee, org.springframework.security.web.session.SessionManagementFilter@623cc6a5, org.springframework.security.web.access.ExceptionTranslationFilter@685f0ede, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@732ebe09]
+2021-06-12 19:03:13.255  INFO 6716 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path ''
+2021-06-12 19:03:13.266  INFO 6716 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Started DukeStrategicTechnologiesApplication in 7.79 seconds (JVM running for 9.354)
+2021-06-12 19:09:10.188  INFO 13116 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Starting DukeStrategicTechnologiesApplication using Java 16.0.1 on DESKTOP-OSFVFMG with PID 13116 (P:\Faks xml\Security\DukeStrategicTechnologies\target\classes started by STEFAN-PC in P:\Faks xml\Security\DukeStrategicTechnologies)
+2021-06-12 19:09:10.193  INFO 13116 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : The following profiles are active: development
+2021-06-12 19:09:10.289  INFO 13116 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\xalan\2.7.2\xalan-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xercesImpl.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xml-apis.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/serializer.jar
+2021-06-12 19:09:10.290  INFO 13116 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\serializer\2.7.2\serializer-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/serializer/2.7.2/xml-apis.jar
+2021-06-12 19:09:10.290  INFO 13116 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-06-12 19:09:10.291  INFO 13116 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-06-12 19:09:11.311  INFO 13116 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-12 19:09:11.567  INFO 13116 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 243 ms. Found 4 JPA repository interfaces.
+2021-06-12 19:09:12.140  INFO 13116 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@161b678f' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 19:09:12.147  INFO 13116 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 19:09:12.569  INFO 13116 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2021-06-12 19:09:12.578  INFO 13116 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-12 19:09:12.579  INFO 13116 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.44]
+2021-06-12 19:09:12.711  INFO 13116 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-12 19:09:12.711  INFO 13116 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2406 ms
+2021-06-12 19:09:12.990  INFO 13116 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-12 19:09:13.042  INFO 13116 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.29.Final
+2021-06-12 19:09:13.159  INFO 13116 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-12 19:09:13.279  INFO 13116 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-12 19:09:13.467  INFO 13116 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-12 19:09:13.484  INFO 13116 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2021-06-12 19:09:14.873  INFO 13116 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-12 19:09:14.886  INFO 13116 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-12 19:09:15.020  INFO 13116 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-06-12 19:09:16.193  INFO 13116 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-12 19:09:16.584  INFO 13116 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/auth/login', POST] with []
+2021-06-12 19:09:16.584  INFO 13116 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/', GET] with []
+2021-06-12 19:09:16.584  INFO 13116 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/webjars/**', GET] with []
+2021-06-12 19:09:16.585  INFO 13116 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/*.html', GET] with []
+2021-06-12 19:09:16.585  INFO 13116 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/favicon.ico', GET] with []
+2021-06-12 19:09:16.585  INFO 13116 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.html', GET] with []
+2021-06-12 19:09:16.585  INFO 13116 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.css', GET] with []
+2021-06-12 19:09:16.586  INFO 13116 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.js', GET] with []
+2021-06-12 19:09:16.629  INFO 13116 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2838981f, org.springframework.security.web.context.SecurityContextPersistenceFilter@282a169d, org.springframework.security.web.header.HeaderWriterFilter@54156bc7, org.springframework.web.filter.CorsFilter@1e09e1a0, org.springframework.security.web.authentication.logout.LogoutFilter@5c6e97ae, com.example.DukeStrategicTechnologies.pki.security.auth.TokenAuthenticationFilter@6715bea0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6514bfac, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@70c3ae3e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4f426cbe, org.springframework.security.web.session.SessionManagementFilter@51635e7f, org.springframework.security.web.access.ExceptionTranslationFilter@480241bc, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@769214b5]
+2021-06-12 19:09:16.722  INFO 13116 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path ''
+2021-06-12 19:09:16.734  INFO 13116 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Started DukeStrategicTechnologiesApplication in 7.361 seconds (JVM running for 9.21)
+2021-06-12 19:09:56.879  INFO 13116 --- [http-nio-8088-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-12 19:09:56.880  INFO 13116 --- [http-nio-8088-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-06-12 19:09:56.885  INFO 13116 --- [http-nio-8088-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2021-06-12 19:09:57.089  WARN 13116 --- [http-nio-8088-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required Long parameter 'userId' is not present]
+2021-06-12 19:10:07.519  INFO 13116 --- [http-nio-8088-exec-4] c.e.D.pki.controller.TemplateController  : Handling GETTING ALL TEMPLATES BY USER ID 213123
+2021-06-12 19:11:39.630  INFO 11796 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Starting DukeStrategicTechnologiesApplication using Java 16.0.1 on DESKTOP-OSFVFMG with PID 11796 (P:\Faks xml\Security\DukeStrategicTechnologies\target\classes started by STEFAN-PC in P:\Faks xml\Security\DukeStrategicTechnologies)
+2021-06-12 19:11:39.634  INFO 11796 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : The following profiles are active: development
+2021-06-12 19:11:39.720  INFO 11796 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\xalan\2.7.2\xalan-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xercesImpl.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xml-apis.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/serializer.jar
+2021-06-12 19:11:39.721  INFO 11796 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\serializer\2.7.2\serializer-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/serializer/2.7.2/xml-apis.jar
+2021-06-12 19:11:39.722  INFO 11796 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-06-12 19:11:39.722  INFO 11796 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-06-12 19:11:40.741  INFO 11796 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-12 19:11:40.957  INFO 11796 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 206 ms. Found 4 JPA repository interfaces.
+2021-06-12 19:11:41.406  INFO 11796 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@3f77d0c1' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 19:11:41.412  INFO 11796 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 19:11:41.779  INFO 11796 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2021-06-12 19:11:41.788  INFO 11796 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-12 19:11:41.789  INFO 11796 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.44]
+2021-06-12 19:11:41.910  INFO 11796 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-12 19:11:41.911  INFO 11796 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2187 ms
+2021-06-12 19:11:42.167  INFO 11796 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-12 19:11:42.215  INFO 11796 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.29.Final
+2021-06-12 19:11:42.342  INFO 11796 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-12 19:11:42.455  INFO 11796 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-12 19:11:42.633  INFO 11796 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-12 19:11:42.654  INFO 11796 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2021-06-12 19:11:44.007  INFO 11796 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-12 19:11:44.018  INFO 11796 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-12 19:11:44.107  INFO 11796 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-06-12 19:11:45.279  INFO 11796 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-12 19:11:45.630  INFO 11796 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/auth/login', POST] with []
+2021-06-12 19:11:45.630  INFO 11796 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/', GET] with []
+2021-06-12 19:11:45.630  INFO 11796 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/webjars/**', GET] with []
+2021-06-12 19:11:45.630  INFO 11796 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/*.html', GET] with []
+2021-06-12 19:11:45.631  INFO 11796 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/favicon.ico', GET] with []
+2021-06-12 19:11:45.631  INFO 11796 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.html', GET] with []
+2021-06-12 19:11:45.631  INFO 11796 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.css', GET] with []
+2021-06-12 19:11:45.632  INFO 11796 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.js', GET] with []
+2021-06-12 19:11:45.677  INFO 11796 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7c0a7a5d, org.springframework.security.web.context.SecurityContextPersistenceFilter@14cf1e28, org.springframework.security.web.header.HeaderWriterFilter@6526a5ca, org.springframework.web.filter.CorsFilter@a0ed068, org.springframework.security.web.authentication.logout.LogoutFilter@6c60719a, com.example.DukeStrategicTechnologies.pki.security.auth.TokenAuthenticationFilter@587c2fb7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2775cbbe, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3ecc0c9d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3c2f0523, org.springframework.security.web.session.SessionManagementFilter@44f86cbc, org.springframework.security.web.access.ExceptionTranslationFilter@6c586fd7, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4a7439a0]
+2021-06-12 19:11:45.772  INFO 11796 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path ''
+2021-06-12 19:11:45.783  INFO 11796 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Started DukeStrategicTechnologiesApplication in 6.955 seconds (JVM running for 8.455)
+2021-06-12 19:23:28.392  INFO 11568 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Starting DukeStrategicTechnologiesApplication using Java 16.0.1 on DESKTOP-OSFVFMG with PID 11568 (P:\Faks xml\Security\DukeStrategicTechnologies\target\classes started by STEFAN-PC in P:\Faks xml\Security\DukeStrategicTechnologies)
+2021-06-12 19:23:28.396  INFO 11568 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : The following profiles are active: development
+2021-06-12 19:23:28.488  INFO 11568 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\xalan\2.7.2\xalan-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xercesImpl.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xml-apis.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/serializer.jar
+2021-06-12 19:23:28.489  INFO 11568 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\serializer\2.7.2\serializer-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/serializer/2.7.2/xml-apis.jar
+2021-06-12 19:23:28.489  INFO 11568 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-06-12 19:23:28.491  INFO 11568 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-06-12 19:23:29.504  INFO 11568 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-12 19:23:29.748  INFO 11568 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 232 ms. Found 4 JPA repository interfaces.
+2021-06-12 19:23:30.130  INFO 11568 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@44073475' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 19:23:30.135  INFO 11568 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 19:23:30.487  INFO 11568 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2021-06-12 19:23:30.497  INFO 11568 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-12 19:23:30.498  INFO 11568 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.44]
+2021-06-12 19:23:30.610  INFO 11568 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-12 19:23:30.611  INFO 11568 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2119 ms
+2021-06-12 19:23:30.836  INFO 11568 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-12 19:23:30.882  INFO 11568 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.29.Final
+2021-06-12 19:23:30.994  INFO 11568 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-12 19:23:31.092  INFO 11568 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-12 19:23:31.254  INFO 11568 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-12 19:23:31.272  INFO 11568 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2021-06-12 19:23:32.568  INFO 11568 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-12 19:23:32.577  INFO 11568 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-12 19:23:32.660  INFO 11568 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-06-12 19:23:33.774  INFO 11568 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-12 19:23:34.084  INFO 11568 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/auth/login', POST] with []
+2021-06-12 19:23:34.084  INFO 11568 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/', GET] with []
+2021-06-12 19:23:34.084  INFO 11568 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/webjars/**', GET] with []
+2021-06-12 19:23:34.085  INFO 11568 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/*.html', GET] with []
+2021-06-12 19:23:34.085  INFO 11568 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/favicon.ico', GET] with []
+2021-06-12 19:23:34.085  INFO 11568 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.html', GET] with []
+2021-06-12 19:23:34.086  INFO 11568 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.css', GET] with []
+2021-06-12 19:23:34.086  INFO 11568 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.js', GET] with []
+2021-06-12 19:23:34.140  INFO 11568 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3a236854, org.springframework.security.web.context.SecurityContextPersistenceFilter@34ae7976, org.springframework.security.web.header.HeaderWriterFilter@405e0544, org.springframework.web.filter.CorsFilter@6a280f2a, org.springframework.security.web.authentication.logout.LogoutFilter@629ff682, com.example.DukeStrategicTechnologies.pki.security.auth.TokenAuthenticationFilter@38b8995b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5a611ab2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@136d598, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7e3d1541, org.springframework.security.web.session.SessionManagementFilter@5a3ad48e, org.springframework.security.web.access.ExceptionTranslationFilter@6ffc5673, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2b36bf4f]
+2021-06-12 19:23:34.241  INFO 11568 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path ''
+2021-06-12 19:23:34.252  INFO 11568 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Started DukeStrategicTechnologiesApplication in 6.828 seconds (JVM running for 8.463)
+2021-06-12 19:24:20.729  INFO 11568 --- [http-nio-8088-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-12 19:24:20.803  INFO 11568 --- [http-nio-8088-exec-2] c.e.D.p.c.CertificateController          : Handling GETTING ALL CERTIFICATES
+2021-06-12 20:09:35.722  INFO 12236 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Starting DukeStrategicTechnologiesApplication using Java 16.0.1 on DESKTOP-OSFVFMG with PID 12236 (P:\Faks xml\Security\DukeStrategicTechnologies\target\classes started by STEFAN-PC in P:\Faks xml\Security\DukeStrategicTechnologies)
+2021-06-12 20:09:35.727  INFO 12236 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : The following profiles are active: development
+2021-06-12 20:09:35.817  INFO 12236 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\xalan\2.7.2\xalan-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xercesImpl.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xml-apis.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/serializer.jar
+2021-06-12 20:09:35.818  INFO 12236 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\serializer\2.7.2\serializer-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/serializer/2.7.2/xml-apis.jar
+2021-06-12 20:09:35.819  INFO 12236 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-06-12 20:09:35.820  INFO 12236 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-06-12 20:09:36.930  INFO 12236 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-12 20:09:37.169  INFO 12236 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 230 ms. Found 4 JPA repository interfaces.
+2021-06-12 20:09:37.550  INFO 12236 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@58af5bec' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 20:09:37.557  INFO 12236 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 20:09:37.908  INFO 12236 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2021-06-12 20:09:37.917  INFO 12236 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-12 20:09:37.918  INFO 12236 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.44]
+2021-06-12 20:09:38.037  INFO 12236 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-12 20:09:38.038  INFO 12236 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2217 ms
+2021-06-12 20:09:38.263  INFO 12236 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-12 20:09:38.312  INFO 12236 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.29.Final
+2021-06-12 20:09:38.415  INFO 12236 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-12 20:09:38.508  INFO 12236 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-12 20:09:38.670  INFO 12236 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-12 20:09:38.686  INFO 12236 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2021-06-12 20:09:39.961  INFO 12236 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-12 20:09:39.971  INFO 12236 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-12 20:09:40.040  INFO 12236 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-06-12 20:09:41.157  INFO 12236 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-12 20:09:41.474  INFO 12236 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/auth/login', POST] with []
+2021-06-12 20:09:41.475  INFO 12236 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/', GET] with []
+2021-06-12 20:09:41.476  INFO 12236 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/webjars/**', GET] with []
+2021-06-12 20:09:41.477  INFO 12236 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/*.html', GET] with []
+2021-06-12 20:09:41.477  INFO 12236 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/favicon.ico', GET] with []
+2021-06-12 20:09:41.477  INFO 12236 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.html', GET] with []
+2021-06-12 20:09:41.478  INFO 12236 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.css', GET] with []
+2021-06-12 20:09:41.478  INFO 12236 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.js', GET] with []
+2021-06-12 20:09:41.520  INFO 12236 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2463e042, org.springframework.security.web.context.SecurityContextPersistenceFilter@1468629c, org.springframework.security.web.header.HeaderWriterFilter@3ecc0c9d, org.springframework.web.filter.CorsFilter@6b08cc36, org.springframework.security.web.authentication.logout.LogoutFilter@6ded4760, com.example.DukeStrategicTechnologies.pki.security.auth.TokenAuthenticationFilter@67d073ed, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@77fece5f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6c60719a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7b0f106c, org.springframework.security.web.session.SessionManagementFilter@35ad94ea, org.springframework.security.web.access.ExceptionTranslationFilter@3c791727, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@662a4dee]
+2021-06-12 20:09:41.624  INFO 12236 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path ''
+2021-06-12 20:09:41.634  INFO 12236 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Started DukeStrategicTechnologiesApplication in 6.671 seconds (JVM running for 8.244)
+2021-06-12 20:28:58.017  INFO 12236 --- [http-nio-8088-exec-1] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x020x000x010x000x010xfc0x030x03t0xae0xcc0xd50x840x8060xe1f/0x070x880x8c0x0b}0x0d0xf30x82Mt0x960xff0x8b0x860xcaRu00x930xf0[0xbb]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:417) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:261) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1707) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630) ~[na:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at java.base/java.lang.Thread.run(Thread.java:831) ~[na:na]
+
+2021-06-12 20:28:58.105  INFO 12236 --- [http-nio-8088-exec-2] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x020x000x010x000x010xfc0x030x03.0xa00xdaE?Y0xdb0xc40x930xbfE0xe40xb10x150xae_;0x08@0x0db0xffd0xdf0x840xa4/0xb70x140x1a^0x9b]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:417) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:261) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1707) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630) ~[na:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at java.base/java.lang.Thread.run(Thread.java:831) ~[na:na]
+
+2021-06-12 20:30:21.702  INFO 8212 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Starting DukeStrategicTechnologiesApplication using Java 16.0.1 on DESKTOP-OSFVFMG with PID 8212 (P:\Faks xml\Security\DukeStrategicTechnologies\target\classes started by STEFAN-PC in P:\Faks xml\Security\DukeStrategicTechnologies)
+2021-06-12 20:30:21.707  INFO 8212 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : The following profiles are active: development
+2021-06-12 20:30:21.782  INFO 8212 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\xalan\2.7.2\xalan-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xercesImpl.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xml-apis.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/serializer.jar
+2021-06-12 20:30:21.783  INFO 8212 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\serializer\2.7.2\serializer-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/serializer/2.7.2/xml-apis.jar
+2021-06-12 20:30:21.784  INFO 8212 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-06-12 20:30:21.785  INFO 8212 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-06-12 20:30:23.827  INFO 8212 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-12 20:30:24.090  INFO 8212 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 253 ms. Found 4 JPA repository interfaces.
+2021-06-12 20:30:24.596  INFO 8212 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@b5ea503' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 20:30:24.604  INFO 8212 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 20:30:25.019  INFO 8212 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2021-06-12 20:30:25.030  INFO 8212 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-12 20:30:25.030  INFO 8212 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.44]
+2021-06-12 20:30:25.175  INFO 8212 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-12 20:30:25.176  INFO 8212 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3390 ms
+2021-06-12 20:30:25.543  INFO 8212 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-12 20:30:25.616  INFO 8212 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.29.Final
+2021-06-12 20:30:25.795  INFO 8212 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-12 20:30:25.902  INFO 8212 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-12 20:30:26.099  INFO 8212 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-12 20:30:26.119  INFO 8212 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2021-06-12 20:30:27.764  INFO 8212 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-12 20:30:27.775  INFO 8212 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-12 20:30:27.880  INFO 8212 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-06-12 20:30:29.448  INFO 8212 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-12 20:30:29.935  INFO 8212 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/auth/login', POST] with []
+2021-06-12 20:30:29.935  INFO 8212 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/', GET] with []
+2021-06-12 20:30:29.936  INFO 8212 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/webjars/**', GET] with []
+2021-06-12 20:30:29.936  INFO 8212 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/*.html', GET] with []
+2021-06-12 20:30:29.937  INFO 8212 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/favicon.ico', GET] with []
+2021-06-12 20:30:29.937  INFO 8212 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.html', GET] with []
+2021-06-12 20:30:29.937  INFO 8212 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.css', GET] with []
+2021-06-12 20:30:29.938  INFO 8212 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.js', GET] with []
+2021-06-12 20:30:29.983  INFO 8212 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@61b7546c, org.springframework.security.web.context.SecurityContextPersistenceFilter@11ccb955, org.springframework.security.web.header.HeaderWriterFilter@74669483, org.springframework.web.filter.CorsFilter@a5a52c9, org.springframework.security.web.authentication.logout.LogoutFilter@1e38d19b, com.example.DukeStrategicTechnologies.pki.security.auth.TokenAuthenticationFilter@13c6f71f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1faa6722, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@24729400, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4f338c2, org.springframework.security.web.session.SessionManagementFilter@21f8af, org.springframework.security.web.access.ExceptionTranslationFilter@4b783102, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7247bc64]
+2021-06-12 20:30:30.073  INFO 8212 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path ''
+2021-06-12 20:30:30.084  INFO 8212 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Started DukeStrategicTechnologiesApplication in 9.1 seconds (JVM running for 11.023)
+2021-06-12 20:30:38.640  INFO 8212 --- [http-nio-8088-exec-1] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x020x000x010x000x010xfc0x030x030x1a0x8cB-+0xf50xa00xda$M!0xd3~X0xdd{&0x0e"0xa60`l0xb49O0x980xd00x8b0xe50xb70x1d]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:417) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:261) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1707) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630) ~[na:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at java.base/java.lang.Thread.run(Thread.java:831) ~[na:na]
+
+2021-06-12 20:30:38.689  INFO 8212 --- [http-nio-8088-exec-2] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x020x000x010x000x010xfc0x030x030x01;0xea+0x8asS0xc40xc6w0xea7u0x9b0xae60xff0x02O*0xc40xdbj0xf70x90d0xff60xa80x180xfd0xc4]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:417) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:261) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1707) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630) ~[na:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at java.base/java.lang.Thread.run(Thread.java:831) ~[na:na]
+
+2021-06-12 20:32:40.520  INFO 8112 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Starting DukeStrategicTechnologiesApplication using Java 16.0.1 on DESKTOP-OSFVFMG with PID 8112 (P:\Faks xml\Security\DukeStrategicTechnologies\target\classes started by STEFAN-PC in P:\Faks xml\Security\DukeStrategicTechnologies)
+2021-06-12 20:32:40.525  INFO 8112 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : The following profiles are active: development
+2021-06-12 20:32:40.663  INFO 8112 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\xalan\2.7.2\xalan-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xercesImpl.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xml-apis.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/serializer.jar
+2021-06-12 20:32:40.663  INFO 8112 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\serializer\2.7.2\serializer-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/serializer/2.7.2/xml-apis.jar
+2021-06-12 20:32:40.663  INFO 8112 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-06-12 20:32:40.664  INFO 8112 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-06-12 20:32:42.370  INFO 8112 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-12 20:32:42.836  INFO 8112 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 448 ms. Found 4 JPA repository interfaces.
+2021-06-12 20:32:43.637  INFO 8112 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@19db23e9' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 20:32:43.651  INFO 8112 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 20:32:44.327  INFO 8112 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2021-06-12 20:32:44.347  INFO 8112 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-12 20:32:44.348  INFO 8112 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.44]
+2021-06-12 20:32:44.557  INFO 8112 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-12 20:32:44.558  INFO 8112 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3892 ms
+2021-06-12 20:32:45.017  INFO 8112 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-12 20:32:45.140  INFO 8112 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.29.Final
+2021-06-12 20:32:45.453  INFO 8112 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-12 20:32:45.683  INFO 8112 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-12 20:32:45.995  INFO 8112 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-12 20:32:46.028  INFO 8112 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2021-06-12 20:32:48.128  INFO 8112 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-12 20:32:48.159  INFO 8112 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-12 20:32:48.313  INFO 8112 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-06-12 20:32:50.475  INFO 8112 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-12 20:32:51.199  INFO 8112 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/auth/login', POST] with []
+2021-06-12 20:32:51.199  INFO 8112 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/', GET] with []
+2021-06-12 20:32:51.202  INFO 8112 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/webjars/**', GET] with []
+2021-06-12 20:32:51.203  INFO 8112 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/*.html', GET] with []
+2021-06-12 20:32:51.203  INFO 8112 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/favicon.ico', GET] with []
+2021-06-12 20:32:51.204  INFO 8112 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.html', GET] with []
+2021-06-12 20:32:51.204  INFO 8112 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.css', GET] with []
+2021-06-12 20:32:51.206  INFO 8112 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.js', GET] with []
+2021-06-12 20:32:51.304  INFO 8112 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3b48f19f, org.springframework.security.web.context.SecurityContextPersistenceFilter@2dfaa0df, org.springframework.security.web.header.HeaderWriterFilter@317e35fd, org.springframework.web.filter.CorsFilter@57c48db7, org.springframework.security.web.authentication.logout.LogoutFilter@a47420c, com.example.DukeStrategicTechnologies.pki.security.auth.TokenAuthenticationFilter@1cd3626d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@225b1b53, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7a10f906, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4f7188bb, org.springframework.security.web.session.SessionManagementFilter@7e01ad30, org.springframework.security.web.access.ExceptionTranslationFilter@6dc2f222, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@21f926a3]
+2021-06-12 20:32:51.667  INFO 8112 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path ''
+2021-06-12 20:32:51.690  INFO 8112 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Started DukeStrategicTechnologiesApplication in 12.561 seconds (JVM running for 18.989)
+2021-06-12 20:33:33.586  INFO 8112 --- [http-nio-8088-exec-1] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x020x000x010x000x010xfc0x030x03C0x12`W]y0x160xfa0xa880xd70xcf0xaa60xd50x020xa90x1bC0xd80xa50xcc0x910xb50x840x160xe20xcb0xfcpE0xe7]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:417) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:261) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1707) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630) ~[na:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at java.base/java.lang.Thread.run(Thread.java:831) ~[na:na]
+
+2021-06-12 20:33:33.657  INFO 8112 --- [http-nio-8088-exec-2] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x020x000x010x000x010xfc0x030x03c20x070xa0`0xec0xd60xe0RM0xa60xb90x10hC0xb30x89/i0x1a0xda0xf00xe7g0xc5uG0xa60x02I70x1e]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:417) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:261) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1707) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630) ~[na:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at java.base/java.lang.Thread.run(Thread.java:831) ~[na:na]
+
+2021-06-12 20:34:58.800  INFO 8112 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-06-12 20:34:58.804  INFO 8112 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-06-12 20:34:58.805  INFO 8112 --- [SpringContextShutdownHook] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2021-06-12 20:34:58.947  INFO 8112 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-06-12 20:34:58.957  INFO 8112 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-06-12 20:36:02.029  INFO 11644 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Starting DukeStrategicTechnologiesApplication using Java 16.0.1 on DESKTOP-OSFVFMG with PID 11644 (P:\Faks xml\Security\DukeStrategicTechnologies\target\classes started by STEFAN-PC in P:\Faks xml\Security\DukeStrategicTechnologies)
+2021-06-12 20:36:02.034  INFO 11644 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : The following profiles are active: development
+2021-06-12 20:36:02.120  INFO 11644 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\xalan\2.7.2\xalan-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xercesImpl.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xml-apis.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/serializer.jar
+2021-06-12 20:36:02.121  INFO 11644 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\serializer\2.7.2\serializer-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/serializer/2.7.2/xml-apis.jar
+2021-06-12 20:36:02.122  INFO 11644 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-06-12 20:36:02.122  INFO 11644 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-06-12 20:36:03.237  INFO 11644 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-12 20:36:03.603  INFO 11644 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 352 ms. Found 4 JPA repository interfaces.
+2021-06-12 20:36:04.089  INFO 11644 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@67e8877f' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 20:36:04.094  INFO 11644 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 20:36:04.463  INFO 11644 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2021-06-12 20:36:04.478  INFO 11644 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-12 20:36:04.478  INFO 11644 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.44]
+2021-06-12 20:36:04.612  INFO 11644 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-12 20:36:04.612  INFO 11644 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2488 ms
+2021-06-12 20:36:04.901  INFO 11644 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-12 20:36:05.018  INFO 11644 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.29.Final
+2021-06-12 20:36:05.142  INFO 11644 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-12 20:36:05.249  INFO 11644 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-12 20:36:05.486  INFO 11644 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-12 20:36:05.505  INFO 11644 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2021-06-12 20:42:06.458  INFO 13444 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Starting DukeStrategicTechnologiesApplication using Java 16.0.1 on DESKTOP-OSFVFMG with PID 13444 (P:\Faks xml\Security\DukeStrategicTechnologies\target\classes started by STEFAN-PC in P:\Faks xml\Security\DukeStrategicTechnologies)
+2021-06-12 20:42:06.462  INFO 13444 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : The following profiles are active: development
+2021-06-12 20:42:06.581  INFO 13444 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\xalan\2.7.2\xalan-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xercesImpl.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xml-apis.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/serializer.jar
+2021-06-12 20:42:06.581  INFO 13444 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\serializer\2.7.2\serializer-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/serializer/2.7.2/xml-apis.jar
+2021-06-12 20:42:06.582  INFO 13444 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-06-12 20:42:06.583  INFO 13444 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-06-12 20:42:07.738  INFO 13444 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-12 20:42:08.113  INFO 13444 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 364 ms. Found 4 JPA repository interfaces.
+2021-06-12 20:42:08.643  INFO 13444 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@15788d70' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 20:42:08.647  INFO 13444 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 20:42:09.092  INFO 13444 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2021-06-12 20:42:09.110  INFO 13444 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-12 20:42:09.112  INFO 13444 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.44]
+2021-06-12 20:42:09.385  INFO 13444 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-12 20:42:09.386  INFO 13444 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2802 ms
+2021-06-12 20:42:09.893  INFO 13444 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-12 20:42:09.996  INFO 13444 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.29.Final
+2021-06-12 20:42:10.244  INFO 13444 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-12 20:42:10.358  INFO 13444 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-12 20:42:10.588  INFO 13444 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-12 20:42:10.609  INFO 13444 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2021-06-12 20:42:11.898  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 20:42:11.898  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "extended_key_usages" does not exist, skipping
+2021-06-12 20:42:11.900  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 20:42:11.901  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "key_usages" does not exist, skipping
+2021-06-12 20:42:11.903  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 20:42:11.904  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "templates" does not exist, skipping
+2021-06-12 20:42:11.906  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 20:42:11.906  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "user_authority" does not exist, skipping
+2021-06-12 20:42:11.908  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 20:42:11.908  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "user_authority" does not exist, skipping
+2021-06-12 20:42:11.910  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 20:42:11.911  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "accounts" does not exist, skipping
+2021-06-12 20:42:11.913  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 20:42:11.913  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "authority" does not exist, skipping
+2021-06-12 20:42:11.915  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 20:42:11.915  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "extended_key_usages" does not exist, skipping
+2021-06-12 20:42:11.917  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 20:42:11.918  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "key_usages" does not exist, skipping
+2021-06-12 20:42:11.920  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 20:42:11.920  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "revoked_certificates" does not exist, skipping
+2021-06-12 20:42:11.922  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 20:42:11.923  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "templates" does not exist, skipping
+2021-06-12 20:42:11.925  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 20:42:11.925  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "user_authority" does not exist, skipping
+2021-06-12 20:42:11.927  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 20:42:11.927  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "users" does not exist, skipping
+2021-06-12 20:42:11.929  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 20:42:11.929  WARN 13444 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : sequence "hibernate_sequence" does not exist, skipping
+2021-06-12 20:42:12.003  INFO 13444 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-12 20:42:12.013  INFO 13444 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-12 20:42:12.070  INFO 13444 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-06-12 20:42:13.317  INFO 13444 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-12 20:42:13.704  INFO 13444 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/auth/login', POST] with []
+2021-06-12 20:42:13.705  INFO 13444 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/', GET] with []
+2021-06-12 20:42:13.705  INFO 13444 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/webjars/**', GET] with []
+2021-06-12 20:42:13.705  INFO 13444 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/*.html', GET] with []
+2021-06-12 20:42:13.705  INFO 13444 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/favicon.ico', GET] with []
+2021-06-12 20:42:13.705  INFO 13444 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.html', GET] with []
+2021-06-12 20:42:13.705  INFO 13444 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.css', GET] with []
+2021-06-12 20:42:13.706  INFO 13444 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.js', GET] with []
+2021-06-12 20:42:13.748  INFO 13444 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@370a905f, org.springframework.security.web.context.SecurityContextPersistenceFilter@7d0dfd2f, org.springframework.security.web.header.HeaderWriterFilter@20efce93, org.springframework.web.filter.CorsFilter@346e43f0, org.springframework.security.web.authentication.logout.LogoutFilter@3c6abfcb, com.example.DukeStrategicTechnologies.pki.security.auth.TokenAuthenticationFilter@77d3b39b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@d9ea4ac, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2e2d05b4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@571bf20d, org.springframework.security.web.session.SessionManagementFilter@11542ea2, org.springframework.security.web.access.ExceptionTranslationFilter@2fa376f4, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@a0ed068]
+2021-06-12 20:42:13.839  INFO 13444 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path ''
+2021-06-12 20:42:13.851  INFO 13444 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Started DukeStrategicTechnologiesApplication in 8.354 seconds (JVM running for 10.538)
+2021-06-12 20:42:23.275  INFO 13444 --- [http-nio-8088-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-12 20:42:36.361  INFO 13444 --- [http-nio-8088-exec-3] c.e.D.p.c.AuthenticationController       : Handling LOGIN
+2021-06-12 21:07:40.642  INFO 2164 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Starting DukeStrategicTechnologiesApplication using Java 16.0.1 on DESKTOP-OSFVFMG with PID 2164 (P:\Faks xml\Security\DukeStrategicTechnologies\target\classes started by STEFAN-PC in P:\Faks xml\Security\DukeStrategicTechnologies)
+2021-06-12 21:07:40.646  INFO 2164 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : The following profiles are active: development
+2021-06-12 21:07:40.738  INFO 2164 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\xalan\2.7.2\xalan-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xercesImpl.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xml-apis.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/serializer.jar
+2021-06-12 21:07:40.739  INFO 2164 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\serializer\2.7.2\serializer-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/serializer/2.7.2/xml-apis.jar
+2021-06-12 21:07:40.740  INFO 2164 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-06-12 21:07:40.741  INFO 2164 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-06-12 21:07:41.747  INFO 2164 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-12 21:07:42.027  INFO 2164 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 272 ms. Found 4 JPA repository interfaces.
+2021-06-12 21:07:42.428  INFO 2164 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@b999c7' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 21:07:42.433  INFO 2164 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 21:07:42.884  INFO 2164 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (https)
+2021-06-12 21:07:42.896  INFO 2164 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-12 21:07:42.896  INFO 2164 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.44]
+2021-06-12 21:07:43.035  INFO 2164 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-12 21:07:43.036  INFO 2164 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2293 ms
+2021-06-12 21:07:43.354  INFO 2164 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-12 21:07:43.435  INFO 2164 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.29.Final
+2021-06-12 21:07:43.727  INFO 2164 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-12 21:07:43.853  INFO 2164 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-12 21:07:44.064  INFO 2164 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-12 21:07:44.087  INFO 2164 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2021-06-12 21:07:45.493  INFO 2164 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-12 21:07:45.504  INFO 2164 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-12 21:07:45.578  INFO 2164 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-06-12 21:07:46.804  INFO 2164 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-12 21:07:47.142  INFO 2164 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/auth/login', POST] with []
+2021-06-12 21:07:47.142  INFO 2164 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/', GET] with []
+2021-06-12 21:07:47.142  INFO 2164 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/webjars/**', GET] with []
+2021-06-12 21:07:47.143  INFO 2164 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/*.html', GET] with []
+2021-06-12 21:07:47.143  INFO 2164 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/favicon.ico', GET] with []
+2021-06-12 21:07:47.143  INFO 2164 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.html', GET] with []
+2021-06-12 21:07:47.144  INFO 2164 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.css', GET] with []
+2021-06-12 21:07:47.144  INFO 2164 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.js', GET] with []
+2021-06-12 21:07:47.196  INFO 2164 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1dd50994, org.springframework.security.web.context.SecurityContextPersistenceFilter@58e4c43, org.springframework.security.web.header.HeaderWriterFilter@693c5d5f, org.springframework.web.filter.CorsFilter@1e7ffdc7, org.springframework.security.web.authentication.logout.LogoutFilter@4f33284f, com.example.DukeStrategicTechnologies.pki.security.auth.TokenAuthenticationFilter@49c65b43, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6c789d01, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1cb5daf8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@20ad183a, org.springframework.security.web.session.SessionManagementFilter@fc9d9cc, org.springframework.security.web.access.ExceptionTranslationFilter@4be8485a, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4edd0e01]
+2021-06-12 21:07:47.549  INFO 2164 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (https) with context path ''
+2021-06-12 21:07:47.560  INFO 2164 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Started DukeStrategicTechnologiesApplication in 7.701 seconds (JVM running for 9.789)
+2021-06-12 21:09:00.177  INFO 2164 --- [https-jsse-nio-8088-exec-10] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-12 21:09:00.477  INFO 2164 --- [https-jsse-nio-8088-exec-10] c.e.D.p.c.AuthenticationController       : Handling LOGIN
+2021-06-12 21:10:00.800  INFO 6820 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Starting DukeStrategicTechnologiesApplication using Java 16.0.1 on DESKTOP-OSFVFMG with PID 6820 (P:\Faks xml\Security\DukeStrategicTechnologies\target\classes started by STEFAN-PC in P:\Faks xml\Security\DukeStrategicTechnologies)
+2021-06-12 21:10:00.804  INFO 6820 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : The following profiles are active: development
+2021-06-12 21:10:00.885  INFO 6820 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\xalan\2.7.2\xalan-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xercesImpl.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xml-apis.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/serializer.jar
+2021-06-12 21:10:00.885  INFO 6820 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\serializer\2.7.2\serializer-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/serializer/2.7.2/xml-apis.jar
+2021-06-12 21:10:00.887  INFO 6820 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-06-12 21:10:00.888  INFO 6820 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-06-12 21:10:01.882  INFO 6820 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-12 21:10:02.172  INFO 6820 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 281 ms. Found 4 JPA repository interfaces.
+2021-06-12 21:10:02.781  INFO 6820 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@3d6e4a9b' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 21:10:02.789  INFO 6820 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 21:10:03.377  INFO 6820 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (https)
+2021-06-12 21:10:03.388  INFO 6820 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-12 21:10:03.388  INFO 6820 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.44]
+2021-06-12 21:10:03.523  INFO 6820 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-12 21:10:03.524  INFO 6820 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2634 ms
+2021-06-12 21:10:04.106  INFO 6820 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-12 21:10:04.177  INFO 6820 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.29.Final
+2021-06-12 21:10:04.406  INFO 6820 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-12 21:10:04.516  INFO 6820 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-12 21:10:04.725  INFO 6820 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-12 21:10:04.745  INFO 6820 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2021-06-12 21:10:06.173  INFO 6820 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-12 21:10:06.184  INFO 6820 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-12 21:10:06.358  INFO 6820 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-06-12 21:10:07.713  INFO 6820 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-12 21:10:08.092  INFO 6820 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/auth/login', POST] with []
+2021-06-12 21:10:08.092  INFO 6820 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/', GET] with []
+2021-06-12 21:10:08.092  INFO 6820 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/webjars/**', GET] with []
+2021-06-12 21:10:08.092  INFO 6820 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/*.html', GET] with []
+2021-06-12 21:10:08.094  INFO 6820 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/favicon.ico', GET] with []
+2021-06-12 21:10:08.094  INFO 6820 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.html', GET] with []
+2021-06-12 21:10:08.094  INFO 6820 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.css', GET] with []
+2021-06-12 21:10:08.094  INFO 6820 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.js', GET] with []
+2021-06-12 21:10:08.145  INFO 6820 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7f5b4a0e, org.springframework.security.web.context.SecurityContextPersistenceFilter@8cb831d, org.springframework.security.web.header.HeaderWriterFilter@41022df4, org.springframework.web.filter.CorsFilter@f52ffd0, org.springframework.security.web.authentication.logout.LogoutFilter@30b4a665, com.example.DukeStrategicTechnologies.pki.security.auth.TokenAuthenticationFilter@171ae12c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@26d714f2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@725cd924, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@601c76a7, org.springframework.security.web.session.SessionManagementFilter@49332f06, org.springframework.security.web.access.ExceptionTranslationFilter@6a688412, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5ccc728a]
+2021-06-12 21:10:08.655  INFO 6820 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (https) with context path ''
+2021-06-12 21:10:08.677  INFO 6820 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Started DukeStrategicTechnologiesApplication in 8.723 seconds (JVM running for 10.549)
+2021-06-12 21:23:12.958  INFO 1992 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Starting DukeStrategicTechnologiesApplication using Java 16.0.1 on DESKTOP-OSFVFMG with PID 1992 (P:\Faks xml\Security\DukeStrategicTechnologies\target\classes started by STEFAN-PC in P:\Faks xml\Security\DukeStrategicTechnologies)
+2021-06-12 21:23:12.961  INFO 1992 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : The following profiles are active: development
+2021-06-12 21:23:13.045  INFO 1992 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\xalan\2.7.2\xalan-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xercesImpl.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xml-apis.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/serializer.jar
+2021-06-12 21:23:13.046  INFO 1992 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\serializer\2.7.2\serializer-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/serializer/2.7.2/xml-apis.jar
+2021-06-12 21:23:13.046  INFO 1992 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-06-12 21:23:13.046  INFO 1992 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-06-12 21:23:13.932  INFO 1992 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-12 21:23:14.148  INFO 1992 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 206 ms. Found 4 JPA repository interfaces.
+2021-06-12 21:23:14.642  INFO 1992 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@94a7bc6' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 21:23:14.648  INFO 1992 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 21:23:15.023  INFO 1992 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (https)
+2021-06-12 21:23:15.033  INFO 1992 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-12 21:23:15.033  INFO 1992 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.44]
+2021-06-12 21:23:15.161  INFO 1992 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-12 21:23:15.162  INFO 1992 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2114 ms
+2021-06-12 21:23:15.433  INFO 1992 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-12 21:23:15.481  INFO 1992 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.29.Final
+2021-06-12 21:23:15.596  INFO 1992 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-12 21:23:15.710  INFO 1992 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-12 21:23:15.877  INFO 1992 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-12 21:23:15.891  INFO 1992 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2021-06-12 21:23:17.202  INFO 1992 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-12 21:23:17.212  INFO 1992 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-12 21:23:17.293  INFO 1992 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-06-12 21:23:18.456  INFO 1992 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-12 21:23:18.801  INFO 1992 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/auth/login', POST] with []
+2021-06-12 21:23:18.801  INFO 1992 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/', GET] with []
+2021-06-12 21:23:18.802  INFO 1992 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/webjars/**', GET] with []
+2021-06-12 21:23:18.802  INFO 1992 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/*.html', GET] with []
+2021-06-12 21:23:18.802  INFO 1992 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/favicon.ico', GET] with []
+2021-06-12 21:23:18.803  INFO 1992 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.html', GET] with []
+2021-06-12 21:23:18.803  INFO 1992 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.css', GET] with []
+2021-06-12 21:23:18.803  INFO 1992 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.js', GET] with []
+2021-06-12 21:23:18.848  INFO 1992 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@74aa6a01, org.springframework.security.web.context.SecurityContextPersistenceFilter@7e6d8e7c, org.springframework.security.web.header.HeaderWriterFilter@58e4c43, org.springframework.web.filter.CorsFilter@2c0f22c9, org.springframework.security.web.authentication.logout.LogoutFilter@2360a4e1, com.example.DukeStrategicTechnologies.pki.security.auth.TokenAuthenticationFilter@563389ee, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7f032c00, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4efe5504, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4d038fef, org.springframework.security.web.session.SessionManagementFilter@72d55c42, org.springframework.security.web.access.ExceptionTranslationFilter@26d714f2, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1dd50994]
+2021-06-12 21:23:19.077 ERROR 1992 --- [restartedMain] org.apache.tomcat.util.net.SSLUtilBase   : Failed to load keystore type [PFX] with path [file:/P:/Faks%20xml/Security/DukeStrategicTechnologies/cert.pfx] due to [PFX not found]
+
+java.security.KeyStoreException: PFX not found
+	at java.base/java.security.KeyStore.getInstance(KeyStore.java:871) ~[na:na]
+	at org.apache.tomcat.util.net.SSLUtilBase.getStore(SSLUtilBase.java:184) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.SSLHostConfigCertificate.getCertificateKeystore(SSLHostConfigCertificate.java:207) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.SSLUtilBase.getKeyManagers(SSLUtilBase.java:282) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.SSLUtilBase.createSSLContext(SSLUtilBase.java:246) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.AbstractJsseEndpoint.createSSLContext(AbstractJsseEndpoint.java:97) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.AbstractJsseEndpoint.initialiseSsl(AbstractJsseEndpoint.java:71) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:258) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1204) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1290) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:614) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1072) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:240) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:282) ~[spring-boot-2.4.4.jar:2.4.4]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:213) ~[spring-boot-2.4.4.jar:2.4.4]
+	at org.springframework.boot.web.servlet.context.WebServerStartStopLifecycle.start(WebServerStartStopLifecycle.java:43) ~[spring-boot-2.4.4.jar:2.4.4]
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:178) ~[spring-context-5.3.5.jar:5.3.5]
+	at org.springframework.context.support.DefaultLifecycleProcessor.access$200(DefaultLifecycleProcessor.java:54) ~[spring-context-5.3.5.jar:5.3.5]
+	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:356) ~[spring-context-5.3.5.jar:5.3.5]
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
+	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:155) ~[spring-context-5.3.5.jar:5.3.5]
+	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:123) ~[spring-context-5.3.5.jar:5.3.5]
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:935) ~[spring-context-5.3.5.jar:5.3.5]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586) ~[spring-context-5.3.5.jar:5.3.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:144) ~[spring-boot-2.4.4.jar:2.4.4]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:769) ~[spring-boot-2.4.4.jar:2.4.4]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:761) ~[spring-boot-2.4.4.jar:2.4.4]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:426) ~[spring-boot-2.4.4.jar:2.4.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:326) ~[spring-boot-2.4.4.jar:2.4.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1313) ~[spring-boot-2.4.4.jar:2.4.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1302) ~[spring-boot-2.4.4.jar:2.4.4]
+	at com.example.DukeStrategicTechnologies.DukeStrategicTechnologiesApplication.main(DukeStrategicTechnologiesApplication.java:23) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-2.4.4.jar:2.4.4]
+Caused by: java.security.NoSuchAlgorithmException: PFX KeyStore not available
+	at java.base/sun.security.jca.GetInstance.getInstance(GetInstance.java:159) ~[na:na]
+	at java.base/java.security.Security.getImpl(Security.java:700) ~[na:na]
+	at java.base/java.security.KeyStore.getInstance(KeyStore.java:868) ~[na:na]
+	... 37 common frames omitted
+
+2021-06-12 21:23:19.113  WARN 1992 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat server
+2021-06-12 21:23:19.115  INFO 1992 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-06-12 21:23:19.121  INFO 1992 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-06-12 21:23:19.124  INFO 1992 --- [restartedMain] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2021-06-12 21:23:19.235  INFO 1992 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-06-12 21:23:19.245  INFO 1992 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-06-12 21:23:19.249  INFO 1992 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2021-06-12 21:23:19.269  INFO 1992 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2021-06-12 21:23:19.333 ERROR 1992 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat server
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:181) ~[spring-context-5.3.5.jar:5.3.5]
+	at org.springframework.context.support.DefaultLifecycleProcessor.access$200(DefaultLifecycleProcessor.java:54) ~[spring-context-5.3.5.jar:5.3.5]
+	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:356) ~[spring-context-5.3.5.jar:5.3.5]
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
+	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:155) ~[spring-context-5.3.5.jar:5.3.5]
+	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:123) ~[spring-context-5.3.5.jar:5.3.5]
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:935) ~[spring-context-5.3.5.jar:5.3.5]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586) ~[spring-context-5.3.5.jar:5.3.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:144) ~[spring-boot-2.4.4.jar:2.4.4]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:769) ~[spring-boot-2.4.4.jar:2.4.4]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:761) ~[spring-boot-2.4.4.jar:2.4.4]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:426) ~[spring-boot-2.4.4.jar:2.4.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:326) ~[spring-boot-2.4.4.jar:2.4.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1313) ~[spring-boot-2.4.4.jar:2.4.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1302) ~[spring-boot-2.4.4.jar:2.4.4]
+	at com.example.DukeStrategicTechnologies.DukeStrategicTechnologiesApplication.main(DukeStrategicTechnologiesApplication.java:23) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-2.4.4.jar:2.4.4]
+Caused by: org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat server
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:229) ~[spring-boot-2.4.4.jar:2.4.4]
+	at org.springframework.boot.web.servlet.context.WebServerStartStopLifecycle.start(WebServerStartStopLifecycle.java:43) ~[spring-boot-2.4.4.jar:2.4.4]
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:178) ~[spring-context-5.3.5.jar:5.3.5]
+	... 20 common frames omitted
+Caused by: java.lang.IllegalArgumentException: standardService.connector.startFailed
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:244) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:282) ~[spring-boot-2.4.4.jar:2.4.4]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:213) ~[spring-boot-2.4.4.jar:2.4.4]
+	... 22 common frames omitted
+Caused by: org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1075) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:240) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	... 24 common frames omitted
+Caused by: java.lang.IllegalArgumentException: Failed to load keystore type [PFX] with path [file:/P:/Faks%20xml/Security/DukeStrategicTechnologies/cert.pfx] due to [PFX not found]
+	at org.apache.tomcat.util.net.AbstractJsseEndpoint.createSSLContext(AbstractJsseEndpoint.java:99) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.AbstractJsseEndpoint.initialiseSsl(AbstractJsseEndpoint.java:71) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:258) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1204) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1290) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:614) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1072) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	... 26 common frames omitted
+Caused by: java.io.IOException: Failed to load keystore type [PFX] with path [file:/P:/Faks%20xml/Security/DukeStrategicTechnologies/cert.pfx] due to [PFX not found]
+	at org.apache.tomcat.util.net.SSLUtilBase.getStore(SSLUtilBase.java:228) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.SSLHostConfigCertificate.getCertificateKeystore(SSLHostConfigCertificate.java:207) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.SSLUtilBase.getKeyManagers(SSLUtilBase.java:282) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.SSLUtilBase.createSSLContext(SSLUtilBase.java:246) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.AbstractJsseEndpoint.createSSLContext(AbstractJsseEndpoint.java:97) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	... 32 common frames omitted
+
+2021-06-12 21:24:27.133  INFO 7976 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Starting DukeStrategicTechnologiesApplication using Java 16.0.1 on DESKTOP-OSFVFMG with PID 7976 (P:\Faks xml\Security\DukeStrategicTechnologies\target\classes started by STEFAN-PC in P:\Faks xml\Security\DukeStrategicTechnologies)
+2021-06-12 21:24:27.137  INFO 7976 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : The following profiles are active: development
+2021-06-12 21:24:27.218  INFO 7976 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\xalan\2.7.2\xalan-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xercesImpl.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xml-apis.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/serializer.jar
+2021-06-12 21:24:27.219  INFO 7976 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\serializer\2.7.2\serializer-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/serializer/2.7.2/xml-apis.jar
+2021-06-12 21:24:27.220  INFO 7976 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-06-12 21:24:27.221  INFO 7976 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-06-12 21:24:28.131  INFO 7976 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-12 21:24:28.363  INFO 7976 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 223 ms. Found 4 JPA repository interfaces.
+2021-06-12 21:24:28.839  INFO 7976 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@126888a1' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 21:24:28.845  INFO 7976 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 21:24:29.251  INFO 7976 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (https)
+2021-06-12 21:24:29.263  INFO 7976 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-12 21:24:29.263  INFO 7976 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.44]
+2021-06-12 21:24:29.408  INFO 7976 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-12 21:24:29.408  INFO 7976 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2186 ms
+2021-06-12 21:24:29.668  INFO 7976 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-12 21:24:29.756  INFO 7976 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.29.Final
+2021-06-12 21:24:29.902  INFO 7976 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-12 21:24:30.006  INFO 7976 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-12 21:24:30.212  INFO 7976 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-12 21:24:30.229  INFO 7976 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2021-06-12 21:24:31.451  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 21:24:31.451  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "extended_key_usages" does not exist, skipping
+2021-06-12 21:24:31.453  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 21:24:31.454  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "key_usages" does not exist, skipping
+2021-06-12 21:24:31.456  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 21:24:31.457  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "templates" does not exist, skipping
+2021-06-12 21:24:31.459  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 21:24:31.460  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "user_authority" does not exist, skipping
+2021-06-12 21:24:31.462  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 21:24:31.462  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "user_authority" does not exist, skipping
+2021-06-12 21:24:31.465  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 21:24:31.466  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "accounts" does not exist, skipping
+2021-06-12 21:24:31.469  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 21:24:31.469  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "authority" does not exist, skipping
+2021-06-12 21:24:31.472  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 21:24:31.472  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "extended_key_usages" does not exist, skipping
+2021-06-12 21:24:31.475  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 21:24:31.475  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "key_usages" does not exist, skipping
+2021-06-12 21:24:31.478  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 21:24:31.478  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "revoked_certificates" does not exist, skipping
+2021-06-12 21:24:31.480  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 21:24:31.480  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "templates" does not exist, skipping
+2021-06-12 21:24:31.483  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 21:24:31.483  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "user_authority" does not exist, skipping
+2021-06-12 21:24:31.486  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 21:24:31.487  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "users" does not exist, skipping
+2021-06-12 21:24:31.489  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-06-12 21:24:31.490  WARN 7976 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : sequence "hibernate_sequence" does not exist, skipping
+2021-06-12 21:24:31.562  INFO 7976 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-12 21:24:31.574  INFO 7976 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-12 21:24:31.637  INFO 7976 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-06-12 21:24:32.845  INFO 7976 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-12 21:24:33.197  INFO 7976 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/auth/login', POST] with []
+2021-06-12 21:24:33.197  INFO 7976 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/', GET] with []
+2021-06-12 21:24:33.197  INFO 7976 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/webjars/**', GET] with []
+2021-06-12 21:24:33.197  INFO 7976 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/*.html', GET] with []
+2021-06-12 21:24:33.197  INFO 7976 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/favicon.ico', GET] with []
+2021-06-12 21:24:33.198  INFO 7976 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.html', GET] with []
+2021-06-12 21:24:33.198  INFO 7976 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.css', GET] with []
+2021-06-12 21:24:33.198  INFO 7976 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.js', GET] with []
+2021-06-12 21:24:33.247  INFO 7976 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1d12947e, org.springframework.security.web.context.SecurityContextPersistenceFilter@6ded4760, org.springframework.security.web.header.HeaderWriterFilter@2aae3f33, org.springframework.web.filter.CorsFilter@7f055faa, org.springframework.security.web.authentication.logout.LogoutFilter@53599a65, com.example.DukeStrategicTechnologies.pki.security.auth.TokenAuthenticationFilter@1f6f6178, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@38a86783, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6cd80d2d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1c178135, org.springframework.security.web.session.SessionManagementFilter@6fc378f8, org.springframework.security.web.access.ExceptionTranslationFilter@24729400, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@728d530]
+2021-06-12 21:24:33.613  INFO 7976 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (https) with context path ''
+2021-06-12 21:24:33.626  INFO 7976 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Started DukeStrategicTechnologiesApplication in 7.315 seconds (JVM running for 8.981)
+2021-06-12 21:24:52.245  INFO 7976 --- [https-jsse-nio-8088-exec-6] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-12 21:24:52.560  INFO 7976 --- [https-jsse-nio-8088-exec-6] c.e.D.p.c.AuthenticationController       : Handling LOGIN
+2021-06-12 21:26:09.991  INFO 7976 --- [https-jsse-nio-8088-exec-5] c.e.D.p.c.AuthenticationController       : Handling LOGIN
+2021-06-12 21:26:10.626 ERROR 7976 --- [https-jsse-nio-8088-exec-5] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.security.authentication.BadCredentialsException: Bad credentials] with root cause
+
+org.springframework.security.authentication.BadCredentialsException: Bad credentials
+	at org.springframework.security.authentication.dao.DaoAuthenticationProvider.additionalAuthenticationChecks(DaoAuthenticationProvider.java:79) ~[spring-security-core-5.4.5.jar:5.4.5]
+	at org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider.authenticate(AbstractUserDetailsAuthenticationProvider.java:147) ~[spring-security-core-5.4.5.jar:5.4.5]
+	at org.springframework.security.authentication.ProviderManager.authenticate(ProviderManager.java:182) ~[spring-security-core-5.4.5.jar:5.4.5]
+	at org.springframework.security.authentication.ProviderManager.authenticate(ProviderManager.java:201) ~[spring-security-core-5.4.5.jar:5.4.5]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter$AuthenticationManagerDelegator.authenticate(WebSecurityConfigurerAdapter.java:510) ~[spring-security-config-5.4.5.jar:5.4.5]
+	at com.example.DukeStrategicTechnologies.pki.controller.AuthenticationController.createAuthenticationToken(AuthenticationController.java:49) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:894) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1060) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:962) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:652) ~[tomcat-embed-core-9.0.44.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733) ~[tomcat-embed-core-9.0.44.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:204) ~[spring-security-web-5.4.5.jar:5.4.5]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183) ~[spring-security-web-5.4.5.jar:5.4.5]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at com.example.DukeStrategicTechnologies.pki.security.xss.XSSFilter.doFilter(XSSFilter.java:41) ~[classes/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1707) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630) ~[na:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at java.base/java.lang.Thread.run(Thread.java:831) ~[na:na]
+
+2021-06-12 21:26:28.521  INFO 7976 --- [https-jsse-nio-8088-exec-1] c.e.D.p.c.AuthenticationController       : Handling LOGIN
+2021-06-12 21:26:28.659 ERROR 7976 --- [https-jsse-nio-8088-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.security.authentication.BadCredentialsException: Bad credentials] with root cause
+
+org.springframework.security.authentication.BadCredentialsException: Bad credentials
+	at org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider.authenticate(AbstractUserDetailsAuthenticationProvider.java:141) ~[spring-security-core-5.4.5.jar:5.4.5]
+	at org.springframework.security.authentication.ProviderManager.authenticate(ProviderManager.java:182) ~[spring-security-core-5.4.5.jar:5.4.5]
+	at org.springframework.security.authentication.ProviderManager.authenticate(ProviderManager.java:201) ~[spring-security-core-5.4.5.jar:5.4.5]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter$AuthenticationManagerDelegator.authenticate(WebSecurityConfigurerAdapter.java:510) ~[spring-security-config-5.4.5.jar:5.4.5]
+	at com.example.DukeStrategicTechnologies.pki.controller.AuthenticationController.createAuthenticationToken(AuthenticationController.java:49) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:894) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1060) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:962) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:652) ~[tomcat-embed-core-9.0.44.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733) ~[tomcat-embed-core-9.0.44.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:204) ~[spring-security-web-5.4.5.jar:5.4.5]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183) ~[spring-security-web-5.4.5.jar:5.4.5]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at com.example.DukeStrategicTechnologies.pki.security.xss.XSSFilter.doFilter(XSSFilter.java:41) ~[classes/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1707) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630) ~[na:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at java.base/java.lang.Thread.run(Thread.java:831) ~[na:na]
+
+2021-06-12 21:27:36.015  INFO 6736 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Starting DukeStrategicTechnologiesApplication using Java 16.0.1 on DESKTOP-OSFVFMG with PID 6736 (P:\Faks xml\Security\DukeStrategicTechnologies\target\classes started by STEFAN-PC in P:\Faks xml\Security\DukeStrategicTechnologies)
+2021-06-12 21:27:36.020  INFO 6736 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : The following profiles are active: development
+2021-06-12 21:27:36.229  INFO 6736 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\xalan\2.7.2\xalan-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xercesImpl.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/xml-apis.jar,file:/C:/Users/STEFAN-PC/.m2/repository/xalan/xalan/2.7.2/serializer.jar
+2021-06-12 21:27:36.229  INFO 6736 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\STEFAN-PC\.m2\repository\xalan\serializer\2.7.2\serializer-2.7.2.jar referenced one or more files that do not exist: file:/C:/Users/STEFAN-PC/.m2/repository/xalan/serializer/2.7.2/xml-apis.jar
+2021-06-12 21:27:36.230  INFO 6736 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-06-12 21:27:36.231  INFO 6736 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-06-12 21:27:37.754  INFO 6736 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-12 21:27:38.239  INFO 6736 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 464 ms. Found 4 JPA repository interfaces.
+2021-06-12 21:27:38.797  INFO 6736 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@6ce51e30' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 21:27:38.804  INFO 6736 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-12 21:27:39.262  INFO 6736 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (https)
+2021-06-12 21:27:39.277  INFO 6736 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-12 21:27:39.278  INFO 6736 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.44]
+2021-06-12 21:27:39.432  INFO 6736 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-12 21:27:39.432  INFO 6736 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3194 ms
+2021-06-12 21:27:39.750  INFO 6736 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-12 21:27:39.841  INFO 6736 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.29.Final
+2021-06-12 21:27:40.114  INFO 6736 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-12 21:27:40.253  INFO 6736 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-12 21:27:40.497  INFO 6736 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-12 21:27:40.525  INFO 6736 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2021-06-12 21:27:42.553  INFO 6736 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-12 21:27:42.568  INFO 6736 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-12 21:27:42.737  INFO 6736 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-06-12 21:27:44.112  INFO 6736 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-12 21:27:44.592  INFO 6736 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/auth/login', POST] with []
+2021-06-12 21:27:44.593  INFO 6736 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/', GET] with []
+2021-06-12 21:27:44.595  INFO 6736 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/webjars/**', GET] with []
+2021-06-12 21:27:44.596  INFO 6736 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/*.html', GET] with []
+2021-06-12 21:27:44.601  INFO 6736 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/favicon.ico', GET] with []
+2021-06-12 21:27:44.602  INFO 6736 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.html', GET] with []
+2021-06-12 21:27:44.603  INFO 6736 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.css', GET] with []
+2021-06-12 21:27:44.604  INFO 6736 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**/*.js', GET] with []
+2021-06-12 21:27:44.778  INFO 6736 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@e03884e, org.springframework.security.web.context.SecurityContextPersistenceFilter@a47420c, org.springframework.security.web.header.HeaderWriterFilter@7575cf26, org.springframework.web.filter.CorsFilter@6fb583a3, org.springframework.security.web.authentication.logout.LogoutFilter@58de96bb, com.example.DukeStrategicTechnologies.pki.security.auth.TokenAuthenticationFilter@108c8df6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7f97bc34, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@714066c4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@78ba4499, org.springframework.security.web.session.SessionManagementFilter@ffd65b9, org.springframework.security.web.access.ExceptionTranslationFilter@14b8206a, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5be6d7d8]
+2021-06-12 21:27:45.659  INFO 6736 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (https) with context path ''
+2021-06-12 21:27:45.677  INFO 6736 --- [restartedMain] e.D.DukeStrategicTechnologiesApplication : Started DukeStrategicTechnologiesApplication in 10.558 seconds (JVM running for 12.851)
+2021-06-12 21:27:55.324  INFO 6736 --- [https-jsse-nio-8088-exec-5] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-12 21:28:01.313  INFO 6736 --- [https-jsse-nio-8088-exec-5] c.e.D.p.c.AuthenticationController       : Handling LOGIN
+2021-06-12 21:29:21.024  INFO 6736 --- [https-jsse-nio-8088-exec-7] c.e.D.p.c.CertificateController          : Handling GETTING ALL CERTIFICATES FOR SIGNING BY USER, USERNAME user1@gmail.com
+2021-06-12 21:29:45.815  INFO 6736 --- [https-jsse-nio-8088-exec-8] c.e.D.p.c.AuthenticationController       : Handling LOGIN
+2021-06-12 21:29:46.348 ERROR 6736 --- [https-jsse-nio-8088-exec-8] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.security.authentication.BadCredentialsException: Bad credentials] with root cause
+
+org.springframework.security.authentication.BadCredentialsException: Bad credentials
+	at org.springframework.security.authentication.dao.DaoAuthenticationProvider.additionalAuthenticationChecks(DaoAuthenticationProvider.java:79) ~[spring-security-core-5.4.5.jar:5.4.5]
+	at org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider.authenticate(AbstractUserDetailsAuthenticationProvider.java:147) ~[spring-security-core-5.4.5.jar:5.4.5]
+	at org.springframework.security.authentication.ProviderManager.authenticate(ProviderManager.java:182) ~[spring-security-core-5.4.5.jar:5.4.5]
+	at org.springframework.security.authentication.ProviderManager.authenticate(ProviderManager.java:201) ~[spring-security-core-5.4.5.jar:5.4.5]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter$AuthenticationManagerDelegator.authenticate(WebSecurityConfigurerAdapter.java:510) ~[spring-security-config-5.4.5.jar:5.4.5]
+	at com.example.DukeStrategicTechnologies.pki.controller.AuthenticationController.createAuthenticationToken(AuthenticationController.java:49) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:894) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1060) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:962) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:652) ~[tomcat-embed-core-9.0.44.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.5.jar:5.3.5]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733) ~[tomcat-embed-core-9.0.44.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:204) ~[spring-security-web-5.4.5.jar:5.4.5]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183) ~[spring-security-web-5.4.5.jar:5.4.5]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.5.jar:5.3.5]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at com.example.DukeStrategicTechnologies.pki.security.xss.XSSFilter.doFilter(XSSFilter.java:41) ~[classes/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1707) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630) ~[na:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.44.jar:9.0.44]
+	at java.base/java.lang.Thread.run(Thread.java:831) ~[na:na]
+
+2021-06-12 21:30:03.588  INFO 6736 --- [https-jsse-nio-8088-exec-9] c.e.D.p.c.AuthenticationController       : Handling LOGIN
+2021-06-12 21:30:04.250  INFO 6736 --- [https-jsse-nio-8088-exec-10] c.e.D.p.c.CertificateController          : Handling GETTING ALL CERTIFICATES FOR SIGNING BY USER, USERNAME user1@gmail.com
+2021-06-12 21:30:11.739  INFO 6736 --- [https-jsse-nio-8088-exec-2] c.e.D.pki.controller.UserController      : Handling GETTING ALL USERS
+2021-06-12 21:30:13.060  INFO 6736 --- [https-jsse-nio-8088-exec-3] c.e.D.p.c.CertificateController          : Handling GETTING ALL CERTIFICATES FOR SIGNING BY USER, USERNAME user1@gmail.com
+2021-06-12 21:30:15.311  INFO 6736 --- [https-jsse-nio-8088-exec-5] c.e.D.p.c.CertificateController          : Handling GETTING POSSIBLE KEY USAGES, ALIAS user1@gmail.com6808366554968030033
+2021-06-12 21:30:35.156  INFO 6736 --- [https-jsse-nio-8088-exec-7] c.e.D.p.c.CertificateController          : Handling CREATING CERTIFICATE
+2021-06-12 21:30:37.837  INFO 6736 --- [https-jsse-nio-8088-exec-8] c.e.D.p.c.CertificateController          : Handling GETTING ALL CERTIFICATES FOR SIGNING BY USER, USERNAME user1@gmail.com
+2021-06-12 22:00:54.169  INFO 6736 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-06-12 22:00:54.171  INFO 6736 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-06-12 22:00:54.172  INFO 6736 --- [SpringContextShutdownHook] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2021-06-12 22:00:54.285  INFO 6736 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-06-12 22:00:54.294  INFO 6736 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

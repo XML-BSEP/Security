@@ -1,5 +1,6 @@
 package com.example.DukeStrategicTechnologies.pki.service;
 
+import com.example.DukeStrategicTechnologies.pki.controller.AuthenticationController;
 import com.example.DukeStrategicTechnologies.pki.dto.DownloadCertificateDTO;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.bouncycastle.cert.jcajce.JcaCertStore;
@@ -14,6 +15,8 @@ import org.bouncycastle.operator.jcajce.JcaDigestCalculatorProviderBuilder;
 import org.bouncycastle.util.io.pem.PemGenerationException;
 import org.bouncycastle.util.io.pem.PemObject;
 import org.bouncycastle.util.io.pem.PemObjectGenerator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +32,8 @@ import java.util.List;
 
 @Service
 public class Base64Encoder {
+
+    private final Logger LOGGER = LoggerFactory.getLogger(Base64Encoder.class);
     private static final String DOWNLOAD_PATH = System.getProperty("user.home") + "\\Downloads\\";
     private String filepath;
     private String filepathKey;
@@ -40,6 +45,7 @@ public class Base64Encoder {
     public void downloadCertificate(DownloadCertificateDTO dto) throws Exception {
 
         if(ocspService.isRevoked(dto.getSerialNumber())) {
+            LOGGER.error("Can not download revoked certificate");
             throw new Exception("Can not download revoked certificate!");
         }
         String alias = dto.getSubjectEmail() + dto.getSerialNumber();
@@ -115,6 +121,7 @@ public class Base64Encoder {
                     return new PemObject(certificate1.getType(), certificate1.getEncoded());
                 } catch (CertificateEncodingException e) {
                     e.printStackTrace();
+                    LOGGER.error("Failed to generate PemObject " + e.getMessage());
                     return null;
                 }
             }
