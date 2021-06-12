@@ -84,12 +84,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/users/add").permitAll()
 
 //                .antMatchers("/certificate/getCaCertificates").permitAll()
-                .antMatchers("/certificate/getRootCertificates").permitAll()
+//                .antMatchers("/certificate/getRootCertificates").permitAll()
                 .antMatchers("/users/register").permitAll()
                 .antMatchers("/users/confirmAccount").permitAll()
                 .antMatchers("/users/resendRegistrationCode").permitAll()
                 .antMatchers("/users/resetPasswordMail").permitAll()
                 .antMatchers("/users/resetPassword").permitAll()
+
 
                 // za svaki drugi zahtev korisnik mora biti autentifikovan
                 .anyRequest().authenticated().and()

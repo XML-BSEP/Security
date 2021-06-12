@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomDetailUserService implements UserDetailsService {
 
+
     protected final Log LOGGER = LogFactory.getLog(getClass());
 
     @Autowired
@@ -51,7 +52,7 @@ public class CustomDetailUserService implements UserDetailsService {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, oldPassword));
         } else {
             LOGGER.debug("No authentication manager set. can't change Password!");
-
+            LOGGER.error("failed to change password");
             return;
         }
 

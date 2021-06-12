@@ -7,7 +7,7 @@ import com.example.DukeStrategicTechnologies.pki.model.enums.SignatureAlgorithm;
 import java.util.Collection;
 
 public class Validator {
-    public static final String PASSWORD = "^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[!@#&()–[{}]:;',?/~$^+=<>]).{10,20}$";
+    public static final String PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z0-9\\d$@$!%*?&].{7,}$";
     public static final String EMAIL = "^(.+)@(.+)$";
 
     public static void validateStringInput(String input, String fieldName) throws StringInputException {

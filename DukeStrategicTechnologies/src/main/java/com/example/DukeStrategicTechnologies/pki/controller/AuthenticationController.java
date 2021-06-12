@@ -6,6 +6,8 @@ import com.example.DukeStrategicTechnologies.pki.security.TokenUtils;
 import com.example.DukeStrategicTechnologies.pki.security.auth.JwtAuthenticationRequest;
 import com.example.DukeStrategicTechnologies.pki.security.domain.UserTokenState;
 import com.example.DukeStrategicTechnologies.pki.service.CustomDetailUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,11 +20,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping(value = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuthenticationController {
 
+    private final Logger LOGGER = LoggerFactory.getLogger(AuthenticationController.class);
     @Autowired
     private TokenUtils tokenUtils;
 
@@ -38,6 +41,8 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest,
                                                        HttpServletResponse response) {
+        LOGGER.info("Handling LOGIN");
+
         AuthenticatedUserDTO authenticatedUserDTO = new AuthenticatedUserDTO();
 
             Authentication authentication = authenticationManager

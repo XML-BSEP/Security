@@ -15,6 +15,8 @@ import org.bouncycastle.cert.jcajce.JcaX509v3CertificateBuilder;
 import org.bouncycastle.operator.ContentSigner;
 import org.bouncycastle.operator.OperatorCreationException;
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.CertificateException;
@@ -25,6 +27,8 @@ import java.util.Collection;
 import java.util.List;
 
 public class CertificateGenerator {
+
+    private final Logger LOGGER = LoggerFactory.getLogger(CertificateGenerator.class);
     public CertificateGenerator() {}
 
     public X509Certificate generateCertificate(String commonName, String email, Subject subjectData, Issuer issuerData, ExtendedCertificateData extendedCertificateData, boolean isRoot) {
@@ -67,16 +71,22 @@ public class CertificateGenerator {
 
         } catch (CertificateEncodingException e) {
             e.printStackTrace();
+            LOGGER.error("failed to generate certificate " + e.getMessage());
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
+            LOGGER.error("failed to generate certificate " + e.getMessage());
         } catch (IllegalStateException e) {
             e.printStackTrace();
+            LOGGER.error("failed to generate certificate " + e.getMessage());
         } catch (OperatorCreationException e) {
             e.printStackTrace();
+            LOGGER.error("failed to generate certificate " + e.getMessage());
         } catch (CertificateException e) {
             e.printStackTrace();
+            LOGGER.error("failed to generate certificate " + e.getMessage());
         } catch (CertIOException e) {
             e.printStackTrace();
+            LOGGER.error("failed to generate certificate " + e.getMessage());
         }
         return null;
     }
