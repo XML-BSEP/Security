@@ -19,7 +19,11 @@ export class RegisterComponent implements OnInit {
     this.registrationForm = new FormGroup({
     'name' : new FormControl(null, Validators.required),
     'lastname' : new FormControl(null, Validators.required),
-    'username' : new FormControl(null, Validators.required),
+    'cname' : new FormControl(null, Validators.required),
+    'state' : new FormControl(null, Validators.required),
+    'city' : new FormControl(null, Validators.required),
+    'orgunit' : new FormControl(null, Validators.required),
+    'org' : new FormControl(null, Validators.required),
     'email' : new FormControl(null, [Validators.required, Validators.email]),
     'password' : new FormControl(null, [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z0-9\d$@$!%*?&].{7,}$')]),
     'confirmPassword' : new FormControl(null, [Validators.required,    Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z0-9\d$@$!%*?&].{7,}$')]),
@@ -29,24 +33,28 @@ export class RegisterComponent implements OnInit {
   register(){
     var name = this.registrationForm.controls.name.value;
     var lastname = this.registrationForm.controls.lastname.value;
-    var username = this.registrationForm.controls.username.value;
+    var city = this.registrationForm.controls.city.value;
+    var state = this.registrationForm.controls.state.value;
+    var orgunit = this.registrationForm.controls.orgunit.value;
+    var org = this.registrationForm.controls.org.value;
     var email = this.registrationForm.controls.email.value;
     var password = this.registrationForm.controls.password.value;
     var confirmPassword = this.registrationForm.controls.confirmPassword.value;
+    var commonName = this.registrationForm.controls.cname.value
     console.log(password);
     if(password===confirmPassword){
-      this.newUser = new RegisteredUser(name, lastname, email, password, confirmPassword, username);
+      this.newUser = new RegisteredUser(name, lastname, email, password, confirmPassword, state, city, org, orgunit, commonName);
 
-      // this.registrationService.register(this.newUser).subscribe(
-      //   success => {
-      //     this.toastr.success("Please check your mail to confirm registration")
-      //     this.router.navigate(['/regconfirm'], {state: {data: email}});
-      //   },
-      //   error => {
-      //     this.toastr.error(error)
-      //   }
+      this.registrationService.register(this.newUser).subscribe(
+        success => {
+          this.toastr.success("Please check your mail to confirm registration")
+          this.router.navigate(['/regconfirm'], {state: {data: email}});
+        },
+        error => {
+          this.toastr.error(error)
+        }
 
-      // )
+      )
     }
 
   }

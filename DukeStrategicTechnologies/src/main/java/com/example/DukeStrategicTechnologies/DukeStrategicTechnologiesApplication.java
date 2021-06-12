@@ -12,7 +12,8 @@ import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
 import java.util.Collections;
-
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 @SpringBootApplication
 public class DukeStrategicTechnologiesApplication {
 

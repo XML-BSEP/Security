@@ -1,8 +1,6 @@
 package com.example.DukeStrategicTechnologies.pki.controller;
 
-import com.example.DukeStrategicTechnologies.pki.dto.NewUserDTO;
-import com.example.DukeStrategicTechnologies.pki.dto.TemplateDTO;
-import com.example.DukeStrategicTechnologies.pki.dto.UserDTO;
+import com.example.DukeStrategicTechnologies.pki.dto.*;
 import com.example.DukeStrategicTechnologies.pki.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,6 +32,17 @@ public class UserController {
     @PostMapping(value="/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> register(@RequestBody NewUserDTO userDTO) throws Exception {
         userService.register(userDTO);
+        return  new ResponseEntity<>(HttpStatus.OK);
+    }
+    @PostMapping(value="/confirmAccount", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> activate(@RequestBody ActivationDTO dto) throws Exception {
+        userService.activateAccount(dto);
+        return  new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(value="/resendRegistrationCode", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> resend(@RequestBody ResendCodeDTO dto) throws Exception {
+        userService.resendCode(dto);
         return  new ResponseEntity<>(HttpStatus.OK);
     }
 }
