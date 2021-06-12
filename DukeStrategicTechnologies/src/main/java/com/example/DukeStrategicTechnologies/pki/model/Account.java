@@ -18,7 +18,7 @@ public class Account implements UserDetails {
     private Long id;
     private String email;
     private String password;
-    @Column(insertable = false, updatable = false)
+//    @Column(insertable = false, updatable = false)
     private String role;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(name = "user_authority",

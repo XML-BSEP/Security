@@ -84,7 +84,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/users/add").permitAll()
 
 //                .antMatchers("/certificate/getCaCertificates").permitAll()
-                .antMatchers("/certificate/getRootCertificates").permitAll()
+//                .antMatchers("/certificate/getRootCertificates").permitAll()
                 .antMatchers("/users/register").permitAll()
                 .antMatchers("/users/confirmAccount").permitAll()
                 .antMatchers("/users/resendRegistrationCode").permitAll()

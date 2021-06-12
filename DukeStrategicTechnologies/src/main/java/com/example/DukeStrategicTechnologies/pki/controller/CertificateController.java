@@ -44,7 +44,7 @@ public class CertificateController {
 
     //ADD OTHER ROLES
     @PostMapping("/createCertificate")
-    @PreAuthorize("hasRole('ADMIN') || hasRole('CA')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN') ||  hasAuthority('ROLE_CA')")
     public ResponseEntity<?> createCertificate(@RequestBody CreateCertificateDTO dto) throws Exception {
         LOGGER.info("Handling CREATING CERTIFICATE");
 
@@ -53,7 +53,7 @@ public class CertificateController {
     }
 
     @GetMapping("/getAll")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<List<CertificateDTO>> getAll() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
         LOGGER.info("Handling GETTING ALL CERTIFICATES");
 
@@ -62,7 +62,7 @@ public class CertificateController {
     }
 
     @GetMapping("/getAllForSigning")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<List<CertificateDTO>> getAllForSigning() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
         LOGGER.info("Handling GETTING ALL CERTIFICATES FOR SIGNING");
 
@@ -87,7 +87,7 @@ public class CertificateController {
     }
 
     @PostMapping("/revokeCertificate")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<?> revokeCertificate(@RequestBody String serialNumber) throws Exception {
         LOGGER.info("Handling REVOKING CERTIFICATE");
 
@@ -116,7 +116,7 @@ public class CertificateController {
     }
 
     @GetMapping("/getRootCertificates")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<?> getSelfSignedCertificates() throws Exception{
         LOGGER.info("Handling GETTING ROOT CERTIFICATES");
 
@@ -195,7 +195,7 @@ public class CertificateController {
     }
 
     @PostMapping("/createRootCertificate")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<?> createRootCertificate(@RequestBody CreateCertificateDTO dto) throws Exception {
         LOGGER.info("Handling CREATING ROOT CERTIFICATE");
         certificateService.createRootCertificate(dto);

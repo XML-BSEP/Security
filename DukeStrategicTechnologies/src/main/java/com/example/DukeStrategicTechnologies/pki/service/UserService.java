@@ -117,7 +117,7 @@ public class UserService {
         }
         if (dto.getCode().equals(redis.getCode())) {
 
-            Account newAccount = new Account(redis.getAccount().getEmail(), passwordEncoder.encode(redis.getAccount().getPassword()));
+            Account newAccount = new Account(redis.getAccount().getEmail(), redis.getAccount().getPassword());
             User newUser = new User(redis.getUser().getGivenName(), redis.getUser().getSurname(), redis.getUser().getCommonName(), redis.getUser().getOrganization(), redis.getUser().getOrganizationUnit(),
                     redis.getUser().getState(), redis.getUser().getCity(), redis.getUser().getEmail(), false, 0L);
 
