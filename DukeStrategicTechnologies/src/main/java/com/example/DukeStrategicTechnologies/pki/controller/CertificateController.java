@@ -23,6 +23,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -56,7 +57,13 @@ public class CertificateController {
     @GetMapping("/getAllForSigning")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<CertificateDTO>> getAllForSigning() throws CertificateException, NoSuchAlgorithmException, KeyStoreException, NoSuchProviderException, IOException {
-        List<CertificateDTO> certificateAlias = certificateService.getAllCertificatesForSigning();
+        List<CertificateDTO> certificateAlias = new ArrayList<>();
+        try{
+            certificateAlias = certificateService.getAllCertificatesForSigning();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
         return new ResponseEntity<>(certificateAlias, HttpStatus.OK);
     }
 

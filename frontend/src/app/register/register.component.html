@@ -10,7 +10,7 @@
       <mat-card class="main-card">
         <h1 class="register-text">Register</h1>
         <form [formGroup]="registrationForm" >
-          <div>
+          <div style="display: flex; flex-direction: row;">
             <mat-form-field appearance="fill" id="text-ff">
               <mat-label>Name*</mat-label>
               <input matInput placeholder="Name"
@@ -20,9 +20,7 @@
                 Please enter name</mat-error>
 
             </mat-form-field>
-          </div>
-          <div>
-            <mat-form-field appearance="fill" id="text-ff">
+            <mat-form-field appearance="fill" id="text-ff" style="margin-right: 10%;">
               <mat-label>Lastname*</mat-label>
               <input matInput placeholder="Lastname"
                     formControlName="lastname">
@@ -31,19 +29,17 @@
                 Please enter lastname</mat-error>
             </mat-form-field>
           </div>
-          <div>
+          <div style="display: flex; flex-direction: row;">
             <mat-form-field appearance="fill" id="text-ff">
-              <mat-label>Username*</mat-label>
-              <input matInput placeholder="Username"
-                    formControlName="username">
+              <mat-label>Common name*</mat-label>
+              <input matInput placeholder="Common name"
+                    formControlName="cname">
               <mat-error
-                *ngIf="!registrationForm.get('username').valid && registrationForm.get('username').touched && registrationForm.get('username').errors['required']">
-                Please enter email</mat-error>
+                *ngIf="!registrationForm.get('cname').valid && registrationForm.get('cname').touched && registrationForm.get('cname').errors['required']">
+                Please enter common name</mat-error>
 
             </mat-form-field>
-          </div>
-            <div>
-            <mat-form-field appearance="fill" id="text-ff">
+            <mat-form-field appearance="fill" id="text-ff" style="margin-right:10%">
               <mat-label>Email*</mat-label>
               <input matInput placeholder="Email"
                     formControlName="email">
@@ -53,6 +49,42 @@
                 <mat-error
                 *ngIf="!registrationForm.get('email').valid && registrationForm.get('email').touched && registrationForm.get('email').errors['email']">
                 Please enter email</mat-error>
+            </mat-form-field>
+          </div>
+          <div style="display: flex; flex-direction: row;">
+            <mat-form-field appearance="fill" id="text-ff">
+              <mat-label>Org unit*</mat-label>
+              <input matInput placeholder="Org unit"
+                    formControlName="orgunit">
+              <mat-error
+                *ngIf="!registrationForm.get('orgunit').valid && registrationForm.get('orgunit').touched && registrationForm.get('orgunit').errors['required']">
+                Please enter org unit</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" id="text-ff" style="margin-right: 10%;">
+              <mat-label>Organization*</mat-label>
+              <input matInput placeholder="Organization"
+                    formControlName="org">
+              <mat-error
+                *ngIf="!registrationForm.get('org').valid && registrationForm.get('org').touched && registrationForm.get('org').errors['required']">
+                Please enter organization</mat-error>
+            </mat-form-field>
+          </div>
+          <div style="display: flex; flex-direction: row;">
+            <mat-form-field appearance="fill" id="text-ff">
+              <mat-label>City*</mat-label>
+              <input matInput placeholder="City"
+                    formControlName="city">
+              <mat-error
+                *ngIf="!registrationForm.get('city').valid && registrationForm.get('city').touched && registrationForm.get('city').errors['required']">
+                Please enter city</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" id="text-ff" style="margin-right: 10%;">
+              <mat-label>State*</mat-label>
+              <input matInput placeholder="State"
+                    formControlName="state">
+              <mat-error
+                *ngIf="!registrationForm.get('state').valid && registrationForm.get('state').touched && registrationForm.get('state').errors['required']">
+                Please enter state</mat-error>
             </mat-form-field>
           </div>
           <div>

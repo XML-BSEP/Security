@@ -23,12 +23,12 @@ export class RegistrationConfirmationComponent implements OnInit {
       //maybe add pattern for code validation on frontend
       'code' : new FormControl(null, [Validators.required])
     });
-    // if(history.state.data === undefined){
-    //   this.router.navigate(['/home'])
-    // }else{
-    //   this.userMail = history.state.data;
+    if(history.state.data === undefined){
+      this.router.navigate(['/home'])
+    }else{
+      this.userMail = history.state.data;
 
-    // }
+    }
   }
   confirm(){
     console.log(this.userMail)
