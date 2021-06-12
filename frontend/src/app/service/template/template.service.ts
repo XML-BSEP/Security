@@ -1,3 +1,4 @@
+import { UserTemplate } from './../../model/user/userTemplate';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -19,6 +20,10 @@ export class TemplateService {
 
   getAll() : Observable<Template[]>{
     return this.http.get<Template[]>(`${environment.baseUrl}/${environment.template}/${environment.findAll}`);
+  }
+
+  getAllByUser(userId : Number) : Observable<Template[]>{
+    return this.http.get<Template[]>(`${environment.baseUrl}/${environment.template}/${environment.allByUser}/?userId=${userId}`);
   }
 
 }

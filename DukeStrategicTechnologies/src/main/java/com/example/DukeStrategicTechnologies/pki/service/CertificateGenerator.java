@@ -27,7 +27,7 @@ import java.util.List;
 public class CertificateGenerator {
     public CertificateGenerator() {}
 
-    public X509Certificate generateCertificate(Subject subjectData, Issuer issuerData, ExtendedCertificateData extendedCertificateData, boolean isRoot) {
+    public X509Certificate generateCertificate(String commonName, String email, Subject subjectData, Issuer issuerData, ExtendedCertificateData extendedCertificateData, boolean isRoot) {
         try {
 
             JcaContentSignerBuilder builder = new JcaContentSignerBuilder(extendedCertificateData.getSignatureAlgorithm().toString());
@@ -43,8 +43,8 @@ public class CertificateGenerator {
                     subjectData.getKeyPair().getPublic());
 
             List<GeneralName> altNames = new ArrayList<GeneralName>();
-            altNames.add(new GeneralName(GeneralName.rfc822Name, "user@mail.com"));
-            altNames.add(new GeneralName(GeneralName.dNSName, "localhost"));
+            altNames.add(new GeneralName(GeneralName.rfc822Name, email));
+            altNames.add(new GeneralName(GeneralName.dNSName, commonName));
             altNames.add(new GeneralName(GeneralName.iPAddress, "127.0.0.1"));
 
             GeneralNames subjectAltNames = GeneralNames.getInstance(new DERSequence((GeneralName[]) altNames.toArray(new GeneralName[] {})));
